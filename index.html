@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="famous.land">
+    <title>famous.land</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        background: #10100f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        display: grid;
+        min-height: 100svh;
+        place-items: center;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(218, 61, 36, 0.24), transparent 34rem),
+          radial-gradient(circle at 82% 22%, rgba(37, 143, 120, 0.2), transparent 32rem),
+          linear-gradient(140deg, #10100f 0%, #171714 46%, #12181a 100%);
+      }
+
+      img {
+        display: block;
+        width: min(78vw, 980px);
+        max-height: 86svh;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="assets/famous-land.svg" alt="famous.land">
+  </body>
+</html>
