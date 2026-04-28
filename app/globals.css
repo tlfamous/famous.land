@@ -1,0 +1,527 @@
+:root {
+  --ink: #11140f;
+  --paper: #f7f3e8;
+  --paper-strong: #fffaf0;
+  --field: #d8e3bd;
+  --moss: #536b35;
+  --moss-dark: #26361c;
+  --bark: #6d543c;
+  --water: #2f6f77;
+  --line: rgba(17, 20, 15, 0.16);
+  --shadow: 0 18px 48px rgba(17, 20, 15, 0.16);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--paper);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(247, 243, 232, 0.88), rgba(247, 243, 232, 0.98)),
+    url("/assets/FamousLand2.png") center / cover no-repeat;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+main {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 20px 16px 36px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: max(12px, env(safe-area-inset-top)) 14px 12px;
+  color: var(--paper-strong);
+  background: rgba(17, 20, 15, 0.92);
+  border-bottom: 1px solid rgba(255, 250, 240, 0.14);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+
+.brand strong {
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.brand small {
+  display: block;
+  margin-top: 2px;
+  color: rgba(255, 250, 240, 0.74);
+  font-size: 0.72rem;
+  letter-spacing: 0;
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+}
+
+.site-header nav a {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 250, 240, 0.2);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.home-hero,
+.hero-card,
+.marker-hero,
+.card,
+.save-callout {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.home-hero {
+  min-height: min(78svh, 760px);
+  display: flex;
+  align-items: end;
+  padding: 28px;
+  color: var(--paper-strong);
+  background:
+    linear-gradient(180deg, rgba(17, 20, 15, 0.12), rgba(17, 20, 15, 0.72)),
+    url("/assets/FamousLand2.png") center / cover;
+}
+
+.home-hero > div {
+  max-width: 680px;
+}
+
+.hero-card,
+.marker-hero {
+  padding: 24px;
+  color: var(--paper-strong);
+  background: linear-gradient(135deg, rgba(17, 20, 15, 0.96), rgba(38, 54, 28, 0.93));
+}
+
+.marker-hero {
+  background:
+    linear-gradient(135deg, rgba(17, 20, 15, 0.94), rgba(38, 54, 28, 0.88)),
+    url("/assets/FamousLand2.png") center / cover;
+}
+
+.card,
+.save-callout {
+  padding: 20px;
+  background: rgba(255, 250, 240, 0.94);
+}
+
+.save-callout {
+  color: var(--paper-strong);
+  background: linear-gradient(135deg, var(--moss-dark), var(--water));
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 12ch;
+  margin-bottom: 14px;
+  font-size: clamp(2.5rem, 13vw, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+
+.marker-hero h1,
+.hero-card h1 {
+  max-width: 13ch;
+  font-size: clamp(2.2rem, 10vw, 4.8rem);
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-size: clamp(1.35rem, 6vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+p {
+  margin-bottom: 12px;
+}
+
+.muted,
+.form-note {
+  color: rgba(17, 20, 15, 0.68);
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  color: currentColor;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.found-message {
+  max-width: 34rem;
+  font-size: 1.18rem;
+  font-weight: 700;
+}
+
+.marker-meta,
+.button-row,
+.split {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.marker-meta,
+.button-row {
+  flex-wrap: wrap;
+}
+
+.marker-meta span {
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 250, 240, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.08);
+}
+
+.split {
+  justify-content: space-between;
+}
+
+.button,
+button.button,
+.text-link {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.button {
+  padding: 12px 18px;
+}
+
+.button.primary {
+  color: var(--paper-strong);
+  background: var(--ink);
+}
+
+.button.secondary {
+  color: var(--ink);
+  background: var(--field);
+}
+
+.save-callout .button.secondary {
+  background: var(--paper-strong);
+}
+
+.text-link {
+  justify-content: flex-start;
+  color: var(--moss-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.steps {
+  display: grid;
+  gap: 12px;
+}
+
+.steps div {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.steps span {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--paper-strong);
+  border-radius: 999px;
+  background: var(--moss-dark);
+  font-weight: 900;
+}
+
+.progress-bar {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(17, 20, 15, 0.12);
+}
+
+.progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--moss), var(--water));
+}
+
+.save-callout .progress-bar,
+.marker-hero .progress-bar,
+.hero-card .progress-bar {
+  background: rgba(255, 250, 240, 0.18);
+}
+
+.badge-grid,
+.zone-list,
+.quest-list,
+.mini-quests,
+.marker-list,
+.recent-list {
+  display: grid;
+  gap: 12px;
+}
+
+.badge {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(247, 243, 232, 0.82);
+}
+
+.badge strong,
+.badge span {
+  display: block;
+}
+
+.badge.earned {
+  border-color: rgba(83, 107, 53, 0.42);
+  background: #eef4da;
+}
+
+.badge.locked {
+  opacity: 0.72;
+}
+
+.quest {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 250, 240, 0.94);
+}
+
+.quest.complete {
+  background: #eef4da;
+  border-color: rgba(83, 107, 53, 0.42);
+}
+
+.form {
+  display: grid;
+  gap: 10px;
+}
+
+.form label {
+  font-weight: 800;
+}
+
+.form input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-strong);
+}
+
+.notice {
+  padding: 12px 14px;
+  border: 1px solid rgba(83, 107, 53, 0.28);
+  border-radius: var(--radius);
+  background: rgba(216, 227, 189, 0.58);
+}
+
+.notice.error {
+  border-color: rgba(134, 50, 34, 0.32);
+  background: rgba(255, 225, 214, 0.72);
+}
+
+.marker-list a,
+.recent-list li {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(247, 243, 232, 0.78);
+  text-decoration: none;
+}
+
+.marker-list small,
+.recent-list span {
+  grid-column: 2;
+  color: rgba(17, 20, 15, 0.68);
+}
+
+.recent-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.safety-list {
+  display: grid;
+  gap: 12px;
+  padding-left: 22px;
+}
+
+.safety-footer {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+  color: rgba(17, 20, 15, 0.72);
+  font-size: 0.94rem;
+}
+
+.sticky-actions {
+  position: sticky;
+  bottom: 10px;
+  z-index: 10;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+@media (min-width: 720px) {
+  main {
+    padding: 28px 24px 48px;
+  }
+
+  .site-header {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .site-header nav {
+    gap: 12px;
+    font-size: 0.94rem;
+  }
+
+  .home-hero,
+  .hero-card,
+  .marker-hero {
+    padding: 44px;
+  }
+
+  .card,
+  .save-callout {
+    padding: 28px;
+  }
+
+  .grid.two {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .badge-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quest {
+    grid-template-columns: 1fr minmax(180px, 0.35fr);
+    align-items: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .site-header nav {
+    width: 100%;
+  }
+
+  .site-header nav a {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .button-row .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button,
+  .site-header a,
+  .marker-list a {
+    transition:
+      transform 160ms ease,
+      background 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .button:active,
+  .marker-list a:active {
+    transform: translateY(1px);
+  }
+}

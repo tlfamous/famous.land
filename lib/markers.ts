@@ -1,0 +1,447 @@
+import type { Marker, Zone } from "@/lib/types";
+
+export const markers: Marker[] = [
+  {
+    marker_id: "FF-TREE-001",
+    short_code: "8K4P2",
+    url: "https://famous.land/8K4P2",
+    marker_number: 1,
+    marker_name: "First Marker",
+    zone: "Road Walker",
+    difficulty: "Easy",
+    field_note: "This is a gentle starting point for the quest, close to the obvious way in.",
+    challenge: "Take one slow breath and notice the loudest natural sound nearby.",
+    clue: "Famous came this way. Look for another marker near an easy walking line.",
+    is_island: false,
+    order: 1
+  },
+  {
+    marker_id: "FF-TREE-002",
+    short_code: "37TZZ",
+    url: "https://famous.land/37TZZ",
+    marker_number: 2,
+    marker_name: "Welcome Road",
+    zone: "Road Walker",
+    difficulty: "Easy",
+    field_note: "Road-edge trees often mark the boundary between arrival and exploration.",
+    challenge: "Find three different leaf shapes before you move on.",
+    clue: "Follow the route where footsteps and tires have both passed.",
+    is_island: false,
+    order: 2
+  },
+  {
+    marker_id: "FF-TREE-003",
+    short_code: "F779V",
+    url: "https://famous.land/F779V",
+    marker_number: 3,
+    marker_name: "Split Rail Turn",
+    zone: "Road Walker",
+    difficulty: "Easy",
+    field_note: "Turns and edges are good places to pause and choose the next small adventure.",
+    challenge: "Stand still for 20 seconds and look for movement in the grass or branches.",
+    clue: "Another easy marker waits where the road bends and the woods lean close.",
+    is_island: false,
+    order: 3
+  },
+  {
+    marker_id: "FF-TREE-004",
+    short_code: "EDZ7B",
+    url: "https://famous.land/EDZ7B",
+    marker_number: 4,
+    marker_name: "Old Driveway Pine",
+    zone: "Road Walker",
+    difficulty: "Easy",
+    field_note: "Pines hold sound differently than hardwoods, especially when the wind is up.",
+    challenge: "Compare the bark on this tree with the next hardwood you pass.",
+    clue: "Stay near the practical path and watch for a tree with a clear view of the way.",
+    is_island: false,
+    order: 4
+  },
+  {
+    marker_id: "FF-TREE-005",
+    short_code: "YWE8A",
+    url: "https://famous.land/YWE8A",
+    marker_number: 5,
+    marker_name: "Gravel Bend",
+    zone: "Road Walker",
+    difficulty: "Easy",
+    field_note: "Loose stone and leaf litter tell a small story about water, wheels, and weather.",
+    challenge: "Find one sign that rain has shaped the ground here.",
+    clue: "A nearby marker keeps to the easy line but tucks closer to shade.",
+    is_island: false,
+    order: 5
+  },
+  {
+    marker_id: "FF-TREE-006",
+    short_code: "W33AB",
+    url: "https://famous.land/W33AB",
+    marker_number: 6,
+    marker_name: "Gatepost Oak",
+    zone: "Road Walker",
+    difficulty: "Easy",
+    field_note: "Old oaks are landmarks even when nobody officially names them.",
+    challenge: "Look up and find the widest branch you can see without stepping off safe ground.",
+    clue: "Continue toward the next obvious edge where open space meets trees.",
+    is_island: false,
+    order: 6
+  },
+  {
+    marker_id: "FF-TREE-007",
+    short_code: "KFXCK",
+    url: "https://famous.land/KFXCK",
+    marker_number: 7,
+    marker_name: "Roadside Maple",
+    zone: "Road Walker",
+    difficulty: "Easy",
+    field_note: "Maples change the color of this place long before summer is over.",
+    challenge: "Find a maple leaf and trace its points with your eyes.",
+    clue: "The last Road Walker marker is near a quiet turn.",
+    is_island: false,
+    order: 7
+  },
+  {
+    marker_id: "FF-TREE-008",
+    short_code: "U8U35",
+    url: "https://famous.land/U8U35",
+    marker_number: 8,
+    marker_name: "Quiet Turn",
+    zone: "Road Walker",
+    difficulty: "Easy",
+    field_note: "A quiet turn is a good reminder that exploring does not need to be loud.",
+    challenge: "Listen for the farthest sound you can hear.",
+    clue: "If you are ready for more effort, start looking uphill.",
+    is_island: false,
+    order: 8
+  },
+  {
+    marker_id: "FF-TREE-009",
+    short_code: "XJYYQ",
+    url: "https://famous.land/XJYYQ",
+    marker_number: 9,
+    marker_name: "Hilltop Pine",
+    zone: "Hill Top",
+    difficulty: "Medium",
+    field_note: "The higher ground changes the air and opens small windows through the trees.",
+    challenge: "Pause and notice whether the wind feels different up here.",
+    clue: "Another hill marker sits near a rock or root that makes you slow down.",
+    is_island: false,
+    order: 9
+  },
+  {
+    marker_id: "FF-TREE-010",
+    short_code: "CN5UP",
+    url: "https://famous.land/CN5UP",
+    marker_number: 10,
+    marker_name: "High Rock",
+    zone: "Hill Top",
+    difficulty: "Hard",
+    field_note: "Higher places make even familiar land feel a little new.",
+    challenge: "Name one thing you can see from here that you could not see below.",
+    clue: "Follow the ridge feeling, not the steepest shortcut.",
+    is_island: false,
+    order: 10
+  },
+  {
+    marker_id: "FF-TREE-011",
+    short_code: "XRZ8J",
+    url: "https://famous.land/XRZ8J",
+    marker_number: 11,
+    marker_name: "Windy Ridge",
+    zone: "Hill Top",
+    difficulty: "Medium",
+    field_note: "Ridges collect breezes and make leaves speak a little louder.",
+    challenge: "Watch the canopy for 15 seconds and find where the wind is strongest.",
+    clue: "Keep to safe footing and look for the next marker along upper ground.",
+    is_island: false,
+    order: 11
+  },
+  {
+    marker_id: "FF-TREE-012",
+    short_code: "AB2MJ",
+    url: "https://famous.land/AB2MJ",
+    marker_number: 12,
+    marker_name: "Upper Trail",
+    zone: "Hill Top",
+    difficulty: "Medium",
+    field_note: "The upper trail rewards patience more than speed.",
+    challenge: "Find one small plant growing where you did not expect it.",
+    clue: "A marker waits near a place where the hill begins to soften.",
+    is_island: false,
+    order: 12
+  },
+  {
+    marker_id: "FF-TREE-013",
+    short_code: "KNDQH",
+    url: "https://famous.land/KNDQH",
+    marker_number: 13,
+    marker_name: "Lookout Oak",
+    zone: "Hill Top",
+    difficulty: "Medium",
+    field_note: "This tree has the steady patience of something that has watched many summers.",
+    challenge: "Look in four directions and pick the one that feels most open.",
+    clue: "The next hill marker is closer to ferns and slope than open road.",
+    is_island: false,
+    order: 13
+  },
+  {
+    marker_id: "FF-TREE-014",
+    short_code: "T7H9E",
+    url: "https://famous.land/T7H9E",
+    marker_number: 14,
+    marker_name: "Fern Slope",
+    zone: "Hill Top",
+    difficulty: "Hard",
+    field_note: "Ferns love the damp pockets where shade lingers after rain.",
+    challenge: "Count how many fern fronds you can see without stepping off safe footing.",
+    clue: "One more Hill Top marker waits near a turning point.",
+    is_island: false,
+    order: 14
+  },
+  {
+    marker_id: "FF-TREE-015",
+    short_code: "MKS7E",
+    url: "https://famous.land/MKS7E",
+    marker_number: 15,
+    marker_name: "Summit Turn",
+    zone: "Hill Top",
+    difficulty: "Hard",
+    field_note: "The summit is not always a peak; sometimes it is just where the walk changes.",
+    challenge: "Before heading down, take one careful look for clouds and changing weather.",
+    clue: "For a different kind of hunt, head into the deeper tree cover.",
+    is_island: false,
+    order: 15
+  },
+  {
+    marker_id: "FF-TREE-016",
+    short_code: "EWNJC",
+    url: "https://famous.land/EWNJC",
+    marker_number: 16,
+    marker_name: "Tall Pine Stand",
+    zone: "Tree Top",
+    difficulty: "Medium",
+    field_note: "Tall pines make a room out of the woods.",
+    challenge: "Look for needles on the ground and compare them with nearby leaves.",
+    clue: "Another marker hides where shade gets thicker.",
+    is_island: false,
+    order: 16
+  },
+  {
+    marker_id: "FF-TREE-017",
+    short_code: "PUQZA",
+    url: "https://famous.land/PUQZA",
+    marker_number: 17,
+    marker_name: "Hemlock Shade",
+    zone: "Tree Top",
+    difficulty: "Medium",
+    field_note: "Hemlock shade can feel cooler even on a hot summer day.",
+    challenge: "Stand still for 30 seconds and listen for birds, insects, or leaves.",
+    clue: "Find a tree that seems to split the path or your attention.",
+    is_island: false,
+    order: 17
+  },
+  {
+    marker_id: "FF-TREE-018",
+    short_code: "ETET2",
+    url: "https://famous.land/ETET2",
+    marker_number: 18,
+    marker_name: "Split Oak",
+    zone: "Tree Top",
+    difficulty: "Medium",
+    field_note: "A split trunk can look like a doorway if you are in the right mood.",
+    challenge: "Find a natural line in the bark that runs from low to high.",
+    clue: "The next marker is closer to moss and damp wood.",
+    is_island: false,
+    order: 18
+  },
+  {
+    marker_id: "FF-TREE-019",
+    short_code: "TAKVU",
+    url: "https://famous.land/TAKVU",
+    marker_number: 19,
+    marker_name: "Mossy Trunk",
+    zone: "Tree Top",
+    difficulty: "Medium",
+    field_note: "Moss marks the places where moisture gets to linger.",
+    challenge: "Spot three textures: bark, moss, and leaf litter.",
+    clue: "Watch for a turn that feels deeper in the woods.",
+    is_island: false,
+    order: 19
+  },
+  {
+    marker_id: "FF-TREE-020",
+    short_code: "WYCUD",
+    url: "https://famous.land/WYCUD",
+    marker_number: 20,
+    marker_name: "Deep Woods Turn",
+    zone: "Tree Top",
+    difficulty: "Hard",
+    field_note: "Deep woods reward quiet attention and good sense.",
+    challenge: "Check your footing, then find the smallest living thing you can see.",
+    clue: "A marker waits near roots that cross like a quiet warning.",
+    is_island: false,
+    order: 20
+  },
+  {
+    marker_id: "FF-TREE-021",
+    short_code: "M6F3W",
+    url: "https://famous.land/M6F3W",
+    marker_number: 21,
+    marker_name: "Root Crossing",
+    zone: "Tree Top",
+    difficulty: "Medium",
+    field_note: "Roots hold the hill, trip the hurried, and feed the canopy.",
+    challenge: "Find a root that changes direction at least once.",
+    clue: "Look for a pale cluster of trunks nearby.",
+    is_island: false,
+    order: 21
+  },
+  {
+    marker_id: "FF-TREE-022",
+    short_code: "549S7",
+    url: "https://famous.land/549S7",
+    marker_number: 22,
+    marker_name: "Birch Cluster",
+    zone: "Tree Top",
+    difficulty: "Medium",
+    field_note: "Light-colored bark stands out when the woods get shadowy.",
+    challenge: "Find one patch of bark that looks like paper or peeling paint.",
+    clue: "The next marker may be near a tree wearing lichen like a map.",
+    is_island: false,
+    order: 22
+  },
+  {
+    marker_id: "FF-TREE-023",
+    short_code: "KAN8Y",
+    url: "https://famous.land/KAN8Y",
+    marker_number: 23,
+    marker_name: "Lichen Maple",
+    zone: "Tree Top",
+    difficulty: "Medium",
+    field_note: "Lichen is a partnership, which is a nice thing to find on a family quest.",
+    challenge: "Look for two colors of lichen without touching or scraping it.",
+    clue: "A faint animal path may point you toward another marker.",
+    is_island: false,
+    order: 23
+  },
+  {
+    marker_id: "FF-TREE-024",
+    short_code: "BCPYV",
+    url: "https://famous.land/BCPYV",
+    marker_number: 24,
+    marker_name: "Deer Path",
+    zone: "Tree Top",
+    difficulty: "Hard",
+    field_note: "Some trails are made by people; others are voted into existence by hooves.",
+    challenge: "Look for a sign of wildlife without leaving the safe walking area.",
+    clue: "The last Tree Top marker is tucked into a hollow feeling place.",
+    is_island: false,
+    order: 24
+  },
+  {
+    marker_id: "FF-TREE-025",
+    short_code: "G36YB",
+    url: "https://famous.land/G36YB",
+    marker_number: 25,
+    marker_name: "Hidden Hollow",
+    zone: "Tree Top",
+    difficulty: "Hard",
+    field_note: "A hollow makes the woods feel like they are holding a secret.",
+    challenge: "Listen for the difference between sounds above you and sounds near the ground.",
+    clue: "When you are ready for water, head toward lake light.",
+    is_island: false,
+    order: 25
+  },
+  {
+    marker_id: "FF-TREE-026",
+    short_code: "SH7GP",
+    url: "https://famous.land/SH7GP",
+    marker_number: 26,
+    marker_name: "Lake View",
+    zone: "On the Water",
+    difficulty: "Easy",
+    field_note: "The lake changes the whole pace of the land.",
+    challenge: "Watch the water surface for 20 seconds and name the pattern you see.",
+    clue: "Another water marker waits where the shore grows quieter.",
+    is_island: false,
+    order: 26
+  },
+  {
+    marker_id: "FF-TREE-027",
+    short_code: "D7BZG",
+    url: "https://famous.land/D7BZG",
+    marker_number: 27,
+    marker_name: "Quiet Cove",
+    zone: "On the Water",
+    difficulty: "Medium",
+    field_note: "Coves collect stillness, shade, and small sounds.",
+    challenge: "Find one reflection and one shadow.",
+    clue: "Look for a shoreline tree that seems to lean toward the lake.",
+    is_island: false,
+    order: 27
+  },
+  {
+    marker_id: "FF-TREE-028",
+    short_code: "VHF99",
+    url: "https://famous.land/VHF99",
+    marker_number: 28,
+    marker_name: "Shoreline Pine",
+    zone: "On the Water",
+    difficulty: "Medium",
+    field_note: "Shoreline trees live with wet feet nearby and wind in their branches.",
+    challenge: "Listen for water, wind, birds, or insects before you leave.",
+    clue: "A marker waits closer to a turn by the water.",
+    is_island: false,
+    order: 28
+  },
+  {
+    marker_id: "FF-TREE-029",
+    short_code: "Z6QRQ",
+    url: "https://famous.land/Z6QRQ",
+    marker_number: 29,
+    marker_name: "Dockside Turn",
+    zone: "On the Water",
+    difficulty: "Easy",
+    field_note: "Edges near docks and shore paths ask for slower steps and better attention.",
+    challenge: "Point out the safest path back from the water before you move on.",
+    clue: "The island marker is special. Only go there with permission and safe conditions.",
+    is_island: false,
+    order: 29
+  },
+  {
+    marker_id: "FF-TREE-030",
+    short_code: "A66DJ",
+    url: "https://famous.land/A66DJ",
+    marker_number: 30,
+    marker_name: "Island Landing",
+    zone: "On the Water",
+    difficulty: "Bonus",
+    field_note: "The island marker is a bonus find for supervised, safe conditions only.",
+    challenge: "Before celebrating, name the safest way back to shore.",
+    clue: "Island Cow found. Famous definitely came this way.",
+    is_island: true,
+    order: 30
+  }
+];
+
+export const zones: Zone[] = ["Road Walker", "Hill Top", "Tree Top", "On the Water"];
+
+export function getMarkerByToken(token: string): Marker | undefined {
+  const normalized = decodeURIComponent(token).trim().toUpperCase();
+  return markers.find(
+    (marker) =>
+      marker.short_code.toUpperCase() === normalized ||
+      marker.marker_id.toUpperCase() === normalized
+  );
+}
+
+export function getMarkerById(markerId: string): Marker | undefined {
+  return markers.find((marker) => marker.marker_id === markerId);
+}
+
+export function getMarkerByShortCode(shortCode: string): Marker | undefined {
+  return markers.find((marker) => marker.short_code === shortCode);
+}
+
+export function markerRoute(marker: Marker): string {
+  return `/${marker.short_code}`;
+}

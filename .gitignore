@@ -1,1 +1,8 @@
 .DS_Store
+node_modules/
+.next/
+out/
+dist/
+.data/
+tsconfig.tsbuildinfo
+.env*.local
