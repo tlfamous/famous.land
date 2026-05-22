@@ -1,0 +1,43 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "famous-land-summer-quest",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-04-28",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "vars": {
+    "EMAIL_PROVIDER": "brevo",
+    "EMAIL_FROM": "quest@famous.land",
+    "EMAIL_FROM_NAME": "Famous Land Quest",
+    "EMAIL_REPLY_TO": "quest@famous.land",
+    "EMAIL_REPLY_TO_NAME": "Famous Land Quest",
+    "NEXT_PUBLIC_SITE_URL": "https://famous.land"
+  },
+  "workers_dev": false,
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "famous-land-summer-quest"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "famous-land-quest",
+      "database_id": "9a4caa16-4c29-4a6d-ac5b-f92c0ba58749"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "famous.land/*",
+      "zone_name": "famous.land"
+    },
+    {
+      "pattern": "www.famous.land/*",
+      "zone_name": "famous.land"
+    }
+  ]
+}

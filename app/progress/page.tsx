@@ -1,5 +1,5 @@
-import { ProgressDashboard } from "@/components/ProgressDashboard";
+import { redirect } from "next/navigation";
 
 export default function ProgressPage() {
-  return <ProgressDashboard />;
+  redirect("/quest");
 }

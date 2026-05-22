@@ -1,6 +1,4 @@
-export type Zone = "Road Walker" | "Hill Top" | "Tree Top" | "On the Water";
-
-export type Difficulty = "Easy" | "Medium" | "Hard" | "Bonus";
+export type Zone = "Lakeview" | "Hillside" | "Treetop" | "No Wake";
 
 export type Marker = {
   marker_id: string;
@@ -9,7 +7,6 @@ export type Marker = {
   marker_number: number;
   marker_name: string;
   zone: Zone;
-  difficulty: Difficulty;
   field_note: string;
   challenge: string;
   clue: string;
@@ -17,17 +14,15 @@ export type Marker = {
   order: number;
 };
 
-export type Badge = {
+export type ZoneQuest = {
   id: string;
-  name: string;
+  zone: Zone;
+  title: string;
+  zoneLabel: string;
   description: string;
 };
 
-export type QuestStatus = {
-  id: string;
-  title: string;
-  badge: string;
-  description: string;
+export type ZoneQuestStatus = ZoneQuest & {
   current: number;
   total: number;
   complete: boolean;
@@ -38,4 +33,5 @@ export type ScanRecord = {
   marker_id: string;
   scanned_at: string;
   user_agent?: string;
+  is_test?: boolean;
 };

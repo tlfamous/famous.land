@@ -1,0 +1,18 @@
+{
+  "name": "Famous Land Quest",
+  "short_name": "Famous Land",
+  "description": "An outdoor QR-code discovery game across Famous Land.",
+  "start_url": "/quest",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fffaf0",
+  "theme_color": "#10140d",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg?v=cow-emoji",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

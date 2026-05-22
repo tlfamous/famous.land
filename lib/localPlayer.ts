@@ -5,11 +5,21 @@ import { markers } from "@/lib/markers";
 const PLAYER_ID_KEY = "famous-land-player-id-v1";
 const FOUND_MARKERS_KEY = "famous-land-found-markers-v1";
 const SCAN_LOG_KEY = "famous-land-scan-log-v1";
+const MARKER_VISITS_KEY = "famous-land-marker-visits-v1";
 const SAVED_PROGRESS_KEY = "famous-land-progress-saved-v1";
+const SAVED_PROGRESS_EMAIL_KEY = `${SAVED_PROGRESS_KEY}:email`;
 
 export type LocalScanLogEntry = {
   marker_id: string;
   scanned_at: string;
+};
+
+export type LocalPlayerSnapshot = {
+  playerId: string;
+  foundIds: string[];
+  scanLog: LocalScanLogEntry[];
+  saved: boolean;
+  savedEmail: string;
 };
 
 function canUseStorage(): boolean {
@@ -51,7 +61,9 @@ export function setLocalPlayerId(playerId: string) {
 
 export function getLocalScannedMarkers(): string[] {
   const markerIds = new Set(markers.map((marker) => marker.marker_id));
-  return readJson<string[]>(FOUND_MARKERS_KEY, []).filter((markerId) => markerIds.has(markerId));
+  return Array.from(
+    new Set(readJson<string[]>(FOUND_MARKERS_KEY, []).filter((markerId) => markerIds.has(markerId)))
+  );
 }
 
 export function addLocalScannedMarker(markerId: string): {
@@ -76,6 +88,17 @@ export function addLocalScannedMarker(markerId: string): {
   }
 
   return { alreadyFound, markerIds };
+}
+
+export function incrementLocalMarkerVisit(markerId: string): number {
+  const visits = readJson<Record<string, number>>(MARKER_VISITS_KEY, {});
+  const nextVisitCount = Math.max(0, visits[markerId] ?? 0) + 1;
+  writeJson(MARKER_VISITS_KEY, {
+    ...visits,
+    [markerId]: nextVisitCount
+  });
+
+  return nextVisitCount;
 }
 
 export function mergeLocalScannedMarkers(markerIds: string[]) {
@@ -116,10 +139,40 @@ export function markProgressSaved(email?: string) {
   if (!canUseStorage()) return;
   window.localStorage.setItem(SAVED_PROGRESS_KEY, "true");
   if (email) {
-    window.localStorage.setItem(`${SAVED_PROGRESS_KEY}:email`, email);
+    window.localStorage.setItem(SAVED_PROGRESS_EMAIL_KEY, email);
   }
 }
 
 export function shouldPromptSaveProgress(): boolean {
   return getLocalScannedMarkers().length >= 5 && !hasSavedProgress();
+}
+
+export function getLocalPlayerSnapshot(): LocalPlayerSnapshot {
+  if (!canUseStorage()) {
+    return {
+      playerId: "",
+      foundIds: [],
+      scanLog: [],
+      saved: false,
+      savedEmail: ""
+    };
+  }
+
+  return {
+    playerId: window.localStorage.getItem(PLAYER_ID_KEY) ?? "",
+    foundIds: getLocalScannedMarkers(),
+    scanLog: getLocalScanLog(),
+    saved: hasSavedProgress(),
+    savedEmail: window.localStorage.getItem(SAVED_PROGRESS_EMAIL_KEY) ?? ""
+  };
+}
+
+export function resetLocalPlayerData() {
+  if (!canUseStorage()) return;
+  window.localStorage.removeItem(PLAYER_ID_KEY);
+  window.localStorage.removeItem(FOUND_MARKERS_KEY);
+  window.localStorage.removeItem(SCAN_LOG_KEY);
+  window.localStorage.removeItem(MARKER_VISITS_KEY);
+  window.localStorage.removeItem(SAVED_PROGRESS_KEY);
+  window.localStorage.removeItem(SAVED_PROGRESS_EMAIL_KEY);
 }

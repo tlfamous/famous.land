@@ -45,7 +45,7 @@ export function SaveProgressForm() {
       error?: string;
       message?: string;
       recovery_code?: string;
-      mode?: "stub";
+      mode?: "email_sent" | "stub";
     };
 
     if (!response.ok || !data.ok) {
@@ -66,7 +66,7 @@ export function SaveProgressForm() {
     <div className="stack">
       <section className="hero-card">
         <p className="eyebrow">Save your progress</p>
-        <h1>Keep your Famous Land Quest going all summer.</h1>
+        <h1>Keep your Famous Land Quest progress safe.</h1>
         <p>
           Enter your email and we will let you recover your progress if you switch phones,
           clear your browser, or come back later.
@@ -111,15 +111,16 @@ export function SaveProgressForm() {
             <p>{message}</p>
             {recoveryCode ? (
               <p>
-                Recovery code for this local stub: <strong>{recoveryCode}</strong>
+                Recovery link fallback:{" "}
+                <Link href={`/recover/${recoveryCode}`}>/recover/{recoveryCode}</Link>
               </p>
             ) : null}
           </div>
         ) : null}
       </section>
 
-      <Link className="button secondary" href="/progress">
-        Back to progress
+      <Link className="button secondary" href="/quest">
+        Back to quest
       </Link>
     </div>
   );

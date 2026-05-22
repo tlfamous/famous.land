@@ -30,8 +30,6 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({
     ok: true,
-    ...result,
-    message:
-      "Progress saved. Email sending is stubbed until an email provider is connected."
+    ...result
   });
 }

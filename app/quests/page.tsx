@@ -1,5 +1,5 @@
-import { QuestList } from "@/components/QuestList";
+import { redirect } from "next/navigation";
 
-export default function QuestsPage() {
-  return <QuestList />;
+export default function QuestCompatibilityRedirectPage() {
+  redirect("/quest");
 }

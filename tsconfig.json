@@ -36,6 +36,16 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next",
+    ".next/**",
+    "**/* 2.ts",
+    "**/* 2.tsx",
+    "**/* 3.ts",
+    "**/* 3.tsx",
+    "**/* [0-9]*.ts",
+    "**/* [0-9]*.tsx",
+    "Damac Mobile Example",
+    "Damac Mobile Example/**"
   ]
 }

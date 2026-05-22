@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => null)) as
-    | { player_id?: string; marker_id?: string }
+    | { player_id?: string; marker_id?: string; is_test?: boolean }
     | null;
 
   if (!body?.player_id || !body.marker_id) {
@@ -24,7 +24,8 @@ export async function POST(request: NextRequest) {
   const result = await recordScan({
     player_id: body.player_id,
     marker_id: marker.marker_id,
-    user_agent: request.headers.get("user-agent") ?? undefined
+    user_agent: request.headers.get("user-agent") ?? undefined,
+    is_test: body.is_test === true
   });
 
   return NextResponse.json({

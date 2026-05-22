@@ -1,8 +1,8 @@
-# Famous Land Summer Quest
+# Famous Land Quest
 
 Mobile-first Next.js game site for `famous.land`.
 
-Thirty physical tree markers across Famous Land each have a unique QR code. A scan opens that marker URL, records the find in the browser, syncs it to the server fallback store, and unlocks progress toward quests and badges.
+Thirty physical tree markers across Famous Land each have a unique QR code. A scan opens that marker URL, records the find in the browser, syncs it to the server fallback store, and unlocks progress through the four zone quests inside the overall Famous Land Quest.
 
 ## What Is Built
 
@@ -17,9 +17,10 @@ Thirty physical tree markers across Famous Land each have a unique QR code. A sc
   - `GET /api/progress?player_id=`
   - `POST /api/save-progress`
   - `POST /api/recover`
-- Local JSON database fallback at `.data/famous-land-db.json`
-- Optional email save/recovery flow stub with recovery-code fallback
-- Home, marker, progress, quests, safety, save-progress, and recover pages
+  - `POST /api/recover/[code]`
+- Cloudflare D1 persistence in production with local JSON fallback at `.data/famous-land-db.json`
+- Optional Brevo email save/recovery flow with one-tap recovery links
+- Home, marker, quest, safety, save-progress, recover, and admin recovery pages
 
 ## Marker CSV
 
@@ -66,18 +67,12 @@ http://localhost:3000/8K4P2
 
 ## Game Rules
 
-- First marker: `First Find`
-- Any 3 markers: `Calf Scout`
-- Any 5 markers: `Five Marker Find` and save-progress prompt
-- Road Walker zone: `Road Walker`
-- Hill Top zone: `Hill Top Explorer`
-- Tree Top zone: `Tree Top Tracker`
-- On the Water zone: `Water Scout`
-- Island marker: `Island Cow`
-- Any 20 markers: `Summer Explorer`
-- All 30 markers: `Famous Land Finisher`
-
-The island marker is `FF-TREE-030` / `A66DJ`.
+- Lakeview Zone: `Lakeview Quest`
+- No Wake Zone: `No Wake Quest`
+- Treetop Zone: `Treetop Quest`
+- Hillside Zone: `Hillside Quest`
+- Famous Land Quest: complete every zone quest
+- Any 5 markers: save-progress prompt
 
 ## Privacy And Safety
 
@@ -86,7 +81,7 @@ The app does not collect GPS location. It does not require name, phone, email, o
 Safety language is included on marker pages and `/safety`:
 
 - Play only with permission.
-- Stay on safe paths and known areas.
+- Stay on safe paths and known routes.
 - Do not climb trees, rocks, fences, or unstable structures.
 - Do not swim, boat, or go onto the island unless supervised and conditions are safe.
 - Children should be supervised near the lake.
@@ -102,6 +97,8 @@ The database abstraction lives in:
 lib/db.ts
 ```
 
+In production on Cloudflare, the app uses the D1 binding named `DB`.
+
 By default, local development writes to:
 
 ```text
@@ -114,69 +111,102 @@ You can override that path with:
 FAMOUS_LAND_DB_PATH=/absolute/path/famous-land-db.json
 ```
 
-On Vercel without a real database, the fallback writes to `/tmp/famous-land-db.json`, which is not durable. For production, replace the implementation in `lib/db.ts` with Supabase, Neon, Postgres, Vercel storage, or another durable store. Keep the public route contracts the same so the UI does not need to change.
+The Cloudflare schema lives in:
 
-Suggested production tables:
-
-```sql
-create table marker_scans (
-  player_id text not null,
-  marker_id text not null,
-  scanned_at timestamptz not null,
-  user_agent text,
-  primary key (player_id, marker_id)
-);
-
-create table saved_players (
-  player_id text primary key,
-  email text not null,
-  saved_at timestamptz not null,
-  recovery_code text
-);
+```text
+migrations/0001_famous_land_quest.sql
 ```
+
+Apply migrations remotely:
+
+```bash
+npx wrangler d1 migrations apply famous-land-quest --remote
+```
+
+To move later to Supabase, Neon, Postgres, Vercel storage, or another durable store, keep the public route contracts the same and replace the implementation behind `lib/db.ts`.
 
 ## Email Provider
 
-The save/recover flow is present but email delivery is stubbed. TODO comments are in:
+The save/recover flow sends transactional email through Brevo when configured.
+Emails use the branded Famous Land mobile-first HTML template and include a
+one-tap recovery link like `/recover/RECOVERY-CODE`; opening that link on the
+quest phone restores progress into that phone's browser storage. If Brevo is
+not configured, the app falls back to showing the local recovery link so
+development still works.
 
-```text
-lib/db.ts
+Brevo has a free plan that currently includes transactional email and 300 email
+sends per day. That is enough for this game flow unless the quest gets heavy
+same-day traffic.
+
+Local `.env.local` example:
+
+```bash
+EMAIL_PROVIDER=brevo
+BREVO_API_KEY=xkeysib-...
+EMAIL_FROM=quest@famous.land
+EMAIL_FROM_NAME="Famous Land Quest"
+NEXT_PUBLIC_SITE_URL=https://famous.land
 ```
 
-To connect email, add Resend, SendGrid, Postmark, or another provider inside `saveProgress()` and `requestRecovery()`.
+For Cloudflare, keep the API key as a secret:
+
+```bash
+npx wrangler secret put BREVO_API_KEY
+```
+
+Set the non-secret values in the Cloudflare dashboard or local environment:
+
+```bash
+EMAIL_PROVIDER=brevo
+EMAIL_FROM=quest@famous.land
+EMAIL_FROM_NAME="Famous Land Quest"
+NEXT_PUBLIC_SITE_URL=https://famous.land
+```
 
 Recommended production flow:
 
 1. Save the player email only after opt-in.
-2. Generate a short-lived signed magic link or recovery code.
-3. Send it by email.
+2. Generate a recovery link backed by a private recovery token.
+3. Send the link by email.
 4. Never show email in leaderboards or public UI.
 5. Do not add passwords.
 
-Useful environment variables:
+Optional environment variables:
 
 ```bash
-EMAIL_PROVIDER=resend
-RESEND_API_KEY=...
-EMAIL_FROM=quest@famous.land
-NEXT_PUBLIC_SITE_URL=https://famous.land
+EMAIL_REPLY_TO=help@famous.land
+EMAIL_REPLY_TO_NAME="Famous Land"
 ```
+
+## Deploy To Cloudflare
+
+GitHub Pages cannot run Next.js API routes. This app is configured for Cloudflare Workers with OpenNext and D1.
+
+One-time setup:
+
+```bash
+npx wrangler d1 create famous-land-quest
+```
+
+Put the returned `database_id` in `wrangler.jsonc`, then run:
+
+```bash
+npx wrangler d1 migrations apply famous-land-quest --remote
+npm run cf:deploy
+```
+
+`wrangler.jsonc` currently routes `famous.land/*` and `www.famous.land/*` to the Worker. This Cloudflare account does not have a `workers.dev` subdomain registered, so the public hostnames are the deployment targets.
 
 ## Deploy To Vercel
 
-GitHub Pages cannot run Next.js API routes. This app should be deployed to Vercel, Cloudflare Pages with Functions, or another Next-compatible serverless host.
+Cloudflare is the primary deployment target. If you move the app to Vercel later:
 
-For Vercel:
-
-1. Push this repo to GitHub.
-2. Import the repo in Vercel.
-3. Framework preset: Next.js.
-4. Build command: `npm run build`.
-5. Output directory: leave default.
-6. Add `famous.land` and `www.famous.land` as domains in Vercel.
-7. Move Cloudflare DNS from GitHub Pages to the Vercel DNS targets Vercel provides.
-8. Add a real database before relying on cross-device persistence.
-9. Add an email provider before relying on magic-link recovery.
+1. Import the repo in Vercel.
+2. Framework preset: Next.js.
+3. Build command: `npm run build`.
+4. Output directory: leave default.
+5. Add a real database before relying on cross-device persistence.
+6. Add an email provider before relying on magic-link recovery.
 
 ## Existing GitHub Pages Note
 
