@@ -67,7 +67,7 @@ export const scheduleItems = [
   {
     time: "Sat 6:00 PM",
     title: "Dinner",
-    detail: "Location: Lake House 3. Beer and wine available."
+    detail: "Location: Lake House 3. Lakeside patio seating."
   },
   {
     time: "Sat 8:00 PM",

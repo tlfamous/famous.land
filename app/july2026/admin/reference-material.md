@@ -283,7 +283,7 @@ Dinner
 
 Location: Lake House 3
 
-Beer and wine available.
+Lakeside patio seating.
 
 ### 8:00 p.m.  
 S’mores at the Fire Pit
