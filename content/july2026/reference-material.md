@@ -59,6 +59,7 @@ The admin page should show:
 - Persistent guest-link service status
 - Ability to generate or regenerate a guest link with a fresh token-style query string
 - Ability to reset a guest binding if needed
+- Ability to copy one SMS-ready packet of all current room-key links
 - Readiness tracker for live, partial, and still-needed launch content
 
 ## 4. Houses
@@ -453,6 +454,7 @@ Admin operating sections:
 - Launch readiness tracker
 - Asset and content checklist showing live bundled media and missing host-supplied content
 - Resort Desk readiness
+- Guest-link packet readiness
 - Motorized vehicle inventory
 - Lake rules readiness
 - Personalized room-key URLs

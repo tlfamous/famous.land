@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./admin.module.css";
 import heroImage from "../assets/july-4-hero.png";
 import lh1Image from "../assets/lake-house-1.jpeg";
@@ -70,6 +70,12 @@ const readinessItems = [
   {
     detail: "15 persistent room-key URLs with reset and regenerate controls.",
     label: "Guest links",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Admin can copy one SMS-ready packet of all current room-key links.",
+    label: "Link packet",
     status: "Ready",
     tone: "ready"
   },
@@ -236,11 +242,26 @@ export function July2026Admin() {
   const [guestLinks, setGuestLinks] = useState<Record<string, GuestLinkRecord>>({});
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
   const [linkStatus, setLinkStatus] = useState("Loading guest links");
+  const [packetCopyStatus, setPacketCopyStatus] = useState("Ready to copy");
+  const packetRef = useRef<HTMLPreElement>(null);
   const origin = typeof window === "undefined" ? "" : window.location.origin;
   const boundGuestProfile = useMemo(
     () => guestAssignments.find((guest) => guest.slug === boundGuest?.slug),
     [boundGuest]
   );
+  const guestLinkPacket = useMemo(() => {
+    const baseUrl = origin || "https://famous.land";
+
+    return guestAssignments
+      .map((guest) => {
+        const token = guestLinks[guest.slug]?.token;
+        const path = `/july2026/guest/${guest.slug}${token ? `?t=${token}` : ""}`;
+        const assignment = guest.house === "Pending" ? "Assignment pending" : `${guest.house} / ${guest.room}`;
+
+        return `${guest.name}: ${assignment}\n${baseUrl}${path}`;
+      })
+      .join("\n\n");
+  }, [guestLinks, origin]);
 
   useEffect(() => {
     try {
@@ -301,6 +322,27 @@ export function July2026Admin() {
   function resetLocalBinding() {
     window.localStorage.removeItem(bindingStorageKey);
     setBoundGuest(null);
+  }
+
+  async function copyGuestLinkPacket() {
+    try {
+      await navigator.clipboard.writeText(guestLinkPacket);
+      setPacketCopyStatus("Copied all room-key links");
+    } catch {
+      const selection = window.getSelection();
+      const packet = packetRef.current;
+
+      if (selection && packet) {
+        const range = document.createRange();
+        range.selectNodeContents(packet);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        setPacketCopyStatus("Copy blocked; packet selected");
+        return;
+      }
+
+      setPacketCopyStatus("Copy blocked; select the packet manually");
+    }
   }
 
   return (
@@ -526,6 +568,21 @@ export function July2026Admin() {
           <div className={styles.bindingStatus}>
             <strong>Persistent link service</strong>
             <span>{linkStatus}</span>
+          </div>
+          <div className={styles.linkPacket}>
+            <div>
+              <span className={styles.label}>Share Packet</span>
+              <h3>All room-key links</h3>
+              <p>
+                SMS-ready list with current tokenized links when available. Regenerate or reset
+                individual guests below, then copy this packet for host outreach.
+              </p>
+            </div>
+            <button type="button" onClick={copyGuestLinkPacket}>
+              Copy packet
+            </button>
+            <span className={styles.packetStatus}>{packetCopyStatus}</span>
+            <pre ref={packetRef}>{guestLinkPacket}</pre>
           </div>
           <div className={styles.guestLinkGrid}>
             {guestAssignments.map((guest) => {
