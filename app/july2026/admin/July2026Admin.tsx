@@ -321,6 +321,11 @@ export function July2026Admin() {
         label: "Weekend itinerary"
       },
       {
+        detail: "Guest-facing motorized vehicle inventory with approval guidance and self-contained images.",
+        href: `${baseUrl}/july2026/fleet`,
+        label: "Fleet guide"
+      },
+      {
         detail: "Downloadable shared weekend calendar.",
         href: `${baseUrl}/july2026/calendar.ics`,
         label: "Weekend calendar"

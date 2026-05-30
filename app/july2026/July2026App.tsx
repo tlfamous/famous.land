@@ -308,6 +308,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               <a className={styles.secondaryButton} href="/july2026/itinerary">
                 Weekend Itinerary
               </a>
+              <a className={styles.secondaryButton} href="/july2026/fleet">
+                Fleet Guide
+              </a>
               <a className={styles.secondaryButton} href="#schedule">
                 View Schedule
               </a>
@@ -355,6 +358,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         <a href="/july2026/concierge">Guest Concierge</a>
         <a href="/july2026/prep">Packing Prep</a>
         <a href="/july2026/itinerary">Itinerary</a>
+        <a href="/july2026/fleet">Fleet Guide</a>
         <a href="/july2026/weekend-guide.txt">Offline Guide</a>
       </section>
 
@@ -418,6 +422,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="/july2026/concierge">Guest Concierge</a>
           <a href="/july2026/prep">Packing Prep</a>
           <a href="/july2026/itinerary">Weekend Itinerary</a>
+          <a href="/july2026/fleet">Fleet Guide</a>
           <a href="#map">House Directions</a>
           <a href="/july2026/calendar.ics">Add Calendar</a>
           <a href="/july2026/host-contact.vcf">Save Host Contact</a>
@@ -759,6 +764,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 );
               })}
             </div>
+            <a className={styles.mapButton} href="/july2026/fleet">
+              Open Fleet Guide
+            </a>
           </article>
 
           <article className={styles.panel} id="fleet">

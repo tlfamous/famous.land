@@ -18,6 +18,9 @@ https://famous.land/july2026/prep
 Weekend itinerary:
 https://famous.land/july2026/itinerary
 
+Fleet guide:
+https://famous.land/july2026/fleet
+
 Host text line:
 781-929-4932
 
