@@ -103,6 +103,7 @@ The admin page should show:
 - Ability to generate or regenerate a guest link with a fresh token-style query string
 - Ability to reset a guest binding if needed
 - Ability to copy one SMS-ready packet of all current room-key links
+- Ability to copy a guest-specific SMS packet with assignment, room-key link, calendar, offline guide, host contact, and arrival notes
 - Readiness tracker for live, partial, and still-needed launch content
 
 ## 4. Houses
@@ -509,6 +510,7 @@ Admin operating sections:
 - Host contact card readiness
 - Offline guide readiness
 - Guest-link packet readiness
+- Guest-specific SMS packet readiness
 - Personalized itinerary readiness
 - Getting Around readiness
 - Motorized vehicle inventory
@@ -536,6 +538,13 @@ Host text templates:
 - Dietary note: "Hi, I have a dietary note for the July 4th weekend:"
 - Fleet approval: "Hi, I would like host approval or timing guidance for motorized lake fleet use."
 - Link reset: "Hi, my July 2026 room-key link needs a reset or fresh token."
+
+Guest-specific SMS packets:
+
+- Admin guest rows can copy a message for one guest at a time.
+- Admin guest rows show a preview of the guest-specific SMS packet before copying.
+- Each packet includes the tokenized room-key link when available, current assignment, arrival and departure notes, calendar link, offline guide link, host contact card link, and host SMS number.
+- Pending guests receive language that their assignment still needs host confirmation instead of a false house or room.
 
 ## 12. Design Direction
 

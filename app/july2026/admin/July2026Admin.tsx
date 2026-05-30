@@ -22,6 +22,7 @@ const adminTools = [
   "First-device identity binding status",
   "Generate or regenerate guest links",
   "Reset the current device binding if needed",
+  "Copy guest-specific SMS packets",
   "Track missing photos, addresses, and room-assignment decisions"
 ];
 
@@ -82,6 +83,12 @@ const readinessItems = [
   {
     detail: "Admin can copy one SMS-ready packet of all current room-key links.",
     label: "Link packet",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Each guest row can copy a personalized SMS packet with assignment, room-key link, calendar, guide, host contact, and arrival notes.",
+    label: "Guest SMS packets",
     status: "Ready",
     tone: "ready"
   },
@@ -285,6 +292,7 @@ export function July2026Admin() {
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
   const [linkStatus, setLinkStatus] = useState("Loading guest links");
   const [packetCopyStatus, setPacketCopyStatus] = useState("Ready to copy");
+  const [guestCopyStatus, setGuestCopyStatus] = useState<Record<string, string>>({});
   const packetRef = useRef<HTMLPreElement>(null);
   const origin = typeof window === "undefined" ? "" : window.location.origin;
   const boundGuestProfile = useMemo(
@@ -384,6 +392,44 @@ export function July2026Admin() {
       }
 
       setPacketCopyStatus("Copy blocked; select the packet manually");
+    }
+  }
+
+  function getGuestSmsPacket(guest: (typeof guestAssignments)[number], path: string) {
+    const baseUrl = origin || "https://famous.land";
+    const assignment =
+      guest.house === "Pending"
+        ? "Your room assignment is still pending host confirmation."
+        : `You are staying at ${guest.house}, ${guest.room}.`;
+
+    return [
+      `Hi ${guest.name}, here is your famous.land July 4th, 2026 room key:`,
+      `${baseUrl}${path}`,
+      "",
+      assignment,
+      `Arrival: ${guest.arrival}`,
+      `Departure: ${guest.departure}`,
+      "",
+      `Calendar: ${baseUrl}/july2026/calendar.ics`,
+      `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
+      `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,
+      "",
+      "Text 781-929-4932 for room help, dietary notes, fleet approval, or link resets."
+    ].join("\n");
+  }
+
+  async function copyGuestSmsPacket(guest: (typeof guestAssignments)[number], path: string) {
+    try {
+      await navigator.clipboard.writeText(getGuestSmsPacket(guest, path));
+      setGuestCopyStatus((statuses) => ({
+        ...statuses,
+        [guest.slug]: "Copied SMS packet"
+      }));
+    } catch {
+      setGuestCopyStatus((statuses) => ({
+        ...statuses,
+        [guest.slug]: "Copy blocked"
+      }));
     }
   }
 
@@ -644,6 +690,7 @@ export function July2026Admin() {
               const path = `/july2026/guest/${guest.slug}${token ? `?t=${token}` : ""}`;
               const href = `${origin}${path}`;
               const boundAt = guestLinks[guest.slug]?.bound_at;
+              const smsPacket = getGuestSmsPacket(guest, path);
 
               return (
                 <article key={guest.slug}>
@@ -669,7 +716,15 @@ export function July2026Admin() {
                     >
                       Copy
                     </button>
+                    <button type="button" onClick={() => copyGuestSmsPacket(guest, path)}>
+                      Copy SMS
+                    </button>
                   </div>
+                  <span className={styles.guestCopyStatus}>{guestCopyStatus[guest.slug] ?? "SMS packet ready"}</span>
+                  <details className={styles.guestSmsPreview}>
+                    <summary>Preview SMS packet</summary>
+                    <pre>{smsPacket}</pre>
+                  </details>
                 </article>
               );
             })}
