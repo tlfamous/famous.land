@@ -195,6 +195,18 @@ The resort pass includes:
 - Pocket itinerary for the highest-priority Friday, Saturday, and Sunday moments
 - Print-friendly styling for screenshot or paper backup
 
+### Day-Of Desk
+
+The guest portal exposes a mobile-friendly day-of operations hub at `/july2026/day-of`.
+
+The Day-Of Desk includes:
+
+- Guest portal, resort pass, arrival card, rain plan, map, directions, meals, fleet, safety, offline guide, and host text actions
+- Fast priority cards for room keys, weather pivots, lake approvals, and meals
+- Weekend flow guidance for Friday arrival, Friday welcome, Saturday LH3 movement, fleet orientation, Saturday evening, and Sunday departures
+- Lake approval rules before motorized vehicle use
+- Tap-to-text host actions for general help, room help, and fleet approval
+
 ### Resort FAQ
 
 The guest portal exposes a quick-answer FAQ at `/july2026/faq`.
@@ -855,7 +867,7 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, resort pass, resort FAQ, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, launch status, guest SMS packets, host text templates, media shot list, and offline guide.
+- The packet includes review links for the guest portal, Day-Of Desk, resort pass, resort FAQ, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, launch status, guest SMS packets, host text templates, media shot list, and offline guide.
 
 Launch status packet:
 
@@ -871,7 +883,7 @@ Media shot list:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, resort pass, resort FAQ, offline guide, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, launch status, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, Day-Of Desk, admin reference, resort pass, resort FAQ, offline guide, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, launch status, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

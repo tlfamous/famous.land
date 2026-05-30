@@ -6,6 +6,9 @@ https://famous.land/july2026
 Resort pass:
 https://famous.land/july2026/pass
 
+Day-Of Desk:
+https://famous.land/july2026/day-of
+
 Resort FAQ:
 https://famous.land/july2026/faq
 
@@ -131,6 +134,11 @@ ARRIVAL CHECKLIST
 - When you arrive: go to your assigned house, settle into your room, then use the schedule for the Friday LH1 welcome flow.
 - Friday night: LH1 sunroom at 6:30 PM for the grab-and-go meal, then Great Room 1 at 7:00 PM for weekend orientation.
 - Saturday lake day: start at LH3 for yoga and lake time; wait for the 11:00 AM LH1 orientation before motorized fleet use.
+
+DAY-OF DESK
+- One-screen guest hub: https://famous.land/july2026/day-of
+- Use it for arrival, room keys, weather pivots, lake approvals, meals, maps, offline guide, and host texts.
+- If anything feels unclear, text 781-929-4932 and use host updates as the source of truth.
 
 HOST TEXT PROMPTS
 - Room help: Hi, I need help with my July 4th weekend room assignment or arrival directions.

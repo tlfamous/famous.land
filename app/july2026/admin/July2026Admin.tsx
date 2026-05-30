@@ -41,6 +41,7 @@ const adminTools = [
 const guestExperience = [
   "Welcome / Check-In",
   "Resort Desk quick guide",
+  "Day-Of Desk",
   "Arrival checklist",
   "Resort FAQ",
   "Rain Plan",
@@ -131,6 +132,12 @@ const readinessItems = [
   {
     detail: "Guest page now has a Resort Desk guide for room keys, host SMS, directions, and approval rules.",
     label: "Resort Desk",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest-facing day-of desk centralizes arrival, room keys, weather pivots, lake approvals, meals, maps, and host texts.",
+    label: "Day-Of Desk",
     status: "Ready",
     tone: "ready"
   },
@@ -355,6 +362,11 @@ export function July2026Admin() {
         detail: "Primary guest experience.",
         href: `${baseUrl}/july2026`,
         label: "Guest portal"
+      },
+      {
+        detail: "Mobile day-of operations hub for arrival, weather, meals, lake approvals, maps, and host texts.",
+        href: `${baseUrl}/july2026/day-of`,
+        label: "Day-Of Desk"
       },
       {
         detail: "Proof-backed reference and admin controls.",

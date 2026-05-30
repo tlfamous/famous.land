@@ -123,6 +123,11 @@ export const bringItems = [
 
 export const resortDeskItems = [
   {
+    action: "Open the Day-Of Desk",
+    detail: "Use the one-screen operations hub for arrival, room keys, weather pivots, lake approvals, meals, maps, and host texts.",
+    label: "Today"
+  },
+  {
     action: "Open your room-key link",
     detail: "Use your personalized guest link for house, room, arrival, departure, companions, and host help.",
     label: "Check-in"
@@ -178,6 +183,115 @@ export const resortDeskItems = [
     label: "Safety"
   }
 ];
+
+export const dayOfDeskItems = [
+  {
+    href: "/july2026",
+    label: "Guest Portal",
+    note: "Full resort experience, room-key entry, schedule, houses, and activities."
+  },
+  {
+    href: "/july2026/pass",
+    label: "Resort Pass",
+    note: "Pocket QR, host line, calendar, offline guide, and key weekend moments."
+  },
+  {
+    href: "/july2026/arrival-card",
+    label: "Arrival Card",
+    note: "Check-in window, house flow, host line, and Friday night movement."
+  },
+  {
+    href: "/july2026/rain-plan",
+    label: "Rain Plan",
+    note: "Weather pivots, indoor house hubs, lake holds, meals, and fireworks decisions."
+  },
+  {
+    href: "/july2026/map",
+    label: "Resort Map",
+    note: "How LH1, LH2, LH3, lake routes, meals, and gathering hubs fit together."
+  },
+  {
+    href: "/july2026/directions",
+    label: "Directions Hub",
+    note: "Known LH2/LH3 directions and the LH1 pending-address fallback."
+  },
+  {
+    href: "/july2026/meals",
+    label: "Meals Guide",
+    note: "Welcome food, coffee, smoothies, lunch, dinner, brunch, and dietary-note texting."
+  },
+  {
+    href: "/july2026/fleet",
+    label: "Fleet Guide",
+    note: "Laconic, Spikey Lizard, Laika, Saturday orientation, and host approval rules."
+  },
+  {
+    href: "/july2026/safety",
+    label: "Safety Guide",
+    note: "Emergency-first guidance, life jackets, dock plan, lake rules, and host approvals."
+  },
+  {
+    href: "/july2026/weekend-guide.txt",
+    label: "Offline Guide",
+    note: "Plain-text backup for low-signal moments."
+  }
+] as const;
+
+export const dayOfPriorityItems = [
+  {
+    label: "First move",
+    title: "Open your room key",
+    detail: "Check your assigned house, room, companions, arrival notes, and personal packet before you leave or as soon as you arrive."
+  },
+  {
+    label: "Weather",
+    title: "Use the Rain Plan",
+    detail: "If the sky changes the plan, the host text line and Rain Plan are the source of truth for lake holds, meals, and fireworks."
+  },
+  {
+    label: "Lake",
+    title: "Wait for approval",
+    detail: "Motorized fleet use starts only after the Saturday LH1 orientation and a host go-ahead."
+  },
+  {
+    label: "Food",
+    title: "Follow the meals guide",
+    detail: "Welcome meal, coffee, smoothies, lunch, dinner, brunch, and dietary-note texting all live in one guest page."
+  }
+] as const;
+
+export const dayOfFlowItems = [
+  {
+    time: "Fri arrival",
+    title: "Go to your assigned house",
+    detail: "Settle in first, then follow the Friday LH1 welcome flow."
+  },
+  {
+    time: "Fri 6:30 PM",
+    title: "Welcome meal",
+    detail: "Sunroom, LH1. Then weekend orientation at Great Room 1."
+  },
+  {
+    time: "Sat morning",
+    title: "Move toward LH3",
+    detail: "Yoga, lake time, smoothies, lunch, dinner, and Sunday brunch are centered at LH3."
+  },
+  {
+    time: "Sat 11 AM",
+    title: "Fleet orientation",
+    detail: "LH1 safety briefing before Laconic, Spikey Lizard, Laika, or other host-approved motorized use."
+  },
+  {
+    time: "Sat evening",
+    title: "Dinner, fire, fireworks",
+    detail: "Dinner at LH3, then LH1 fire pit and fireworks options after host guidance."
+  },
+  {
+    time: "Sun",
+    title: "Brunch and departures",
+    detail: "Coffee at all houses, pancake brunch at LH3, free time, and Sunday afternoon departures."
+  }
+] as const;
 
 export const arrivalChecklistItems = [
   {
@@ -661,6 +775,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     "",
     "Current review links:",
     `Guest portal: ${baseUrl}/july2026`,
+    `Day-Of Desk: ${baseUrl}/july2026/day-of`,
     `Resort pass: ${baseUrl}/july2026/pass`,
     `Resort FAQ: ${baseUrl}/july2026/faq`,
     `Rain plan: ${baseUrl}/july2026/rain-plan`,
@@ -698,6 +813,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "Published guest surfaces:",
     `- Guest portal: ${baseUrl}/july2026`,
     `- Admin reference: ${baseUrl}/july2026/admin`,
+    `- Day-Of Desk: ${baseUrl}/july2026/day-of`,
     `- Resort pass: ${baseUrl}/july2026/pass`,
     `- Resort FAQ: ${baseUrl}/july2026/faq`,
     `- Rain plan: ${baseUrl}/july2026/rain-plan`,
@@ -727,6 +843,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "",
     "Ready now:",
     "- Resort-style guest portal and supporting pages",
+    "- Day-Of Desk for arrival, weather pivots, lake approvals, meals, maps, and host texts",
     "- Mobile resort pass with QR, host text, calendar, offline guide, and key itinerary actions",
     "- Resort FAQ for arrival, directions, food, lake approvals, phone setup, and host help",
     "- Rain plan with host-update, indoor-pivot, lake-safety, and meal-continuity guidance",
@@ -1014,6 +1131,7 @@ Room key: ${baseUrl}/july2026/guest/${guest.slug}
 Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
+Day-Of Desk: ${baseUrl}/july2026/day-of
 Resort pass: ${baseUrl}/july2026/pass
 Resort FAQ: ${baseUrl}/july2026/faq
 Rain plan: ${baseUrl}/july2026/rain-plan
@@ -1067,6 +1185,7 @@ export function getGuestSmsPacket(
     `Personal room-key packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
     `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
     `Room-key QR code: ${baseUrl}${qrPath}`,
+    `Day-Of Desk: ${baseUrl}/july2026/day-of`,
     `Resort pass: ${baseUrl}/july2026/pass`,
     `Resort FAQ: ${baseUrl}/july2026/faq`,
     `Rain plan: ${baseUrl}/july2026/rain-plan`,

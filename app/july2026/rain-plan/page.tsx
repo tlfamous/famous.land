@@ -45,6 +45,7 @@ export default function July2026RainPlanPage() {
           </div>
           <nav className={styles.quickLinks} aria-label="Rain plan quick actions">
             <a href="/july2026">Guest Portal</a>
+            <a href="/july2026/day-of">Day-Of Desk</a>
             <a href="/july2026/pass">Resort Pass</a>
             <a href="/july2026/faq">Guest FAQ</a>
             <a href="/july2026/itinerary">Itinerary</a>

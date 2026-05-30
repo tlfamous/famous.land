@@ -38,6 +38,11 @@ const passActions = [
     note: "Open the full resort experience"
   },
   {
+    href: "/july2026/day-of",
+    label: "Day-Of Desk",
+    note: "Fast hub for arrival, weather, meals, lake approvals, maps, and host texts"
+  },
+  {
     href: "/july2026/arrival-card",
     label: "Arrival Card",
     note: "Check-in, QR, house flow, and key schedule"
