@@ -228,6 +228,141 @@
   font-weight: 900;
 }
 
+.guestDesk {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+  gap: 24px;
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  padding: 26px clamp(16px, 4vw, 42px) 0;
+}
+
+.guestCard,
+.guestDirectory {
+  border: 1px solid var(--july-line);
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.95);
+  box-shadow: 0 12px 30px rgba(8, 19, 38, 0.08);
+}
+
+.guestCard {
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+}
+
+.sectionLabel {
+  color: var(--july-red);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.guestCard h2 {
+  margin: 8px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.guestCard p,
+.guestLinkIntro p {
+  margin: 12px 0 0;
+  color: var(--july-muted);
+  line-height: 1.45;
+}
+
+.stayDetails {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.stayDetails div,
+.guestLinkIntro {
+  padding: 12px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 8px;
+  background: rgba(8, 33, 65, 0.04);
+}
+
+.stayDetails dt,
+.stayDetails dd {
+  margin: 0;
+}
+
+.stayDetails dt {
+  color: var(--july-muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.stayDetails dd {
+  margin-top: 4px;
+  color: var(--july-blue);
+  font-weight: 900;
+}
+
+.guestLinkIntro strong {
+  display: block;
+  color: var(--july-blue);
+  font-size: 1.2rem;
+}
+
+.guestDirectory {
+  overflow: hidden;
+}
+
+.directoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--july-line);
+}
+
+.directoryHeader strong {
+  color: var(--july-blue);
+}
+
+.guestLinks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--july-line);
+}
+
+.guestLinks a {
+  min-height: 76px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  padding: 12px;
+  color: var(--july-ink);
+  background: rgba(255, 253, 247, 0.98);
+  text-decoration: none;
+}
+
+.guestLinks a:hover,
+.activeGuestLink {
+  background: #fff3e2 !important;
+}
+
+.guestLinks span {
+  font-weight: 950;
+}
+
+.guestLinks small {
+  color: var(--july-muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
 .statusBar {
   display: grid;
   grid-template-columns: auto repeat(4, minmax(110px, 1fr)) auto;
@@ -648,6 +783,7 @@
 
 @media (max-width: 1080px) {
   .heroContent,
+  .guestDesk,
   .contentGrid {
     grid-template-columns: 1fr;
   }
@@ -673,6 +809,10 @@
 
   .photoStrip {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .guestLinks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -719,6 +859,8 @@
   .heroPanel,
   .formRow,
   .photoStrip,
+  .guestLinks,
+  .stayDetails,
   .statusBar {
     grid-template-columns: 1fr;
   }

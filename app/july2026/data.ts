@@ -139,6 +139,170 @@ export const motorizedVehicles = [
   }
 ];
 
+export type GuestAssignment = {
+  slug: string;
+  name: string;
+  house: "LH1" | "LH2" | "LH3" | "Pending";
+  room: string;
+  companions: string[];
+  arrival: string;
+  departure: string;
+  note: string;
+};
+
+export const guestAssignments: GuestAssignment[] = [
+  {
+    slug: "holly",
+    name: "Holly",
+    house: "LH3",
+    room: "Primary bedroom",
+    companions: ["Todd"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "Meals, beach time, brunch, and the boat return are centered at LH3."
+  },
+  {
+    slug: "todd",
+    name: "Todd",
+    house: "LH3",
+    room: "Primary bedroom",
+    companions: ["Holly"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "Meals, beach time, brunch, and the boat return are centered at LH3."
+  },
+  {
+    slug: "heather",
+    name: "Heather",
+    house: "LH1",
+    room: "Second floor bedroom",
+    companions: ["Eric"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "Welcome meal, orientation, boat departure, and evening fire pit are based at LH1."
+  },
+  {
+    slug: "eric",
+    name: "Eric",
+    house: "LH1",
+    room: "Second floor bedroom",
+    companions: ["Heather"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "Welcome meal, orientation, boat departure, and evening fire pit are based at LH1."
+  },
+  {
+    slug: "zach",
+    name: "Zach",
+    house: "Pending",
+    room: "Assignment pending",
+    companions: [],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "This guest is listed in the reference material, but the room assignment still needs host confirmation."
+  },
+  {
+    slug: "bee",
+    name: "Bee",
+    house: "Pending",
+    room: "Assignment pending",
+    companions: [],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "This guest is listed in the reference material, but the room assignment still needs host confirmation."
+  },
+  {
+    slug: "cin",
+    name: "Cin",
+    house: "LH2",
+    room: "South bedroom",
+    companions: ["Vin"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "LH2 is the quiet guest-room house and K-cup coffee stop."
+  },
+  {
+    slug: "vin",
+    name: "Vin",
+    house: "LH2",
+    room: "South bedroom",
+    companions: ["Cin"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "LH2 is the quiet guest-room house and K-cup coffee stop."
+  },
+  {
+    slug: "adam",
+    name: "Adam",
+    house: "LH2",
+    room: "North bedroom",
+    companions: ["Gage"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "LH2 is the quiet guest-room house and K-cup coffee stop."
+  },
+  {
+    slug: "gage",
+    name: "Gage",
+    house: "LH2",
+    room: "North bedroom",
+    companions: ["Adam"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "LH2 is the quiet guest-room house and K-cup coffee stop."
+  },
+  {
+    slug: "morgan",
+    name: "Morgan",
+    house: "LH1",
+    room: "The Girls' Room",
+    companions: ["Rowan", "Emma", "Austin"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "The Girls' Room is the third floor bedroom at LH1."
+  },
+  {
+    slug: "rowan",
+    name: "Rowan",
+    house: "LH1",
+    room: "The Girls' Room",
+    companions: ["Morgan", "Emma", "Austin"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "The Girls' Room is the third floor bedroom at LH1."
+  },
+  {
+    slug: "emma",
+    name: "Emma",
+    house: "LH1",
+    room: "The Girls' Room",
+    companions: ["Morgan", "Rowan", "Austin"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "The Girls' Room is the third floor bedroom at LH1."
+  },
+  {
+    slug: "austin",
+    name: "Austin",
+    house: "LH1",
+    room: "The Girls' Room",
+    companions: ["Morgan", "Rowan", "Emma"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "The Girls' Room is the third floor bedroom at LH1."
+  },
+  {
+    slug: "jack",
+    name: "Jack",
+    house: "LH1",
+    room: "Sunroom",
+    companions: [],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "The Friday grab-and-go meal is also in the LH1 sunroom."
+  }
+];
+
 export const statusItems = [
   { label: "Weekend", value: "Jul 3-5" },
   { label: "Check-in", value: "Fri 3 PM" },

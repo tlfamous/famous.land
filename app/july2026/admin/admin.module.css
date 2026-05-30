@@ -10,6 +10,7 @@
 .hero,
 .grid,
 .lists,
+.guestLinksSection,
 .proofSection {
   width: min(100%, 1320px);
   margin: 0 auto;
@@ -147,9 +148,14 @@
   background: #4f7a4c;
 }
 
+.guestLinksSection,
 .proofSection {
   overflow: hidden;
   padding: 0;
+}
+
+.guestLinksSection {
+  margin-bottom: 24px;
 }
 
 .proofHeader {
@@ -183,10 +189,52 @@
   white-space: pre-wrap;
 }
 
+.guestLinkGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(8, 19, 38, 0.13);
+}
+
+.guestLinkGrid a {
+  min-height: 108px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 16px;
+  color: #071429;
+  background: rgba(255, 253, 247, 0.98);
+  text-decoration: none;
+}
+
+.guestLinkGrid a:hover {
+  background: #fff3e2;
+}
+
+.guestLinkGrid strong {
+  font-size: 1.05rem;
+}
+
+.guestLinkGrid span {
+  color: #596476;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.guestLinkGrid code {
+  width: fit-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: #0b4d91;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+}
+
 @media (max-width: 980px) {
   .hero,
   .grid,
-  .lists {
+  .lists,
+  .guestLinkGrid {
     grid-template-columns: 1fr;
   }
 

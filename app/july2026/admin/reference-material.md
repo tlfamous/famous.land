@@ -167,6 +167,30 @@ Photos needed:
 - Austin
 - Jack
 
+### Personalized Guest Links
+
+Each guest currently has a direct room-key URL:
+
+| Guest | URL | Current assignment |
+|---|---|---|
+| Holly | `/july2026/guest/holly` | LH3 / Primary bedroom |
+| Todd | `/july2026/guest/todd` | LH3 / Primary bedroom |
+| Heather | `/july2026/guest/heather` | LH1 / Second floor bedroom |
+| Eric | `/july2026/guest/eric` | LH1 / Second floor bedroom |
+| Zach | `/july2026/guest/zach` | Assignment pending |
+| Bee | `/july2026/guest/bee` | Assignment pending |
+| Cin | `/july2026/guest/cin` | LH2 / South bedroom |
+| Vin | `/july2026/guest/vin` | LH2 / South bedroom |
+| Adam | `/july2026/guest/adam` | LH2 / North bedroom |
+| Gage | `/july2026/guest/gage` | LH2 / North bedroom |
+| Morgan | `/july2026/guest/morgan` | LH1 / The Girls' Room |
+| Rowan | `/july2026/guest/rowan` | LH1 / The Girls' Room |
+| Emma | `/july2026/guest/emma` | LH1 / The Girls' Room |
+| Austin | `/july2026/guest/austin` | LH1 / The Girls' Room |
+| Jack | `/july2026/guest/jack` | LH1 / Sunroom |
+
+Tokenized first-device binding is still a later admin feature. These direct links are the current guest-facing test links.
+
 ## 6. Weekend Schedule
 
 ## Friday, July 3, 2026
@@ -429,6 +453,8 @@ Images still needed:
 Missing information:
 
 - LH1 address
+- Zach room assignment
+- Bee room assignment
 - Final host contact information
 - Exact departure/check-out time, if needed
 - Any dietary notes or restrictions

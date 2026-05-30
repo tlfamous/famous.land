@@ -11,7 +11,14 @@ import lakeHouse3Image from "./assets/lake-house-3.jpeg";
 import laconicVehicleImage from "./assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "./assets/vehicle-laika-trixx.png";
 import spikeyLizardVehicleImage from "./assets/vehicle-spikey-lizard-gtx.png";
-import { bringItems, houseProfiles, motorizedVehicles, scheduleItems, statusItems } from "./data";
+import {
+  bringItems,
+  guestAssignments,
+  houseProfiles,
+  motorizedVehicles,
+  scheduleItems,
+  statusItems
+} from "./data";
 import styles from "./july2026.module.css";
 
 const lakeHouse3Video = new URL("./assets/lh3-profile.mp4", import.meta.url).toString();
@@ -72,13 +79,24 @@ const vehicleImages = {
   }
 } as const;
 
-export function July2026App() {
+type July2026AppProps = {
+  selectedGuestSlug?: string;
+};
+
+export function July2026App({ selectedGuestSlug }: July2026AppProps) {
+  const selectedGuest = guestAssignments.find((guest) => guest.slug === selectedGuestSlug);
+  const selectedGuestHouse =
+    selectedGuest?.house && selectedGuest.house !== "Pending"
+      ? houseProfiles.find((house) => house.name === selectedGuest.house)
+      : null;
+
   return (
     <div className={`${styles.app} july-2026-app`}>
       <nav className={styles.topbar} aria-label="July 2026 event navigation">
         <div className={styles.navLinks}>
           <a href="#stay">My Stay</a>
           <a href="#schedule">Schedule</a>
+          <a href="#guests">Guests</a>
           <a href="#map">Map</a>
           <a href="sms:+17819294932">Contact Host</a>
         </div>
@@ -99,12 +117,16 @@ export function July2026App() {
             <p className={styles.date}>A Famous Land lake weekend</p>
             <p className={styles.sponsor}>Sponsored by famous.land</p>
             <p className={styles.lede}>
-              A private resort-style guest portal for check-in, room assignments, lake-house
-              directions, activities, meals, fireworks, and host help all weekend.
+              {selectedGuest
+                ? `Welcome, ${selectedGuest.name}. Your private lake-weekend check-in is ready with your room, house, schedule, and host text line.`
+                : "A private resort-style guest portal for check-in, room assignments, lake-house directions, activities, meals, fireworks, and host help all weekend."}
             </p>
             <div className={styles.heroActions}>
               <a className={styles.secondaryButton} href="#schedule">
                 View Schedule
+              </a>
+              <a className={styles.secondaryButton} href="#guests">
+                {selectedGuest ? "View My Stay" : "Guest Links"}
               </a>
               <a className={styles.secondaryButton} href="sms:+17819294932">
                 Contact Host
@@ -139,13 +161,23 @@ export function July2026App() {
       <section className={styles.stayStrip} id="stay" aria-label="Personalized stay preview">
         <div>
           <span>Welcome</span>
-          <strong>Your lake-weekend check-in</strong>
-          <p>Personalized guest links will open directly to each guest's house, room, and itinerary.</p>
+          <strong>{selectedGuest ? `${selectedGuest.name}'s lake-weekend check-in` : "Your lake-weekend check-in"}</strong>
+          <p>
+            {selectedGuest
+              ? "This personalized link opens directly to your weekend stay details."
+              : "Personalized guest links open directly to each guest's house, room, and itinerary."}
+          </p>
         </div>
         <div>
           <span>Room key</span>
-          <strong>House and room assignment</strong>
-          <p>Guests can view their own stay first, with an option to browse the full guest list.</p>
+          <strong>
+            {selectedGuest ? `${selectedGuest.house} / ${selectedGuest.room}` : "House and room assignment"}
+          </strong>
+          <p>
+            {selectedGuest
+              ? selectedGuest.note
+              : "Guests can view their own stay first, with an option to browse the full guest list."}
+          </p>
         </div>
         <div>
           <span>Help</span>
@@ -154,6 +186,75 @@ export function July2026App() {
             <a href="sms:+17819294932">Tap to message 781-929-4932</a>
           </p>
         </div>
+      </section>
+
+      <section className={styles.guestDesk} id="guests" aria-label="Guest stay details">
+        <article className={styles.guestCard}>
+          <div>
+            <span className={styles.sectionLabel}>{selectedGuest ? "My Stay" : "Guest Check-In"}</span>
+            <h2>{selectedGuest ? `${selectedGuest.name}'s stay` : "Choose a guest link"}</h2>
+            <p>
+              {selectedGuest
+                ? "A concise room-key view for arrival, room assignment, house context, and host help."
+                : "Each guest has a direct link for their own room-key view. Assignments shown as pending still need host confirmation."}
+            </p>
+          </div>
+
+          {selectedGuest ? (
+            <dl className={styles.stayDetails}>
+              <div>
+                <dt>House</dt>
+                <dd>{selectedGuest.house}</dd>
+              </div>
+              <div>
+                <dt>Room</dt>
+                <dd>{selectedGuest.room}</dd>
+              </div>
+              <div>
+                <dt>Arrival</dt>
+                <dd>{selectedGuest.arrival}</dd>
+              </div>
+              <div>
+                <dt>Departure</dt>
+                <dd>{selectedGuest.departure}</dd>
+              </div>
+              <div>
+                <dt>House note</dt>
+                <dd>{selectedGuestHouse?.role ?? selectedGuest.note}</dd>
+              </div>
+              <div>
+                <dt>Staying with</dt>
+                <dd>{selectedGuest.companions.length ? selectedGuest.companions.join(", ") : "Solo room assignment"}</dd>
+              </div>
+            </dl>
+          ) : (
+            <div className={styles.guestLinkIntro}>
+              <strong>Private room-key links</strong>
+              <p>Use these for guest testing now; they can become tokenized links when binding is added.</p>
+            </div>
+          )}
+        </article>
+
+        <article className={styles.guestDirectory}>
+          <div className={styles.directoryHeader}>
+            <span className={styles.sectionLabel}>Guest Directory</span>
+            <strong>{guestAssignments.length} guests</strong>
+          </div>
+          <div className={styles.guestLinks}>
+            {guestAssignments.map((guest) => (
+              <a
+                className={guest.slug === selectedGuest?.slug ? styles.activeGuestLink : undefined}
+                href={`/july2026/guest/${guest.slug}`}
+                key={guest.slug}
+              >
+                <span>{guest.name}</span>
+                <small>
+                  {guest.house === "Pending" ? "Pending" : `${guest.house} / ${guest.room}`}
+                </small>
+              </a>
+            ))}
+          </div>
+        </article>
       </section>
 
       <section className={styles.contentGrid} aria-label="Event planning">

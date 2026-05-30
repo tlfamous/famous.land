@@ -1,4 +1,5 @@
 import styles from "./admin.module.css";
+import { guestAssignments } from "../data";
 import { referenceMaterial } from "./referenceMaterial";
 
 const proofUrl = "https://www.proofeditor.ai/d/ado6gf4r?token=2b8510d8-4eaa-4fc9-b0e7-f802f6a0d12c";
@@ -109,6 +110,29 @@ export function July2026Admin() {
               ))}
             </ul>
           </article>
+        </section>
+
+        <section className={styles.guestLinksSection} aria-label="Personalized guest links">
+          <div className={styles.proofHeader}>
+            <div>
+              <span className={styles.label}>Guest Links</span>
+              <h2>Personalized room-key URLs</h2>
+              <p>
+                Current direct links for testing each guest's stay view. Pending assignments are
+                visible until the host confirms those rooms.
+              </p>
+            </div>
+            <a href="/july2026/guest/holly">Preview Holly</a>
+          </div>
+          <div className={styles.guestLinkGrid}>
+            {guestAssignments.map((guest) => (
+              <a href={`/july2026/guest/${guest.slug}`} key={guest.slug}>
+                <strong>{guest.name}</strong>
+                <span>{guest.house === "Pending" ? "Assignment pending" : `${guest.house} / ${guest.room}`}</span>
+                <code>/july2026/guest/{guest.slug}</code>
+              </a>
+            ))}
+          </div>
         </section>
 
         <section className={styles.proofSection} aria-label="Editable Proof reference material">
