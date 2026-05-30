@@ -195,6 +195,25 @@ export const hostHelpItems = [
   }
 ];
 
+export const lakeUseRules = [
+  {
+    label: "Orientation first",
+    detail: "Motorized fleet use starts only after the Saturday LH1 safety briefing and a host go-ahead."
+  },
+  {
+    label: "Life jackets",
+    detail: "Wear the right-size life jacket for boating, PWC rides, and any lake activity where the host asks for one."
+  },
+  {
+    label: "Dock plan",
+    detail: "Use the host-designated departure and return points, especially for the LH1-to-LH3 group boat ride."
+  },
+  {
+    label: "Text before changes",
+    detail: "Text the host before changing cruise plans, taking out a motorized vehicle, or requesting quad/four-wheeler time."
+  }
+];
+
 export const motorizedVehicles = [
   {
     capacity: "10 persons",

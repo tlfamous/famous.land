@@ -391,7 +391,16 @@ Activity approval rules:
 - Quad/four-wheeler use is by host approval.
 - Dietary notes, allergies, or restrictions should be texted to the host at 781-929-4932.
 
-## 8. Food and Drinks
+## 8. Lake Use and Approval Guide
+
+The guest page includes a dedicated Lake Rules section with:
+
+- Orientation first: motorized fleet use starts only after the Saturday LH1 safety briefing and a host go-ahead.
+- Life jackets: guests should wear the right-size life jacket for boating, PWC rides, and any lake activity where the host asks for one.
+- Dock plan: guests should use the host-designated departure and return points, especially for the LH1-to-LH3 group boat ride.
+- Text before changes: guests should text the host before changing cruise plans, taking out a motorized vehicle, or requesting quad/four-wheeler time.
+
+## 9. Food and Drinks
 
 The guest page includes a dedicated Food and Drinks section with:
 
@@ -402,7 +411,7 @@ The guest page includes a dedicated Food and Drinks section with:
 - Saturday dinner at LH3 with lakeside patio seating
 - Sunday pancake brunch at LH3
 
-## 9. Motorized Vehicle Inventory
+## 10. Motorized Vehicle Inventory
 
 | Name | Vehicle | Color | Capacity | Reference image | Operating note |
 |---|---|---|---|---|---|
@@ -416,7 +425,7 @@ Inventory notes:
 - The three inventory cards should look visually similar, using clean studio-style Sea-Doo watercraft references.
 - All motorized vehicle use is part of the host-approved activity flow.
 
-## 10. Guest Experience Requirements
+## 11. Guest Experience Requirements
 
 The site should feel like a fun resort portal.
 
@@ -429,6 +438,7 @@ Suggested sections:
 - Houses
 - Activities
 - Motorized Fleet
+- Lake Rules and Approvals
 - Food and Drinks
 - Maps and Directions with known LH2 and LH3 address links
 - Help / Contact Host
@@ -445,7 +455,7 @@ Admin operating sections:
 - Personalized room-key URLs
 - Embedded reference material with Proof edit link
 
-## 11. Design Direction
+## 12. Design Direction
 
 Style should feel:
 
@@ -469,7 +479,7 @@ Possible design language:
 
 Avoid making the site feel too corporate or too silly. It should be fun but still useful.
 
-## 12. Content and Asset Needs
+## 13. Content and Asset Needs
 
 Images still needed:
 

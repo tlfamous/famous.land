@@ -19,6 +19,7 @@ import {
   guestAssignments,
   hostHelpItems,
   houseProfiles,
+  lakeUseRules,
   motorizedVehicles,
   scheduleItems,
   statusItems
@@ -680,6 +681,21 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 <span>{activity.location}</span>
                 <strong>{activity.title}</strong>
                 <p>{activity.detail}</p>
+              </section>
+            ))}
+          </div>
+        </article>
+
+        <article className={styles.panel} id="lake-rules">
+          <div className={styles.panelHeader}>
+            <Icon path="M12 2 4 5.5v6.1c0 4.8 3.3 8.8 8 10.4 4.7-1.6 8-5.6 8-10.4V5.5L12 2Zm0 2.2 6 2.6v4.8c0 3.7-2.4 6.8-6 8.1-3.6-1.3-6-4.4-6-8.1V6.8l6-2.6Zm-1 10.4 5-5-1.4-1.4-3.6 3.6-1.6-1.6L8 11.6l3 3Z" />
+            <h2>Lake Rules</h2>
+          </div>
+          <div className={styles.approvalList}>
+            {lakeUseRules.map((rule) => (
+              <section key={rule.label}>
+                <strong>{rule.label}</strong>
+                <p>{rule.detail}</p>
               </section>
             ))}
           </div>

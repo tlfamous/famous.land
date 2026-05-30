@@ -33,6 +33,7 @@ const guestExperience = [
   "Houses",
   "Activities",
   "Motorized Fleet",
+  "Lake Rules and Approvals",
   "Food and Drinks",
   "Maps and Directions",
   "Contact Host",
