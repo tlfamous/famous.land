@@ -59,6 +59,7 @@ export default function July2026SafetyPage() {
           </div>
           <nav className={styles.quickLinks} aria-label="Safety quick actions">
             <a href="/july2026">Guest Portal</a>
+            <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/concierge">Guest Concierge</a>
             <a href="/july2026/fleet">Fleet Guide</a>
             <a href="/july2026/arrival-card">Arrival Card</a>

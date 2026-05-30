@@ -1,0 +1,429 @@
+.page {
+  min-height: 100svh;
+  padding: clamp(18px, 4vw, 48px);
+  color: #081326;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(243, 187, 85, 0.2), transparent 26%),
+    linear-gradient(135deg, rgba(8, 33, 65, 0.08), rgba(79, 122, 76, 0.12)),
+    #f7f5ee;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.shell {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  overflow: hidden;
+  background: #fffdf7;
+  border: 1px solid rgba(8, 19, 38, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 22px 62px rgba(8, 19, 38, 0.16);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: clamp(24px, 5vw, 58px);
+  align-items: end;
+  padding: clamp(28px, 5vw, 58px);
+  color: #fffdf7;
+  background:
+    linear-gradient(135deg, rgba(8, 19, 38, 0.96), rgba(8, 33, 65, 0.82)),
+    url("../assets/july-4-hero.png") center / cover;
+}
+
+.kicker {
+  margin: 0 0 12px;
+  color: #f3bb55;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.mapLegend h2,
+.timelinePanel h2,
+.twoColumn h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.3rem, 7vw, 5.8rem);
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+
+.hero p:last-child {
+  max-width: 700px;
+  margin: 20px 0 0;
+  color: rgba(255, 253, 247, 0.9);
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.5;
+}
+
+.quickLinks {
+  display: grid;
+  gap: 10px;
+}
+
+.quickLinks a,
+.mapLegend a,
+.houseGrid a,
+.footer a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  color: #fffdf7;
+  background: #be1d27;
+  border: 1px solid rgba(255, 253, 247, 0.2);
+  border-radius: 8px;
+  font-weight: 950;
+  text-align: center;
+  text-decoration: none;
+}
+
+.quickLinks a {
+  background: rgba(255, 253, 247, 0.1);
+  border-color: rgba(255, 253, 247, 0.35);
+}
+
+.mapPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: 18px;
+  padding: clamp(18px, 4vw, 40px);
+  background: #e7e5dd;
+}
+
+.mapCanvas {
+  position: relative;
+  min-height: 510px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 247, 0.94), rgba(245, 249, 243, 0.9)),
+    radial-gradient(circle at 50% 50%, rgba(45, 91, 126, 0.18), transparent 46%);
+  border: 1px solid rgba(8, 19, 38, 0.14);
+  border-radius: 8px;
+}
+
+.lakeShape {
+  position: absolute;
+  inset: 11% 18% 12% 18%;
+  background:
+    radial-gradient(circle at 36% 24%, rgba(61, 119, 158, 0.75), transparent 22%),
+    radial-gradient(circle at 64% 52%, rgba(61, 119, 158, 0.82), transparent 30%),
+    linear-gradient(135deg, #2d5b7e, #77a9be);
+  border: 14px solid rgba(255, 253, 247, 0.74);
+  border-radius: 45% 55% 48% 52%;
+  box-shadow: inset 0 0 36px rgba(8, 19, 38, 0.24), 0 20px 45px rgba(8, 19, 38, 0.14);
+  transform: rotate(-8deg);
+}
+
+.routeLine {
+  position: absolute;
+  top: 47%;
+  left: 16%;
+  width: 68%;
+  height: 6px;
+  background: linear-gradient(90deg, #be1d27, #f3bb55, #4f7a4c);
+  border-radius: 999px;
+  box-shadow: 0 0 0 8px rgba(255, 253, 247, 0.74);
+}
+
+.mapStop {
+  position: absolute;
+  width: min(250px, 38%);
+  padding: 18px;
+  background: #fffdf7;
+  border: 1px solid rgba(8, 19, 38, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 16px 32px rgba(8, 19, 38, 0.16);
+}
+
+.mapStop span,
+.houseGrid span {
+  color: #be1d27;
+  font-size: 0.74rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.mapStop strong {
+  display: block;
+  margin-top: 7px;
+  color: #082141;
+  font-size: 1.15rem;
+}
+
+.mapStop p,
+.mapLegend p,
+.houseGrid p,
+.timelinePanel p,
+.stack p,
+.foodStrip p {
+  margin: 9px 0 0;
+  color: #5d6673;
+  line-height: 1.45;
+}
+
+.west {
+  top: 24px;
+  left: 24px;
+}
+
+.north {
+  top: 24px;
+  right: 24px;
+}
+
+.east {
+  right: 24px;
+  bottom: 24px;
+}
+
+.mapLegend {
+  padding: clamp(22px, 4vw, 34px);
+  background: #fffdf7;
+  border: 1px solid rgba(8, 19, 38, 0.14);
+  border-radius: 8px;
+}
+
+.mapLegend h2,
+.timelinePanel h2,
+.twoColumn h2 {
+  font-size: clamp(2.35rem, 4vw, 3.8rem);
+}
+
+.mapLegend h2 {
+  font-size: clamp(2.1rem, 3vw, 3rem);
+}
+
+.mapLegend a {
+  width: 100%;
+  margin-top: 24px;
+  background: #082141;
+}
+
+.houseGrid,
+.foodStrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding: 0 clamp(18px, 4vw, 40px) 18px;
+}
+
+.houseGrid article,
+.foodStrip article,
+.timelinePanel,
+.twoColumn article {
+  padding: clamp(20px, 4vw, 32px);
+  background: #fffdf7;
+  border: 1px solid rgba(8, 19, 38, 0.14);
+  border-radius: 8px;
+}
+
+.houseGrid h2 {
+  margin: 10px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 5vw, 4.6rem);
+  line-height: 0.9;
+}
+
+.houseGrid strong {
+  display: block;
+  margin-top: 14px;
+  color: #082141;
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+
+.houseGrid div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.houseGrid small {
+  padding: 7px 10px;
+  color: #082141;
+  background: #f7f5ee;
+  border: 1px solid rgba(8, 19, 38, 0.12);
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+.houseGrid a {
+  width: 100%;
+  margin-top: 18px;
+  background: #082141;
+}
+
+.timelinePanel,
+.twoColumn {
+  display: grid;
+  grid-template-columns: minmax(240px, 330px) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 44px);
+  margin: 0 clamp(18px, 4vw, 40px) 18px;
+}
+
+.timelinePanel ol {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timelinePanel li {
+  display: grid;
+  grid-template-columns: minmax(118px, 0.36fr) minmax(0, 1fr);
+  gap: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(8, 19, 38, 0.12);
+}
+
+.timelinePanel li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.timelinePanel time {
+  color: #be1d27;
+  font-weight: 950;
+}
+
+.timelinePanel strong,
+.stack strong,
+.foodStrip strong {
+  display: block;
+  color: #082141;
+  font-size: 1.05rem;
+}
+
+.twoColumn {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stack {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.stack section {
+  padding: 16px;
+  background: #f7f5ee;
+  border: 1px solid rgba(8, 19, 38, 0.12);
+  border-radius: 8px;
+}
+
+.foodStrip {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.foodStrip article {
+  padding: 18px;
+}
+
+.foodStrip time {
+  display: block;
+  margin-bottom: 8px;
+  color: #be1d27;
+  font-size: 0.8rem;
+  font-weight: 950;
+}
+
+.footer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px clamp(18px, 4vw, 40px);
+  color: #fffdf7;
+  background: #081326;
+}
+
+.footer span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+@media (max-width: 980px) {
+  .mapPanel,
+  .houseGrid,
+  .foodStrip,
+  .timelinePanel,
+  .twoColumn {
+    grid-template-columns: 1fr;
+  }
+
+  .foodStrip {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 0;
+  }
+
+  .shell {
+    border-radius: 0;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .mapPanel {
+    padding: 14px;
+  }
+
+  .mapCanvas {
+    min-height: 680px;
+  }
+
+  .lakeShape {
+    inset: 17% 6% 18% 6%;
+  }
+
+  .routeLine {
+    top: 49%;
+    left: 10%;
+    width: 80%;
+  }
+
+  .mapStop {
+    width: calc(100% - 36px);
+  }
+
+  .west,
+  .north,
+  .east {
+    left: 18px;
+    right: auto;
+  }
+
+  .west {
+    top: 18px;
+  }
+
+  .north {
+    top: 230px;
+  }
+
+  .east {
+    bottom: 18px;
+  }
+
+  .timelinePanel li {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

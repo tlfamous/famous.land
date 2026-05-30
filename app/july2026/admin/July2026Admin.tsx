@@ -56,6 +56,7 @@ const guestExperience = [
   "Lake Rules and Approvals",
   "Safety Guide",
   "Food and Drinks",
+  "Resort Map",
   "Maps and Directions",
   "Getting Around guide",
   "Contact Host",
@@ -169,6 +170,12 @@ const readinessItems = [
   {
     detail: "Guest-facing meals guide centralizes welcome food, house coffee, smoothies, lunch, lakeside patio dinner, brunch, and dietary-note texting.",
     label: "Meals guide",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest-facing resort map shows LH1/LH2/LH3 roles, lake movement, food hubs, and activity anchors.",
+    label: "Resort map",
     status: "Ready",
     tone: "ready"
   },
@@ -348,6 +355,11 @@ export function July2026Admin() {
         detail: "Public one-page arrival guide with QR, host line, check-in flow, and key schedule.",
         href: `${baseUrl}/july2026/arrival-card`,
         label: "Arrival card"
+      },
+      {
+        detail: "Public resort map for house flow, lake route, gathering hubs, meal locations, and activity anchors.",
+        href: `${baseUrl}/july2026/map`,
+        label: "Resort map"
       },
       {
         detail: "Public house movement page with live LH2/LH3 maps and LH1 pending-address fallback.",

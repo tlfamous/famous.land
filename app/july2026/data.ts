@@ -142,6 +142,11 @@ export const resortDeskItems = [
     label: "Directions"
   },
   {
+    action: "Open the resort map",
+    detail: "See the weekend house flow across LH1, LH2, LH3, lake routes, meals, and gathering hubs.",
+    label: "Map"
+  },
+  {
     action: "Add the weekend calendar",
     detail: "Download the famous.land calendar file for check-in, meals, yoga, boat ride, fireworks, brunch, and departure weekend.",
     label: "Calendar"
@@ -500,7 +505,7 @@ export const motorizedVehicles = [
     pickup: "Host-approved lake launch point",
     source: "Red Sea-Doo Spark Trixx 2up studio reference",
     sourceUrl:
-      "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my26/studio/rec-lite/spark-trixx/SEA-MY26-SPARK-Trixx-3up-NoSS-M90-Dragon-Red-Bright-White-00066TA00-Studio-34FR-CU.png",
+      "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my22/studio/rec-lite/SEA-MY22-SPARK-2up-IBR-TRIXX-withoutSS-90-Can-Am-Red-SKU00065NA00-Studio-34FR-NA-661x480.png",
     type: "Sea-Doo Spark Trixx-style PWC"
   }
 ];
@@ -549,6 +554,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     "Current review links:",
     `Guest portal: ${baseUrl}/july2026`,
     `Arrival card: ${baseUrl}/july2026/arrival-card`,
+    `Resort map: ${baseUrl}/july2026/map`,
     `Directions hub: ${baseUrl}/july2026/directions`,
     `House directory: ${baseUrl}/july2026/houses`,
     `Guest concierge: ${baseUrl}/july2026/concierge`,
@@ -825,6 +831,7 @@ Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
 Arrival card: ${baseUrl}/july2026/arrival-card
+Resort map: ${baseUrl}/july2026/map
 Directions hub: ${baseUrl}/july2026/directions
 Guest concierge: ${baseUrl}/july2026/concierge
 Packing prep: ${baseUrl}/july2026/prep

@@ -42,6 +42,7 @@ export default function July2026ConciergePage() {
           <nav className={styles.quickLinks} aria-label="Concierge quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
+            <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/prep">Packing Prep</a>
             <a href="/july2026/itinerary">Itinerary</a>

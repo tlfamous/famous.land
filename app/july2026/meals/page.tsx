@@ -52,6 +52,7 @@ export default function July2026MealsPage() {
           </div>
           <nav className={styles.quickLinks} aria-label="Meals quick actions">
             <a href="/july2026">Guest Portal</a>
+            <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
             <a href="/july2026/prep">Packing Prep</a>
             <a href="/july2026/concierge">Guest Concierge</a>

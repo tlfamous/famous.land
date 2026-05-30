@@ -182,6 +182,18 @@ The arrival card includes:
 - Key schedule moments
 - Tap-to-text host prompts
 
+### Resort Map
+
+The guest portal exposes a polished resort-map style movement guide at `/july2026/map`.
+
+The resort map includes:
+
+- Guest portal, directions hub, house directory, itinerary, meals, fleet, lake area map, and text-host actions
+- Visual LH1, LH2, and LH3 house-flow map with lake route treatment
+- House roles, direction status, room/spaces, and map actions
+- Movement moments showing when the weekend shifts houses
+- Getting Around, activity anchors, meal locations, and Contact Host footer
+
 ### Directions Hub
 
 The guest portal exposes a mobile-friendly house movement and directions page at `/july2026/directions`.
@@ -643,6 +655,7 @@ Suggested sections:
 - Lake Rules and Approvals
 - Safety Guide at `/july2026/safety`
 - Food and Drinks
+- Resort Map at `/july2026/map`
 - Maps and Directions with known LH2 and LH3 address links
 - Directions Hub at `/july2026/directions`
 - House Directory at `/july2026/houses`
@@ -666,6 +679,7 @@ Admin operating sections:
 - Resort Desk readiness
 - Arrival Desk readiness
 - Arrival card readiness
+- Resort map readiness
 - Directions hub readiness
 - House directory readiness
 - Guest concierge readiness
@@ -694,6 +708,7 @@ Admin operating sections:
 Getting Around guide:
 
 - Arrive at your assigned house using the guest room-key page; LH2 and LH3 directions are live, and LH1 directions remain pending until the host confirms the address.
+- Use the resort map for a polished guest-facing overview of house roles, lake movement, meal hubs, and activity anchors.
 - Use the directions hub for known house map links, LH1 pending-address fallback, and host text help.
 - Use the house directory for LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.
 - Friday starts at LH1 for the welcome meal, orientation, and first-night fire gathering.
@@ -736,6 +751,12 @@ Meals and coffee guide:
 - `/july2026/meals` centralizes welcome food, house coffee, fruit smoothies, lunch, lakeside patio dinner, pancake brunch, and dietary-note texting.
 - Guest portal, arrival card, prep, itinerary, concierge, offline guide, and admin launch review link to the meals guide.
 - Guests can text dietary notes or food questions to 781-929-4932 from the meals guide.
+
+Resort map:
+
+- `/july2026/map` centralizes the visual house flow across LH1, LH2, and LH3.
+- The page keeps LH1 address pending while still giving guests a clear Lake Monomonac fallback and house-role overview.
+- Guest portal, arrival card, directions hub, house directory, itinerary, meals, fleet, offline guide, and admin launch review link to the resort map.
 
 Guest-specific SMS packets:
 
@@ -790,7 +811,7 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
+- The packet includes review links for the guest portal, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
 
 Media shot list:
 
@@ -800,7 +821,7 @@ Media shot list:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

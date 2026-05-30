@@ -6,6 +6,9 @@ https://famous.land/july2026
 Arrival card:
 https://famous.land/july2026/arrival-card
 
+Resort map:
+https://famous.land/july2026/map
+
 Directions hub:
 https://famous.land/july2026/directions
 
@@ -56,6 +59,7 @@ GETTING AROUND
 - Saturday morning shifts to LH3 for yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch.
 - The Saturday group boat ride departs from LH1 after motorized fleet orientation and returns to LH3 for lunch.
 - LH2 and LH3 directions are live in the guest portal. LH1 directions will be added when confirmed by the host.
+- Use the resort map for the house flow, lake route, meal hubs, and activity anchors.
 - Use the directions hub for known house map links and the Lake Monomonac fallback map.
 - Use the house directory for LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.
 
