@@ -113,7 +113,6 @@ export const bringItems = [
   "Reusable water bottle",
   "Bug spray",
   "Light jacket or hoodie",
-  "Drink of choice",
   "Patriotic spirit"
 ];
 
