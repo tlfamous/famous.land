@@ -138,6 +138,11 @@ export const resortDeskItems = [
     label: "Houses"
   },
   {
+    action: "Open the guest registry",
+    detail: "Use the standalone house-by-house roster for room assignments, companions, pending placements, and guest room-key links.",
+    label: "Registry"
+  },
+  {
     action: "Text the host",
     detail: "Questions, dietary notes, link resets, quad requests, and motorized lake plans all go to 781-929-4932.",
     label: "Help"
@@ -214,6 +219,11 @@ export const dayOfDeskItems = [
     href: "/july2026/directions",
     label: "Directions Hub",
     note: "Known LH2/LH3 directions and the LH1 pending-address fallback."
+  },
+  {
+    href: "/july2026/guest-list",
+    label: "Guest Registry",
+    note: "House-by-house roster with rooms, companions, pending assignments, and room-key links."
   },
   {
     href: "/july2026/meals",
@@ -782,6 +792,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Arrival card: ${baseUrl}/july2026/arrival-card`,
     `Resort map: ${baseUrl}/july2026/map`,
     `Directions hub: ${baseUrl}/july2026/directions`,
+    `Guest registry: ${baseUrl}/july2026/guest-list`,
     `House directory: ${baseUrl}/july2026/houses`,
     `Guest concierge: ${baseUrl}/july2026/concierge`,
     `Packing prep: ${baseUrl}/july2026/prep`,
@@ -820,6 +831,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     `- Arrival card: ${baseUrl}/july2026/arrival-card`,
     `- Resort map: ${baseUrl}/july2026/map`,
     `- Directions hub: ${baseUrl}/july2026/directions`,
+    `- Guest registry: ${baseUrl}/july2026/guest-list`,
     `- House directory: ${baseUrl}/july2026/houses`,
     `- Guest concierge: ${baseUrl}/july2026/concierge`,
     `- Packing prep: ${baseUrl}/july2026/prep`,
@@ -844,6 +856,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "Ready now:",
     "- Resort-style guest portal and supporting pages",
     "- Day-Of Desk for arrival, weather pivots, lake approvals, meals, maps, and host texts",
+    "- Guest registry for house rosters, room assignments, companions, pending assignments, and room-key links",
     "- Mobile resort pass with QR, host text, calendar, offline guide, and key itinerary actions",
     "- Resort FAQ for arrival, directions, food, lake approvals, phone setup, and host help",
     "- Rain plan with host-update, indoor-pivot, lake-safety, and meal-continuity guidance",
@@ -1138,6 +1151,7 @@ Rain plan: ${baseUrl}/july2026/rain-plan
 Arrival card: ${baseUrl}/july2026/arrival-card
 Resort map: ${baseUrl}/july2026/map
 Directions hub: ${baseUrl}/july2026/directions
+Guest registry: ${baseUrl}/july2026/guest-list
 Guest concierge: ${baseUrl}/july2026/concierge
 Packing prep: ${baseUrl}/july2026/prep
 Weekend itinerary: ${baseUrl}/july2026/itinerary
@@ -1189,6 +1203,7 @@ export function getGuestSmsPacket(
     `Resort pass: ${baseUrl}/july2026/pass`,
     `Resort FAQ: ${baseUrl}/july2026/faq`,
     `Rain plan: ${baseUrl}/july2026/rain-plan`,
+    `Guest registry: ${baseUrl}/july2026/guest-list`,
     `Calendar: ${baseUrl}/july2026/calendar.ics`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,

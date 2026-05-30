@@ -55,6 +55,7 @@ export default function July2026MealsPage() {
             <a href="/july2026/faq">Guest FAQ</a>
             <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
+            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
             <a href="/july2026/prep">Packing Prep</a>
             <a href="/july2026/concierge">Guest Concierge</a>

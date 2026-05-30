@@ -48,6 +48,7 @@ export default function July2026RainPlanPage() {
             <a href="/july2026/day-of">Day-Of Desk</a>
             <a href="/july2026/pass">Resort Pass</a>
             <a href="/july2026/faq">Guest FAQ</a>
+            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/safety">Safety Guide</a>
             <a href="/july2026/weekend-guide.txt">Offline Guide</a>

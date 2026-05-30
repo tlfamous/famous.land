@@ -27,6 +27,9 @@ https://famous.land/july2026/directions
 House directory:
 https://famous.land/july2026/houses
 
+Guest registry:
+https://famous.land/july2026/guest-list
+
 Guest concierge:
 https://famous.land/july2026/concierge
 
@@ -77,6 +80,7 @@ GETTING AROUND
 - Use the resort map for the house flow, lake route, meal hubs, and activity anchors.
 - Use the directions hub for known house map links and the Lake Monomonac fallback map.
 - Use the house directory for LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.
+- Use the guest registry for house rosters, room assignments, companions, pending guests, and room-key links.
 
 HOUSE DIRECTORY
 LH1
@@ -90,6 +94,11 @@ Address: 63 Pine Eden Road, Rindge, New Hampshire.
 LH3
 Beach, meals, brunch, boat return.
 Address: 25 Sunny Cove Road, Winchendon, Massachusetts.
+
+GUEST REGISTRY
+- Guest registry: https://famous.land/july2026/guest-list
+- Assigned guests have house and room details.
+- Zach and Bee still show assignment-pending language until the host confirms lodging details.
 
 KEY SCHEDULE
 Friday 3:00-6:00 PM - Guest check-in window

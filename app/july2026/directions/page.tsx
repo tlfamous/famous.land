@@ -36,6 +36,7 @@ export default function July2026DirectionsPage() {
             <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/houses">House Directory</a>
+            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/concierge">Guest Concierge</a>
             <a href="/july2026/prep">Packing Prep</a>

@@ -76,6 +76,7 @@ export default function July2026HousesPage() {
             <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/directions">Directions Hub</a>
+            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
@@ -179,6 +180,7 @@ export default function July2026HousesPage() {
                     <a href={mapsUrl ?? lakeAreaUrl} target="_blank" rel="noreferrer">
                       {mapsUrl ? house.mapLabel : "Open Lake Area Map"}
                     </a>
+                    <a href="/july2026/guest-list">Guest Registry</a>
                     <a href="/july2026/directions">Directions Hub</a>
                     <a href={hostSmsHref}>Text Host</a>
                   </div>

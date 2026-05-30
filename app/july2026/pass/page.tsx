@@ -53,6 +53,11 @@ const passActions = [
     note: "Known LH2/LH3 maps and LH1 pending fallback"
   },
   {
+    href: "/july2026/guest-list",
+    label: "Guest Registry",
+    note: "House rosters, room assignments, companions, pending guests, and room-key links"
+  },
+  {
     href: "/july2026/faq",
     label: "Guest FAQ",
     note: "Quick answers for arrival, directions, food, lake approvals, and host help"

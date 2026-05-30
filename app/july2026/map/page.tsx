@@ -73,6 +73,7 @@ export default function July2026ResortMapPage() {
             <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/houses">House Directory</a>
+            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>

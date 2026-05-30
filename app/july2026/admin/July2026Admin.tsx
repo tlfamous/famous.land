@@ -47,6 +47,7 @@ const guestExperience = [
   "Rain Plan",
   "Host text templates",
   "House Directory",
+  "Guest Registry",
   "Add Calendar",
   "Save Host Contact",
   "Offline Guide",
@@ -210,6 +211,12 @@ const readinessItems = [
   {
     detail: "Guest-facing standalone directory shows LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.",
     label: "House directory",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest-facing registry shows house rosters, room assignments, companions, pending assignments, and room-key links.",
+    label: "Guest registry",
     status: "Ready",
     tone: "ready"
   },
@@ -412,6 +419,11 @@ export function July2026Admin() {
         detail: "Standalone LH1/LH2/LH3 directory with photos, rooms, guests, house roles, and direction status.",
         href: `${baseUrl}/july2026/houses`,
         label: "House directory"
+      },
+      {
+        detail: "Standalone guest registry with house rosters, room assignments, companions, pending guests, and room-key links.",
+        href: `${baseUrl}/july2026/guest-list`,
+        label: "Guest registry"
       },
       {
         detail: "Public help desk with host text prompts, approvals, lake rules, and self-service links.",

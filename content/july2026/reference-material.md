@@ -274,6 +274,19 @@ The house directory includes:
 - House-specific itinerary highlights
 - House-to-house weekend flow
 
+### Guest Registry
+
+The guest portal exposes a standalone guest registry at `/july2026/guest-list`.
+
+The guest registry includes:
+
+- Guest portal, Day-Of Desk, house directory, directions hub, arrival card, and text-host actions
+- Total guest, assigned guest, and pending guest summary
+- House-by-house roster for LH1, LH2, LH3, and pending assignments
+- Room-level guest groupings with companions
+- Direct room-key links for every guest
+- Pending-assignment language for Zach and Bee until host-confirmed lodging details are available
+
 ### Guest Concierge
 
 The guest portal exposes a mobile-friendly guest help desk at `/july2026/concierge`.
@@ -714,6 +727,7 @@ Suggested sections:
 - Maps and Directions with known LH2 and LH3 address links
 - Directions Hub at `/july2026/directions`
 - House Directory at `/july2026/houses`
+- Guest Registry at `/july2026/guest-list`
 - Guest Concierge at `/july2026/concierge`
 - Packing Prep at `/july2026/prep`
 - Weekend Itinerary at `/july2026/itinerary`
@@ -766,6 +780,7 @@ Getting Around guide:
 - Use the resort map for a polished guest-facing overview of house roles, lake movement, meal hubs, and activity anchors.
 - Use the directions hub for known house map links, LH1 pending-address fallback, and host text help.
 - Use the house directory for LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.
+- Use the guest registry for house rosters, room assignments, companions, pending guests, and room-key links.
 - Friday starts at LH1 for the welcome meal, orientation, and first-night fire gathering.
 - Saturday morning shifts to LH3 for yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch.
 - The Saturday group boat ride connects LH1 to LH3 after the motorized fleet orientation.
@@ -813,6 +828,12 @@ Resort map:
 - `/july2026/map` centralizes the visual house flow across LH1, LH2, and LH3.
 - The page keeps LH1 address pending while still giving guests a clear Lake Monomonac fallback and house-role overview.
 - Guest portal, arrival card, directions hub, house directory, itinerary, meals, fleet, offline guide, and admin launch review link to the resort map.
+
+Guest registry:
+
+- `/july2026/guest-list` centralizes guest rosters by LH1, LH2, LH3, and pending assignment.
+- The page shows total guests, assigned guests, pending guests, room groupings, companions, and direct room-key links.
+- Pending guests continue to show host-confirmation language rather than false house or room assignments.
 
 Guest-specific SMS packets:
 
@@ -867,7 +888,7 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, Day-Of Desk, resort pass, resort FAQ, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, launch status, guest SMS packets, host text templates, media shot list, and offline guide.
+- The packet includes review links for the guest portal, Day-Of Desk, resort pass, resort FAQ, arrival card, resort map, directions hub, house directory, guest registry, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, launch status, guest SMS packets, host text templates, media shot list, and offline guide.
 
 Launch status packet:
 
@@ -883,7 +904,7 @@ Media shot list:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, Day-Of Desk, admin reference, resort pass, resort FAQ, offline guide, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, launch status, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, Day-Of Desk, admin reference, resort pass, resort FAQ, offline guide, arrival card, resort map, directions hub, house directory, guest registry, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, launch status, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction
