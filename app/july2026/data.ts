@@ -115,6 +115,30 @@ export const bringItems = [
   "Patriotic spirit"
 ];
 
+export const motorizedVehicles = [
+  {
+    name: "Laconic",
+    type: "Sea-Doo Switch pontoon boat",
+    color: "Red",
+    capacity: "10 persons",
+    image: "laconic"
+  },
+  {
+    name: "Spikey Lizard",
+    type: "Sea-Doo GTX PWC",
+    color: "Blue",
+    capacity: "3 seats",
+    image: "spikey-lizard"
+  },
+  {
+    name: "Laika",
+    type: "Sea-Doo Spark Trixx",
+    color: "Red",
+    capacity: "2 seats",
+    image: "laika"
+  }
+];
+
 export const statusItems = [
   { label: "Weekend", value: "Jul 3-5" },
   { label: "Check-in", value: "Fri 3 PM" },

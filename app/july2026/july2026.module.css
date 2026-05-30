@@ -413,6 +413,74 @@
   gap: 18px;
 }
 
+.vehicleList {
+  display: grid;
+  margin: 16px 22px 20px;
+  border-top: 1px solid var(--july-line);
+}
+
+.vehicleRow {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 13px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--july-line);
+}
+
+.vehicleImage {
+  width: 96px;
+  height: 70px;
+  object-fit: contain;
+  border: 1px solid rgba(8, 19, 38, 0.08);
+  border-radius: 6px;
+  background: #f8faf6;
+}
+
+.vehicleBody strong {
+  display: block;
+  line-height: 1.1;
+}
+
+.vehicleBody p {
+  margin: 4px 0 0;
+  color: var(--july-muted);
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+.vehicleMeta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 9px 0 0;
+}
+
+.vehicleMeta div {
+  padding: 6px 7px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 6px;
+  background: rgba(8, 33, 65, 0.03);
+}
+
+.vehicleMeta dt,
+.vehicleMeta dd {
+  margin: 0;
+}
+
+.vehicleMeta dt {
+  color: var(--july-muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.vehicleMeta dd {
+  color: var(--july-blue);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
 .bringList {
   display: grid;
   gap: 10px;

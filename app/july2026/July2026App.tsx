@@ -8,7 +8,10 @@ import lakeHouse2ExteriorSideImage from "./assets/lake-house-2-exterior-side.jpe
 import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
-import { bringItems, houseProfiles, scheduleItems, statusItems } from "./data";
+import laconicVehicleImage from "./assets/vehicle-laconic-switch.png";
+import laikaVehicleImage from "./assets/vehicle-laika-trixx.png";
+import spikeyLizardVehicleImage from "./assets/vehicle-spikey-lizard-gtx.png";
+import { bringItems, houseProfiles, motorizedVehicles, scheduleItems, statusItems } from "./data";
 import styles from "./july2026.module.css";
 
 const lakeHouse3Video = new URL("./assets/lh3-profile.mp4", import.meta.url).toString();
@@ -51,6 +54,21 @@ const houseImages = {
     label: "LH3",
     src: lakeHouse3Image,
     videoSrc: lakeHouse3Video
+  }
+} as const;
+
+const vehicleImages = {
+  laconic: {
+    alt: "Red Sea-Doo Switch pontoon boat reference for Laconic.",
+    src: laconicVehicleImage
+  },
+  laika: {
+    alt: "Red Sea-Doo Spark Trixx reference for Laika.",
+    src: laikaVehicleImage
+  },
+  "spikey-lizard": {
+    alt: "Blue Sea-Doo GTX PWC reference for Spikey Lizard.",
+    src: spikeyLizardVehicleImage
   }
 } as const;
 
@@ -237,6 +255,43 @@ export function July2026App() {
                       ))}
                     </ul>
                     <small>{house.note}</small>
+                  </section>
+                );
+              })}
+            </div>
+          </article>
+
+          <article className={styles.panel}>
+            <div className={styles.panelHeader}>
+              <Icon path="M4 15h16l-2.1-5.4A3 3 0 0 0 15.1 7H8.9a3 3 0 0 0-2.8 2.6L4 15Zm3-6h10l1.2 4H5.8L7 9Zm-.5 8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm11 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" />
+              <h2>Motorized Fleet</h2>
+            </div>
+            <div className={styles.vehicleList}>
+              {motorizedVehicles.map((vehicle) => {
+                const vehicleImage = vehicleImages[vehicle.image as keyof typeof vehicleImages];
+
+                return (
+                  <section className={styles.vehicleRow} key={vehicle.name}>
+                    <Image
+                      src={vehicleImage.src}
+                      alt={vehicleImage.alt}
+                      className={styles.vehicleImage}
+                      sizes="(max-width: 1080px) 96px, 96px"
+                    />
+                    <div className={styles.vehicleBody}>
+                      <strong>{vehicle.name}</strong>
+                      <p>{vehicle.type}</p>
+                      <dl className={styles.vehicleMeta}>
+                        <div>
+                          <dt>Color</dt>
+                          <dd>{vehicle.color}</dd>
+                        </div>
+                        <div>
+                          <dt>Capacity</dt>
+                          <dd>{vehicle.capacity}</dd>
+                        </div>
+                      </dl>
+                    </div>
                   </section>
                 );
               })}

@@ -358,7 +358,15 @@ The site should include an activities page or section with descriptions for:
 - Sparklers
 - Fireworks viewing
 
-## 8. Guest Experience Requirements
+## 8. Motorized Vehicle Inventory
+
+| Name | Vehicle | Color | Capacity | Reference image |
+|---|---|---|---|---|
+| Laconic | Sea-Doo Switch pontoon boat | Red | 10 persons | Red Sea-Doo Switch / Cruise-style pontoon |
+| Spikey Lizard | Sea-Doo GTX PWC | Blue | 3 seats | Blue Sea-Doo GTX |
+| Laika | Sea-Doo Spark Trixx | Red | 2 seats | Red Sea-Doo Trixx |
+
+## 9. Guest Experience Requirements
 
 The site should feel like a fun resort portal.
 
@@ -376,7 +384,7 @@ Suggested sections:
 - View Other Guests
 - Admin
 
-## 9. Design Direction
+## 10. Design Direction
 
 Style should feel:
 
@@ -400,7 +408,7 @@ Possible design language:
 
 Avoid making the site feel too corporate or too silly. It should be fun but still useful.
 
-## 10. Content and Asset Needs
+## 11. Content and Asset Needs
 
 Images still needed:
 
