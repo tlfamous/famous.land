@@ -95,14 +95,12 @@ Address: 63 Pine Eden Road, Rindge, New Hampshire
 
 Known spaces:
 
-- First floor bedroom
 - South bedroom
 - North bedroom
 
 Photos needed:
 
 - Exterior of Lake House 2
-- First floor bedroom
 - South bedroom
 - North bedroom
 - Any common spaces
@@ -140,7 +138,6 @@ Photos needed:
 
 | Guest(s) | Room |
 |---|---|
-| Zach and Bee | First floor bedroom |
 | Cin and Vin | South bedroom |
 | Adam and Gage | North bedroom |
 
