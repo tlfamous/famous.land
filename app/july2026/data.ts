@@ -133,7 +133,7 @@ export const houseProfiles = [
     image: "lake-house-1"
   },
   {
-    name: "Lake House 2",
+    name: "LH2",
     role: "Quiet guest rooms and coffee stop",
     rooms: ["First floor bedroom", "South bedroom", "North bedroom"],
     note: "63 Pine Eden Road, Rindge, New Hampshire",
