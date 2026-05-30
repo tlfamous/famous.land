@@ -507,6 +507,7 @@
 }
 
 .linkPacket button,
+.linkPacket a,
 .contentRequestPacket button,
 .contentRequestPacket a {
   min-height: 42px;
@@ -524,6 +525,13 @@
   font-weight: 900;
   text-decoration: none;
   cursor: pointer;
+}
+
+.linkPacket a {
+  color: #082141;
+  border: 1px solid rgba(8, 33, 65, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: none;
 }
 
 .contentRequestPacket a {

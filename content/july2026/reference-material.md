@@ -588,6 +588,12 @@ Room-key QR codes:
 - Admin guest rows show each guest's QR code and can open tokenized QR URLs when a current token is available.
 - Guest-specific SMS packets include the room-key QR code URL for screenshot or print-based sharing.
 
+Printable room-key sheet:
+
+- Admin includes a print-friendly room-key sheet at `/july2026/admin/room-keys`.
+- The sheet lists every guest, current assignment, arrival, departure, companions, stable room-key URL, and room-key QR code.
+- The sheet is intended for host check-in, arrival troubleshooting, and paper/screenshot backup.
+
 Personal calendar files:
 
 - Each guest page links to a personal downloadable `.ics` file.
@@ -603,7 +609,7 @@ Missing-content request packet:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, weekend calendar, host contact card, missing-content request, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, weekend calendar, host contact card, missing-content request, printable room-key sheet, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

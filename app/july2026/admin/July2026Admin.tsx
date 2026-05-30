@@ -311,6 +311,11 @@ export function July2026Admin() {
         label: "Missing-content request"
       },
       {
+        detail: "Print-friendly guest room-key links and QR codes.",
+        href: `${baseUrl}/july2026/admin/room-keys`,
+        label: "Printable room keys"
+      },
+      {
         detail: "Sample personalized room key for QA.",
         href: `${baseUrl}/july2026/guest/holly`,
         label: "Sample room key"
@@ -780,6 +785,7 @@ export function July2026Admin() {
             <button type="button" onClick={copyGuestLinkPacket}>
               Copy packet
             </button>
+            <a href="/july2026/admin/room-keys">Print room keys</a>
             <span className={styles.packetStatus}>{packetCopyStatus}</span>
             <pre ref={packetRef}>{guestLinkPacket}</pre>
           </div>
