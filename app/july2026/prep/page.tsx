@@ -12,9 +12,8 @@ export const metadata: Metadata = {
 };
 
 const coveredItems = [
-  "Drinks are provided",
-  "Chairs and lakeside seating are provided",
   "Main meals and scheduled food moments are planned",
+  "Host text prompts are ready for room help, dietary notes, fleet approval, and link resets",
   "Guest portal, calendar, host contact, and offline guide are available on your phone"
 ];
 
@@ -57,8 +56,8 @@ export default function July2026PrepPage() {
           </article>
           <article>
             <span>Covered</span>
-            <strong>Drinks and seating</strong>
-            <p>No need to bring drinks, lawn chairs, or blankets for the hosted lake setup.</p>
+            <strong>Weekend logistics</strong>
+            <p>Meals, host text prompts, calendar, contact card, and the offline guide are ready for phone setup.</p>
           </article>
           <article>
             <span>Before leaving</span>

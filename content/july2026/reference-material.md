@@ -190,7 +190,7 @@ The packing prep page includes:
 
 - Guest portal, arrival card, guest concierge, and text-host actions
 - What to bring list
-- Provided items, including drinks and chairs/lakeside seating
+- Provided logistics, including meals, host text prompts, calendar, contact card, and offline guide
 - Before-you-leave phone setup checklist
 - Nice-to-have personal items
 - Tap-to-text host prompts
@@ -668,9 +668,9 @@ Host text templates:
 Packing prep:
 
 - Guests should bring sunscreen, swimsuit and towel, reusable water bottle, bug spray, light jacket or hoodie, and patriotic spirit.
-- Drinks are provided.
-- Chairs and lakeside seating are provided.
 - Main meals and scheduled food moments are planned.
+- Host text prompts are ready for room help, dietary notes, fleet approval, and link resets.
+- Guest portal, calendar, host contact, and offline guide are available on the guest's phone.
 - Guests should open their room-key link, save the host contact, add the calendar, and download the guide before leaving.
 
 Guest-specific SMS packets:
