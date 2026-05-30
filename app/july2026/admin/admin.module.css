@@ -11,6 +11,7 @@
 .grid,
 .lists,
 .readinessSection,
+.assetSection,
 .vehicleInventorySection,
 .guestLinksSection,
 .proofSection {
@@ -97,6 +98,7 @@
 
 .panel,
 .readinessSection,
+.assetSection,
 .vehicleInventorySection,
 .proofSection {
   border: 1px solid rgba(8, 19, 38, 0.13);
@@ -162,6 +164,7 @@
 
 .guestLinksSection,
 .readinessSection,
+.assetSection,
 .vehicleInventorySection,
 .proofSection {
   overflow: hidden;
@@ -170,6 +173,7 @@
 
 .guestLinksSection,
 .readinessSection,
+.assetSection,
 .vehicleInventorySection {
   margin-bottom: 24px;
 }
@@ -232,6 +236,92 @@
 .needed span {
   color: #fffdf7;
   background: #be1d27;
+}
+
+.assetGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(8, 19, 38, 0.13);
+}
+
+.assetGrid article {
+  display: grid;
+  grid-template-columns: 122px 1fr;
+  gap: 14px;
+  align-items: center;
+  min-height: 146px;
+  padding: 16px;
+  background: rgba(255, 253, 247, 0.98);
+}
+
+.assetImage {
+  width: 122px;
+  height: 92px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid rgba(8, 19, 38, 0.09);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.assetGrid strong,
+.contentGapGrid strong {
+  display: block;
+  margin-top: 8px;
+  color: #082141;
+  font-size: 1rem;
+  line-height: 1.16;
+}
+
+.assetGrid p,
+.contentGapGrid p {
+  margin: 7px 0 0;
+  color: #596476;
+  line-height: 1.38;
+}
+
+.readyBadge,
+.neededBadge,
+.optionalBadge {
+  width: fit-content;
+  min-height: 25px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.readyBadge {
+  color: #f9fff6;
+  background: #4f7a4c;
+}
+
+.neededBadge {
+  color: #fffdf7;
+  background: #be1d27;
+}
+
+.optionalBadge {
+  color: #071429;
+  background: #f3bb55;
+}
+
+.contentGapGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(8, 19, 38, 0.13);
+  border-top: 1px solid rgba(8, 19, 38, 0.13);
+}
+
+.contentGapGrid article {
+  min-height: 132px;
+  padding: 18px;
+  background: #fffdf7;
 }
 
 .vehicleInventoryGrid {
@@ -439,9 +529,20 @@
   .grid,
   .lists,
   .readinessGrid,
+  .assetGrid,
+  .contentGapGrid,
   .vehicleInventoryGrid,
   .guestLinkGrid {
     grid-template-columns: 1fr;
+  }
+
+  .assetGrid article {
+    grid-template-columns: 104px 1fr;
+  }
+
+  .assetImage {
+    width: 104px;
+    height: 78px;
   }
 
   .vehicleInventoryGrid dl {

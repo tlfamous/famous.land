@@ -3,6 +3,12 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./admin.module.css";
+import heroImage from "../assets/july-4-hero.png";
+import lh1Image from "../assets/lake-house-1.jpeg";
+import lh2ExteriorImage from "../assets/lake-house-2-exterior-front.jpeg";
+import lh2KitchenImage from "../assets/lake-house-2-kitchen.jpeg";
+import lh2LivingRoomImage from "../assets/lake-house-2-living-room.jpeg";
+import lh3PosterImage from "../assets/lake-house-3.jpeg";
 import laconicVehicleImage from "../assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "../assets/vehicle-laika-trixx.png";
 import spikeyLizardVehicleImage from "../assets/vehicle-spikey-lizard-gtx.png";
@@ -96,6 +102,90 @@ const readinessItems = [
     tone: "partial"
   }
 ];
+
+const assetChecklist = [
+  {
+    alt: "Generated July 4th lake weekend hero artwork.",
+    detail: "Guest landing hero and admin background.",
+    label: "Hero artwork",
+    src: heroImage,
+    status: "Live",
+    tone: "ready"
+  },
+  {
+    alt: "Aerial view of LH1 on a wooded peninsula.",
+    detail: "Guest house profile for LH1.",
+    label: "LH1 exterior",
+    src: lh1Image,
+    status: "Live",
+    tone: "ready"
+  },
+  {
+    alt: "LH2 front exterior with Camp Peace sign and lake view.",
+    detail: "Guest house profile plus LH2 gallery.",
+    label: "LH2 exterior",
+    src: lh2ExteriorImage,
+    status: "Live",
+    tone: "ready"
+  },
+  {
+    alt: "LH2 kitchen with canoe mounted overhead.",
+    detail: "LH2 common-space gallery.",
+    label: "LH2 kitchen",
+    src: lh2KitchenImage,
+    status: "Live",
+    tone: "ready"
+  },
+  {
+    alt: "LH2 living room with stone fireplace.",
+    detail: "LH2 common-space gallery.",
+    label: "LH2 living room",
+    src: lh2LivingRoomImage,
+    status: "Live",
+    tone: "ready"
+  },
+  {
+    alt: "Exterior of LH3 with stone siding, green roof, and patio.",
+    detail: "LH3 poster and animated profile fallback.",
+    label: "LH3 exterior",
+    src: lh3PosterImage,
+    status: "Live",
+    tone: "ready"
+  }
+] as const;
+
+const missingContentChecklist = [
+  {
+    detail: "Needed before LH1 directions can be shown.",
+    label: "LH1 address",
+    status: "Needed"
+  },
+  {
+    detail: "Sunroom, Great Room 1, Grand Peninsula, South Grand Peninsula fire pit, and assigned rooms.",
+    label: "LH1 interior and activity photos",
+    status: "Needed"
+  },
+  {
+    detail: "South bedroom and North bedroom photos for room-level confidence.",
+    label: "LH2 bedroom photos",
+    status: "Needed"
+  },
+  {
+    detail: "Beach, primary bedroom, dining/gathering, smoothie, lunch, dinner, and brunch areas.",
+    label: "LH3 beach and room photos",
+    status: "Needed"
+  },
+  {
+    detail: "Host-confirmed room placement for both guests.",
+    label: "Zach and Bee assignments",
+    status: "Needed"
+  },
+  {
+    detail: "Guest pages currently say Sunday afternoon.",
+    label: "Exact departure time",
+    status: "Optional"
+  }
+] as const;
 
 const vehicleImages = {
   laconic: {
@@ -294,6 +384,47 @@ export function July2026Admin() {
                   <span>{item.status}</span>
                   <strong>{item.label}</strong>
                 </div>
+                <p>{item.detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.assetSection} aria-label="July 2026 media and content checklist">
+          <div className={styles.proofHeader}>
+            <div>
+              <span className={styles.label}>Media</span>
+              <h2>Asset and Content Checklist</h2>
+              <p>
+                Current media bundled with the July 2026 experience, plus the host-supplied photos
+                and details still needed for a fully polished guest launch.
+              </p>
+            </div>
+          </div>
+          <div className={styles.assetGrid}>
+            {assetChecklist.map((item) => (
+              <article key={item.label}>
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  className={styles.assetImage}
+                  sizes="(max-width: 980px) 100vw, 210px"
+                />
+                <div>
+                  <span className={styles.readyBadge}>{item.status}</span>
+                  <strong>{item.label}</strong>
+                  <p>{item.detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className={styles.contentGapGrid}>
+            {missingContentChecklist.map((item) => (
+              <article key={item.label}>
+                <span className={item.status === "Optional" ? styles.optionalBadge : styles.neededBadge}>
+                  {item.status}
+                </span>
+                <strong>{item.label}</strong>
                 <p>{item.detail}</p>
               </article>
             ))}

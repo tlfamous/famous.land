@@ -440,6 +440,7 @@ Admin operating sections:
 - Planning summary
 - Reference checkpoints
 - Launch readiness tracker
+- Asset and content checklist showing live bundled media and missing host-supplied content
 - Motorized vehicle inventory
 - Personalized room-key URLs
 - Embedded reference material with Proof edit link
@@ -485,6 +486,18 @@ Images still needed:
 - LH3 primary bedroom
 - LH3 dining/gathering areas
 - Any room photos for personalized room pages
+
+Current bundled media:
+
+- Generated July 4th lake weekend hero artwork
+- LH1 aerial exterior photo
+- LH2 exterior front photo
+- LH2 exterior side photo
+- LH2 kitchen photo
+- LH2 living room photo
+- LH3 exterior patio photo
+- LH3 animated profile video
+- Motorized vehicle reference images for Laconic, Spikey Lizard, and Laika
 
 Missing information:
 
