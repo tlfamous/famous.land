@@ -68,7 +68,7 @@ Each house should have a dedicated profile page or section with:
 - Key gathering spaces
 - Any relevant notes or amenities
 
-### Lake House 1
+### LH1
 
 Address: TBD
 
@@ -82,14 +82,14 @@ Known spaces/events:
 
 Photos needed:
 
-- Exterior of Lake House 1: provided as LH1 aerial photo
+- Exterior of LH1: provided as LH1 aerial photo
 - Sunroom
 - Great Room 1
 - Grand Peninsula
 - South Grand Peninsula fire pit
 - Relevant bedrooms
 
-### Lake House 2
+### LH2
 
 Address: 63 Pine Eden Road, Rindge, New Hampshire
 
@@ -100,12 +100,12 @@ Known spaces:
 
 Photos needed:
 
-- Exterior of Lake House 2
+- Exterior of LH2
 - South bedroom
 - North bedroom
 - Any common spaces
 
-### Lake House 3
+### LH3
 
 Address: 25 Sunny Cove Road, Winchendon, Massachusetts
 
@@ -118,7 +118,7 @@ Known spaces/events:
 
 Photos needed:
 
-- Exterior of Lake House 3
+- Exterior of LH3
 - Beach
 - Primary bedroom
 - Dining/gathering area
@@ -126,7 +126,7 @@ Photos needed:
 
 ## 5. Guest and Room Assignments
 
-### Lake House 1
+### LH1
 
 | Guest(s) | Room |
 |---|---|
@@ -134,14 +134,14 @@ Photos needed:
 | Morgan, Rowan, Emma, and Austin | Third floor bedroom, labeled “The Girls’ Room” |
 | Jack | Sunroom |
 
-### Lake House 2
+### LH2
 
 | Guest(s) | Room |
 |---|---|
 | Cin and Vin | South bedroom |
 | Adam and Gage | North bedroom |
 
-### Lake House 3
+### LH3
 
 | Guest(s) | Room |
 |---|---|
@@ -179,21 +179,21 @@ Guests arrive and settle into their assigned lake house and room.
 ### 6:30 p.m.  
 Casual Grab-and-Go Meal
 
-Location: Sunroom, Lake House 1
+Location: Sunroom, LH1
 
 A casual, flexible meal after check-in.
 
 ### 7:00 p.m. to 8:00 p.m.  
 Weekend Orientation
 
-Location: Great Room 1, Lake House 1
+Location: Great Room 1, LH1
 
 Overview of the weekend, key locations, schedule, activities, and safety/logistics.
 
 ### 8:00 p.m.  
 Campfire, Cigars, and Scotch
 
-Location: Grand Peninsula, Lake House 1
+Location: Grand Peninsula, LH1
 
 Relaxed evening gathering with fire, cigars, and scotch for those who partake.
 
@@ -204,23 +204,23 @@ Coffee Time at All Houses
 
 Each house has its own coffee experience:
 
-- Lake House 1: Kona coffee
-- Lake House 2: K-cup coffee
-- Lake House 3: Drip coffee
+- LH1: Kona coffee
+- LH2: K-cup coffee
+- LH3: Drip coffee
 
 Guests may visit any house for coffee.
 
 ### 8:00 a.m.  
 Yoga on the Beach
 
-Location: Beach, Lake House 3
+Location: Beach, LH3
 
 Morning yoga by the lake.
 
 ### 9:00 a.m.  
 Non-Motorized Lake Activities
 
-Location: Lake House 3 / Lake access
+Location: LH3 / Lake access
 
 Activities include:
 
@@ -232,29 +232,29 @@ Activities include:
 ### 10:00 a.m.  
 Fruit Smoothies
 
-Location: Lake House 3
+Location: LH3
 
 Refreshing smoothies after morning lake activities.
 
 ### 11:00 a.m.  
 Motorized Lake Vehicle Orientation
 
-Location: Lake House 1
+Location: LH1
 
 Safety briefing and orientation for motorized lake vehicles, including boats or similar lake equipment.
 
 ### 11:30 a.m. to 12:30 p.m.  
 Boat Ride
 
-Departure: Lake House 1  
-Return: Lake House 3
+Departure: LH1  
+Return: LH3
 
 Group boat ride across the lake.
 
 ### 12:30 p.m.  
 Lunch
 
-Location: Lake House 3
+Location: LH3
 
 Lunch begins immediately after the boat ride returns.
 
@@ -276,26 +276,26 @@ Fourth of July Boat Parade
 
 Guests may see the boat parade during afternoon free time.
 
-Expected viewing note: The parade may pass by Lake House 3 around 3:00 p.m.
+Expected viewing note: The parade may pass by LH3 around 3:00 p.m.
 
 ### 6:00 p.m.  
 Dinner
 
-Location: Lake House 3
+Location: LH3
 
 Lakeside patio seating.
 
 ### 8:00 p.m.  
 S’mores at the Fire Pit
 
-Location: South Grand Peninsula, Lake House 1
+Location: South Grand Peninsula, LH1
 
 Evening fire pit gathering with s’mores.
 
 ### 8:30 p.m.  
 Sparklers and Snacks
 
-Location: South Grand Peninsula / Lake House 1 area unless otherwise specified
+Location: South Grand Peninsula / LH1 area unless otherwise specified
 
 Evening snacks and sparklers after s’mores.
 
@@ -304,8 +304,8 @@ Optional Fireworks Viewing
 
 Viewing options:
 
-- Grand Peninsula at Lake House 1
-- Beach at Lake House 3
+- Grand Peninsula at LH1
+- Beach at LH3
 - Chartered cruise experience on the lake
 
 ## Sunday, July 5, 2026
@@ -315,14 +315,14 @@ Coffee Time at All Houses
 
 Same coffee setup as Saturday:
 
-- Lake House 1: Kona coffee
-- Lake House 2: K-cup coffee
-- Lake House 3: Drip coffee
+- LH1: Kona coffee
+- LH2: K-cup coffee
+- LH3: Drip coffee
 
 ### 10:00 a.m.  
 Pancake Brunch
 
-Location: Lake House 3
+Location: LH3
 
 Relaxed Sunday brunch.
 
@@ -404,23 +404,23 @@ Avoid making the site feel too corporate or too silly. It should be fun but stil
 
 Images still needed:
 
-- Lake House 1 exterior: provided as LH1 aerial photo
-- Lake House 1 sunroom
-- Lake House 1 Great Room 1
-- Lake House 1 Grand Peninsula
-- Lake House 1 South Grand Peninsula fire pit
-- Lake House 1 bedrooms
-- Lake House 2 exterior
-- Lake House 2 bedrooms
-- Lake House 3 exterior: provided as LH3 exterior patio photo
-- Lake House 3 beach
-- Lake House 3 primary bedroom
-- Lake House 3 dining/gathering areas
+- LH1 exterior: provided as LH1 aerial photo
+- LH1 sunroom
+- LH1 Great Room 1
+- LH1 Grand Peninsula
+- LH1 South Grand Peninsula fire pit
+- LH1 bedrooms
+- LH2 exterior
+- LH2 bedrooms
+- LH3 exterior: provided as LH3 exterior patio photo
+- LH3 beach
+- LH3 primary bedroom
+- LH3 dining/gathering areas
 - Any room photos for personalized room pages
 
 Missing information:
 
-- Lake House 1 address
+- LH1 address
 - Final host contact information
 - Exact departure/check-out time, if needed
 - Any dietary notes or restrictions

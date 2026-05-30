@@ -25,7 +25,7 @@ const guestExperience = [
 ];
 
 const contentNeeds = [
-  "Lake House 1 address",
+  "LH1 address",
   "House and room photos",
   "Final host contact information",
   "Exact departure or check-out time",

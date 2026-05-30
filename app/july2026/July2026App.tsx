@@ -21,23 +21,23 @@ function Icon({ path }: { path: string }) {
 
 const houseImages = {
   "lake-house-1": {
-    alt: "Aerial view of Lake House 1 on a wooded peninsula.",
+    alt: "Aerial view of LH1 on a wooded peninsula.",
     label: "LH1",
     src: lakeHouse1Image
   },
   "lake-house-2": {
-    alt: "Lake House 2 exterior with Camp Peace sign and lake view.",
+    alt: "LH2 exterior with Camp Peace sign and lake view.",
     gallery: [
       {
-        alt: "Lake House 2 side exterior above the lake.",
+        alt: "LH2 side exterior above the lake.",
         src: lakeHouse2ExteriorSideImage
       },
       {
-        alt: "Lake House 2 kitchen with a canoe mounted overhead.",
+        alt: "LH2 kitchen with a canoe mounted overhead.",
         src: lakeHouse2KitchenImage
       },
       {
-        alt: "Lake House 2 living room with stone fireplace.",
+        alt: "LH2 living room with stone fireplace.",
         src: lakeHouse2LivingRoomImage
       }
     ],
@@ -45,7 +45,7 @@ const houseImages = {
     src: lakeHouse2ExteriorFrontImage
   },
   "lake-house-3": {
-    alt: "Exterior of Lake House 3 with stone siding, green roof, and patio.",
+    alt: "Exterior of LH3 with stone siding, green roof, and patio.",
     label: "LH3",
     src: lakeHouse3Image
   }
