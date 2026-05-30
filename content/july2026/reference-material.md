@@ -93,7 +93,7 @@ The guest portal exposes a downloadable plain-text guide at `/july2026/weekend-g
 
 The offline guide includes:
 
-- Event portal, arrival card, host text line, host contact card, and calendar links
+- Event portal, arrival card, directions hub, host text line, host contact card, and calendar links
 - Arrival instructions
 - Arrival checklist and host text template prompts
 - Getting Around house flow
@@ -112,7 +112,7 @@ The personalized packet includes:
 - Arrival and departure details
 - House note and house-specific itinerary highlights
 - Weekend essentials
-- Links to the room key, guest portal, arrival card, calendar, offline guide, and host contact card
+- Links to the room key, guest portal, arrival card, directions hub, calendar, offline guide, and host contact card
 - Host SMS line and approval notes
 
 ### Arrival Card
@@ -131,6 +131,20 @@ The arrival card includes:
 - LH1, LH2, and LH3 directory notes
 - Key schedule moments
 - Tap-to-text host prompts
+
+### Directions Hub
+
+The guest portal exposes a mobile-friendly house movement and directions page at `/july2026/directions`.
+
+The directions hub includes:
+
+- Guest portal, arrival card, Lake Monomonac area map, and text-host actions
+- LH2 live Google Maps link
+- LH3 live Google Maps link
+- LH1 pending-address status and Lake Monomonac fallback map
+- House room lists
+- Confirmed guests by house
+- House-to-house weekend flow
 
 ### Admin Page
 
@@ -536,6 +550,7 @@ Suggested sections:
 - Lake Rules and Approvals
 - Food and Drinks
 - Maps and Directions with known LH2 and LH3 address links
+- Directions Hub at `/july2026/directions`
 - Getting Around guide for house-to-house weekend flow
 - Help / Contact Host
 - View Other Guests
@@ -551,6 +566,7 @@ Admin operating sections:
 - Resort Desk readiness
 - Arrival Desk readiness
 - Arrival card readiness
+- Directions hub readiness
 - Calendar file readiness
 - Personalized calendar readiness
 - Host contact card readiness
@@ -568,6 +584,7 @@ Admin operating sections:
 Getting Around guide:
 
 - Arrive at your assigned house using the guest room-key page; LH2 and LH3 directions are live, and LH1 directions remain pending until the host confirms the address.
+- Use the directions hub for known house map links, LH1 pending-address fallback, and host text help.
 - Friday starts at LH1 for the welcome meal, orientation, and first-night fire gathering.
 - Saturday morning shifts to LH3 for yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch.
 - The Saturday group boat ride connects LH1 to LH3 after the motorized fleet orientation.
@@ -598,7 +615,7 @@ Personal room-key packets:
 - Each guest page links to a downloadable plain-text personal packet.
 - Packet route pattern: `/july2026/guest/{slug}/packet.txt`.
 - The packet is suitable for offline reference and includes house-specific highlights plus the core weekend links.
-- Personal room-key pages and packets include direct directions for LH2 and LH3 guests, while LH1 and pending guests use the general Lake Monomonac area map until the LH1 address is confirmed.
+- Personal room-key pages and packets include direct directions for LH2 and LH3 guests, the directions hub, while LH1 and pending guests use the general Lake Monomonac area map until the LH1 address is confirmed.
 
 Room-key QR codes:
 
@@ -637,11 +654,11 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, admin reference, and offline guide.
+- The packet includes review links for the guest portal, arrival card, directions hub, admin reference, and offline guide.
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

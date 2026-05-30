@@ -301,6 +301,11 @@ export function July2026Admin() {
         label: "Arrival card"
       },
       {
+        detail: "Public house movement page with live LH2/LH3 maps and LH1 pending-address fallback.",
+        href: `${baseUrl}/july2026/directions`,
+        label: "Directions hub"
+      },
+      {
         detail: "Downloadable shared weekend calendar.",
         href: `${baseUrl}/july2026/calendar.ics`,
         label: "Weekend calendar"
