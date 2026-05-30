@@ -9,6 +9,9 @@ https://famous.land/july2026/arrival-card
 Directions hub:
 https://famous.land/july2026/directions
 
+Guest concierge:
+https://famous.land/july2026/concierge
+
 Host text line:
 781-929-4932
 
@@ -93,6 +96,7 @@ HOST TEXT PROMPTS
 - Dietary note: Hi, I have a dietary note for the July 4th weekend:
 - Fleet approval: Hi, I would like host approval or timing guidance for motorized lake fleet use.
 - Link reset: Hi, my July 2026 room-key link needs a reset or fresh token.
+- Use the guest concierge for tap-to-text prompts, lake rules, and host approval guidance.
 
 MOTORIZED VEHICLE INVENTORY
 - Laconic: red Sea-Doo Switch Cruise pontoon boat, 23 ft, 10 persons. Best for group cruises, boat parade viewing, relaxed lake runs, and the Saturday LH1-to-LH3 ride after host orientation.

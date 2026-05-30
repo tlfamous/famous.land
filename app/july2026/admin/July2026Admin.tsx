@@ -306,6 +306,11 @@ export function July2026Admin() {
         label: "Directions hub"
       },
       {
+        detail: "Public help desk with host text prompts, approvals, lake rules, and self-service links.",
+        href: `${baseUrl}/july2026/concierge`,
+        label: "Guest concierge"
+      },
+      {
         detail: "Downloadable shared weekend calendar.",
         href: `${baseUrl}/july2026/calendar.ics`,
         label: "Weekend calendar"

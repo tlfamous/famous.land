@@ -93,7 +93,7 @@ The guest portal exposes a downloadable plain-text guide at `/july2026/weekend-g
 
 The offline guide includes:
 
-- Event portal, arrival card, directions hub, host text line, host contact card, and calendar links
+- Event portal, arrival card, directions hub, guest concierge, host text line, host contact card, and calendar links
 - Arrival instructions
 - Arrival checklist and host text template prompts
 - Getting Around house flow
@@ -112,7 +112,7 @@ The personalized packet includes:
 - Arrival and departure details
 - House note and house-specific itinerary highlights
 - Weekend essentials
-- Links to the room key, guest portal, arrival card, directions hub, calendar, offline guide, and host contact card
+- Links to the room key, guest portal, arrival card, directions hub, guest concierge, calendar, offline guide, and host contact card
 - Host SMS line and approval notes
 
 ### Arrival Card
@@ -145,6 +145,18 @@ The directions hub includes:
 - House room lists
 - Confirmed guests by house
 - House-to-house weekend flow
+
+### Guest Concierge
+
+The guest portal exposes a mobile-friendly guest help desk at `/july2026/concierge`.
+
+The guest concierge includes:
+
+- Guest portal, arrival card, directions hub, and text-host actions
+- Tap-to-text host prompts for room help, dietary notes, fleet approval, and link resets
+- Dietary, motorized fleet, quad/cruise, and room-key help notes
+- Lake use and approval rules
+- Resort Desk self-service links and explanations
 
 ### Admin Page
 
@@ -551,6 +563,7 @@ Suggested sections:
 - Food and Drinks
 - Maps and Directions with known LH2 and LH3 address links
 - Directions Hub at `/july2026/directions`
+- Guest Concierge at `/july2026/concierge`
 - Getting Around guide for house-to-house weekend flow
 - Help / Contact Host
 - View Other Guests
@@ -567,6 +580,7 @@ Admin operating sections:
 - Arrival Desk readiness
 - Arrival card readiness
 - Directions hub readiness
+- Guest concierge readiness
 - Calendar file readiness
 - Personalized calendar readiness
 - Host contact card readiness
@@ -602,6 +616,7 @@ Host text templates:
 - Dietary note: "Hi, I have a dietary note for the July 4th weekend:"
 - Fleet approval: "Hi, I would like host approval or timing guidance for motorized lake fleet use."
 - Link reset: "Hi, my July 2026 room-key link needs a reset or fresh token."
+- Guest concierge: `/july2026/concierge` exposes the prompts as tap-to-text cards and pairs them with approval guidance.
 
 Guest-specific SMS packets:
 
@@ -654,11 +669,11 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, directions hub, admin reference, and offline guide.
+- The packet includes review links for the guest portal, arrival card, directions hub, guest concierge, admin reference, and offline guide.
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, guest concierge, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction
