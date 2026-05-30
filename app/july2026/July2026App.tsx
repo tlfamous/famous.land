@@ -11,6 +11,8 @@ import lakeHouse3Image from "./assets/lake-house-3.jpeg";
 import { bringItems, houseProfiles, scheduleItems, statusItems } from "./data";
 import styles from "./july2026.module.css";
 
+const lakeHouse3Video = new URL("./assets/lh3-profile.mp4", import.meta.url).toString();
+
 function Icon({ path }: { path: string }) {
   return (
     <svg aria-hidden="true" className={styles.icon} viewBox="0 0 24 24">
@@ -47,7 +49,8 @@ const houseImages = {
   "lake-house-3": {
     alt: "Exterior of LH3 with stone siding, green roof, and patio.",
     label: "LH3",
-    src: lakeHouse3Image
+    src: lakeHouse3Image,
+    videoSrc: lakeHouse3Video
   }
 } as const;
 
@@ -191,7 +194,19 @@ export function July2026App() {
 
                 return (
                   <section className={houseImage ? styles.featuredHouse : undefined} key={house.name}>
-                    {houseImage ? (
+                    {houseImage && "videoSrc" in houseImage ? (
+                      <video
+                        aria-label={houseImage.alt}
+                        autoPlay
+                        className={styles.houseImage}
+                        loop
+                        muted
+                        playsInline
+                        poster={houseImage.src.src}
+                      >
+                        <source src={houseImage.videoSrc} type="video/mp4" />
+                      </video>
+                    ) : houseImage ? (
                       <Image
                         src={houseImage.src}
                         alt={houseImage.alt}
