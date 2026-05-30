@@ -107,6 +107,7 @@ type ServerBindingStatus =
 
 export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
+  const [lh3VideoReady, setLh3VideoReady] = useState(false);
   const [serverBindingStatus, setServerBindingStatus] = useState<ServerBindingStatus>("idle");
   const selectedGuest = guestAssignments.find((guest) => guest.slug === selectedGuestSlug);
   const selectedGuestHouse =
@@ -499,6 +500,24 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             <span className={styles.parkingPin}>Parking</span>
             <span className={styles.lakeLabel}>Lake Monomonac</span>
           </div>
+          <div className={styles.resortDirectory} aria-label="Lake house directory">
+            {houseProfiles.map((house) => (
+              <section key={house.name}>
+                <div>
+                  <strong>{house.name}</strong>
+                  <p>{house.role}</p>
+                </div>
+                <small>{house.note}</small>
+                {"mapsUrl" in house && house.mapsUrl ? (
+                  <a href={house.mapsUrl} target="_blank" rel="noreferrer">
+                    Directions
+                  </a>
+                ) : (
+                  <span>Directions pending</span>
+                )}
+              </section>
+            ))}
+          </div>
           <a className={styles.mapButton} href={directionsHref} target="_blank" rel="noreferrer">
             {selectedGuestHouse && "mapsUrl" in selectedGuestHouse && selectedGuestHouse.mapsUrl
               ? `Directions to ${selectedGuestHouse.name}`
@@ -522,17 +541,29 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 return (
                   <section className={houseImage ? styles.featuredHouse : undefined} key={house.name}>
                     {houseImage && "videoSrc" in houseImage ? (
-                      <video
-                        aria-label={houseImage.alt}
-                        autoPlay
-                        className={styles.houseImage}
-                        loop
-                        muted
-                        playsInline
-                        poster={houseImage.src.src}
-                      >
-                        <source src={houseImage.videoSrc} type="video/mp4" />
-                      </video>
+                      <div className={styles.houseVideoFrame}>
+                        <Image
+                          src={houseImage.src}
+                          alt={houseImage.alt}
+                          className={styles.houseVideoPoster}
+                          sizes="(max-width: 1080px) 100vw, 360px"
+                        />
+                        <video
+                          aria-label={houseImage.alt}
+                          autoPlay
+                          className={`${styles.houseImage} ${styles.houseVideo} ${
+                            lh3VideoReady ? styles.houseVideoReady : ""
+                          }`}
+                          loop
+                          muted
+                          onCanPlay={() => setLh3VideoReady(true)}
+                          playsInline
+                          poster={houseImage.src.src}
+                          preload="metadata"
+                        >
+                          <source src={houseImage.videoSrc} type="video/mp4" />
+                        </video>
+                      </div>
                     ) : houseImage ? (
                       <Image
                         src={houseImage.src}

@@ -691,6 +691,75 @@
   font-style: italic;
 }
 
+.resortDirectory {
+  display: grid;
+  gap: 8px;
+  margin: 12px 22px 16px;
+}
+
+.resortDirectory section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 247, 0.98), rgba(245, 249, 241, 0.86)),
+    radial-gradient(circle at 100% 0%, rgba(79, 122, 76, 0.15), transparent 30%);
+}
+
+.resortDirectory section > div {
+  grid-column: 1 / -1;
+}
+
+.resortDirectory strong {
+  display: block;
+  color: var(--july-blue);
+  font-size: 1.05rem;
+  line-height: 1.1;
+}
+
+.resortDirectory p,
+.resortDirectory small {
+  margin: 3px 0 0;
+  color: var(--july-muted);
+  line-height: 1.28;
+}
+
+.resortDirectory small {
+  margin: 0;
+  color: #8a5260;
+  font-weight: 850;
+}
+
+.resortDirectory a,
+.resortDirectory span {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.resortDirectory a {
+  color: #164f9f;
+  border: 1px solid rgba(22, 79, 159, 0.28);
+  background: rgba(22, 79, 159, 0.06);
+  text-decoration: none;
+}
+
+.resortDirectory span {
+  color: #8a5260;
+  border: 1px solid rgba(138, 82, 96, 0.2);
+  background: rgba(138, 82, 96, 0.06);
+}
+
 .mapButton {
   width: fit-content;
   min-height: 42px;
@@ -827,6 +896,35 @@
   display: block;
   object-fit: cover;
   object-position: center;
+}
+
+.houseVideoFrame {
+  position: relative;
+  height: 156px;
+  overflow: hidden;
+  background: #f8faf6;
+}
+
+.houseVideoPoster,
+.houseVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.houseVideoPoster {
+  display: block;
+}
+
+.houseVideo {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.houseVideoReady {
+  opacity: 1;
 }
 
 .houseGallery {
@@ -1125,6 +1223,7 @@
   .bindingNotice,
   .bindingWarning,
   .pendingAssignmentNotice,
+  .resortDirectory section,
   .activityGrid,
   .hostHelpGrid,
   .formRow,
