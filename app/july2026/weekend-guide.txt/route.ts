@@ -42,6 +42,9 @@ https://famous.land/july2026/host-contact.vcf
 Add calendar:
 https://famous.land/july2026/calendar.ics
 
+Launch status:
+https://famous.land/july2026/admin/status.txt
+
 WEEKEND OVERVIEW
 Friday, July 3 through Sunday, July 5, 2026
 Lake Monomonac weekend houses in Rindge, NH and Winchendon, MA

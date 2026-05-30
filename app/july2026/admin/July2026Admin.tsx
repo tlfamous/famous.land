@@ -417,6 +417,11 @@ export function July2026Admin() {
         label: "Missing-content request"
       },
       {
+        detail: "Plain-text current launch state with ready surfaces, caveats, and host-confirmation blockers.",
+        href: `${baseUrl}/july2026/admin/status.txt`,
+        label: "Launch status"
+      },
+      {
         detail: "Print-friendly review sheet for every guest room-key SMS packet.",
         href: `${baseUrl}/july2026/admin/sms-packets`,
         label: "Guest SMS packets"
@@ -751,6 +756,7 @@ export function July2026Admin() {
               Copy request
             </button>
             <a href="/july2026/admin/missing-content.txt">Download .txt</a>
+            <a href="/july2026/admin/status.txt">Launch status</a>
             <a href="/july2026/admin/media-shot-list">Print shot list</a>
             <span className={styles.packetStatus}>{contentRequestStatus}</span>
             <pre ref={contentRequestRef}>{contentRequestPacket}</pre>
