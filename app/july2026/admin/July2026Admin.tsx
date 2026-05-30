@@ -1,12 +1,7 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import styles from "./admin.module.css";
+import { referenceMaterial } from "./referenceMaterial";
 
 const proofUrl = "https://www.proofeditor.ai/d/ado6gf4r?token=2b8510d8-4eaa-4fc9-b0e7-f802f6a0d12c";
-const referenceMaterial = readFileSync(
-  join(process.cwd(), "app/july2026/admin/reference-material.md"),
-  "utf8"
-);
 
 const adminTools = [
   "Guest list with assigned house and room",

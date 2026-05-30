@@ -407,7 +407,7 @@ Avoid making the site feel too corporate or too silly. It should be fun but stil
 
 Images still needed:
 
-- Lake House 1 exterior
+- Lake House 1 exterior: provided as LH1 aerial photo
 - Lake House 1 sunroom
 - Lake House 1 Great Room 1
 - Lake House 1 Grand Peninsula
