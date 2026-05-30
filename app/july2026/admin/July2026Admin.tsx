@@ -28,6 +28,8 @@ const adminTools = [
 const guestExperience = [
   "Welcome / Check-In",
   "Resort Desk quick guide",
+  "Arrival checklist",
+  "Host text templates",
   "Add Calendar",
   "Save Host Contact",
   "Offline Guide",
@@ -86,6 +88,12 @@ const readinessItems = [
   {
     detail: "Guest page now has a Resort Desk guide for room keys, host SMS, directions, and approval rules.",
     label: "Resort Desk",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest page includes an Arrival Desk checklist plus one-tap SMS templates for room help, dietary notes, fleet approval, and link resets.",
+    label: "Arrival Desk",
     status: "Ready",
     tone: "ready"
   },

@@ -14,10 +14,12 @@ import laikaVehicleImage from "./assets/vehicle-laika-trixx.png";
 import spikeyLizardVehicleImage from "./assets/vehicle-spikey-lizard-gtx.png";
 import {
   activityItems,
+  arrivalChecklistItems,
   bringItems,
   foodMoments,
   guestAssignments,
   hostHelpItems,
+  hostTextTemplates,
   houseProfiles,
   itineraryHighlights,
   lakeUseRules,
@@ -390,12 +392,51 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         </div>
         <div className={styles.resortDeskActions}>
           <a href="#guests">Find My Room</a>
+          <a href="#arrival">Arrival Checklist</a>
           <a href="#map">House Directions</a>
           <a href="/july2026/calendar.ics">Add Calendar</a>
           <a href="/july2026/host-contact.vcf">Save Host Contact</a>
           <a href="/july2026/weekend-guide.txt">Offline Guide</a>
           <a href="sms:+17819294932">Text Host</a>
         </div>
+      </section>
+
+      <section className={styles.arrivalDesk} id="arrival" aria-label="Arrival checklist and text templates">
+        <article>
+          <div>
+            <span className={styles.sectionLabel}>Arrival Desk</span>
+            <h2>Land, settle, and know where to go</h2>
+            <p>
+              A practical mobile checklist for the first hour on site, plus ready-to-send host
+              messages for the things most likely to come up.
+            </p>
+          </div>
+          <ol className={styles.arrivalChecklist}>
+            {arrivalChecklistItems.map((item) => (
+              <li key={item.label}>
+                <strong>{item.label}</strong>
+                <p>{item.detail}</p>
+              </li>
+            ))}
+          </ol>
+        </article>
+        <article>
+          <div>
+            <span className={styles.sectionLabel}>Text Templates</span>
+            <h2>Tap once, edit if needed</h2>
+          </div>
+          <div className={styles.textTemplateGrid}>
+            {hostTextTemplates.map((template) => (
+              <a
+                href={`sms:+17819294932?body=${encodeURIComponent(template.body)}`}
+                key={template.label}
+              >
+                <span>{template.label}</span>
+                <p>{template.body}</p>
+              </a>
+            ))}
+          </div>
+        </article>
       </section>
 
       <section className={styles.guestDesk} id="guests" aria-label="Guest stay details">

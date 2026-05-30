@@ -153,6 +153,44 @@ export const resortDeskItems = [
   }
 ];
 
+export const arrivalChecklistItems = [
+  {
+    label: "Before you leave",
+    detail: "Open your room-key link, save the host contact, and add the weekend calendar while you still have an easy signal."
+  },
+  {
+    label: "When you arrive",
+    detail: "Go to your assigned house, settle into your room, then use the schedule for the Friday LH1 welcome flow."
+  },
+  {
+    label: "Friday night",
+    detail: "Head to the LH1 sunroom for the 6:30 PM grab-and-go meal, then Great Room 1 for the 7:00 PM weekend orientation."
+  },
+  {
+    label: "Saturday lake day",
+    detail: "Start at LH3 for yoga and lake time; wait for the 11:00 AM LH1 orientation before any motorized fleet use."
+  }
+];
+
+export const hostTextTemplates = [
+  {
+    label: "Room help",
+    body: "Hi, I need help with my July 4th weekend room assignment or arrival directions."
+  },
+  {
+    label: "Dietary note",
+    body: "Hi, I have a dietary note for the July 4th weekend:"
+  },
+  {
+    label: "Fleet approval",
+    body: "Hi, I would like host approval or timing guidance for motorized lake fleet use."
+  },
+  {
+    label: "Link reset",
+    body: "Hi, my July 2026 room-key link needs a reset or fresh token."
+  }
+];
+
 export const itineraryHighlights = {
   LH1: [
     {

@@ -73,6 +73,18 @@ WHAT TO BRING
 - Light jacket or hoodie
 - Patriotic spirit
 
+ARRIVAL CHECKLIST
+- Before you leave: open your room-key link, save the host contact, and add the weekend calendar while you still have an easy signal.
+- When you arrive: go to your assigned house, settle into your room, then use the schedule for the Friday LH1 welcome flow.
+- Friday night: LH1 sunroom at 6:30 PM for the grab-and-go meal, then Great Room 1 at 7:00 PM for weekend orientation.
+- Saturday lake day: start at LH3 for yoga and lake time; wait for the 11:00 AM LH1 orientation before motorized fleet use.
+
+HOST TEXT PROMPTS
+- Room help: Hi, I need help with my July 4th weekend room assignment or arrival directions.
+- Dietary note: Hi, I have a dietary note for the July 4th weekend:
+- Fleet approval: Hi, I would like host approval or timing guidance for motorized lake fleet use.
+- Link reset: Hi, my July 2026 room-key link needs a reset or fresh token.
+
 MOTORIZED VEHICLE INVENTORY
 - Laconic: red Sea-Doo Switch Cruise pontoon boat, 23 ft, 10 persons. Best for group cruises, boat parade viewing, relaxed lake runs, and the Saturday LH1-to-LH3 ride after host orientation.
 - Spikey Lizard: blue Sea-Doo GTX-style PWC, 3 seats. Best for host-approved PWC rides after the Saturday safety briefing.

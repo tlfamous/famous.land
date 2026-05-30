@@ -85,6 +85,7 @@ The offline guide includes:
 
 - Event portal, host text line, host contact card, and calendar links
 - Arrival instructions
+- Arrival checklist and host text template prompts
 - Getting Around house flow
 - LH1, LH2, and LH3 directory notes
 - Key schedule
@@ -477,6 +478,8 @@ Suggested sections:
 
 - Welcome / Check-In
 - Resort Desk quick guide
+- Arrival Desk checklist
+- Host text templates
 - Add Calendar
 - Save Host Contact
 - Offline Guide
@@ -501,6 +504,7 @@ Admin operating sections:
 - Launch readiness tracker
 - Asset and content checklist showing live bundled media and missing host-supplied content
 - Resort Desk readiness
+- Arrival Desk readiness
 - Calendar file readiness
 - Host contact card readiness
 - Offline guide readiness
@@ -518,6 +522,20 @@ Getting Around guide:
 - Friday starts at LH1 for the welcome meal, orientation, and first-night fire gathering.
 - Saturday morning shifts to LH3 for yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch.
 - The Saturday group boat ride connects LH1 to LH3 after the motorized fleet orientation.
+
+Arrival Desk checklist:
+
+- Before guests leave: open the room-key link, save the host contact, and add the weekend calendar.
+- Arrival: go to the assigned house, settle into the assigned room, then use the schedule for the Friday LH1 welcome flow.
+- Friday night: LH1 sunroom for the 6:30 p.m. grab-and-go meal, then Great Room 1 for the 7:00 p.m. orientation.
+- Saturday lake day: start at LH3 for yoga and lake time, then wait for the 11:00 a.m. LH1 orientation before motorized fleet use.
+
+Host text templates:
+
+- Room help: "Hi, I need help with my July 4th weekend room assignment or arrival directions."
+- Dietary note: "Hi, I have a dietary note for the July 4th weekend:"
+- Fleet approval: "Hi, I would like host approval or timing guidance for motorized lake fleet use."
+- Link reset: "Hi, my July 2026 room-key link needs a reset or fresh token."
 
 ## 12. Design Direction
 
