@@ -559,6 +559,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     "",
     "Current review links:",
     `Guest portal: ${baseUrl}/july2026`,
+    `Resort pass: ${baseUrl}/july2026/pass`,
     `Arrival card: ${baseUrl}/july2026/arrival-card`,
     `Resort map: ${baseUrl}/july2026/map`,
     `Directions hub: ${baseUrl}/july2026/directions`,
@@ -593,6 +594,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "Published guest surfaces:",
     `- Guest portal: ${baseUrl}/july2026`,
     `- Admin reference: ${baseUrl}/july2026/admin`,
+    `- Resort pass: ${baseUrl}/july2026/pass`,
     `- Arrival card: ${baseUrl}/july2026/arrival-card`,
     `- Resort map: ${baseUrl}/july2026/map`,
     `- Directions hub: ${baseUrl}/july2026/directions`,
@@ -619,6 +621,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "",
     "Ready now:",
     "- Resort-style guest portal and supporting pages",
+    "- Mobile resort pass with QR, host text, calendar, offline guide, and key itinerary actions",
     "- Prefilled Contact Host SMS actions to 781-929-4932",
     "- Downloadable host contact card",
     "- Shared weekend calendar and personal guest calendars",
@@ -903,6 +906,7 @@ Room key: ${baseUrl}/july2026/guest/${guest.slug}
 Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
+Resort pass: ${baseUrl}/july2026/pass
 Arrival card: ${baseUrl}/july2026/arrival-card
 Resort map: ${baseUrl}/july2026/map
 Directions hub: ${baseUrl}/july2026/directions
@@ -953,6 +957,7 @@ export function getGuestSmsPacket(
     `Personal room-key packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
     `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
     `Room-key QR code: ${baseUrl}${qrPath}`,
+    `Resort pass: ${baseUrl}/july2026/pass`,
     `Calendar: ${baseUrl}/july2026/calendar.ics`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,

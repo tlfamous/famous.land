@@ -3,6 +3,9 @@ const guideText = `FAMOUS.LAND JULY 4TH, 2026 WEEKEND GUIDE
 Event portal:
 https://famous.land/july2026
 
+Resort pass:
+https://famous.land/july2026/pass
+
 Arrival card:
 https://famous.land/july2026/arrival-card
 

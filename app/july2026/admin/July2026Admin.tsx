@@ -348,6 +348,11 @@ export function July2026Admin() {
         label: "Admin reference"
       },
       {
+        detail: "Mobile-friendly resort pass with QR, host SMS, calendar, offline guide, and pocket itinerary.",
+        href: `${baseUrl}/july2026/pass`,
+        label: "Resort pass"
+      },
+      {
         detail: "Plain-text offline guest guide.",
         href: `${baseUrl}/july2026/weekend-guide.txt`,
         label: "Weekend guide"
