@@ -66,6 +66,16 @@ The calendar includes the full July 3-5 weekend block plus major guest events:
 - Saturday fireworks viewing
 - Sunday pancake brunch
 
+Each guest room-key page also exposes a personal calendar file at `/july2026/guest/{slug}/calendar.ics`.
+
+The personal calendar includes:
+
+- The guest's current assignment, or pending-assignment language when needed
+- Arrival and departure notes
+- Personal room-key URL
+- Personal room-key packet URL
+- Host SMS line
+
 ### Host Contact Card
 
 The guest portal exposes a downloadable host contact card at `/july2026/host-contact.vcf`.
@@ -495,6 +505,7 @@ Suggested sections:
 - Arrival Desk checklist
 - Host text templates
 - Add Calendar
+- Add My Calendar
 - Save Host Contact
 - Offline Guide
 - My Stay
@@ -521,6 +532,7 @@ Admin operating sections:
 - Resort Desk readiness
 - Arrival Desk readiness
 - Calendar file readiness
+- Personalized calendar readiness
 - Host contact card readiness
 - Offline guide readiness
 - Guest-link packet readiness
@@ -558,7 +570,7 @@ Guest-specific SMS packets:
 
 - Admin guest rows can copy a message for one guest at a time.
 - Admin guest rows show a preview of the guest-specific SMS packet before copying.
-- Each packet includes the tokenized room-key link when available, personal packet link, current assignment, arrival and departure notes, calendar link, offline guide link, host contact card link, and host SMS number.
+- Each packet includes the tokenized room-key link when available, personal calendar link, personal packet link, current assignment, arrival and departure notes, calendar link, offline guide link, host contact card link, and host SMS number.
 - Pending guests receive language that their assignment still needs host confirmation instead of a false house or room.
 
 Personal room-key packets:
@@ -566,6 +578,12 @@ Personal room-key packets:
 - Each guest page links to a downloadable plain-text personal packet.
 - Packet route pattern: `/july2026/guest/{slug}/packet.txt`.
 - The packet is suitable for offline reference and includes house-specific highlights plus the core weekend links.
+
+Personal calendar files:
+
+- Each guest page links to a personal downloadable `.ics` file.
+- Calendar route pattern: `/july2026/guest/{slug}/calendar.ics`.
+- The calendar includes the guest's assignment or pending-assignment language, arrival/departure notes, personal room-key URL, personal packet URL, and host SMS line.
 
 ## 12. Design Direction
 

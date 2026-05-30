@@ -111,6 +111,12 @@ const readinessItems = [
     tone: "ready"
   },
   {
+    detail: "Each guest room-key page exposes a personal .ics file with their assignment, packet link, room-key URL, and host SMS line.",
+    label: "Personal calendars",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
     detail: "Guest CTAs download a host vCard from /july2026/host-contact.vcf with the SMS line and event URL.",
     label: "Host contact card",
     status: "Ready",
@@ -411,6 +417,7 @@ export function July2026Admin() {
       `Departure: ${guest.departure}`,
       "",
       `Personal room-key packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
+      `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
       `Calendar: ${baseUrl}/july2026/calendar.ics`,
       `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
       `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,

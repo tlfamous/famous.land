@@ -524,6 +524,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 <a href={`/july2026/guest/${selectedGuest.slug}/packet.txt`}>
                   Download My Room Key
                 </a>
+                <a href={`/july2026/guest/${selectedGuest.slug}/calendar.ics`}>Add My Calendar</a>
                 <a href="/july2026/weekend-guide.txt">Download Weekend Guide</a>
               </div>
               <div className={styles.personalItinerary}>
