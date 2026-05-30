@@ -432,6 +432,7 @@ The site should feel like a fun resort portal.
 Suggested sections:
 
 - Welcome / Check-In
+- Resort Desk quick guide
 - My Stay
 - My Room
 - Weekend Itinerary
@@ -451,6 +452,7 @@ Admin operating sections:
 - Reference checkpoints
 - Launch readiness tracker
 - Asset and content checklist showing live bundled media and missing host-supplied content
+- Resort Desk readiness
 - Motorized vehicle inventory
 - Lake rules readiness
 - Personalized room-key URLs

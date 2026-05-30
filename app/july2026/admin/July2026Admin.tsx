@@ -27,6 +27,7 @@ const adminTools = [
 
 const guestExperience = [
   "Welcome / Check-In",
+  "Resort Desk quick guide",
   "My Stay",
   "My Room",
   "Weekend Itinerary",
@@ -69,6 +70,12 @@ const readinessItems = [
   {
     detail: "15 persistent room-key URLs with reset and regenerate controls.",
     label: "Guest links",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest page now has a Resort Desk guide for room keys, host SMS, directions, and approval rules.",
+    label: "Resort Desk",
     status: "Ready",
     tone: "ready"
   },

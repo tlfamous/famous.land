@@ -115,6 +115,29 @@ export const bringItems = [
   "Patriotic spirit"
 ];
 
+export const resortDeskItems = [
+  {
+    action: "Open your room-key link",
+    detail: "Use your personalized guest link for house, room, arrival, departure, companions, and host help.",
+    label: "Check-in"
+  },
+  {
+    action: "Text the host",
+    detail: "Questions, dietary notes, link resets, quad requests, and motorized lake plans all go to 781-929-4932.",
+    label: "Help"
+  },
+  {
+    action: "Use the house directory",
+    detail: "LH2 and LH3 have live directions. LH1 directions will appear after the address is confirmed.",
+    label: "Directions"
+  },
+  {
+    action: "Wait for the Saturday orientation",
+    detail: "Pontoon, PWC, and quad/four-wheeler use needs the host go-ahead before anyone heads out.",
+    label: "Approvals"
+  }
+];
+
 export const activityItems = [
   {
     title: "Beach and swimming",

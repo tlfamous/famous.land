@@ -21,6 +21,7 @@ import {
   houseProfiles,
   lakeUseRules,
   motorizedVehicles,
+  resortDeskItems,
   scheduleItems,
   statusItems
 } from "./data";
@@ -254,6 +255,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       <nav className={styles.topbar} aria-label="July 2026 event navigation">
         <div className={styles.navLinks}>
           <a href="#stay">My Stay</a>
+          <a href="#resort-desk">Desk</a>
           <a href="#schedule">Schedule</a>
           <a href="#activities">Activities</a>
           <a href="#lake-rules">Rules</a>
@@ -351,6 +353,31 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <p>
             <a href="sms:+17819294932">Tap to message 781-929-4932</a>
           </p>
+        </div>
+      </section>
+
+      <section className={styles.resortDesk} id="resort-desk" aria-label="Resort desk guide">
+        <div className={styles.resortDeskHeader}>
+          <span className={styles.sectionLabel}>Resort Desk</span>
+          <h2>Fast answers for arrival weekend</h2>
+          <p>
+            The essentials guests will need most: room keys, host contact, live directions, and
+            approval rules for lake and quad activities.
+          </p>
+        </div>
+        <div className={styles.resortDeskGrid}>
+          {resortDeskItems.map((item) => (
+            <section key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.action}</strong>
+              <p>{item.detail}</p>
+            </section>
+          ))}
+        </div>
+        <div className={styles.resortDeskActions}>
+          <a href="#guests">Find My Room</a>
+          <a href="#map">House Directions</a>
+          <a href="sms:+17819294932">Text Host</a>
         </div>
       </section>
 
