@@ -42,6 +42,7 @@ export default function July2026PrepPage() {
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/itinerary">Itinerary</a>
+            <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>
             <a href="/july2026/concierge">Guest Concierge</a>
             <a href="sms:+17819294932">Text Host</a>

@@ -3,8 +3,8 @@
   padding: clamp(18px, 4vw, 48px);
   color: #081326;
   background:
-    radial-gradient(circle at 86% 10%, rgba(190, 29, 39, 0.14), transparent 26%),
-    linear-gradient(135deg, rgba(8, 33, 65, 0.08), rgba(243, 187, 85, 0.12)),
+    radial-gradient(circle at 88% 12%, rgba(243, 187, 85, 0.22), transparent 28%),
+    linear-gradient(135deg, rgba(8, 33, 65, 0.08), rgba(79, 122, 76, 0.12)),
     #f7f5ee;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -27,7 +27,7 @@
   padding: clamp(28px, 5vw, 58px);
   color: #fffdf7;
   background:
-    linear-gradient(135deg, rgba(8, 19, 38, 0.96), rgba(8, 33, 65, 0.84)),
+    linear-gradient(135deg, rgba(8, 19, 38, 0.96), rgba(8, 33, 65, 0.8)),
     url("../assets/july-4-hero.png") center / cover;
 }
 
@@ -41,8 +41,8 @@
 }
 
 .hero h1,
-.dayPanel h2,
-.panel h2 {
+.panel h2,
+.servicePanel h2 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(3.2rem, 8vw, 6.8rem);
@@ -51,7 +51,7 @@
 }
 
 .hero p:last-child {
-  max-width: 690px;
+  max-width: 710px;
   margin: 20px 0 0;
   color: rgba(255, 253, 247, 0.9);
   font-size: clamp(1rem, 1.5vw, 1.18rem);
@@ -64,6 +64,7 @@
 }
 
 .quickLinks a,
+.servicePanel a,
 .footer a {
   min-height: 48px;
   display: inline-flex;
@@ -75,6 +76,7 @@
   border: 1px solid rgba(255, 253, 247, 0.2);
   border-radius: 8px;
   font-weight: 950;
+  text-align: center;
   text-decoration: none;
 }
 
@@ -92,12 +94,14 @@
 }
 
 .summaryGrid article {
-  min-height: 168px;
+  min-height: 172px;
   padding: 22px;
   background: #fffdf7;
 }
 
-.summaryGrid span {
+.summaryGrid span,
+.coffeeGrid span,
+.mealTimeline time {
   color: #be1d27;
   font-size: 0.78rem;
   font-weight: 950;
@@ -118,26 +122,21 @@
   line-height: 1.45;
 }
 
-.dayStack {
-  display: grid;
-  gap: 18px;
-  padding: 0 clamp(18px, 4vw, 40px) 18px;
-}
-
-.dayPanel,
-.panel {
+.panel,
+.servicePanel {
+  margin: 0 clamp(18px, 4vw, 40px) 18px;
   padding: clamp(22px, 4vw, 34px);
   background: #fffdf7;
   border: 1px solid rgba(8, 19, 38, 0.14);
   border-radius: 8px;
 }
 
-.dayPanel h2,
-.panel h2 {
+.panel h2,
+.servicePanel h2 {
   font-size: clamp(2.7rem, 6vw, 4.9rem);
 }
 
-.timeline {
+.mealTimeline {
   display: grid;
   gap: 0;
   margin: 24px 0 0;
@@ -145,7 +144,7 @@
   list-style: none;
 }
 
-.timeline li {
+.mealTimeline li {
   display: grid;
   grid-template-columns: minmax(94px, 160px) minmax(0, 1fr);
   gap: 20px;
@@ -153,57 +152,53 @@
   border-top: 1px solid rgba(8, 19, 38, 0.12);
 }
 
-.timeline time,
-.foodGrid time {
-  color: #be1d27;
-  font-weight: 950;
-}
-
-.timeline strong,
-.foodGrid strong {
+.mealTimeline strong,
+.coffeeGrid strong {
   display: block;
   color: #082141;
-  font-size: 1.16rem;
+  font-size: 1.15rem;
 }
 
-.timeline p,
-.foodGrid p {
-  margin: 7px 0 0;
+.mealTimeline p,
+.coffeeGrid p,
+.servicePanel p {
+  margin: 8px 0 0;
   color: #5d6673;
   line-height: 1.5;
 }
 
-.panel {
-  margin: 0 clamp(18px, 4vw, 40px) 18px;
+.twoColumn {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 0 clamp(18px, 4vw, 40px) 18px;
 }
 
-.foodGrid {
+.twoColumn .panel {
+  margin: 0;
+}
+
+.coffeeGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
   margin-top: 24px;
 }
 
-.foodGrid article {
-  min-height: 154px;
-  padding: 18px;
+.coffeeGrid section {
+  padding: 16px;
   background: #f7f5ee;
   border: 1px solid rgba(8, 19, 38, 0.12);
   border-radius: 8px;
 }
 
-.sectionLink {
-  min-height: 48px;
-  display: inline-flex;
+.servicePanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  gap: 22px;
   align-items: center;
-  justify-content: center;
-  margin-top: 18px;
-  padding: 0 18px;
-  color: #fffdf7;
-  background: #be1d27;
-  border-radius: 8px;
-  font-weight: 950;
-  text-decoration: none;
+  background:
+    linear-gradient(135deg, rgba(8, 33, 65, 0.08), rgba(243, 187, 85, 0.14)),
+    #fffdf7;
 }
 
 .footer {
@@ -222,7 +217,7 @@
   font-weight: 900;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 900px) {
   .page {
     padding: 0;
   }
@@ -233,11 +228,14 @@
 
   .hero,
   .summaryGrid,
-  .foodGrid {
+  .twoColumn,
+  .servicePanel {
     grid-template-columns: 1fr;
   }
+}
 
-  .timeline li {
+@media (max-width: 640px) {
+  .mealTimeline li {
     grid-template-columns: 1fr;
     gap: 8px;
   }

@@ -21,6 +21,9 @@ https://famous.land/july2026/prep
 Weekend itinerary:
 https://famous.land/july2026/itinerary
 
+Meals and coffee:
+https://famous.land/july2026/meals
+
 Fleet guide:
 https://famous.land/july2026/fleet
 
@@ -103,6 +106,7 @@ WHAT TO BRING
 
 PROVIDED
 - Main meals and scheduled food moments are planned.
+- Meals and coffee guide: https://famous.land/july2026/meals
 - Host text prompts are ready for room help, dietary notes, fleet approval, and link resets.
 - Guest portal, calendar, host contact, and offline guide are available on your phone.
 

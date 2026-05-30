@@ -49,6 +49,7 @@ export default function July2026ItineraryPage() {
             <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/concierge">Guest Concierge</a>
             <a href="/july2026/prep">Packing Prep</a>
+            <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>
           </nav>
         </header>
@@ -107,6 +108,7 @@ export default function July2026ItineraryPage() {
               </article>
             ))}
           </div>
+          <a className={styles.sectionLink} href="/july2026/meals">Open Meals Guide</a>
         </section>
 
         <footer className={styles.footer}>

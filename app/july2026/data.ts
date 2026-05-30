@@ -147,6 +147,11 @@ export const resortDeskItems = [
     label: "Calendar"
   },
   {
+    action: "Open the meals guide",
+    detail: "Welcome food, house coffee, smoothies, LH3 lunch, lakeside patio dinner, brunch, and dietary-note texting are in one place.",
+    label: "Meals"
+  },
+  {
     action: "Save the offline guide",
     detail: "Download the plain-text weekend guide with schedule, house flow, host line, what to bring, and approval notes.",
     label: "Guide"
@@ -462,6 +467,8 @@ export const motorizedVehicles = [
     name: "Laconic",
     pickup: "LH1 dock / host-designated departure point",
     source: "Red Sea-Doo Switch Cruise studio reference",
+    sourceUrl:
+      "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my23/studio/switch/cruise/SEA-MY23-Can-Am-SWIC-230hp-21-Coral-Blast-00046PT00-34FR-NA.png",
     type: "Sea-Doo Switch Cruise pontoon boat"
   },
   {
@@ -476,6 +483,8 @@ export const motorizedVehicles = [
     name: "Spikey Lizard",
     pickup: "Host-approved lake launch point",
     source: "Blue Sea-Doo GTX studio reference",
+    sourceUrl:
+      "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my26/studio/touring/gtx/SEA-MY26-GTX-Standard-NoSS-M170-Blue-Abyss-Gulfstream-Blue-00011TD00-Studio-34FR-CU.png",
     type: "Sea-Doo GTX-style PWC"
   },
   {
@@ -490,6 +499,8 @@ export const motorizedVehicles = [
     name: "Laika",
     pickup: "Host-approved lake launch point",
     source: "Red Sea-Doo Spark Trixx 2up studio reference",
+    sourceUrl:
+      "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my26/studio/rec-lite/spark-trixx/SEA-MY26-SPARK-Trixx-3up-NoSS-M90-Dragon-Red-Bright-White-00066TA00-Studio-34FR-CU.png",
     type: "Sea-Doo Spark Trixx-style PWC"
   }
 ];
@@ -543,6 +554,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Guest concierge: ${baseUrl}/july2026/concierge`,
     `Packing prep: ${baseUrl}/july2026/prep`,
     `Weekend itinerary: ${baseUrl}/july2026/itinerary`,
+    `Meals and coffee: ${baseUrl}/july2026/meals`,
     `Fleet guide: ${baseUrl}/july2026/fleet`,
     `Safety guide: ${baseUrl}/july2026/safety`,
     `Admin reference: ${baseUrl}/july2026/admin`,
@@ -817,6 +829,7 @@ Directions hub: ${baseUrl}/july2026/directions
 Guest concierge: ${baseUrl}/july2026/concierge
 Packing prep: ${baseUrl}/july2026/prep
 Weekend itinerary: ${baseUrl}/july2026/itinerary
+Meals and coffee: ${baseUrl}/july2026/meals
 Fleet guide: ${baseUrl}/july2026/fleet
 Safety guide: ${baseUrl}/july2026/safety
 Calendar: ${baseUrl}/july2026/calendar.ics

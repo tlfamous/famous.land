@@ -127,6 +127,18 @@ The weekend itinerary includes:
 - Meal and coffee moments
 - Contact Host footer
 
+### Meals and Coffee Guide
+
+The guest portal exposes a mobile-friendly meals and coffee guide at `/july2026/meals`.
+
+The meals and coffee guide includes:
+
+- Guest portal, weekend itinerary, packing prep, guest concierge, and text-dietary-note actions
+- Welcome meal, house coffee, smoothies, lunch, dinner, brunch, and departure food moments
+- LH1 Kona coffee, LH2 K-cup coffee, and LH3 drip coffee notes
+- Friday welcome food, Saturday lakeside patio dinner, and Sunday pancake brunch summaries
+- Dietary-note guidance and tap-to-text host action
+
 ### Fleet Guide
 
 The guest portal exposes a mobile-friendly motorized vehicle guide at `/july2026/fleet`.
@@ -603,6 +615,7 @@ Inventory notes:
 
 - The website stores the vehicle reference images inside the July 2026 asset folder.
 - The three inventory cards should look visually similar, using clean studio-style Sea-Doo watercraft references.
+- Admin inventory cards link back to the original Sea-Doo reference image used for each vehicle.
 - The guest fleet cards show best-use, start-point, and approval notes so guests know what to text the host about.
 - All motorized vehicle use is part of the host-approved activity flow.
 
@@ -636,6 +649,7 @@ Suggested sections:
 - Guest Concierge at `/july2026/concierge`
 - Packing Prep at `/july2026/prep`
 - Weekend Itinerary at `/july2026/itinerary`
+- Meals and Coffee Guide at `/july2026/meals`
 - Fleet Guide at `/july2026/fleet`
 - Getting Around guide for house-to-house weekend flow
 - Help / Contact Host
@@ -657,6 +671,7 @@ Admin operating sections:
 - Guest concierge readiness
 - Packing prep readiness
 - Weekend itinerary readiness
+- Meals guide readiness
 - Fleet guide readiness
 - Safety guide readiness
 - Media shot list readiness
@@ -716,6 +731,12 @@ Packing prep:
 - Guest portal, calendar, host contact, and offline guide are available on the guest's phone.
 - Guests should open their room-key link, save the host contact, add the calendar, and download the guide before leaving.
 
+Meals and coffee guide:
+
+- `/july2026/meals` centralizes welcome food, house coffee, fruit smoothies, lunch, lakeside patio dinner, pancake brunch, and dietary-note texting.
+- Guest portal, arrival card, prep, itinerary, concierge, offline guide, and admin launch review link to the meals guide.
+- Guests can text dietary notes or food questions to 781-929-4932 from the meals guide.
+
 Guest-specific SMS packets:
 
 - Admin guest rows can copy a message for one guest at a time.
@@ -769,7 +790,7 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, fleet guide, safety guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
+- The packet includes review links for the guest portal, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
 
 Media shot list:
 
@@ -779,7 +800,7 @@ Media shot list:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

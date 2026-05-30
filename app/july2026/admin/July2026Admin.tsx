@@ -49,6 +49,7 @@ const guestExperience = [
   "My Stay",
   "My Room",
   "Weekend Itinerary",
+  "Meals and Coffee",
   "Houses",
   "Activities",
   "Motorized Fleet",
@@ -162,6 +163,12 @@ const readinessItems = [
   {
     detail: "Guest room-key pages show house-specific itinerary highlights for LH1, LH2, LH3, and pending assignments.",
     label: "Personal itinerary",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest-facing meals guide centralizes welcome food, house coffee, smoothies, lunch, lakeside patio dinner, brunch, and dietary-note texting.",
+    label: "Meals guide",
     status: "Ready",
     tone: "ready"
   },
@@ -366,6 +373,11 @@ export function July2026Admin() {
         detail: "Public print/screenshot-friendly run of show grouped by weekend day.",
         href: `${baseUrl}/july2026/itinerary`,
         label: "Weekend itinerary"
+      },
+      {
+        detail: "Public meals and coffee guide with food moments, house coffee, and dietary-note text action.",
+        href: `${baseUrl}/july2026/meals`,
+        label: "Meals and coffee"
       },
       {
         detail: "Guest-facing motorized vehicle inventory with approval guidance and self-contained images.",
@@ -812,7 +824,9 @@ export function July2026Admin() {
                       </div>
                       <div>
                         <dt>Image source</dt>
-                        <dd>{vehicle.source}</dd>
+                        <dd>
+                          <a href={vehicle.sourceUrl}>{vehicle.source}</a>
+                        </dd>
                       </div>
                     </dl>
                     <p>{vehicle.detail}</p>

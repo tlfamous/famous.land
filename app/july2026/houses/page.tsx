@@ -75,6 +75,7 @@ export default function July2026HousesPage() {
             <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/itinerary">Itinerary</a>
+            <a href="/july2026/meals">Meals Guide</a>
             <a href="sms:+17819294932">Text Host</a>
           </nav>
         </header>

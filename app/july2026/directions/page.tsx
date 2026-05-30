@@ -37,6 +37,7 @@ export default function July2026DirectionsPage() {
             <a href="/july2026/concierge">Guest Concierge</a>
             <a href="/july2026/prep">Packing Prep</a>
             <a href="/july2026/itinerary">Itinerary</a>
+            <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>
             <a href={lakeAreaUrl} target="_blank" rel="noreferrer">
               Lake Area Map
