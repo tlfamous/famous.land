@@ -208,6 +208,7 @@ The admin page should show:
 - Ability to copy one SMS-ready packet of all current room-key links
 - Ability to copy a guest-specific SMS packet with assignment, room-key link, calendar, offline guide, host contact, and arrival notes
 - Ability to review a print-friendly sheet of all guest-specific SMS packets
+- Ability to review print-friendly day-of host text templates for arrival, movement, fleet approvals, meals, fireworks, and help
 - Ability to copy a missing-content request packet for the remaining host-supplied address, room assignment, photo, and checkout details
 - Ability to open a print-friendly media shot list for remaining house, room, and event-location photos
 - Readiness tracker for live, partial, and still-needed launch content
@@ -634,6 +635,7 @@ Admin operating sections:
 - Guest-link packet readiness
 - Guest-specific SMS packet readiness
 - Guest SMS review sheet readiness
+- Host text template readiness
 - Personalized room-key packet readiness
 - Personalized itinerary readiness
 - Getting Around readiness
@@ -664,6 +666,8 @@ Host text templates:
 - Fleet approval: "Hi, I would like host approval or timing guidance for motorized lake fleet use."
 - Link reset: "Hi, my July 2026 room-key link needs a reset or fresh token."
 - Guest concierge: `/july2026/concierge` exposes the prompts as tap-to-text cards and pairs them with approval guidance.
+- Admin includes a print-friendly host text template sheet at `/july2026/admin/host-texts`.
+- The host text template sheet covers arrival reminder, Friday welcome flow, Saturday lake morning, fleet orientation, boat ride movement, dinner/fireworks, Sunday brunch, and general host help.
 
 Packing prep:
 
@@ -726,7 +730,7 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, admin reference, guest SMS packets, media shot list, and offline guide.
+- The packet includes review links for the guest portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
 
 Media shot list:
 
@@ -736,7 +740,7 @@ Media shot list:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, weekend calendar, host contact card, missing-content request, guest SMS packets, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

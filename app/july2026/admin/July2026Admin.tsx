@@ -31,6 +31,7 @@ const adminTools = [
   "Reset the current device binding if needed",
   "Copy guest-specific SMS packets",
   "Review printable guest SMS packets",
+  "Review day-of host text templates",
   "Copy missing-content request packet",
   "Print media shot list",
   "Track missing photos, addresses, and room-assignment decisions"
@@ -111,6 +112,12 @@ const readinessItems = [
   {
     detail: "Admin includes a print-friendly review sheet for every guest outreach SMS.",
     label: "SMS review sheet",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Admin includes print-friendly day-of host broadcast templates for arrival, movement, fleet, meals, fireworks, and help.",
+    label: "Host text templates",
     status: "Ready",
     tone: "ready"
   },
@@ -332,7 +339,7 @@ export function July2026Admin() {
         label: "Guest concierge"
       },
       {
-        detail: "Public packing and pre-arrival checklist with provided items and phone setup reminders.",
+        detail: "Public packing and pre-arrival checklist with provided logistics and phone setup reminders.",
         href: `${baseUrl}/july2026/prep`,
         label: "Packing prep"
       },
@@ -365,6 +372,11 @@ export function July2026Admin() {
         detail: "Print-friendly review sheet for every guest room-key SMS packet.",
         href: `${baseUrl}/july2026/admin/sms-packets`,
         label: "Guest SMS packets"
+      },
+      {
+        detail: "Print-friendly day-of host broadcast templates for guest operations.",
+        href: `${baseUrl}/july2026/admin/host-texts`,
+        label: "Host text templates"
       },
       {
         detail: "Print-friendly shot list for remaining house, room, and event-location photos.",
@@ -827,6 +839,7 @@ export function July2026Admin() {
             </button>
             <a href="/july2026/admin/room-keys">Print room keys</a>
             <a href="/july2026/admin/sms-packets">Review SMS</a>
+            <a href="/july2026/admin/host-texts">Host texts</a>
             <a href="/july2026/admin/media-shot-list">Print shot list</a>
             <a href="/july2026/admin/briefing-sheet">Print briefing</a>
             <a href="/july2026/admin/house-signs">Print house signs</a>

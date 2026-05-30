@@ -25,6 +25,7 @@ export default function July2026SmsPacketsPage() {
         <nav aria-label="Admin links">
           <a href="/july2026/admin">Admin</a>
           <a href="/july2026/admin/room-keys">Room keys</a>
+          <a href="/july2026/admin/host-texts">Host texts</a>
           <a href="/july2026/admin/briefing-sheet">Briefing</a>
         </nav>
       </header>

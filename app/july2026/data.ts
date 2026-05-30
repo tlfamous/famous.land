@@ -191,6 +191,65 @@ export const hostTextTemplates = [
   }
 ];
 
+export const hostBroadcastMessages = [
+  {
+    audience: "All guests",
+    label: "Arrival reminder",
+    timing: "Friday morning",
+    body:
+      "Welcome to the famous.land July 4th weekend. Please open your room key before you leave, save the host contact, and text 781-929-4932 if you need arrival help. Check-in is Friday, July 3, 3-6 PM."
+  },
+  {
+    audience: "All guests",
+    label: "Friday welcome flow",
+    timing: "Friday 5:30 PM",
+    body:
+      "Friday welcome flow: grab-and-go meal is at 6:30 PM in the LH1 sunroom, then weekend orientation is 7-8 PM in Great Room 1 at LH1. Text 781-929-4932 if you need directions or help."
+  },
+  {
+    audience: "All guests",
+    label: "Saturday lake morning",
+    timing: "Saturday 7:30 AM",
+    body:
+      "Good morning. Coffee is available at all houses from 7:30-8 AM. Yoga is 8 AM at the LH3 beach, followed by non-motorized lake time and fruit smoothies at LH3."
+  },
+  {
+    audience: "Motorized fleet guests",
+    label: "Fleet orientation",
+    timing: "Saturday 10:30 AM",
+    body:
+      "Motorized lake fleet reminder: orientation is 11 AM at LH1. Please wait for the host briefing and go-ahead before using Laconic, Spikey Lizard, Laika, or any other motorized equipment."
+  },
+  {
+    audience: "All guests",
+    label: "Boat ride movement",
+    timing: "Saturday 11:15 AM",
+    body:
+      "Boat ride is 11:30 AM-12:30 PM, departing from LH1 and returning to LH3 for lunch. Please follow host direction for the dock plan and life jackets."
+  },
+  {
+    audience: "All guests",
+    label: "Dinner and fireworks",
+    timing: "Saturday 5:30 PM",
+    body:
+      "Dinner is 6 PM at LH3 with lakeside patio seating. S'mores start around 8 PM at South Grand Peninsula, LH1, with fireworks viewing around 9 PM from LH1, LH3, or a host-approved cruise."
+  },
+  {
+    audience: "All guests",
+    label: "Sunday brunch",
+    timing: "Sunday 9:00 AM",
+    body:
+      "Sunday coffee starts at 8:30 AM at all houses. Pancake brunch is 10 AM at LH3, followed by free time, lake activities, and Sunday afternoon departures."
+  },
+  {
+    audience: "Guests needing help",
+    label: "Host help",
+    timing: "Anytime",
+    body:
+      "Text 781-929-4932 for room help, dietary notes, arrival directions, motorized fleet approval, cruise questions, or room-key link resets."
+  }
+] as const;
+
 export const itineraryHighlights = {
   LH1: [
     {
@@ -476,6 +535,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Fleet guide: ${baseUrl}/july2026/fleet`,
     `Admin reference: ${baseUrl}/july2026/admin`,
     `Guest SMS packets: ${baseUrl}/july2026/admin/sms-packets`,
+    `Host text templates: ${baseUrl}/july2026/admin/host-texts`,
     `Media shot list: ${baseUrl}/july2026/admin/media-shot-list`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Download this request: ${baseUrl}/july2026/admin/missing-content.txt`,
