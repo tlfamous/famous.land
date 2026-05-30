@@ -30,6 +30,7 @@ const guestExperience = [
   "Resort Desk quick guide",
   "Add Calendar",
   "Save Host Contact",
+  "Offline Guide",
   "My Stay",
   "My Room",
   "Weekend Itinerary",
@@ -97,6 +98,12 @@ const readinessItems = [
   {
     detail: "Guest CTAs download a host vCard from /july2026/host-contact.vcf with the SMS line and event URL.",
     label: "Host contact card",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest CTAs download a plain-text weekend guide from /july2026/weekend-guide.txt for offline use.",
+    label: "Offline guide",
     status: "Ready",
     tone: "ready"
   },

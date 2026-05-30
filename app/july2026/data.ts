@@ -142,6 +142,11 @@ export const resortDeskItems = [
     label: "Calendar"
   },
   {
+    action: "Save the offline guide",
+    detail: "Download the plain-text weekend guide with schedule, house flow, host line, what to bring, and approval notes.",
+    label: "Guide"
+  },
+  {
     action: "Wait for the Saturday orientation",
     detail: "Pontoon, PWC, and quad/four-wheeler use needs the host go-ahead before anyone heads out.",
     label: "Approvals"

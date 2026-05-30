@@ -333,6 +333,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         <a href="sms:+17819294932">Text 781-929-4932</a>
         <a href="/july2026/calendar.ics">Add Calendar</a>
         <a href="/july2026/host-contact.vcf">Save Host</a>
+        <a href="/july2026/weekend-guide.txt">Offline Guide</a>
       </section>
 
       <section className={styles.stayStrip} id="stay" aria-label="Personalized stay preview">
@@ -392,6 +393,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="#map">House Directions</a>
           <a href="/july2026/calendar.ics">Add Calendar</a>
           <a href="/july2026/host-contact.vcf">Save Host Contact</a>
+          <a href="/july2026/weekend-guide.txt">Offline Guide</a>
           <a href="sms:+17819294932">Text Host</a>
         </div>
       </section>

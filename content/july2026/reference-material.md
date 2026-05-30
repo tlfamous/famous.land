@@ -77,6 +77,20 @@ The contact card saves:
 - Mobile: 781-929-4932
 - Website: https://famous.land/july2026
 
+### Offline Weekend Guide
+
+The guest portal exposes a downloadable plain-text guide at `/july2026/weekend-guide.txt`.
+
+The offline guide includes:
+
+- Event portal, host text line, host contact card, and calendar links
+- Arrival instructions
+- Getting Around house flow
+- LH1, LH2, and LH3 directory notes
+- Key schedule
+- What to bring
+- Lake and host approval notes
+
 ### Admin Page
 
 The admin page should show:
@@ -465,6 +479,7 @@ Suggested sections:
 - Resort Desk quick guide
 - Add Calendar
 - Save Host Contact
+- Offline Guide
 - My Stay
 - My Room
 - Weekend Itinerary
@@ -488,6 +503,7 @@ Admin operating sections:
 - Resort Desk readiness
 - Calendar file readiness
 - Host contact card readiness
+- Offline guide readiness
 - Guest-link packet readiness
 - Personalized itinerary readiness
 - Getting Around readiness

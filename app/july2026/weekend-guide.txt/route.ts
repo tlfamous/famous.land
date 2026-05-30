@@ -1,0 +1,91 @@
+const guideText = `FAMOUS.LAND JULY 4TH, 2026 WEEKEND GUIDE
+
+Event portal:
+https://famous.land/july2026
+
+Host text line:
+781-929-4932
+
+Save host contact:
+https://famous.land/july2026/host-contact.vcf
+
+Add calendar:
+https://famous.land/july2026/calendar.ics
+
+WEEKEND OVERVIEW
+Friday, July 3 through Sunday, July 5, 2026
+Lake Monomonac weekend houses in Rindge, NH and Winchendon, MA
+Sponsored by famous.land
+
+ARRIVAL
+Friday 3:00-6:00 PM
+Arrive, settle into your assigned lake house, and find your room.
+Use your personalized room-key link for your house, room, companions, and host help.
+
+GETTING AROUND
+- Friday starts at LH1 for the welcome meal, weekend orientation, and first-night fire gathering.
+- Saturday morning shifts to LH3 for yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch.
+- The Saturday group boat ride departs from LH1 after motorized fleet orientation and returns to LH3 for lunch.
+- LH2 and LH3 directions are live in the guest portal. LH1 directions will be added when confirmed by the host.
+
+HOUSE DIRECTORY
+LH1
+Welcome, orientation, boat departure, fire pit.
+Address: TBD.
+
+LH2
+Quiet guest rooms and coffee stop.
+Address: 63 Pine Eden Road, Rindge, New Hampshire.
+
+LH3
+Beach, meals, brunch, boat return.
+Address: 25 Sunny Cove Road, Winchendon, Massachusetts.
+
+KEY SCHEDULE
+Friday 3:00-6:00 PM - Guest check-in window
+Friday 6:30 PM - Casual grab-and-go meal, Sunroom, LH1
+Friday 7:00-8:00 PM - Weekend orientation, Great Room 1, LH1
+Friday 8:00 PM - Campfire, cigars, and scotch, Grand Peninsula, LH1
+
+Saturday 7:30-8:00 AM - Coffee time at all houses
+Saturday 8:00 AM - Yoga on the beach, LH3
+Saturday 9:00 AM - Non-motorized lake activities, LH3 / lake access
+Saturday 10:00 AM - Fruit smoothies, LH3
+Saturday 11:00 AM - Motorized lake vehicle orientation, LH1
+Saturday 11:30 AM-12:30 PM - Boat ride, depart LH1 and return LH3
+Saturday 12:30 PM - Lunch, LH3
+Saturday 2:00-6:00 PM - Free time and optional activities
+Saturday 6:00 PM - Dinner, LH3, lakeside patio seating
+Saturday 8:00 PM - S'mores at the fire pit, South Grand Peninsula, LH1
+Saturday 8:30 PM - Sparklers and snacks, South Grand Peninsula / LH1 area
+Saturday 9:00 PM - Optional fireworks viewing from LH1, LH3, or host-approved cruise
+
+Sunday 8:30 AM - Coffee time at all houses
+Sunday 10:00 AM - Pancake brunch, LH3
+After brunch - Free time and lake activities
+Sunday afternoon - Departure and grab-and-go food
+
+WHAT TO BRING
+- Sunscreen
+- Swimsuit and towel
+- Reusable water bottle
+- Bug spray
+- Light jacket or hoodie
+- Patriotic spirit
+
+APPROVAL NOTES
+- Motorized fleet use starts only after the Saturday LH1 safety briefing and host go-ahead.
+- Wear the right-size life jacket for boating, PWC rides, and lake activities where the host asks for one.
+- Text the host before changing cruise plans, taking out a motorized vehicle, or requesting quad/four-wheeler time.
+- Text dietary notes, allergies, arrival timing, or room-key help to 781-929-4932.
+`;
+
+export function GET() {
+  return new Response(guideText, {
+    headers: {
+      "cache-control": "public, max-age=3600",
+      "content-disposition": 'attachment; filename="famous-land-july-2026-guide.txt"',
+      "content-type": "text/plain; charset=utf-8"
+    }
+  });
+}
