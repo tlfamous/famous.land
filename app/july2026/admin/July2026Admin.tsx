@@ -311,6 +311,11 @@ export function July2026Admin() {
         label: "Guest concierge"
       },
       {
+        detail: "Public packing and pre-arrival checklist with provided items and phone setup reminders.",
+        href: `${baseUrl}/july2026/prep`,
+        label: "Packing prep"
+      },
+      {
         detail: "Downloadable shared weekend calendar.",
         href: `${baseUrl}/july2026/calendar.ics`,
         label: "Weekend calendar"

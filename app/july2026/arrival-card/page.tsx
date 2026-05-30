@@ -54,6 +54,7 @@ export default function July2026ArrivalCardPage() {
           <a href="/july2026">Guest Portal</a>
           <a href="/july2026/directions">Directions Hub</a>
           <a href="/july2026/concierge">Guest Concierge</a>
+          <a href="/july2026/prep">Packing Prep</a>
           <a href="/july2026/calendar.ics">Add Calendar</a>
           <a href="/july2026/host-contact.vcf">Save Host</a>
           <a href="/july2026/weekend-guide.txt">Offline Guide</a>

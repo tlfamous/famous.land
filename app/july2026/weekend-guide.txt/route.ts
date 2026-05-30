@@ -12,6 +12,9 @@ https://famous.land/july2026/directions
 Guest concierge:
 https://famous.land/july2026/concierge
 
+Packing prep:
+https://famous.land/july2026/prep
+
 Host text line:
 781-929-4932
 
@@ -84,6 +87,11 @@ WHAT TO BRING
 - Bug spray
 - Light jacket or hoodie
 - Patriotic spirit
+
+PROVIDED
+- Drinks are provided.
+- Chairs and lakeside seating are provided.
+- Main meals and scheduled food moments are planned.
 
 ARRIVAL CHECKLIST
 - Before you leave: open your room-key link, save the host contact, and add the weekend calendar while you still have an easy signal.
