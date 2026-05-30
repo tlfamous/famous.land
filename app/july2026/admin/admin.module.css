@@ -652,6 +652,40 @@
   font-size: 0.78rem;
 }
 
+.guestQrPreview {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid rgba(8, 33, 65, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.64);
+}
+
+.guestQrPreview img {
+  width: 86px;
+  height: 86px;
+  border: 1px solid rgba(8, 19, 38, 0.1);
+  border-radius: 6px;
+  background: #fffdf7;
+}
+
+.guestQrPreview strong {
+  color: #082141;
+  font-size: 0.9rem;
+  line-height: 1.14;
+}
+
+.guestQrPreview span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: #596476 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.7rem !important;
+  line-height: 1.35;
+}
+
 .guestLinkActions {
   display: flex;
   flex-wrap: wrap;

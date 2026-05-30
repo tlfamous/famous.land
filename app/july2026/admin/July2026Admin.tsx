@@ -447,8 +447,14 @@ export function July2026Admin() {
     }
   }
 
+  function getGuestQrPath(guest: (typeof guestAssignments)[number], path: string) {
+    const queryIndex = path.indexOf("?");
+    return `/july2026/guest/${guest.slug}/qr.svg${queryIndex === -1 ? "" : path.slice(queryIndex)}`;
+  }
+
   function getGuestSmsPacket(guest: (typeof guestAssignments)[number], path: string) {
     const baseUrl = origin || "https://famous.land";
+    const qrPath = getGuestQrPath(guest, path);
     const assignment =
       guest.house === "Pending"
         ? "Your room assignment is still pending host confirmation."
@@ -464,6 +470,7 @@ export function July2026Admin() {
       "",
       `Personal room-key packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
       `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
+      `Room-key QR code: ${baseUrl}${qrPath}`,
       `Calendar: ${baseUrl}/july2026/calendar.ics`,
       `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
       `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,
@@ -781,6 +788,7 @@ export function July2026Admin() {
               const token = guestLinks[guest.slug]?.token;
               const path = `/july2026/guest/${guest.slug}${token ? `?t=${token}` : ""}`;
               const href = `${origin}${path}`;
+              const qrPath = getGuestQrPath(guest, path);
               const boundAt = guestLinks[guest.slug]?.bound_at;
               const smsPacket = getGuestSmsPacket(guest, path);
 
@@ -792,8 +800,16 @@ export function July2026Admin() {
                     <span>{boundAt ? `Bound ${new Date(boundAt).toLocaleString()}` : "Not bound yet"}</span>
                     <code>{path}</code>
                   </div>
+                  <div className={styles.guestQrPreview}>
+                    <img src={qrPath} alt={`${guest.name} room-key QR code`} />
+                    <div>
+                      <strong>Room-key QR</strong>
+                      <span>{qrPath}</span>
+                    </div>
+                  </div>
                   <div className={styles.guestLinkActions}>
                     <a href={path}>Open</a>
+                    <a href={qrPath}>Open QR</a>
                     <button type="button" onClick={() => updateGuestLink(guest.slug, "regenerate")}>
                       Regenerate
                     </button>

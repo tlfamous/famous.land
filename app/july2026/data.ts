@@ -725,6 +725,7 @@ Weekend essentials:
 
 Links:
 Room key: ${baseUrl}/july2026/guest/${guest.slug}
+Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Guest portal: ${baseUrl}/july2026
 Calendar: ${baseUrl}/july2026/calendar.ics
 Offline guide: ${baseUrl}/july2026/weekend-guide.txt

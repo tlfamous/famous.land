@@ -581,6 +581,13 @@ Personal room-key packets:
 - Packet route pattern: `/july2026/guest/{slug}/packet.txt`.
 - The packet is suitable for offline reference and includes house-specific highlights plus the core weekend links.
 
+Room-key QR codes:
+
+- Each guest page links to a self-contained QR code image for that guest's room-key URL.
+- QR route pattern: `/july2026/guest/{slug}/qr.svg`.
+- Admin guest rows show each guest's QR code and can open tokenized QR URLs when a current token is available.
+- Guest-specific SMS packets include the room-key QR code URL for screenshot or print-based sharing.
+
 Personal calendar files:
 
 - Each guest page links to a personal downloadable `.ics` file.
