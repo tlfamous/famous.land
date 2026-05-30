@@ -107,7 +107,6 @@ export const scheduleItems = [
 ];
 
 export const bringItems = [
-  "Lawn chairs or blankets",
   "Sunscreen",
   "Swimsuit and towel",
   "Reusable water bottle",
