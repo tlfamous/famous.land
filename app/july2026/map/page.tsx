@@ -69,6 +69,7 @@ export default function July2026ResortMapPage() {
           </div>
           <nav className={styles.quickLinks} aria-label="Resort map quick actions">
             <a href="/july2026">Guest Portal</a>
+            <a href="/july2026/faq">Guest FAQ</a>
             <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/houses">House Directory</a>
             <a href="/july2026/itinerary">Itinerary</a>

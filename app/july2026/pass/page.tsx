@@ -48,6 +48,11 @@ const passActions = [
     note: "Known LH2/LH3 maps and LH1 pending fallback"
   },
   {
+    href: "/july2026/faq",
+    label: "Guest FAQ",
+    note: "Quick answers for arrival, directions, food, lake approvals, and host help"
+  },
+  {
     href: "/july2026/weekend-guide.txt",
     label: "Offline Guide",
     note: "Plain-text backup for low-signal moments"

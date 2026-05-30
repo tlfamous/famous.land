@@ -427,6 +427,69 @@ export const hostHelpItems = [
   }
 ];
 
+export const faqItems = [
+  {
+    category: "Arrival",
+    question: "When should I arrive?",
+    answer:
+      "Plan to arrive Friday, July 3 between 3:00 and 6:00 PM. Open your room-key link before you leave so you know your assigned house and room."
+  },
+  {
+    category: "Arrival",
+    question: "Where do I go first?",
+    answer:
+      "Go to your assigned house first, settle in, then use the schedule for the Friday LH1 welcome meal and orientation."
+  },
+  {
+    category: "Directions",
+    question: "Are house directions ready?",
+    answer:
+      "LH2 and LH3 directions are live. LH1 directions stay pending until the host confirms the exact address; use the directions hub and text the host if you need help."
+  },
+  {
+    category: "Food",
+    question: "Do I need to bring drinks or a lawn chair?",
+    answer:
+      "No. Drinks and chairs are provided. Bring personal lake basics like sunscreen, swim gear, bug spray, and a light layer."
+  },
+  {
+    category: "Food",
+    question: "How should I share allergies or dietary needs?",
+    answer:
+      "Text the host before the weekend with allergies, dietary restrictions, or anything the kitchen should know."
+  },
+  {
+    category: "Lake",
+    question: "Can I use the motorized lake vehicles?",
+    answer:
+      "Only after the Saturday LH1 orientation and a host go-ahead. Laconic, Spikey Lizard, Laika, quad time, and cruise plans all require host approval."
+  },
+  {
+    category: "Lake",
+    question: "What should I do for lake safety?",
+    answer:
+      "Follow the host dock plan, wear the right-size life jacket when asked, and text before changing cruise plans or taking out a motorized vehicle."
+  },
+  {
+    category: "Schedule",
+    question: "Where are the main Saturday meals and lake activities?",
+    answer:
+      "Saturday yoga, beach time, smoothies, lunch, dinner, and Sunday brunch are centered at LH3. The motorized orientation and boat departure happen at LH1."
+  },
+  {
+    category: "Help",
+    question: "Who do I contact if anything is confusing?",
+    answer:
+      "Text 781-929-4932. Room help, arrival directions, food notes, fleet approval, cruise questions, and link resets all go to the host line."
+  },
+  {
+    category: "Phone setup",
+    question: "What should I save on my phone before leaving?",
+    answer:
+      "Open your room-key link, save the host contact card, add the weekend calendar, and download the offline guide while you still have an easy signal."
+  }
+] as const;
+
 export const lakeUseRules = [
   {
     label: "Orientation first",
@@ -560,6 +623,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     "Current review links:",
     `Guest portal: ${baseUrl}/july2026`,
     `Resort pass: ${baseUrl}/july2026/pass`,
+    `Resort FAQ: ${baseUrl}/july2026/faq`,
     `Arrival card: ${baseUrl}/july2026/arrival-card`,
     `Resort map: ${baseUrl}/july2026/map`,
     `Directions hub: ${baseUrl}/july2026/directions`,
@@ -595,6 +659,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     `- Guest portal: ${baseUrl}/july2026`,
     `- Admin reference: ${baseUrl}/july2026/admin`,
     `- Resort pass: ${baseUrl}/july2026/pass`,
+    `- Resort FAQ: ${baseUrl}/july2026/faq`,
     `- Arrival card: ${baseUrl}/july2026/arrival-card`,
     `- Resort map: ${baseUrl}/july2026/map`,
     `- Directions hub: ${baseUrl}/july2026/directions`,
@@ -622,6 +687,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "Ready now:",
     "- Resort-style guest portal and supporting pages",
     "- Mobile resort pass with QR, host text, calendar, offline guide, and key itinerary actions",
+    "- Resort FAQ for arrival, directions, food, lake approvals, phone setup, and host help",
     "- Prefilled Contact Host SMS actions to 781-929-4932",
     "- Downloadable host contact card",
     "- Shared weekend calendar and personal guest calendars",
@@ -907,6 +973,7 @@ Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
 Resort pass: ${baseUrl}/july2026/pass
+Resort FAQ: ${baseUrl}/july2026/faq
 Arrival card: ${baseUrl}/july2026/arrival-card
 Resort map: ${baseUrl}/july2026/map
 Directions hub: ${baseUrl}/july2026/directions
@@ -958,6 +1025,7 @@ export function getGuestSmsPacket(
     `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
     `Room-key QR code: ${baseUrl}${qrPath}`,
     `Resort pass: ${baseUrl}/july2026/pass`,
+    `Resort FAQ: ${baseUrl}/july2026/faq`,
     `Calendar: ${baseUrl}/july2026/calendar.ics`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,

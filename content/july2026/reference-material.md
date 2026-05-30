@@ -195,6 +195,20 @@ The resort pass includes:
 - Pocket itinerary for the highest-priority Friday, Saturday, and Sunday moments
 - Print-friendly styling for screenshot or paper backup
 
+### Resort FAQ
+
+The guest portal exposes a quick-answer FAQ at `/july2026/faq`.
+
+The resort FAQ includes:
+
+- Arrival window and first-stop guidance
+- LH2/LH3 direction readiness and LH1 pending-address guidance
+- Food, drinks, chair, and dietary-note answers
+- Motorized lake vehicle approval reminders
+- Lake safety and life-jacket reminders
+- Phone setup checklist for room key, host contact, calendar, and offline guide
+- Prefilled Contact Host action for anything still unclear
+
 ### Resort Map
 
 The guest portal exposes a polished resort-map style movement guide at `/july2026/map`.
@@ -654,6 +668,7 @@ Suggested sections:
 - Resort Desk quick guide
 - Arrival Desk checklist
 - Resort Pass at `/july2026/pass`
+- Resort FAQ at `/july2026/faq`
 - Host text templates
 - Add Calendar
 - Add My Calendar
@@ -826,7 +841,7 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, resort pass, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, launch status, guest SMS packets, host text templates, media shot list, and offline guide.
+- The packet includes review links for the guest portal, resort pass, resort FAQ, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, launch status, guest SMS packets, host text templates, media shot list, and offline guide.
 
 Launch status packet:
 
@@ -842,7 +857,7 @@ Media shot list:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, resort pass, offline guide, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, launch status, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, resort pass, resort FAQ, offline guide, arrival card, resort map, directions hub, house directory, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, launch status, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction
@@ -898,6 +913,7 @@ Current bundled media:
 - LH3 exterior patio photo
 - LH3 animated profile video
 - Motorized vehicle reference images for Laconic, Spikey Lizard, and Laika
+- Resort FAQ content for arrival, directions, food, lake approvals, phone setup, and host help
 
 Missing information:
 

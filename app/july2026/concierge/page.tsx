@@ -41,6 +41,7 @@ export default function July2026ConciergePage() {
           </div>
           <nav className={styles.quickLinks} aria-label="Concierge quick actions">
             <a href="/july2026">Guest Portal</a>
+            <a href="/july2026/faq">Guest FAQ</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/directions">Directions Hub</a>
@@ -60,6 +61,16 @@ export default function July2026ConciergePage() {
               <p>{item.detail}</p>
             </article>
           ))}
+        </section>
+
+        <section className={styles.panel}>
+          <p className={styles.kicker}>Common questions</p>
+          <h2>Open the Resort FAQ</h2>
+          <p>
+            Arrival timing, directions status, what is provided, lake approvals,
+            and phone setup are collected in one quick-answer page.
+          </p>
+          <a className={styles.sectionLink} href="/july2026/faq">Open Guest FAQ</a>
         </section>
 
         <section className={styles.twoColumn}>

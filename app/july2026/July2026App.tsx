@@ -300,6 +300,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               <a className={styles.secondaryButton} href="/july2026/pass">
                 Resort Pass
               </a>
+              <a className={styles.secondaryButton} href="/july2026/faq">
+                Guest FAQ
+              </a>
               <a className={styles.secondaryButton} href="/july2026/map">
                 Resort Map
               </a>
@@ -368,6 +371,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         ))}
         <a href={hostSmsHref}>Text 781-929-4932</a>
         <a href="/july2026/pass">Resort Pass</a>
+        <a href="/july2026/faq">Guest FAQ</a>
         <a href="/july2026/calendar.ics">Add Calendar</a>
         <a href="/july2026/host-contact.vcf">Save Host</a>
         <a href="/july2026/arrival-card">Arrival Card</a>
@@ -438,6 +442,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         <div className={styles.resortDeskActions}>
           <a href="#guests">Find My Room</a>
           <a href="/july2026/pass">Resort Pass</a>
+          <a href="/july2026/faq">Guest FAQ</a>
           <a href="/july2026/arrival-card">Arrival Card</a>
           <a href="/july2026/map">Resort Map</a>
           <a href="#arrival">Arrival Checklist</a>

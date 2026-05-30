@@ -6,6 +6,9 @@ https://famous.land/july2026
 Resort pass:
 https://famous.land/july2026/pass
 
+Resort FAQ:
+https://famous.land/july2026/faq
+
 Arrival card:
 https://famous.land/july2026/arrival-card
 
@@ -132,6 +135,15 @@ HOST TEXT PROMPTS
 - Fleet approval: Hi, I would like host approval or timing guidance for motorized lake fleet use.
 - Link reset: Hi, my July 2026 room-key link needs a reset or fresh token.
 - Use the guest concierge for tap-to-text prompts, lake rules, and host approval guidance.
+
+QUICK FAQ
+- Arrival window: Friday, July 3, 3:00-6:00 PM.
+- First stop: go to your assigned house first, then follow the Friday LH1 welcome flow.
+- Directions: LH2 and LH3 are live; LH1 stays pending until the host confirms the exact address.
+- Provided: drinks and chairs are provided. Bring personal lake basics.
+- Lake vehicles: motorized fleet use starts only after the Saturday LH1 orientation and host go-ahead.
+- Phone setup: open your room key, save the host contact, add the calendar, and download this guide before leaving.
+- More answers: https://famous.land/july2026/faq
 
 MOTORIZED VEHICLE INVENTORY
 - Laconic: red Sea-Doo Switch Cruise pontoon boat, 23 ft, 10 persons. Best for group cruises, boat parade viewing, relaxed lake runs, and the Saturday LH1-to-LH3 ride after host orientation.

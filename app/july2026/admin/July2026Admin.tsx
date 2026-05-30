@@ -42,6 +42,7 @@ const guestExperience = [
   "Welcome / Check-In",
   "Resort Desk quick guide",
   "Arrival checklist",
+  "Resort FAQ",
   "Host text templates",
   "House Directory",
   "Add Calendar",
@@ -135,6 +136,12 @@ const readinessItems = [
   {
     detail: "Guest page includes an Arrival Desk checklist plus one-tap SMS templates for room help, dietary notes, fleet approval, and link resets.",
     label: "Arrival Desk",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest-facing FAQ collects arrival, directions, food, lake approvals, phone setup, and host-help answers.",
+    label: "Resort FAQ",
     status: "Ready",
     tone: "ready"
   },
@@ -351,6 +358,11 @@ export function July2026Admin() {
         detail: "Mobile-friendly resort pass with QR, host SMS, calendar, offline guide, and pocket itinerary.",
         href: `${baseUrl}/july2026/pass`,
         label: "Resort pass"
+      },
+      {
+        detail: "Quick guest answers for arrival, directions, food, lake approvals, phone setup, and host help.",
+        href: `${baseUrl}/july2026/faq`,
+        label: "Resort FAQ"
       },
       {
         detail: "Plain-text offline guest guide.",

@@ -51,6 +51,7 @@ export default function July2026FleetPage() {
           </div>
           <nav className={styles.quickLinks} aria-label="Fleet quick actions">
             <a href="/july2026">Guest Portal</a>
+            <a href="/july2026/faq">Guest FAQ</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
             <a href="/july2026/concierge">Guest Concierge</a>
