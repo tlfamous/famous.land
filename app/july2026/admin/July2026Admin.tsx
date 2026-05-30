@@ -431,7 +431,7 @@ export function July2026Admin() {
           </div>
         </section>
 
-        <section className={styles.vehicleInventorySection} aria-label="Motorized vehicle inventory">
+        <section className={styles.vehicleInventorySection} id="fleet-inventory" aria-label="Motorized vehicle inventory">
           <div className={styles.proofHeader}>
             <div>
               <span className={styles.label}>Inventory</span>
@@ -467,8 +467,16 @@ export function July2026Admin() {
                         <dd>{vehicle.color}</dd>
                       </div>
                       <div>
+                        <dt>Class</dt>
+                        <dd>{vehicle.length}</dd>
+                      </div>
+                      <div>
                         <dt>Capacity</dt>
                         <dd>{vehicle.capacity}</dd>
+                      </div>
+                      <div>
+                        <dt>Image source</dt>
+                        <dd>{vehicle.source}</dd>
                       </div>
                     </dl>
                     <p>{vehicle.detail}</p>

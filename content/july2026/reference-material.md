@@ -404,16 +404,16 @@ The guest page includes a dedicated Food and Drinks section with:
 
 ## 9. Motorized Vehicle Inventory
 
-| Name | Vehicle | Color | Capacity | Reference image |
-|---|---|---|---|---|
-| Laconic | Sea-Doo Switch pontoon boat | Red | 10 persons | Red Sea-Doo Switch Cruise-style pontoon |
-| Spikey Lizard | Sea-Doo PWC | Blue | 3 seats | Blue Sea-Doo GTX-style PWC |
-| Laika | Sea-Doo Trixx | Red | 2 seats | Red Sea-Doo Spark Trixx-style PWC |
+| Name | Vehicle | Color | Capacity | Reference image | Operating note |
+|---|---|---|---|---|---|
+| Laconic | Sea-Doo Switch Cruise pontoon boat | Red | 10 persons | Red / Coral Blast Sea-Doo Switch Cruise 21-class studio reference; host reference says 23 ft | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
+| Spikey Lizard | Sea-Doo PWC | Blue | 3 seats | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
+| Laika | Sea-Doo Spark Trixx | Red | 2 seats | Red Sea-Doo Spark Trixx 2up studio reference | Compact Trixx-style PWC for host-approved lake use after orientation. |
 
 Inventory notes:
 
 - The website stores the vehicle reference images inside the July 2026 asset folder.
-- The three inventory cards should look visually similar, using clean studio-style watercraft references.
+- The three inventory cards should look visually similar, using clean studio-style Sea-Doo watercraft references.
 - All motorized vehicle use is part of the host-approved activity flow.
 
 ## 10. Guest Experience Requirements

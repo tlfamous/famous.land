@@ -608,7 +608,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             </div>
           </article>
 
-          <article className={styles.panel}>
+          <article className={styles.panel} id="fleet">
             <div className={styles.panelHeader}>
               <Icon path="M4 15h16l-2.1-5.4A3 3 0 0 0 15.1 7H8.9a3 3 0 0 0-2.8 2.6L4 15Zm3-6h10l1.2 4H5.8L7 9Zm-.5 8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm11 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" />
               <h2>Motorized Fleet</h2>
@@ -630,7 +630,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                       <p>{vehicle.type}</p>
                       <dl className={styles.vehicleMeta}>
                         <div>
-                          <dt>Model</dt>
+                          <dt>Reference</dt>
                           <dd>{vehicle.model}</dd>
                         </div>
                         <div>
@@ -638,10 +638,15 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                           <dd>{vehicle.color}</dd>
                         </div>
                         <div>
+                          <dt>Class</dt>
+                          <dd>{vehicle.length}</dd>
+                        </div>
+                        <div>
                           <dt>Capacity</dt>
                           <dd>{vehicle.capacity}</dd>
                         </div>
                       </dl>
+                      <p>{vehicle.detail}</p>
                     </div>
                   </section>
                 );

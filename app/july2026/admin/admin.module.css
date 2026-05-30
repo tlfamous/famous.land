@@ -368,7 +368,8 @@
   margin: 13px 0 0;
 }
 
-.vehicleInventoryGrid dl div:first-child {
+.vehicleInventoryGrid dl div:first-child,
+.vehicleInventoryGrid dl div:last-child {
   grid-column: 1 / -1;
 }
 

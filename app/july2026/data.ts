@@ -199,19 +199,23 @@ export const motorizedVehicles = [
   {
     capacity: "10 persons",
     color: "Red",
-    detail: "Group lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation.",
+    detail: "Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation.",
     image: "laconic",
-    model: "Switch Cruise-style pontoon reference",
+    length: "Host reference: 23 ft",
+    model: "Switch Cruise 21-class pontoon reference",
     name: "Laconic",
-    type: "Sea-Doo Switch pontoon boat"
+    source: "Red / Coral Blast Sea-Doo Switch Cruise 21 studio reference",
+    type: "Sea-Doo Switch Cruise pontoon boat"
   },
   {
     capacity: "3 seats",
     color: "Blue",
     detail: "Personal watercraft for approved lake use after the Saturday safety briefing.",
     image: "spikey-lizard",
+    length: "PWC",
     model: "GTX-style PWC reference",
     name: "Spikey Lizard",
+    source: "Blue Sea-Doo GTX studio reference",
     type: "Sea-Doo PWC"
   },
   {
@@ -219,9 +223,11 @@ export const motorizedVehicles = [
     color: "Red",
     detail: "Compact Trixx-style PWC for host-approved lake use after orientation.",
     image: "laika",
-    model: "Spark Trixx-style PWC reference",
+    length: "PWC",
+    model: "Spark Trixx 2up-style PWC reference",
     name: "Laika",
-    type: "Sea-Doo Trixx"
+    source: "Red Sea-Doo Spark Trixx 2up studio reference",
+    type: "Sea-Doo Spark Trixx"
   }
 ];
 
