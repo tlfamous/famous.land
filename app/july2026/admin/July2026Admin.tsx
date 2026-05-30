@@ -12,7 +12,7 @@ import lh3PosterImage from "../assets/lake-house-3.jpeg";
 import laconicVehicleImage from "../assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "../assets/vehicle-laika-trixx.png";
 import spikeyLizardVehicleImage from "../assets/vehicle-spikey-lizard-gtx.png";
-import { guestAssignments, motorizedVehicles } from "../data";
+import { getLaunchCompletionRequestText, guestAssignments, launchCompletionItems, motorizedVehicles } from "../data";
 import { referenceMaterial } from "./referenceMaterial";
 
 const proofUrl = "https://www.proofeditor.ai/d/ado6gf4r?token=2b8510d8-4eaa-4fc9-b0e7-f802f6a0d12c";
@@ -236,39 +236,6 @@ const assetChecklist = [
   }
 ] as const;
 
-const missingContentChecklist = [
-  {
-    detail: "Needed before LH1 directions can be shown.",
-    label: "LH1 address",
-    status: "Needed"
-  },
-  {
-    detail: "Sunroom, Great Room 1, Grand Peninsula, South Grand Peninsula fire pit, and assigned rooms.",
-    label: "LH1 interior and activity photos",
-    status: "Needed"
-  },
-  {
-    detail: "South bedroom and North bedroom photos for room-level confidence.",
-    label: "LH2 bedroom photos",
-    status: "Needed"
-  },
-  {
-    detail: "Beach, primary bedroom, dining/gathering, smoothie, lunch, dinner, and brunch areas.",
-    label: "LH3 beach and room photos",
-    status: "Needed"
-  },
-  {
-    detail: "Host-confirmed room placement for both guests.",
-    label: "Zach and Bee assignments",
-    status: "Needed"
-  },
-  {
-    detail: "Guest pages currently say Sunday afternoon.",
-    label: "Exact departure time",
-    status: "Optional"
-  }
-] as const;
-
 const vehicleImages = {
   laconic: {
     alt: "Red Sea-Doo Switch pontoon reference for Laconic.",
@@ -310,6 +277,52 @@ export function July2026Admin() {
   const packetRef = useRef<HTMLPreElement>(null);
   const contentRequestRef = useRef<HTMLPreElement>(null);
   const origin = typeof window === "undefined" ? "" : window.location.origin;
+  const baseUrl = origin || "https://famous.land";
+  const launchReviewLinks = useMemo(
+    () => [
+      {
+        detail: "Primary guest experience.",
+        href: `${baseUrl}/july2026`,
+        label: "Guest portal"
+      },
+      {
+        detail: "Proof-backed reference and admin controls.",
+        href: `${baseUrl}/july2026/admin`,
+        label: "Admin reference"
+      },
+      {
+        detail: "Plain-text offline guest guide.",
+        href: `${baseUrl}/july2026/weekend-guide.txt`,
+        label: "Weekend guide"
+      },
+      {
+        detail: "Downloadable shared weekend calendar.",
+        href: `${baseUrl}/july2026/calendar.ics`,
+        label: "Weekend calendar"
+      },
+      {
+        detail: "Downloadable host contact card.",
+        href: `${baseUrl}/july2026/host-contact.vcf`,
+        label: "Host contact"
+      },
+      {
+        detail: "Downloadable packet for the remaining host-supplied content.",
+        href: `${baseUrl}/july2026/admin/missing-content.txt`,
+        label: "Missing-content request"
+      },
+      {
+        detail: "Sample personalized room key for QA.",
+        href: `${baseUrl}/july2026/guest/holly`,
+        label: "Sample room key"
+      },
+      {
+        detail: "Sample pending-assignment room key for QA.",
+        href: `${baseUrl}/july2026/guest/zach`,
+        label: "Pending room key"
+      }
+    ],
+    [baseUrl]
+  );
   const boundGuestProfile = useMemo(
     () => guestAssignments.find((guest) => guest.slug === boundGuest?.slug),
     [boundGuest]
@@ -328,23 +341,8 @@ export function July2026Admin() {
       .join("\n\n");
   }, [guestLinks, origin]);
   const contentRequestPacket = useMemo(() => {
-    const baseUrl = origin || "https://famous.land";
-
-    return [
-      "July 4th, 2026 famous.land launch completion request",
-      "",
-      "Please send or confirm these remaining items so the guest portal can be final:",
-      "",
-      ...missingContentChecklist.map((item, index) => `${index + 1}. ${item.label} (${item.status})\n   ${item.detail}`),
-      "",
-      "Current review links:",
-      `Guest portal: ${baseUrl}/july2026`,
-      `Admin reference: ${baseUrl}/july2026/admin`,
-      `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
-      "",
-      "Once these are confirmed, the site can replace pending room/address language and add the remaining room/detail media."
-    ].join("\n");
-  }, [origin]);
+    return getLaunchCompletionRequestText(baseUrl);
+  }, [baseUrl]);
 
   useEffect(() => {
     try {
@@ -619,7 +617,7 @@ export function July2026Admin() {
             ))}
           </div>
           <div className={styles.contentGapGrid}>
-            {missingContentChecklist.map((item) => (
+            {launchCompletionItems.map((item) => (
               <article key={item.label}>
                 <span className={item.status === "Optional" ? styles.optionalBadge : styles.neededBadge}>
                   {item.status}
@@ -641,8 +639,31 @@ export function July2026Admin() {
             <button type="button" onClick={copyContentRequestPacket}>
               Copy request
             </button>
+            <a href="/july2026/admin/missing-content.txt">Download .txt</a>
             <span className={styles.packetStatus}>{contentRequestStatus}</span>
             <pre ref={contentRequestRef}>{contentRequestPacket}</pre>
+          </div>
+        </section>
+
+        <section className={styles.launchUrlsSection} aria-label="Launch review URLs">
+          <div className={styles.proofHeader}>
+            <div>
+              <span className={styles.label}>Launch QA</span>
+              <h2>Live URLs to Review</h2>
+              <p>
+                Fast links for checking the published guest portal, admin reference, downloads, and
+                the two room-key states guests can see.
+              </p>
+            </div>
+          </div>
+          <div className={styles.launchUrlGrid}>
+            {launchReviewLinks.map((item) => (
+              <a href={item.href} key={item.label}>
+                <strong>{item.label}</strong>
+                <span>{item.href}</span>
+                <p>{item.detail}</p>
+              </a>
+            ))}
           </div>
         </section>
 

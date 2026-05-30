@@ -590,8 +590,14 @@ Personal calendar files:
 Missing-content request packet:
 
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
+- The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
 - The packet includes review links for the guest portal, admin reference, and offline guide.
+
+Launch QA links:
+
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, weekend calendar, host contact card, missing-content request, sample assigned room key, and sample pending room key.
+- The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction
 

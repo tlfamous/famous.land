@@ -425,6 +425,57 @@ export const motorizedVehicles = [
   }
 ];
 
+export const launchCompletionItems = [
+  {
+    detail: "Needed before LH1 directions can be shown.",
+    label: "LH1 address",
+    status: "Needed"
+  },
+  {
+    detail: "Sunroom, Great Room 1, Grand Peninsula, South Grand Peninsula fire pit, and assigned rooms.",
+    label: "LH1 interior and activity photos",
+    status: "Needed"
+  },
+  {
+    detail: "South bedroom and North bedroom photos for room-level confidence.",
+    label: "LH2 bedroom photos",
+    status: "Needed"
+  },
+  {
+    detail: "Beach, primary bedroom, dining/gathering, smoothie, lunch, dinner, and brunch areas.",
+    label: "LH3 beach and room photos",
+    status: "Needed"
+  },
+  {
+    detail: "Host-confirmed room placement for both guests.",
+    label: "Zach and Bee assignments",
+    status: "Needed"
+  },
+  {
+    detail: "Guest pages currently say Sunday afternoon.",
+    label: "Exact departure time",
+    status: "Optional"
+  }
+] as const;
+
+export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") {
+  return [
+    "July 4th, 2026 famous.land launch completion request",
+    "",
+    "Please send or confirm these remaining items so the guest portal can be final:",
+    "",
+    ...launchCompletionItems.map((item, index) => `${index + 1}. ${item.label} (${item.status})\n   ${item.detail}`),
+    "",
+    "Current review links:",
+    `Guest portal: ${baseUrl}/july2026`,
+    `Admin reference: ${baseUrl}/july2026/admin`,
+    `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
+    `Download this request: ${baseUrl}/july2026/admin/missing-content.txt`,
+    "",
+    "Once these are confirmed, the site can replace pending room/address language and add the remaining room/detail media."
+  ].join("\n");
+}
+
 export type GuestAssignment = {
   slug: string;
   name: string;
