@@ -1,0 +1,254 @@
+.sheet {
+  min-height: 100svh;
+  padding: 34px;
+  color: #071429;
+  background: #f7f5ee;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.header {
+  max-width: 1220px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 auto 22px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid rgba(8, 19, 38, 0.16);
+}
+
+.header p,
+.signHeader span {
+  margin: 0;
+  color: #be1d27;
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 7px 0 0;
+  color: #082141;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.header span {
+  display: block;
+  margin-top: 8px;
+  color: #5d6673;
+  font-weight: 750;
+}
+
+.header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header a {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  color: #fffdf7;
+  border-radius: 8px;
+  background: #be1d27;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.header a:last-child {
+  color: #082141;
+  border: 1px solid rgba(8, 33, 65, 0.18);
+  background: #fffdf7;
+}
+
+.signs {
+  max-width: 1220px;
+  display: grid;
+  gap: 18px;
+  margin: 0 auto;
+}
+
+.sign {
+  min-height: 520px;
+  break-inside: avoid;
+  display: grid;
+  gap: 18px;
+  padding: 26px;
+  border: 1px solid rgba(8, 19, 38, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, #fffdf7, rgba(245, 249, 241, 0.84)),
+    radial-gradient(circle at 100% 0%, rgba(79, 122, 76, 0.18), transparent 32%);
+  box-shadow: 0 14px 34px rgba(8, 19, 38, 0.09);
+}
+
+.signHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 170px;
+  gap: 22px;
+  align-items: start;
+}
+
+.signHeader h2 {
+  margin: 4px 0 0;
+  color: #082141;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(4rem, 12vw, 7.4rem);
+  line-height: 0.88;
+  letter-spacing: 0;
+}
+
+.signHeader p {
+  max-width: 720px;
+  margin: 12px 0 0;
+  color: #071429;
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.18;
+}
+
+.signHeader img {
+  width: 170px;
+  height: 170px;
+  border: 1px solid rgba(8, 19, 38, 0.12);
+  border-radius: 8px;
+  background: #fffdf7;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.details div {
+  padding: 13px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.details dt,
+.details dd {
+  margin: 0;
+}
+
+.details dt {
+  color: #5d6673;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.details dd {
+  margin-top: 4px;
+  color: #082141;
+  font-weight: 950;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.roomBlock,
+.moments {
+  padding: 16px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.roomBlock strong,
+.moments strong {
+  display: block;
+  color: #be1d27;
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.roomBlock ul,
+.moments ul {
+  display: grid;
+  gap: 9px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.roomBlock li,
+.moments li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 9px;
+  color: #071429;
+  font-size: 1.05rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.roomBlock li::before,
+.moments li::before {
+  width: 10px;
+  height: 10px;
+  margin-top: 7px;
+  content: "";
+  border-radius: 50%;
+  background: #4f7a4c;
+}
+
+.sign footer {
+  padding-top: 2px;
+  color: #5d6673;
+  font-weight: 850;
+}
+
+@media (max-width: 760px) {
+  .sheet {
+    padding: 18px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .signHeader,
+  .details {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .sheet {
+    padding: 0;
+    background: #fff;
+  }
+
+  .header {
+    display: none;
+  }
+
+  .signs {
+    max-width: none;
+    gap: 0;
+  }
+
+  .sign {
+    min-height: 100vh;
+    padding: 0.45in;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    page-break-after: always;
+  }
+
+  .sign:last-child {
+    page-break-after: auto;
+  }
+}

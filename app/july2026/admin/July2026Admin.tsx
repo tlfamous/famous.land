@@ -321,6 +321,11 @@ export function July2026Admin() {
         label: "Host briefing sheet"
       },
       {
+        detail: "Print-ready LH1, LH2, and LH3 signs with portal QR and host text line.",
+        href: `${baseUrl}/july2026/admin/house-signs`,
+        label: "House signs"
+      },
+      {
         detail: "Sample personalized room key for QA.",
         href: `${baseUrl}/july2026/guest/holly`,
         label: "Sample room key"
@@ -792,6 +797,7 @@ export function July2026Admin() {
             </button>
             <a href="/july2026/admin/room-keys">Print room keys</a>
             <a href="/july2026/admin/briefing-sheet">Print briefing</a>
+            <a href="/july2026/admin/house-signs">Print house signs</a>
             <span className={styles.packetStatus}>{packetCopyStatus}</span>
             <pre ref={packetRef}>{guestLinkPacket}</pre>
           </div>

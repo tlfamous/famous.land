@@ -600,6 +600,13 @@ Printable host briefing sheet:
 - The sheet summarizes the host text line, guest portal, launch caveats, arrival checklist, house flow, weekend schedule, meals, lake approvals, packing list, activities, motorized fleet, and common text prompts.
 - The sheet is intended as a host operations backup for check-in, meal timing, lake rules, and day-of coordination.
 
+Printable house signs:
+
+- The guest portal exposes a generic event QR code at `/july2026/qr.svg`.
+- Admin includes print-ready LH1, LH2, and LH3 house signs at `/july2026/admin/house-signs`.
+- Each sign includes the house role, host text line, guest portal, address status, rooms/spaces, key moments at that house, and the portal QR code.
+- The signs are intended for on-site guest orientation and resort-style arrival polish.
+
 Personal calendar files:
 
 - Each guest page links to a personal downloadable `.ics` file.
@@ -615,7 +622,7 @@ Missing-content request packet:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction
