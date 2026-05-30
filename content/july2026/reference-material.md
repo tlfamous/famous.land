@@ -50,6 +50,22 @@ The backend guest-link store records each guest slug, token, current binding sta
 
 The admin page includes a local reset control for the current device plus persistent regenerate/reset controls for each guest link.
 
+### Calendar File
+
+The guest portal exposes a downloadable calendar file at `/july2026/calendar.ics`.
+
+The calendar includes the full July 3-5 weekend block plus major guest events:
+
+- Guest check-in
+- Friday welcome meal
+- Friday weekend orientation
+- Saturday yoga
+- Saturday motorized lake vehicle orientation
+- Saturday group boat ride
+- Saturday dinner
+- Saturday fireworks viewing
+- Sunday pancake brunch
+
 ### Admin Page
 
 The admin page should show:
@@ -436,6 +452,7 @@ Suggested sections:
 
 - Welcome / Check-In
 - Resort Desk quick guide
+- Add Calendar
 - My Stay
 - My Room
 - Weekend Itinerary
@@ -457,6 +474,7 @@ Admin operating sections:
 - Launch readiness tracker
 - Asset and content checklist showing live bundled media and missing host-supplied content
 - Resort Desk readiness
+- Calendar file readiness
 - Guest-link packet readiness
 - Personalized itinerary readiness
 - Getting Around readiness

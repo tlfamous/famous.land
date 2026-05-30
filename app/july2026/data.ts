@@ -132,6 +132,11 @@ export const resortDeskItems = [
     label: "Directions"
   },
   {
+    action: "Add the weekend calendar",
+    detail: "Download the famous.land calendar file for check-in, meals, yoga, boat ride, fireworks, brunch, and departure weekend.",
+    label: "Calendar"
+  },
+  {
     action: "Wait for the Saturday orientation",
     detail: "Pontoon, PWC, and quad/four-wheeler use needs the host go-ahead before anyone heads out.",
     label: "Approvals"
@@ -539,6 +544,7 @@ export const guestAssignments: GuestAssignment[] = [
 export const statusItems = [
   { label: "Weekend", value: "Jul 3-5" },
   { label: "Check-in", value: "Fri 3 PM" },
+  { label: "Calendar", value: "Ready" },
   { label: "Host", value: "Text-ready" },
   { label: "Lake", value: "Resort mode" }
 ];

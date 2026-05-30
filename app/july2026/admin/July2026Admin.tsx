@@ -28,6 +28,7 @@ const adminTools = [
 const guestExperience = [
   "Welcome / Check-In",
   "Resort Desk quick guide",
+  "Add Calendar",
   "My Stay",
   "My Room",
   "Weekend Itinerary",
@@ -83,6 +84,12 @@ const readinessItems = [
   {
     detail: "Guest page now has a Resort Desk guide for room keys, host SMS, directions, and approval rules.",
     label: "Resort Desk",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest CTAs download a self-contained weekend .ics file from /july2026/calendar.ics.",
+    label: "Calendar file",
     status: "Ready",
     tone: "ready"
   },
