@@ -468,6 +468,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     "",
     "Current review links:",
     `Guest portal: ${baseUrl}/july2026`,
+    `Arrival card: ${baseUrl}/july2026/arrival-card`,
     `Admin reference: ${baseUrl}/july2026/admin`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Download this request: ${baseUrl}/july2026/admin/missing-content.txt`,
@@ -732,6 +733,7 @@ Room key: ${baseUrl}/july2026/guest/${guest.slug}
 Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
+Arrival card: ${baseUrl}/july2026/arrival-card
 Calendar: ${baseUrl}/july2026/calendar.ics
 Offline guide: ${baseUrl}/july2026/weekend-guide.txt
 Save host contact: ${baseUrl}/july2026/host-contact.vcf

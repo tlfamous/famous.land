@@ -3,6 +3,9 @@ const guideText = `FAMOUS.LAND JULY 4TH, 2026 WEEKEND GUIDE
 Event portal:
 https://famous.land/july2026
 
+Arrival card:
+https://famous.land/july2026/arrival-card
+
 Host text line:
 781-929-4932
 

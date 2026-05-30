@@ -296,6 +296,11 @@ export function July2026Admin() {
         label: "Weekend guide"
       },
       {
+        detail: "Public one-page arrival guide with QR, host line, check-in flow, and key schedule.",
+        href: `${baseUrl}/july2026/arrival-card`,
+        label: "Arrival card"
+      },
+      {
         detail: "Downloadable shared weekend calendar.",
         href: `${baseUrl}/july2026/calendar.ics`,
         label: "Weekend calendar"

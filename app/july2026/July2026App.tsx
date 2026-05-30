@@ -293,6 +293,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 : "A private resort-style guest portal for check-in, room assignments, lake-house directions, activities, meals, fireworks, and host help all weekend."}
             </p>
             <div className={styles.heroActions}>
+              <a className={styles.secondaryButton} href="/july2026/arrival-card">
+                Arrival Card
+              </a>
               <a className={styles.secondaryButton} href="#schedule">
                 View Schedule
               </a>
@@ -335,6 +338,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         <a href="sms:+17819294932">Text 781-929-4932</a>
         <a href="/july2026/calendar.ics">Add Calendar</a>
         <a href="/july2026/host-contact.vcf">Save Host</a>
+        <a href="/july2026/arrival-card">Arrival Card</a>
         <a href="/july2026/weekend-guide.txt">Offline Guide</a>
       </section>
 
@@ -392,6 +396,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         </div>
         <div className={styles.resortDeskActions}>
           <a href="#guests">Find My Room</a>
+          <a href="/july2026/arrival-card">Arrival Card</a>
           <a href="#arrival">Arrival Checklist</a>
           <a href="#map">House Directions</a>
           <a href="/july2026/calendar.ics">Add Calendar</a>
