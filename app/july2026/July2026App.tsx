@@ -19,6 +19,7 @@ import {
   guestAssignments,
   hostHelpItems,
   houseProfiles,
+  itineraryHighlights,
   lakeUseRules,
   motorizedVehicles,
   resortDeskItems,
@@ -116,6 +117,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
     selectedGuest?.house && selectedGuest.house !== "Pending"
       ? houseProfiles.find((house) => house.name === selectedGuest.house)
       : null;
+  const selectedItineraryHighlights = selectedGuest
+    ? itineraryHighlights[selectedGuest.house]
+    : [];
   const directionsHref =
     selectedGuestHouse && "mapsUrl" in selectedGuestHouse && selectedGuestHouse.mapsUrl
       ? selectedGuestHouse.mapsUrl
@@ -462,6 +466,23 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                   <dd>{selectedGuest.companions.length ? selectedGuest.companions.join(", ") : "Solo room assignment"}</dd>
                 </div>
               </dl>
+              <div className={styles.personalItinerary}>
+                <div className={styles.personalItineraryHeader}>
+                  <span className={styles.sectionLabel}>My Itinerary</span>
+                  <strong>House-specific highlights</strong>
+                </div>
+                <ol>
+                  {selectedItineraryHighlights.map((item) => (
+                    <li key={`${item.time}-${item.title}`}>
+                      <time>{item.time}</time>
+                      <div>
+                        <strong>{item.title}</strong>
+                        <p>{item.detail}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </>
           ) : (
             <div className={styles.guestLinkIntro}>

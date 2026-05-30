@@ -496,6 +496,66 @@
   font-weight: 900;
 }
 
+.personalItinerary {
+  overflow: hidden;
+  border: 1px solid rgba(8, 33, 65, 0.12);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 253, 247, 0.98), rgba(245, 249, 241, 0.86)),
+    radial-gradient(circle at 100% 0%, rgba(79, 122, 76, 0.16), transparent 30%);
+}
+
+.personalItineraryHeader {
+  padding: 15px 16px 12px;
+  border-bottom: 1px solid rgba(8, 33, 65, 0.1);
+}
+
+.personalItineraryHeader strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--july-blue);
+  font-size: 1.12rem;
+}
+
+.personalItinerary ol {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.personalItinerary li {
+  display: grid;
+  grid-template-columns: 102px 1fr;
+  gap: 14px;
+  padding: 14px 16px;
+  border-top: 1px solid rgba(8, 33, 65, 0.08);
+}
+
+.personalItinerary li:first-child {
+  border-top: 0;
+}
+
+.personalItinerary time {
+  color: var(--july-red);
+  font-size: 0.86rem;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
+.personalItinerary li strong {
+  display: block;
+  color: var(--july-blue);
+  line-height: 1.15;
+}
+
+.personalItinerary p {
+  margin: 5px 0 0;
+  color: var(--july-muted);
+  font-size: 0.92rem;
+  line-height: 1.36;
+}
+
 .guestLinkIntro strong {
   display: block;
   color: var(--july-blue);
@@ -1363,6 +1423,7 @@
   .bindingNotice,
   .bindingWarning,
   .pendingAssignmentNotice,
+  .personalItinerary li,
   .resortDirectory section,
   .resortDeskGrid,
   .activityGrid,

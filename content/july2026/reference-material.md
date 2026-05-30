@@ -36,6 +36,7 @@ The personalized view should include:
 - Arrival/check-in information
 - Departure/check-out information
 - Relevant schedule details
+- House-specific itinerary highlights
 - Host contact/help button
 - Ability to view other guest assignments if desired
 
@@ -455,6 +456,7 @@ Admin operating sections:
 - Asset and content checklist showing live bundled media and missing host-supplied content
 - Resort Desk readiness
 - Guest-link packet readiness
+- Personalized itinerary readiness
 - Motorized vehicle inventory
 - Lake rules readiness
 - Personalized room-key URLs

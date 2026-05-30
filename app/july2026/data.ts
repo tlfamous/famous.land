@@ -138,6 +138,77 @@ export const resortDeskItems = [
   }
 ];
 
+export const itineraryHighlights = {
+  LH1: [
+    {
+      detail: "Settle in, then stay close for the welcome meal and orientation.",
+      time: "Fri 3-8 PM",
+      title: "Arrival hub"
+    },
+    {
+      detail: "Group boat ride departs from LH1 and returns to LH3 for lunch.",
+      time: "Sat 11:00 AM",
+      title: "Boat orientation and departure"
+    },
+    {
+      detail: "S'mores, sparklers, snacks, and Grand Peninsula fireworks viewing happen around LH1.",
+      time: "Sat evening",
+      title: "Fire pit and fireworks"
+    }
+  ],
+  LH2: [
+    {
+      detail: "Quiet guest-room house with K-cup coffee before the lake day starts.",
+      time: "Sat 7:30 AM",
+      title: "Coffee stop"
+    },
+    {
+      detail: "Head to LH3 for yoga, lake activities, smoothies, lunch, dinner, and brunch.",
+      time: "Sat-Sun",
+      title: "Meals and beach time"
+    },
+    {
+      detail: "Use the live LH2 directions link for the house, then follow the schedule for LH1 and LH3 gatherings.",
+      time: "All weekend",
+      title: "House-to-house flow"
+    }
+  ],
+  LH3: [
+    {
+      detail: "Yoga, swimming, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch are centered at LH3.",
+      time: "Sat-Sun",
+      title: "Beach and meals hub"
+    },
+    {
+      detail: "The Saturday boat ride returns to LH3 right before lunch.",
+      time: "Sat 12:30 PM",
+      title: "Boat return"
+    },
+    {
+      detail: "Watch fireworks from LH3 beach or coordinate the optional cruise with the host.",
+      time: "Sat 9:00 PM",
+      title: "Fireworks option"
+    }
+  ],
+  Pending: [
+    {
+      detail: "Text the host before arrival for the latest lodging details.",
+      time: "Before Fri",
+      title: "Confirm your room"
+    },
+    {
+      detail: "The weekend schedule is still available while your room placement is finalized.",
+      time: "Fri-Sun",
+      title: "Follow the full itinerary"
+    },
+    {
+      detail: "Use the host text line for room assignment, directions, and arrival questions.",
+      time: "Anytime",
+      title: "Host help"
+    }
+  ]
+} as const;
+
 export const activityItems = [
   {
     title: "Beach and swimming",

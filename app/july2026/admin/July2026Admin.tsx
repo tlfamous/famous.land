@@ -86,6 +86,12 @@ const readinessItems = [
     tone: "ready"
   },
   {
+    detail: "Guest room-key pages show house-specific itinerary highlights for LH1, LH2, LH3, and pending assignments.",
+    label: "Personal itinerary",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
     detail: "Laconic, Spikey Lizard, and Laika are listed with self-contained reference images.",
     label: "Motorized fleet",
     status: "Ready",
