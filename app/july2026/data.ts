@@ -115,6 +115,67 @@ export const bringItems = [
   "Patriotic spirit"
 ];
 
+export const activityItems = [
+  {
+    title: "Beach and swimming",
+    location: "LH3",
+    detail: "Beach time, swimming, lounging, and the easiest lake access for Saturday and Sunday."
+  },
+  {
+    title: "Kayaks, canoes, and rowboats",
+    location: "LH3 / lake access",
+    detail: "Non-motorized lake time starts Saturday morning and stays available during free time."
+  },
+  {
+    title: "Motorized lake fleet",
+    location: "LH1 orientation",
+    detail: "Use begins after the Saturday safety briefing and follows host direction."
+  },
+  {
+    title: "Famous Land quests and hiking",
+    location: "Famous Land",
+    detail: "Optional dry-land exploring during the Saturday afternoon free-time block."
+  },
+  {
+    title: "Campfire, s'mores, and fireworks",
+    location: "LH1 / LH3",
+    detail: "Evening fire pit at LH1, with fireworks viewing from LH1, LH3, or the optional cruise."
+  }
+];
+
+export const foodMoments = [
+  {
+    time: "Fri 6:30 PM",
+    title: "Grab-and-go welcome meal",
+    detail: "Sunroom, LH1. Casual first-night food after check-in."
+  },
+  {
+    time: "Sat 7:30 AM",
+    title: "Coffee at all houses",
+    detail: "Kona at LH1, K-cups at LH2, and drip coffee at LH3."
+  },
+  {
+    time: "Sat 10:00 AM",
+    title: "Fruit smoothies",
+    detail: "LH3 after morning lake activities."
+  },
+  {
+    time: "Sat 12:30 PM",
+    title: "Lunch",
+    detail: "LH3, immediately after the boat ride returns."
+  },
+  {
+    time: "Sat 6:00 PM",
+    title: "Dinner",
+    detail: "LH3 with lakeside patio seating."
+  },
+  {
+    time: "Sun 10:00 AM",
+    title: "Pancake brunch",
+    detail: "LH3 before Sunday free time and departures."
+  }
+];
+
 export const motorizedVehicles = [
   {
     name: "Laconic",
@@ -316,6 +377,7 @@ export const houseProfiles = [
     role: "Welcome, orientation, boat departure, fire pit",
     rooms: ["Second floor bedroom", "The Girls' Room", "Sunroom"],
     note: "Address TBD",
+    mapLabel: "Directions pending",
     image: "lake-house-1"
   },
   {
@@ -323,6 +385,8 @@ export const houseProfiles = [
     role: "Quiet guest rooms and coffee stop",
     rooms: ["South bedroom", "North bedroom"],
     note: "63 Pine Eden Road, Rindge, New Hampshire",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=63%20Pine%20Eden%20Road%2C%20Rindge%2C%20NH",
+    mapLabel: "Open LH2 directions",
     image: "lake-house-2"
   },
   {
@@ -330,6 +394,8 @@ export const houseProfiles = [
     role: "Beach, meals, brunch, boat return",
     rooms: ["Primary bedroom"],
     note: "25 Sunny Cove Road, Winchendon, Massachusetts",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=25%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA",
+    mapLabel: "Open LH3 directions",
     image: "lake-house-3"
   }
 ];

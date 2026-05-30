@@ -13,7 +13,9 @@ import laconicVehicleImage from "./assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "./assets/vehicle-laika-trixx.png";
 import spikeyLizardVehicleImage from "./assets/vehicle-spikey-lizard-gtx.png";
 import {
+  activityItems,
   bringItems,
+  foodMoments,
   guestAssignments,
   houseProfiles,
   motorizedVehicles,
@@ -99,6 +101,10 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
     selectedGuest?.house && selectedGuest.house !== "Pending"
       ? houseProfiles.find((house) => house.name === selectedGuest.house)
       : null;
+  const directionsHref =
+    selectedGuestHouse && "mapsUrl" in selectedGuestHouse && selectedGuestHouse.mapsUrl
+      ? selectedGuestHouse.mapsUrl
+      : "https://www.google.com/maps/search/?api=1&query=Lake%20Monomonac%20Rindge%20NH%20Winchendon%20MA";
   const boundGuestProfile = useMemo(
     () => guestAssignments.find((guest) => guest.slug === boundGuest?.slug),
     [boundGuest]
@@ -141,6 +147,8 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         <div className={styles.navLinks}>
           <a href="#stay">My Stay</a>
           <a href="#schedule">Schedule</a>
+          <a href="#activities">Activities</a>
+          <a href="#food">Food</a>
           <a href="#guests">Guests</a>
           <a href="#map">Map</a>
           <a href="sms:+17819294932">Contact Host</a>
@@ -294,7 +302,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           ) : (
             <div className={styles.guestLinkIntro}>
               <strong>Private room-key links</strong>
-              <p>Use these for guest testing now; they can become tokenized links when binding is added.</p>
+              <p>Use these for guest testing now; the admin page can generate fresh token-style versions.</p>
             </div>
           )}
         </article>
@@ -357,8 +365,10 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             <span className={styles.parkingPin}>Parking</span>
             <span className={styles.lakeLabel}>Lake Monomonac</span>
           </div>
-          <a className={styles.mapButton} href="https://maps.google.com" target="_blank" rel="noreferrer">
-            Get Directions
+          <a className={styles.mapButton} href={directionsHref} target="_blank" rel="noreferrer">
+            {selectedGuestHouse && "mapsUrl" in selectedGuestHouse && selectedGuestHouse.mapsUrl
+              ? `Directions to ${selectedGuestHouse.name}`
+              : "Open Lake Area Map"}
           </a>
         </article>
 
@@ -420,6 +430,13 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                       ))}
                     </ul>
                     <small>{house.note}</small>
+                    {"mapsUrl" in house && house.mapsUrl ? (
+                      <a className={styles.houseMapLink} href={house.mapsUrl} target="_blank" rel="noreferrer">
+                        {house.mapLabel}
+                      </a>
+                    ) : (
+                      <span className={styles.houseMapPending}>{house.mapLabel}</span>
+                    )}
                   </section>
                 );
               })}
@@ -475,6 +492,42 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             </ul>
           </article>
         </div>
+      </section>
+
+      <section className={styles.resortGuide} aria-label="Activities and food guide">
+        <article className={styles.panel} id="activities">
+          <div className={styles.panelHeader}>
+            <Icon path="M4 18.5c2.5 0 2.5-1.5 5-1.5s2.5 1.5 5 1.5 2.5-1.5 5-1.5v2c-2.5 0-2.5 1.5-5 1.5s-2.5-1.5-5-1.5-2.5 1.5-5 1.5v-2Zm2-5.5 3.2-6.8 3.1 5.4 1.8-2.8L20 16H4l2-3Zm3.4-2.7L7.8 14h3.9L9.4 10.3Z" />
+            <h2>Activities</h2>
+          </div>
+          <div className={styles.activityGrid}>
+            {activityItems.map((activity) => (
+              <section key={activity.title}>
+                <span>{activity.location}</span>
+                <strong>{activity.title}</strong>
+                <p>{activity.detail}</p>
+              </section>
+            ))}
+          </div>
+        </article>
+
+        <article className={styles.panel} id="food">
+          <div className={styles.panelHeader}>
+            <Icon path="M7 2h2v8a3 3 0 0 1-2 2.83V22H5v-9.17A3 3 0 0 1 3 10V2h2v8h2V2Zm8 0h2v20h-2v-8h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1Z" />
+            <h2>Food and Drinks</h2>
+          </div>
+          <ol className={styles.foodList}>
+            {foodMoments.map((moment) => (
+              <li key={`${moment.time}-${moment.title}`}>
+                <time>{moment.time}</time>
+                <div>
+                  <strong>{moment.title}</strong>
+                  <p>{moment.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </article>
       </section>
 
       <section className={styles.photoStrip} aria-label="Event highlights">

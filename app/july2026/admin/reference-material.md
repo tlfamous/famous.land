@@ -74,6 +74,8 @@ Each house should have a dedicated profile page or section with:
 
 Address: TBD
 
+Google Maps link: pending until address is confirmed.
+
 Known spaces/events:
 
 - Sunroom
@@ -95,6 +97,8 @@ Photos needed:
 
 Address: 63 Pine Eden Road, Rindge, New Hampshire
 
+Google Maps link: `https://www.google.com/maps/search/?api=1&query=63%20Pine%20Eden%20Road%2C%20Rindge%2C%20NH`
+
 Known spaces:
 
 - South bedroom
@@ -110,6 +114,8 @@ Photos needed:
 ### LH3
 
 Address: 25 Sunny Cove Road, Winchendon, Massachusetts
+
+Google Maps link: `https://www.google.com/maps/search/?api=1&query=25%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA`
 
 Known spaces/events:
 
@@ -364,27 +370,32 @@ Grab-and-go food available for guests as they depart.
 
 ## 7. Activity List
 
-The site should include an activities page or section with descriptions for:
+The guest page includes a dedicated Activities section with scan-friendly cards for:
 
-- Yoga on the beach
-- Kayaks
-- Canoes
-- Rowboats
-- Swimming
-- Motorized lake vehicles
-- Boat ride
-- Chartered fireworks cruise
-- Famous Land hiking
-- Famous Land quests
-- Quad/four-wheeler by request or reservation
-- Beach lounging
-- Napping and downtime
-- Campfire
-- S’mores
-- Sparklers
-- Fireworks viewing
+- Beach and swimming at LH3
+- Kayaks, canoes, and rowboats from LH3 / lake access
+- Motorized lake fleet after the LH1 orientation
+- Famous Land quests and hiking during free time
+- Campfire, s’mores, sparklers, and fireworks viewing from LH1 / LH3
 
-## 8. Motorized Vehicle Inventory
+Activity approval still needs host rules for:
+
+- Motorized lake fleet use
+- Optional fireworks cruise
+- Quad/four-wheeler use
+
+## 8. Food and Drinks
+
+The guest page includes a dedicated Food and Drinks section with:
+
+- Friday grab-and-go welcome meal in the LH1 sunroom
+- Saturday coffee at all houses
+- Saturday fruit smoothies at LH3
+- Saturday lunch at LH3
+- Saturday dinner at LH3 with lakeside patio seating
+- Sunday pancake brunch at LH3
+
+## 9. Motorized Vehicle Inventory
 
 | Name | Vehicle | Color | Capacity | Reference image |
 |---|---|---|---|---|
@@ -392,7 +403,7 @@ The site should include an activities page or section with descriptions for:
 | Spikey Lizard | Sea-Doo GTX PWC | Blue | 3 seats | Blue Sea-Doo GTX |
 | Laika | Sea-Doo Spark Trixx | Red | 2 seats | Red Sea-Doo Trixx |
 
-## 9. Guest Experience Requirements
+## 10. Guest Experience Requirements
 
 The site should feel like a fun resort portal.
 
@@ -405,12 +416,12 @@ Suggested sections:
 - Houses
 - Activities
 - Food and Drinks
-- Maps and Directions
+- Maps and Directions with known LH2 and LH3 address links
 - Help / Contact Host
 - View Other Guests
 - Admin
 
-## 10. Design Direction
+## 11. Design Direction
 
 Style should feel:
 
@@ -434,7 +445,7 @@ Possible design language:
 
 Avoid making the site feel too corporate or too silly. It should be fun but still useful.
 
-## 11. Content and Asset Needs
+## 12. Content and Asset Needs
 
 Images still needed:
 

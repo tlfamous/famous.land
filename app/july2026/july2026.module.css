@@ -453,6 +453,15 @@
   padding: 28px clamp(16px, 4vw, 42px) 20px;
 }
 
+.resortGuide {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.1fr) minmax(300px, 0.9fr);
+  gap: 24px;
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  padding: 8px clamp(16px, 4vw, 42px) 24px;
+}
+
 .panel {
   background: rgba(255, 253, 247, 0.94);
   border: 1px solid var(--july-line);
@@ -779,9 +788,107 @@
 
 .houseList small {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: #8a5260;
   font-weight: 800;
+}
+
+.houseMapLink,
+.houseMapPending {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin: 0 12px 12px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.houseMapLink {
+  color: #164f9f;
+  border: 1px solid rgba(22, 79, 159, 0.28);
+  background: rgba(22, 79, 159, 0.06);
+  text-decoration: none;
+}
+
+.houseMapPending {
+  color: #8a5260;
+  border: 1px solid rgba(138, 82, 96, 0.2);
+  background: rgba(138, 82, 96, 0.06);
+}
+
+.activityGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 22px 22px;
+}
+
+.activityGrid section {
+  min-height: 148px;
+  padding: 15px;
+  border: 1px solid rgba(8, 33, 65, 0.12);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 253, 247, 0.96), rgba(255, 243, 226, 0.76)),
+    radial-gradient(circle at 94% 12%, rgba(243, 187, 85, 0.28), transparent 28%);
+}
+
+.activityGrid span {
+  color: var(--july-red);
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.activityGrid strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--july-blue);
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
+
+.activityGrid p {
+  margin: 8px 0 0;
+  color: var(--july-muted);
+  font-size: 0.92rem;
+  line-height: 1.38;
+}
+
+.foodList {
+  display: grid;
+  margin: 14px 22px 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.foodList li {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--july-line);
+}
+
+.foodList time {
+  color: var(--july-red);
+  font-size: 0.88rem;
+  font-weight: 950;
+}
+
+.foodList strong {
+  display: block;
+  color: var(--july-blue);
+  line-height: 1.15;
+}
+
+.foodList p {
+  margin: 4px 0 0;
+  color: var(--july-muted);
+  font-size: 0.92rem;
+  line-height: 1.34;
 }
 
 .photoStrip {
@@ -830,7 +937,8 @@
 @media (max-width: 1080px) {
   .heroContent,
   .guestDesk,
-  .contentGrid {
+  .contentGrid,
+  .resortGuide {
     grid-template-columns: 1fr;
   }
 
@@ -905,11 +1013,13 @@
   .heroPanel,
   .bindingNotice,
   .bindingWarning,
+  .activityGrid,
   .formRow,
   .photoStrip,
   .guestLinks,
   .stayDetails,
-  .statusBar {
+  .statusBar,
+  .foodList li {
     grid-template-columns: 1fr;
   }
 
