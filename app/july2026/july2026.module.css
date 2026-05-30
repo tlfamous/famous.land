@@ -178,7 +178,7 @@
 
 .stayStrip {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   width: min(100%, 1320px);
   margin: 0 auto;
@@ -936,63 +936,19 @@
 
 .mapCard {
   position: relative;
-  height: 280px;
+  display: block;
   margin: 12px 22px;
   overflow: hidden;
+  border: 1px solid rgba(8, 19, 38, 0.12);
   border-radius: 8px;
-  background:
-    radial-gradient(circle at 72% 44%, rgba(255, 253, 247, 0.2) 0 6%, transparent 7%),
-    linear-gradient(135deg, transparent 0 44%, rgba(255, 253, 247, 0.62) 45% 48%, transparent 49%),
-    radial-gradient(circle at 66% 50%, #426f8c 0 30%, transparent 31%),
-    linear-gradient(135deg, #587f4d, #244b33 52%, #0c3347);
+  background: #d3f1df;
+  box-shadow: 0 14px 34px rgba(8, 19, 38, 0.12);
 }
 
-.mapCard::before {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background:
-    linear-gradient(115deg, transparent 0 39%, rgba(241, 220, 169, 0.78) 40% 43%, transparent 44%),
-    radial-gradient(circle at 24% 34%, rgba(255, 255, 255, 0.16), transparent 18%),
-    radial-gradient(circle at 18% 80%, rgba(0, 0, 0, 0.2), transparent 22%);
-}
-
-.eventPin,
-.parkingPin,
-.lakeLabel {
-  position: absolute;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  padding: 5px 10px;
-  color: var(--july-ink);
-  background: rgba(255, 253, 247, 0.86);
-  border: 1px solid rgba(8, 19, 38, 0.16);
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 950;
-}
-
-.eventPin {
-  top: 26%;
-  left: 45%;
-}
-
-.parkingPin {
-  bottom: 18%;
-  left: 18%;
-}
-
-.lakeLabel {
-  right: 12%;
-  bottom: 22%;
-  color: rgba(255, 253, 247, 0.84);
-  background: transparent;
-  border: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1rem;
-  font-style: italic;
+.mapImage {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .transitGuide {

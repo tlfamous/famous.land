@@ -1,0 +1,275 @@
+.sheet {
+  min-height: 100svh;
+  padding: 34px;
+  color: #071429;
+  background: #f7f5ee;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.header {
+  max-width: 1220px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 auto 22px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid rgba(8, 19, 38, 0.16);
+}
+
+.header p,
+.rulesHeader span,
+.vehicleHeader span {
+  margin: 0;
+  color: #be1d27;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h1,
+.rulesHeader h2,
+.vehicleHeader h2 {
+  margin: 7px 0 0;
+  color: #082141;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.header span {
+  display: block;
+  margin-top: 8px;
+  color: #5d6673;
+  font-weight: 750;
+}
+
+.header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header a {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  color: #fffdf7;
+  border-radius: 8px;
+  background: #be1d27;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.header a:not(:first-child) {
+  color: #082141;
+  border: 1px solid rgba(8, 33, 65, 0.18);
+  background: #fffdf7;
+}
+
+.signs {
+  max-width: 1220px;
+  display: grid;
+  gap: 18px;
+  margin: 0 auto;
+}
+
+.rulesSign,
+.vehicleSign {
+  min-height: 560px;
+  break-inside: avoid;
+  display: grid;
+  gap: 18px;
+  padding: 26px;
+  border: 1px solid rgba(8, 19, 38, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, #fffdf7, rgba(245, 249, 241, 0.88)),
+    radial-gradient(circle at 100% 0%, rgba(79, 122, 76, 0.18), transparent 32%);
+  box-shadow: 0 14px 34px rgba(8, 19, 38, 0.09);
+}
+
+.rulesHeader,
+.vehicleHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(210px, 360px);
+  gap: 24px;
+  align-items: start;
+}
+
+.rulesHeader h2,
+.vehicleHeader h2 {
+  font-size: clamp(3.8rem, 10vw, 7rem);
+  line-height: 0.88;
+}
+
+.rulesHeader p,
+.vehicleHeader p {
+  margin: 14px 0 0;
+  color: #071429;
+  font-size: 1.28rem;
+  font-weight: 900;
+  line-height: 1.22;
+}
+
+.rulesHeader img {
+  width: 190px;
+  height: 190px;
+  justify-self: end;
+  border: 1px solid rgba(8, 19, 38, 0.12);
+  border-radius: 8px;
+  background: #fffdf7;
+}
+
+.vehicleImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.contactGrid,
+.vehicleDetails {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.vehicleDetails {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.contactGrid div,
+.vehicleDetails div,
+.ruleGrid article {
+  padding: 14px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.contactGrid dt,
+.contactGrid dd,
+.vehicleDetails dt,
+.vehicleDetails dd {
+  margin: 0;
+}
+
+.contactGrid dt,
+.vehicleDetails dt {
+  color: #5d6673;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.contactGrid dd,
+.vehicleDetails dd {
+  margin-top: 5px;
+  color: #082141;
+  font-weight: 950;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.ruleGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ruleGrid strong {
+  color: #be1d27;
+  font-size: 1rem;
+}
+
+.ruleGrid p {
+  margin: 8px 0 0;
+  color: #071429;
+  font-weight: 760;
+  line-height: 1.32;
+}
+
+.vehicleSign footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
+  color: #fffdf7;
+  border-radius: 8px;
+  background: #082141;
+}
+
+.vehicleSign footer strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.vehicleSign footer span {
+  font-size: 1.45rem;
+  font-weight: 950;
+}
+
+@media (max-width: 760px) {
+  .sheet {
+    padding: 18px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .rulesHeader,
+  .vehicleHeader,
+  .contactGrid,
+  .vehicleDetails,
+  .ruleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .rulesHeader img {
+    justify-self: start;
+  }
+
+  .vehicleSign footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media print {
+  .sheet {
+    padding: 0;
+    background: #fff;
+  }
+
+  .header {
+    display: none;
+  }
+
+  .signs {
+    max-width: none;
+    gap: 0;
+  }
+
+  .rulesSign,
+  .vehicleSign {
+    min-height: 100vh;
+    padding: 0.42in;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    page-break-after: always;
+  }
+
+  .vehicleSign:last-child {
+    page-break-after: auto;
+  }
+}

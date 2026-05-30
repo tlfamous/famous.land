@@ -29,13 +29,8 @@ export default function July2026FaqPage() {
           <nav className={styles.quickLinks} aria-label="FAQ quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/day-of">Day-Of Desk</a>
-            <a href="/july2026/pass">Resort Pass</a>
-            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/directions">Directions Hub</a>
-            <a href="/july2026/guest-list">Guest Registry</a>
-            <a href="/july2026/prep">Packing Prep</a>
-            <a href="/july2026/safety">Safety Guide</a>
             <a href={hostSmsHref}>Text Host</a>
           </nav>
         </header>
@@ -98,7 +93,6 @@ export default function July2026FaqPage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href="/july2026/weekend-guide.txt">Offline Guide</a>
           <a href="/july2026/concierge">Concierge</a>
         </footer>
       </section>

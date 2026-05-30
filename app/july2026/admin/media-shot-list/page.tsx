@@ -153,7 +153,7 @@ const shotGroups = [
         framing: "Clean horizontal room image showing bed and key room character.",
         priority: "High",
         title: "Primary bedroom",
-        use: "Room-key confidence for Holly and Todd."
+        use: "Room-key confidence for Holly and Tod."
       },
       {
         framing: "Wide gathering image with table/seating flow clear.",

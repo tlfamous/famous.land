@@ -7,7 +7,7 @@ import lakeHouse2KitchenImage from "../assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "../assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "../assets/lake-house-3.jpeg";
 import lakeHouse3ProfileGif from "../assets/lh3-profile.gif";
-import { guestAssignments, hostSmsHref, houseProfiles, itineraryHighlights, transitGuideItems } from "../data";
+import { hostSmsHref, houseProfiles, itineraryHighlights, transitGuideItems } from "../data";
 import styles from "./houses.module.css";
 
 export const metadata: Metadata = {
@@ -76,10 +76,8 @@ export default function July2026HousesPage() {
           <nav className={styles.quickLinks} aria-label="House directory quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/directions">Directions Hub</a>
-            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
@@ -103,7 +101,6 @@ export default function July2026HousesPage() {
 
         <section className={styles.houseStack} aria-label="Lake house profiles">
           {houseProfiles.map((house) => {
-            const assignedGuests = guestAssignments.filter((guest) => guest.house === house.name);
             const mapsUrl = "mapsUrl" in house ? house.mapsUrl : undefined;
             const media = house.image ? houseMedia[house.image] : undefined;
             const highlights = itineraryHighlights[house.name as keyof typeof itineraryHighlights];
@@ -155,16 +152,6 @@ export default function July2026HousesPage() {
                         ))}
                       </div>
                     </section>
-                    <section>
-                      <strong>Assigned guests</strong>
-                      <div className={styles.chipList}>
-                        {assignedGuests.length ? (
-                          assignedGuests.map((guest) => <span key={guest.slug}>{guest.name}</span>)
-                        ) : (
-                          <span>Pending host confirmation</span>
-                        )}
-                      </div>
-                    </section>
                   </div>
 
                   <ol className={styles.highlightList}>
@@ -183,7 +170,6 @@ export default function July2026HousesPage() {
                     <a href={mapsUrl ?? lakeAreaUrl} target="_blank" rel="noreferrer">
                       {mapsUrl ? house.mapLabel : "Open Lake Area Map"}
                     </a>
-                    <a href="/july2026/guest-list">Guest Registry</a>
                     <a href="/july2026/directions">Directions Hub</a>
                     <a href={hostSmsHref}>Text Host</a>
                   </div>

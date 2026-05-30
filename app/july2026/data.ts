@@ -42,8 +42,8 @@ export const scheduleItems = [
   },
   {
     time: "Sat 10:00 AM",
-    title: "Fruit smoothies",
-    detail: "Location: LH3. Refreshing smoothies after morning lake activities."
+    title: "Spa water",
+    detail: "Location: LH3. Refreshing spa water after morning lake activities."
   },
   {
     time: "Sat 11:00 AM",
@@ -98,7 +98,7 @@ export const scheduleItems = [
   {
     time: "Sun 10:00 AM",
     title: "Pancake brunch",
-    detail: "Location: LH3. Relaxed Sunday brunch."
+    detail: "Location: LH3. Relaxed Sunday pancake brunch with spa water."
   },
   {
     time: "After brunch",
@@ -114,19 +114,12 @@ export const scheduleItems = [
 
 export const bringItems = [
   "Sunscreen",
-  "Swimsuit and towel",
-  "Reusable water bottle",
-  "Bug spray",
+  "Swimsuit",
   "Light jacket or hoodie",
   "Patriotic spirit"
 ];
 
 export const resortDeskItems = [
-  {
-    action: "Open the Day-Of Desk",
-    detail: "Use the one-screen operations hub for arrival, room keys, weather pivots, lake approvals, meals, maps, and host texts.",
-    label: "Today"
-  },
   {
     action: "Open your room-key link",
     detail: "Use your personalized guest link for house, room, arrival, departure, companions, and host help.",
@@ -148,11 +141,6 @@ export const resortDeskItems = [
     label: "Help"
   },
   {
-    action: "Save the host contact",
-    detail: "Add the famous.land host card to your phone so the weekend text line is easy to find.",
-    label: "Contact"
-  },
-  {
     action: "Use the directions hub",
     detail: "LH2 and LH3 have live directions. LH1 directions will appear after the address is confirmed.",
     label: "Directions"
@@ -169,23 +157,13 @@ export const resortDeskItems = [
   },
   {
     action: "Open the meals guide",
-    detail: "Welcome food, house coffee, smoothies, LH3 lunch, lakeside patio dinner, brunch, and dietary-note texting are in one place.",
+    detail: "Welcome food, house coffee, spa water, LH3 lunch, lakeside patio dinner, brunch, and dietary-note texting are in one place.",
     label: "Meals"
-  },
-  {
-    action: "Save the offline guide",
-    detail: "Download the plain-text weekend guide with schedule, house flow, host line, what to bring, and approval notes.",
-    label: "Guide"
   },
   {
     action: "Wait for the Saturday orientation",
     detail: "Pontoon, PWC, and quad/four-wheeler use needs the host go-ahead before anyone heads out.",
     label: "Approvals"
-  },
-  {
-    action: "Open the safety guide",
-    detail: "Emergency-first guidance, life jackets, dock plan, host approvals, and Saturday lake orientation live in one place.",
-    label: "Safety"
   }
 ];
 
@@ -196,19 +174,9 @@ export const dayOfDeskItems = [
     note: "Full resort experience, room-key entry, schedule, houses, and activities."
   },
   {
-    href: "/july2026/pass",
-    label: "Resort Pass",
-    note: "Pocket QR, host line, calendar, offline guide, and key weekend moments."
-  },
-  {
     href: "/july2026/arrival-card",
     label: "Arrival Card",
     note: "Check-in window, house flow, host line, and Friday night movement."
-  },
-  {
-    href: "/july2026/rain-plan",
-    label: "Rain Plan",
-    note: "Weather pivots, indoor house hubs, lake holds, meals, and fireworks decisions."
   },
   {
     href: "/july2026/map",
@@ -221,29 +189,14 @@ export const dayOfDeskItems = [
     note: "Known LH2/LH3 directions and the LH1 pending-address fallback."
   },
   {
-    href: "/july2026/guest-list",
-    label: "Guest Registry",
-    note: "House-by-house roster with rooms, companions, pending assignments, and room-key links."
-  },
-  {
     href: "/july2026/meals",
     label: "Meals Guide",
-    note: "Welcome food, coffee, smoothies, lunch, dinner, brunch, and dietary-note texting."
+    note: "Welcome food, coffee, spa water, lunch, dinner, brunch, and dietary-note texting."
   },
   {
     href: "/july2026/fleet",
     label: "Fleet Guide",
     note: "Laconic, Spikey Lizard, Laika, Saturday orientation, and host approval rules."
-  },
-  {
-    href: "/july2026/safety",
-    label: "Safety Guide",
-    note: "Emergency-first guidance, life jackets, dock plan, lake rules, and host approvals."
-  },
-  {
-    href: "/july2026/weekend-guide.txt",
-    label: "Offline Guide",
-    note: "Plain-text backup for low-signal moments."
   }
 ] as const;
 
@@ -255,8 +208,8 @@ export const dayOfPriorityItems = [
   },
   {
     label: "Weather",
-    title: "Use the Rain Plan",
-    detail: "If the sky changes the plan, the host text line and Rain Plan are the source of truth for lake holds, meals, and fireworks."
+    title: "Watch host texts",
+    detail: "If the sky changes the plan, host texts are the source of truth for lake holds, meals, and fireworks."
   },
   {
     label: "Lake",
@@ -266,7 +219,7 @@ export const dayOfPriorityItems = [
   {
     label: "Food",
     title: "Follow the meals guide",
-    detail: "Welcome meal, coffee, smoothies, lunch, dinner, brunch, and dietary-note texting all live in one guest page."
+    detail: "Welcome meal, coffee, spa water, lunch, dinner, brunch, and dietary-note texting all live in one guest page."
   }
 ] as const;
 
@@ -284,7 +237,7 @@ export const dayOfFlowItems = [
   {
     time: "Sat morning",
     title: "Move toward LH3",
-    detail: "Yoga, lake time, smoothies, lunch, dinner, and Sunday brunch are centered at LH3."
+    detail: "Yoga, lake time, spa water, lunch, dinner, and Sunday brunch are centered at LH3."
   },
   {
     time: "Sat 11 AM",
@@ -361,7 +314,7 @@ export const hostBroadcastMessages = [
     label: "Saturday lake morning",
     timing: "Saturday 7:30 AM",
     body:
-      "Good morning. Coffee is available at all houses from 7:30-8 AM. Yoga is 8 AM at the LH3 beach, followed by non-motorized lake time and fruit smoothies at LH3."
+      "Good morning. Coffee is available at all houses from 7:30-8 AM. Yoga is 8 AM at the LH3 beach, followed by non-motorized lake time and spa water at LH3."
   },
   {
     audience: "Motorized fleet guests",
@@ -425,7 +378,7 @@ export const itineraryHighlights = {
       title: "Coffee stop"
     },
     {
-      detail: "Head to LH3 for yoga, lake activities, smoothies, lunch, dinner, and brunch.",
+      detail: "Head to LH3 for yoga, lake activities, spa water, lunch, dinner, and brunch.",
       time: "Sat-Sun",
       title: "Meals and beach time"
     },
@@ -437,7 +390,7 @@ export const itineraryHighlights = {
   ],
   LH3: [
     {
-      detail: "Yoga, swimming, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch are centered at LH3.",
+      detail: "Yoga, swimming, non-motorized boats, spa water, lunch, dinner, and Sunday brunch are centered at LH3.",
       time: "Sat-Sun",
       title: "Beach and meals hub"
     },
@@ -512,7 +465,7 @@ export const foodMoments = [
   },
   {
     time: "Sat 10:00 AM",
-    title: "Fruit smoothies",
+    title: "Spa water",
     detail: "LH3 after morning lake activities."
   },
   {
@@ -528,7 +481,7 @@ export const foodMoments = [
   {
     time: "Sun 10:00 AM",
     title: "Pancake brunch",
-    detail: "LH3 before Sunday free time and departures."
+    detail: "LH3 pancake brunch with spa water before Sunday free time and departures."
   }
 ];
 
@@ -598,7 +551,7 @@ export const faqItems = [
     category: "Schedule",
     question: "Where are the main Saturday meals and lake activities?",
     answer:
-      "Saturday yoga, beach time, smoothies, lunch, dinner, and Sunday brunch are centered at LH3. The motorized orientation and boat departure happen at LH1."
+      "Saturday yoga, beach time, spa water, lunch, dinner, and Sunday brunch are centered at LH3. The motorized orientation and boat departure happen at LH1."
   },
   {
     category: "Help",
@@ -683,7 +636,7 @@ export const transitGuideItems = [
   },
   {
     label: "Saturday morning shifts to LH3",
-    detail: "Yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch are centered at LH3."
+    detail: "Yoga, beach time, non-motorized boats, spa water, lunch, dinner, and Sunday brunch are centered at LH3."
   },
   {
     label: "Boat ride connects LH1 to LH3",
@@ -739,6 +692,52 @@ export const motorizedVehicles = [
     sourceUrl:
       "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my22/studio/rec-lite/SEA-MY22-SPARK-2up-IBR-TRIXX-withoutSS-90-Can-Am-Red-SKU00065NA00-Studio-34FR-NA-661x480.png",
     type: "Sea-Doo Spark Trixx PWC"
+  },
+  {
+    approval: "Host orientation and quad go-ahead required",
+    bestFor: "Two-seat host-approved land runs",
+    capacity: "2 seats",
+    color: "Gray",
+    detail: "Gray Can-Am quad for host-approved land use after orientation and timing guidance.",
+    image: "can-am-quad",
+    length: "Quad",
+    model: "Can-Am XLT gray 2-seat quad reference",
+    name: "Can-Am Quad",
+    pickup: "Host-designated land staging point",
+    source: "Generated gray Can-Am quad reference render",
+    sourceUrl: "/july2026/assets/vehicle-can-am-quad.png",
+    type: "Can-Am XLT quad"
+  }
+];
+
+export const nonMotorizedVehicles = [
+  {
+    bestFor: "Quiet morning paddles and relaxed lake exploring",
+    capacity: "Multiple kayaks",
+    detail: "Kayaks are available from the LH3 lake-access area during non-motorized lake time and free blocks.",
+    gallery: ["kayaks-1", "kayaks-2"],
+    image: "kayaks-1",
+    name: "Kayaks",
+    pickup: "LH3 lake access",
+    type: "Kayaks"
+  },
+  {
+    bestFor: "Easy low-speed lake time near LH3",
+    capacity: "Two blue pedal boats",
+    detail: "Two blue pedal boats are available for relaxed lake use near the host-designated swimming and launch area.",
+    image: "pedal-boats",
+    name: "Pedal boats",
+    pickup: "LH3 lake access",
+    type: "Two blue pedal boats"
+  },
+  {
+    bestFor: "Tender-style short moves by host guidance",
+    capacity: "Small tender",
+    detail: "Walker Bay tender for host-guided, non-motorized utility use around the lake edge.",
+    image: "walker-bay",
+    name: "Walker Bay tender",
+    pickup: "Host-designated shoreline",
+    type: "Walker Bay tender"
   }
 ];
 
@@ -759,13 +758,8 @@ export const launchCompletionItems = [
     status: "Needed"
   },
   {
-    detail: "Beach, primary bedroom, dining/gathering, smoothie, lunch, dinner, and brunch areas.",
+    detail: "Beach, primary bedroom, dining/gathering, spa water, lunch, dinner, and brunch areas.",
     label: "LH3 beach and room photos",
-    status: "Needed"
-  },
-  {
-    detail: "Host-confirmed room placement for both guests.",
-    label: "Zach and Bee assignments",
     status: "Needed"
   },
   {
@@ -786,26 +780,20 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     "Current review links:",
     `Guest portal: ${baseUrl}/july2026`,
     `Day-Of Desk: ${baseUrl}/july2026/day-of`,
-    `Resort pass: ${baseUrl}/july2026/pass`,
     `Resort FAQ: ${baseUrl}/july2026/faq`,
-    `Rain plan: ${baseUrl}/july2026/rain-plan`,
     `Arrival card: ${baseUrl}/july2026/arrival-card`,
     `Resort map: ${baseUrl}/july2026/map`,
     `Directions hub: ${baseUrl}/july2026/directions`,
-    `Guest registry: ${baseUrl}/july2026/guest-list`,
     `House directory: ${baseUrl}/july2026/houses`,
     `Guest concierge: ${baseUrl}/july2026/concierge`,
-    `Packing prep: ${baseUrl}/july2026/prep`,
     `Weekend itinerary: ${baseUrl}/july2026/itinerary`,
     `Meals and coffee: ${baseUrl}/july2026/meals`,
     `Fleet guide: ${baseUrl}/july2026/fleet`,
-    `Safety guide: ${baseUrl}/july2026/safety`,
     `Admin reference: ${baseUrl}/july2026/admin`,
     `Launch status: ${baseUrl}/july2026/admin/status.txt`,
     `Guest SMS packets: ${baseUrl}/july2026/admin/sms-packets`,
     `Host text templates: ${baseUrl}/july2026/admin/host-texts`,
     `Media shot list: ${baseUrl}/july2026/admin/media-shot-list`,
-    `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Download this request: ${baseUrl}/july2026/admin/missing-content.txt`,
     "",
     "Once these are confirmed, the site can replace pending room/address language and add the remaining room/detail media."
@@ -825,21 +813,15 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     `- Guest portal: ${baseUrl}/july2026`,
     `- Admin reference: ${baseUrl}/july2026/admin`,
     `- Day-Of Desk: ${baseUrl}/july2026/day-of`,
-    `- Resort pass: ${baseUrl}/july2026/pass`,
     `- Resort FAQ: ${baseUrl}/july2026/faq`,
-    `- Rain plan: ${baseUrl}/july2026/rain-plan`,
     `- Arrival card: ${baseUrl}/july2026/arrival-card`,
     `- Resort map: ${baseUrl}/july2026/map`,
     `- Directions hub: ${baseUrl}/july2026/directions`,
-    `- Guest registry: ${baseUrl}/july2026/guest-list`,
     `- House directory: ${baseUrl}/july2026/houses`,
     `- Guest concierge: ${baseUrl}/july2026/concierge`,
-    `- Packing prep: ${baseUrl}/july2026/prep`,
     `- Weekend itinerary: ${baseUrl}/july2026/itinerary`,
     `- Meals and coffee: ${baseUrl}/july2026/meals`,
     `- Fleet guide: ${baseUrl}/july2026/fleet`,
-    `- Safety guide: ${baseUrl}/july2026/safety`,
-    `- Offline weekend guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `- Weekend calendar: ${baseUrl}/july2026/calendar.ics`,
     `- Host contact card: ${baseUrl}/july2026/host-contact.vcf`,
     "",
@@ -859,7 +841,6 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "- Guest registry for house rosters, room assignments, companions, pending assignments, and room-key links",
     "- Mobile resort pass with QR, host text, calendar, offline guide, and key itinerary actions",
     "- Resort FAQ for arrival, directions, food, lake approvals, phone setup, and host help",
-    "- Rain plan with host-update, indoor-pivot, lake-safety, and meal-continuity guidance",
     "- Prefilled Contact Host SMS actions to 781-929-4932",
     "- Downloadable host contact card",
     "- Shared weekend calendar and personal guest calendars",
@@ -880,7 +861,6 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "",
     "Current caveats shown to guests:",
     "- LH1 directions stay pending until the address is confirmed.",
-    "- Zach and Bee pages show assignment-pending language instead of a false room.",
     "- Guest pages say Sunday afternoon for departure until a precise time is confirmed.",
     "- Remaining bedroom, beach, meal-area, and activity-location photos are tracked in the media shot list.",
     "",
@@ -906,14 +886,14 @@ export const guestAssignments: GuestAssignment[] = [
     name: "Holly",
     house: "LH3",
     room: "Primary bedroom",
-    companions: ["Todd"],
+    companions: ["Tod"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
     note: "Meals, beach time, brunch, and the boat return are centered at LH3."
   },
   {
-    slug: "todd",
-    name: "Todd",
+    slug: "tod",
+    name: "Tod",
     house: "LH3",
     room: "Primary bedroom",
     companions: ["Holly"],
@@ -942,24 +922,24 @@ export const guestAssignments: GuestAssignment[] = [
     note: "Welcome meal, orientation, boat departure, and evening fire pit are based at LH1."
   },
   {
-    slug: "zach",
-    name: "Zach",
-    house: "Pending",
-    room: "Assignment pending",
-    companions: [],
+    slug: "zack",
+    name: "Zack",
+    house: "LH1",
+    room: "First floor bedroom",
+    companions: ["Bee"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
-    note: "This guest is listed in the reference material, but the room assignment still needs host confirmation."
+    note: "First floor bedroom at LH1."
   },
   {
     slug: "bee",
     name: "Bee",
-    house: "Pending",
-    room: "Assignment pending",
-    companions: [],
+    house: "LH1",
+    room: "First floor bedroom",
+    companions: ["Zack"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
-    note: "This guest is listed in the reference material, but the room assignment still needs host confirmation."
+    note: "First floor bedroom at LH1."
   },
   {
     slug: "cin",
@@ -1065,7 +1045,7 @@ export const houseProfiles = [
   {
     name: "LH1",
     role: "Welcome, orientation, boat departure, fire pit",
-    rooms: ["Second floor bedroom", "The Girls' Room", "Sunroom"],
+    rooms: ["First floor bedroom", "Second floor bedroom", "The Girls' Room", "Sunroom"],
     note: "Address TBD",
     mapLabel: "Directions pending",
     image: "lake-house-1"
@@ -1083,8 +1063,8 @@ export const houseProfiles = [
     name: "LH3",
     role: "Beach, meals, brunch, boat return",
     rooms: ["Primary bedroom"],
-    note: "25 Sunny Cove Road, Winchendon, Massachusetts",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=25%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA",
+    note: "26 Sunny Cove Road, Winchendon, Massachusetts",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA",
     mapLabel: "Open LH3 directions",
     image: "lake-house-3"
   }
@@ -1146,21 +1126,15 @@ Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
 Day-Of Desk: ${baseUrl}/july2026/day-of
-Resort pass: ${baseUrl}/july2026/pass
 Resort FAQ: ${baseUrl}/july2026/faq
-Rain plan: ${baseUrl}/july2026/rain-plan
 Arrival card: ${baseUrl}/july2026/arrival-card
 Resort map: ${baseUrl}/july2026/map
 Directions hub: ${baseUrl}/july2026/directions
-Guest registry: ${baseUrl}/july2026/guest-list
 Guest concierge: ${baseUrl}/july2026/concierge
-Packing prep: ${baseUrl}/july2026/prep
 Weekend itinerary: ${baseUrl}/july2026/itinerary
 Meals and coffee: ${baseUrl}/july2026/meals
 Fleet guide: ${baseUrl}/july2026/fleet
-Safety guide: ${baseUrl}/july2026/safety
 Calendar: ${baseUrl}/july2026/calendar.ics
-Offline guide: ${baseUrl}/july2026/weekend-guide.txt
 Save host contact: ${baseUrl}/july2026/host-contact.vcf
 
 Host text line:
@@ -1201,12 +1175,8 @@ export function getGuestSmsPacket(
     `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
     `Room-key QR code: ${baseUrl}${qrPath}`,
     `Day-Of Desk: ${baseUrl}/july2026/day-of`,
-    `Resort pass: ${baseUrl}/july2026/pass`,
     `Resort FAQ: ${baseUrl}/july2026/faq`,
-    `Rain plan: ${baseUrl}/july2026/rain-plan`,
-    `Guest registry: ${baseUrl}/july2026/guest-list`,
     `Calendar: ${baseUrl}/july2026/calendar.ics`,
-    `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,
     "",
     "Text 781-929-4932 for room help, dietary notes, fleet approval, or link resets."

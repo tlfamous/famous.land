@@ -410,6 +410,21 @@
   line-height: 1.42;
 }
 
+.miniGallery {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.miniGalleryImage {
+  width: 118px;
+  height: 82px;
+  object-fit: cover;
+  border: 1px solid rgba(8, 19, 38, 0.12);
+  border-radius: 8px;
+  background: #fff;
+}
+
 .proofHeader {
   display: flex;
   align-items: center;
@@ -459,6 +474,37 @@
 .bindingStatus span {
   color: #596476;
   font-weight: 800;
+}
+
+.guestStatusTableWrap {
+  overflow-x: auto;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(8, 19, 38, 0.12);
+  background: #fffdf7;
+}
+
+.guestStatusTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: #071429;
+}
+
+.guestStatusTable th,
+.guestStatusTable td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(8, 19, 38, 0.1);
+  text-align: left;
+}
+
+.guestStatusTable th {
+  color: #be1d27;
+  font-size: 0.76rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.guestStatusTable td {
+  font-weight: 850;
 }
 
 .linkPacket {

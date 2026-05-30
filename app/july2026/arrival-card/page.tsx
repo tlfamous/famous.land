@@ -54,19 +54,14 @@ export default function July2026ArrivalCardPage() {
         <section className={styles.commandBar} aria-label="Arrival quick actions">
           <a href="/july2026">Guest Portal</a>
           <a href="/july2026/faq">Guest FAQ</a>
-          <a href="/july2026/rain-plan">Rain Plan</a>
           <a href="/july2026/map">Resort Map</a>
           <a href="/july2026/directions">Directions Hub</a>
-          <a href="/july2026/guest-list">Guest Registry</a>
           <a href="/july2026/concierge">Guest Concierge</a>
-          <a href="/july2026/prep">Packing Prep</a>
           <a href="/july2026/itinerary">Itinerary</a>
           <a href="/july2026/meals">Meals Guide</a>
           <a href="/july2026/fleet">Fleet Guide</a>
-          <a href="/july2026/safety">Safety Guide</a>
           <a href="/july2026/calendar.ics">Add Calendar</a>
           <a href="/july2026/host-contact.vcf">Save Host</a>
-          <a href="/july2026/weekend-guide.txt">Offline Guide</a>
           <a href={hostSmsHref}>Text 781-929-4932</a>
         </section>
 

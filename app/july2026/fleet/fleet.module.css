@@ -125,6 +125,18 @@
   padding: 0 clamp(18px, 4vw, 40px) 18px;
 }
 
+.sectionIntro {
+  padding: 10px 4px 0;
+}
+
+.sectionIntro h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
 .vehicleCard {
   display: grid;
   grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
@@ -203,6 +215,20 @@
   color: #5d6673;
   font-size: 1.04rem;
   line-height: 1.55;
+}
+
+.galleryStrip {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.galleryImage {
+  width: 156px;
+  height: 108px;
+  object-fit: cover;
+  border: 1px solid rgba(8, 19, 38, 0.14);
+  border-radius: 8px;
 }
 
 .panel {

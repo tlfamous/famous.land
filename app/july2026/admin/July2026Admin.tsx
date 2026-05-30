@@ -10,9 +10,14 @@ import lh2KitchenImage from "../assets/lake-house-2-kitchen.jpeg";
 import lh2LivingRoomImage from "../assets/lake-house-2-living-room.jpeg";
 import lh3PosterImage from "../assets/lake-house-3.jpeg";
 import lh3ProfileGif from "../assets/lh3-profile.gif";
+import canAmQuadImage from "../assets/vehicle-can-am-quad.png";
 import laconicVehicleImage from "../assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "../assets/vehicle-laika-trixx.png";
+import kayakOneImage from "../assets/non-motor-kayaks-1.png";
+import kayakTwoImage from "../assets/non-motor-kayaks-2.png";
+import pedalBoatsImage from "../assets/non-motor-pedal-boats.png";
 import spikeyLizardVehicleImage from "../assets/vehicle-spikey-lizard-gtx.png";
+import walkerBayImage from "../assets/non-motor-walker-bay.webp";
 import {
   getGuestQrPath,
   getGuestSmsPacket,
@@ -20,7 +25,8 @@ import {
   guestAssignments,
   hostSmsHref,
   launchCompletionItems,
-  motorizedVehicles
+  motorizedVehicles,
+  nonMotorizedVehicles
 } from "../data";
 import { referenceMaterial } from "./referenceMaterial";
 
@@ -34,6 +40,7 @@ const adminTools = [
   "Copy guest-specific SMS packets",
   "Review printable guest SMS packets",
   "Review day-of host text templates",
+  "Review printable fleet and dock signs",
   "Copy missing-content request packet",
   "Print media shot list",
   "Track missing photos, addresses, and room-assignment decisions"
@@ -45,13 +52,10 @@ const guestExperience = [
   "Day-Of Desk",
   "Arrival checklist",
   "Resort FAQ",
-  "Rain Plan",
   "Host text templates",
   "House Directory",
-  "Guest Registry",
   "Add Calendar",
   "Save Host Contact",
-  "Offline Guide",
   "My Stay",
   "My Room",
   "Weekend Itinerary",
@@ -59,8 +63,8 @@ const guestExperience = [
   "Houses",
   "Activities",
   "Motorized Fleet",
+  "Non-motorized Fleet",
   "Lake Rules and Approvals",
-  "Safety Guide",
   "Food and Drinks",
   "Resort Map",
   "Maps and Directions",
@@ -72,8 +76,7 @@ const guestExperience = [
 const contentNeeds = [
   "LH1 address",
   "House and room photos",
-  "Exact departure or check-out time",
-  "Zach and Bee room assignments"
+  "Exact departure or check-out time"
 ];
 
 const readinessItems = [
@@ -156,12 +159,6 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Guest-facing rain plan explains host updates, indoor pivots, lake-safety holds, meals, fireworks, and phone backup.",
-    label: "Rain Plan",
-    status: "Ready",
-    tone: "ready"
-  },
-  {
     detail: "Guest CTAs download a self-contained weekend .ics file from /july2026/calendar.ics.",
     label: "Calendar file",
     status: "Ready",
@@ -180,19 +177,13 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Guest CTAs download a plain-text weekend guide from /july2026/weekend-guide.txt for offline use.",
-    label: "Offline guide",
-    status: "Ready",
-    tone: "ready"
-  },
-  {
     detail: "Guest room-key pages show house-specific itinerary highlights for LH1, LH2, LH3, and pending assignments.",
     label: "Personal itinerary",
     status: "Ready",
     tone: "ready"
   },
   {
-    detail: "Guest-facing meals guide centralizes welcome food, house coffee, smoothies, lunch, lakeside patio dinner, brunch, and dietary-note texting.",
+    detail: "Guest-facing meals guide centralizes welcome food, house coffee, spa water, lunch, lakeside patio dinner, brunch, and dietary-note texting.",
     label: "Meals guide",
     status: "Ready",
     tone: "ready"
@@ -216,26 +207,20 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Guest-facing registry shows house rosters, room assignments, companions, pending assignments, and room-key links.",
-    label: "Guest registry",
+    detail: "Laconic, Spikey Lizard, Laika, and the Can-Am Quad are listed with self-contained reference images.",
+    label: "Motorized fleet",
     status: "Ready",
     tone: "ready"
   },
   {
-    detail: "Laconic, Spikey Lizard, and Laika are listed with self-contained reference images.",
-    label: "Motorized fleet",
+    detail: "Kayaks, two blue pedal boats, and the Walker Bay tender are listed with self-contained images.",
+    label: "Non-motorized fleet",
     status: "Ready",
     tone: "ready"
   },
   {
     detail: "Guest navigation now links directly to orientation, life jacket, dock, and host-approval guidance.",
     label: "Lake rules",
-    status: "Ready",
-    tone: "ready"
-  },
-  {
-    detail: "Guest-facing safety guide centralizes emergency-first guidance, host approvals, lake rules, life jackets, and dock movement.",
-    label: "Safety guide",
     status: "Ready",
     tone: "ready"
   },
@@ -258,10 +243,10 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Zach and Bee remain in the guest list with assignment pending.",
+    detail: "Zack and Bee are assigned to the LH1 first floor bedroom.",
     label: "Room assignments",
-    status: "Needed",
-    tone: "needed"
+    status: "Ready",
+    tone: "ready"
   },
   {
     detail: "Current guest pages say Sunday afternoon until a precise check-out time is confirmed.",
@@ -343,6 +328,29 @@ const vehicleImages = {
   "spikey-lizard": {
     alt: "Blue Sea-Doo GTX PWC reference for Spikey Lizard.",
     src: spikeyLizardVehicleImage
+  },
+  "can-am-quad": {
+    alt: "Gray Can-Am quad reference for the two-seat quad.",
+    src: canAmQuadImage
+  }
+} as const;
+
+const nonMotorizedImages = {
+  "kayaks-1": {
+    alt: "Rendered kayak reference for the non-motorized fleet.",
+    src: kayakOneImage
+  },
+  "kayaks-2": {
+    alt: "Second rendered kayak reference for the non-motorized fleet.",
+    src: kayakTwoImage
+  },
+  "pedal-boats": {
+    alt: "Rendered blue pedal boats reference.",
+    src: pedalBoatsImage
+  },
+  "walker-bay": {
+    alt: "Walker Bay tender reference.",
+    src: walkerBayImage
   }
 } as const;
 
@@ -391,24 +399,9 @@ export function July2026Admin() {
         label: "Admin reference"
       },
       {
-        detail: "Mobile-friendly resort pass with QR, host SMS, calendar, offline guide, and pocket itinerary.",
-        href: `${baseUrl}/july2026/pass`,
-        label: "Resort pass"
-      },
-      {
         detail: "Quick guest answers for arrival, directions, food, lake approvals, phone setup, and host help.",
         href: `${baseUrl}/july2026/faq`,
         label: "Resort FAQ"
-      },
-      {
-        detail: "Weather backup guidance for host updates, indoor pivots, lake holds, meals, fireworks, and phone setup.",
-        href: `${baseUrl}/july2026/rain-plan`,
-        label: "Rain plan"
-      },
-      {
-        detail: "Plain-text offline guest guide.",
-        href: `${baseUrl}/july2026/weekend-guide.txt`,
-        label: "Weekend guide"
       },
       {
         detail: "Public one-page arrival guide with QR, host line, check-in flow, and key schedule.",
@@ -431,19 +424,9 @@ export function July2026Admin() {
         label: "House directory"
       },
       {
-        detail: "Standalone guest registry with house rosters, room assignments, companions, pending guests, and room-key links.",
-        href: `${baseUrl}/july2026/guest-list`,
-        label: "Guest registry"
-      },
-      {
         detail: "Public help desk with host text prompts, approvals, lake rules, and self-service links.",
         href: `${baseUrl}/july2026/concierge`,
         label: "Guest concierge"
-      },
-      {
-        detail: "Public packing and pre-arrival checklist with provided logistics and phone setup reminders.",
-        href: `${baseUrl}/july2026/prep`,
-        label: "Packing prep"
       },
       {
         detail: "Public print/screenshot-friendly run of show grouped by weekend day.",
@@ -456,14 +439,9 @@ export function July2026Admin() {
         label: "Meals and coffee"
       },
       {
-        detail: "Guest-facing motorized vehicle inventory with approval guidance and self-contained images.",
+        detail: "Guest-facing motorized and non-motorized inventory with approval guidance and self-contained images.",
         href: `${baseUrl}/july2026/fleet`,
         label: "Fleet guide"
-      },
-      {
-        detail: "Emergency-first guidance, lake rules, life jackets, dock plan, and host approval notes.",
-        href: `${baseUrl}/july2026/safety`,
-        label: "Safety guide"
       },
       {
         detail: "Downloadable shared weekend calendar.",
@@ -516,14 +494,19 @@ export function July2026Admin() {
         label: "House signs"
       },
       {
+        detail: "Print-ready motorized fleet and dock approval signs.",
+        href: `${baseUrl}/july2026/admin/fleet-signs`,
+        label: "Fleet signs"
+      },
+      {
         detail: "Sample personalized room key for QA.",
         href: `${baseUrl}/july2026/guest/holly`,
         label: "Sample room key"
       },
       {
-        detail: "Sample pending-assignment room key for QA.",
-        href: `${baseUrl}/july2026/guest/zach`,
-        label: "Pending room key"
+        detail: "Sample LH1 first-floor room key for QA.",
+        href: `${baseUrl}/july2026/guest/zack`,
+        label: "Sample Zack room key"
       }
     ],
     [baseUrl]
@@ -920,6 +903,70 @@ export function July2026Admin() {
           </div>
         </section>
 
+        <section className={styles.vehicleInventorySection} id="non-motorized-inventory" aria-label="Non-motorized vehicle inventory">
+          <div className={styles.proofHeader}>
+            <div>
+              <span className={styles.label}>Inventory</span>
+              <h2>Non-Motorized Vehicles</h2>
+              <p>
+                Kayaks, pedal boats, and the Walker Bay tender for guest review and host planning.
+              </p>
+            </div>
+          </div>
+          <div className={styles.vehicleInventoryGrid}>
+            {nonMotorizedVehicles.map((vehicle) => {
+              const vehicleImage = nonMotorizedImages[vehicle.image as keyof typeof nonMotorizedImages];
+
+              return (
+                <article key={vehicle.name}>
+                  <Image
+                    src={vehicleImage.src}
+                    alt={vehicleImage.alt}
+                    className={styles.vehicleInventoryImage}
+                    sizes="(max-width: 980px) 100vw, 360px"
+                  />
+                  <div>
+                    <strong>{vehicle.name}</strong>
+                    <span>{vehicle.type}</span>
+                    <dl>
+                      <div>
+                        <dt>Capacity</dt>
+                        <dd>{vehicle.capacity}</dd>
+                      </div>
+                      <div>
+                        <dt>Best for</dt>
+                        <dd>{vehicle.bestFor}</dd>
+                      </div>
+                      <div>
+                        <dt>Start point</dt>
+                        <dd>{vehicle.pickup}</dd>
+                      </div>
+                    </dl>
+                    <p>{vehicle.detail}</p>
+                    {"gallery" in vehicle && vehicle.gallery ? (
+                      <div className={styles.miniGallery}>
+                        {vehicle.gallery.slice(1).map((imageKey) => {
+                          const galleryImage = nonMotorizedImages[imageKey as keyof typeof nonMotorizedImages];
+
+                          return (
+                            <Image
+                              key={imageKey}
+                              src={galleryImage.src}
+                              alt={galleryImage.alt}
+                              className={styles.miniGalleryImage}
+                              sizes="120px"
+                            />
+                          );
+                        })}
+                      </div>
+                    ) : null}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
         <section className={styles.guestLinksSection} aria-label="Personalized guest links">
           <div className={styles.proofHeader}>
             <div>
@@ -945,6 +992,31 @@ export function July2026Admin() {
           <div className={styles.bindingStatus}>
             <strong>Persistent link service</strong>
             <span>{linkStatus}</span>
+          </div>
+          <div className={styles.guestStatusTableWrap}>
+            <table className={styles.guestStatusTable}>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Phone Number</th>
+                  <th>Linked</th>
+                </tr>
+              </thead>
+              <tbody>
+                {guestAssignments.map((guest) => {
+                  const boundAt = guestLinks[guest.slug]?.bound_at;
+                  const phoneNumber = (guest as { phoneNumber?: string }).phoneNumber ?? "TBD";
+
+                  return (
+                    <tr key={guest.slug}>
+                      <td>{guest.name}</td>
+                      <td>{phoneNumber}</td>
+                      <td>{boundAt ? `Linked ${new Date(boundAt).toLocaleString()}` : "Not linked"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
           <div className={styles.linkPacket}>
             <div>

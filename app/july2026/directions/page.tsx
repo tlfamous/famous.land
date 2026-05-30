@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { guestAssignments, hostSmsHref, hostTextTemplates, houseProfiles, transitGuideItems } from "../data";
+import { hostSmsHref, hostTextTemplates, houseProfiles, transitGuideItems } from "../data";
 import styles from "./directions.module.css";
 
 export const metadata: Metadata = {
@@ -33,13 +33,10 @@ export default function July2026DirectionsPage() {
           <nav className={styles.quickLinks} aria-label="Directions quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/houses">House Directory</a>
-            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/concierge">Guest Concierge</a>
-            <a href="/july2026/prep">Packing Prep</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>
@@ -61,7 +58,7 @@ export default function July2026DirectionsPage() {
           <article>
             <span>Live</span>
             <strong>LH3</strong>
-            <p>25 Sunny Cove Road, Winchendon, Massachusetts</p>
+            <p>26 Sunny Cove Road, Winchendon, Massachusetts</p>
           </article>
           <article>
             <span>Pending</span>
@@ -72,7 +69,6 @@ export default function July2026DirectionsPage() {
 
         <section className={styles.houseCards} aria-label="Lake house directions">
           {houseProfiles.map((house) => {
-            const assignedGuests = guestAssignments.filter((guest) => guest.house === house.name);
             const mapsUrl = "mapsUrl" in house ? house.mapsUrl : undefined;
 
             return (
@@ -90,11 +86,6 @@ export default function July2026DirectionsPage() {
                     <span key={room}>{room}</span>
                   ))}
                 </div>
-                <p className={styles.guestList}>
-                  {assignedGuests.length
-                    ? `Guests: ${assignedGuests.map((guest) => guest.name).join(", ")}`
-                    : "No confirmed guest rooms yet."}
-                </p>
                 <div className={styles.cardActions}>
                   {mapsUrl ? (
                     <a href={mapsUrl} target="_blank" rel="noreferrer">

@@ -4,7 +4,7 @@ import styles from "./meals.module.css";
 
 export const metadata: Metadata = {
   title: "July 4th, 2026 Meals and Coffee | famous.land",
-  description: "Guest meal, coffee, smoothie, dinner, and brunch guide for the famous.land July 4th, 2026 lake weekend.",
+  description: "Guest meal, coffee, spa water, dinner, and brunch guide for the famous.land July 4th, 2026 lake weekend.",
   robots: {
     index: false,
     follow: false
@@ -46,18 +46,15 @@ export default function July2026MealsPage() {
             <p className={styles.kicker}>famous.land dining</p>
             <h1>Meals and Coffee</h1>
             <p>
-              The guest dining guide for welcome food, house coffee, smoothies, lunch,
+              The guest dining guide for welcome food, house coffee, spa water, lunch,
               lakeside patio dinner, pancake brunch, and dietary notes.
             </p>
           </div>
           <nav className={styles.quickLinks} aria-label="Meals quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
-            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
-            <a href="/july2026/prep">Packing Prep</a>
             <a href="/july2026/concierge">Guest Concierge</a>
             <a href={`sms:+17819294932?&body=${encodeURIComponent(dietaryTemplate)}`}>Text Dietary Note</a>
           </nav>

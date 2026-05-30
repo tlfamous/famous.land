@@ -1,14 +1,19 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import canAmQuadImage from "../assets/vehicle-can-am-quad.png";
 import laconicVehicleImage from "../assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "../assets/vehicle-laika-trixx.png";
+import kayakOneImage from "../assets/non-motor-kayaks-1.png";
+import kayakTwoImage from "../assets/non-motor-kayaks-2.png";
+import pedalBoatsImage from "../assets/non-motor-pedal-boats.png";
 import spikeyLizardVehicleImage from "../assets/vehicle-spikey-lizard-gtx.png";
-import { hostTextTemplates, lakeUseRules, motorizedVehicles, scheduleItems } from "../data";
+import walkerBayImage from "../assets/non-motor-walker-bay.webp";
+import { hostTextTemplates, lakeUseRules, motorizedVehicles, nonMotorizedVehicles, scheduleItems } from "../data";
 import styles from "./fleet.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Motorized Fleet | famous.land",
-  description: "Guest-facing motorized lake fleet inventory and approval guide for the famous.land July 4th, 2026 weekend.",
+  title: "July 4th, 2026 Lake Fleet | famous.land",
+  description: "Guest-facing motorized and non-motorized lake fleet guide for the famous.land July 4th, 2026 weekend.",
   robots: {
     index: false,
     follow: false
@@ -27,6 +32,29 @@ const vehicleImages = {
   "spikey-lizard": {
     alt: "Blue Sea-Doo GTX PWC reference for Spikey Lizard.",
     src: spikeyLizardVehicleImage
+  },
+  "can-am-quad": {
+    alt: "Gray Can-Am quad reference for the two-seat quad.",
+    src: canAmQuadImage
+  }
+} as const;
+
+const nonMotorizedImages = {
+  "kayaks-1": {
+    alt: "Rendered kayaks for the non-motorized lake fleet.",
+    src: kayakOneImage
+  },
+  "kayaks-2": {
+    alt: "Second rendered kayak view for the non-motorized lake fleet.",
+    src: kayakTwoImage
+  },
+  "pedal-boats": {
+    alt: "Rendered blue pedal boats for relaxed lake use.",
+    src: pedalBoatsImage
+  },
+  "walker-bay": {
+    alt: "Walker Bay tender reference image.",
+    src: walkerBayImage
   }
 } as const;
 
@@ -43,7 +71,7 @@ export default function July2026FleetPage() {
         <header className={styles.hero}>
           <div>
             <p className={styles.kicker}>famous.land lake fleet</p>
-            <h1>Motorized Fleet</h1>
+            <h1>Lake Fleet</h1>
             <p>
               The named lake vehicles for July 4th weekend, with capacity, best-use,
               start-point, and host-approval notes in one guest-friendly guide.
@@ -53,12 +81,8 @@ export default function July2026FleetPage() {
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/day-of">Day-Of Desk</a>
             <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
-            <a href="/july2026/guest-list">Guest Registry</a>
-            <a href="/july2026/concierge">Guest Concierge</a>
-            <a href="/july2026/safety">Safety Guide</a>
             <a href={`sms:+17819294932?&body=${encodeURIComponent(approvalTemplate)}`}>Text For Approval</a>
           </nav>
         </header>
@@ -82,6 +106,10 @@ export default function July2026FleetPage() {
         </section>
 
         <section className={styles.vehicleStack} aria-label="Motorized vehicle inventory">
+          <div className={styles.sectionIntro}>
+            <p className={styles.kicker}>Host approval required</p>
+            <h2>Motorized Inventory</h2>
+          </div>
           {motorizedVehicles.map((vehicle) => {
             const vehicleImage = vehicleImages[vehicle.image as keyof typeof vehicleImages];
 
@@ -121,6 +149,64 @@ export default function July2026FleetPage() {
                     </div>
                   </dl>
                   <p className={styles.detail}>{vehicle.detail}</p>
+                </div>
+              </article>
+            );
+          })}
+        </section>
+
+        <section className={styles.vehicleStack} aria-label="Non-motorized vehicle inventory">
+          <div className={styles.sectionIntro}>
+            <p className={styles.kicker}>No motor</p>
+            <h2>Non-Motorized Inventory</h2>
+          </div>
+          {nonMotorizedVehicles.map((vehicle) => {
+            const vehicleImage = nonMotorizedImages[vehicle.image as keyof typeof nonMotorizedImages];
+
+            return (
+              <article className={styles.vehicleCard} key={vehicle.name}>
+                <div className={styles.vehicleImageFrame}>
+                  <Image
+                    src={vehicleImage.src}
+                    alt={vehicleImage.alt}
+                    className={styles.vehicleImage}
+                    sizes="(max-width: 860px) 100vw, 420px"
+                  />
+                </div>
+                <div className={styles.vehicleBody}>
+                  <div>
+                    <p className={styles.kicker}>{vehicle.capacity}</p>
+                    <h2>{vehicle.name}</h2>
+                    <p>{vehicle.type}</p>
+                  </div>
+                  <dl className={styles.vehicleMeta}>
+                    <div>
+                      <dt>Best for</dt>
+                      <dd>{vehicle.bestFor}</dd>
+                    </div>
+                    <div>
+                      <dt>Start point</dt>
+                      <dd>{vehicle.pickup}</dd>
+                    </div>
+                  </dl>
+                  <p className={styles.detail}>{vehicle.detail}</p>
+                  {"gallery" in vehicle && vehicle.gallery ? (
+                    <div className={styles.galleryStrip}>
+                      {vehicle.gallery.slice(1).map((imageKey) => {
+                        const galleryImage = nonMotorizedImages[imageKey as keyof typeof nonMotorizedImages];
+
+                        return (
+                          <Image
+                            key={imageKey}
+                            src={galleryImage.src}
+                            alt={galleryImage.alt}
+                            className={styles.galleryImage}
+                            sizes="160px"
+                          />
+                        );
+                      })}
+                    </div>
+                  ) : null}
                 </div>
               </article>
             );

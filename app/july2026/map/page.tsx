@@ -40,7 +40,7 @@ const mapStops = [
   {
     house: "LH3",
     label: "Lake day hub",
-    detail: "Yoga, beach, non-motorized boats, smoothies, lunch, dinner, brunch, and boat return.",
+    detail: "Yoga, beach, non-motorized boats, spa water, lunch, dinner, brunch, and boat return.",
     position: "east"
   }
 ] as const;
@@ -70,10 +70,8 @@ export default function July2026ResortMapPage() {
           <nav className={styles.quickLinks} aria-label="Resort map quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/houses">House Directory</a>
-            <a href="/july2026/guest-list">Guest Registry</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>

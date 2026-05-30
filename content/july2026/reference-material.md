@@ -1,972 +1,199 @@
 # Lake Weekend Guest Website Reference Document
 
-## 1. Project Overview
+## Project
 
-Create a polished, playful, luxury-resort-inspired guest website for a private lake weekend from Friday, July 3 through Sunday, July 5, 2026.
+Create a polished, resort-style guest website for a private famous.land lake weekend from Friday, July 3 through Sunday, July 5, 2026.
 
-The site should feel like a boutique resort experience, but still be practical and clear. Guests should be able to see their personalized lodging details, weekend schedule, house information, maps, activity options, and host contact information.
+Public URL:
 
-The theme should lean into the idea that the three lake houses are part of a fictional “resort” experience.
+- `/july2026`
 
-## 2. Core Website Goals
+Admin URL:
 
-The website should help guests quickly answer:
+- `/july2026/admin`
 
-- Where am I staying?
-- What room am I assigned to?
-- What is the weekend schedule?
-- Where are the lake houses?
-- What activities are available?
-- Where do I go for each event?
-- Who do I contact if I need help?
+The guest-facing site should stay focused and calm. Guest rosters and guest-link operations belong on the admin page only.
 
-The site should also create a fun “check-in” experience where each guest opens a personalized link and sees their own room assignment and itinerary.
+## Guest-Facing Pages
 
-## 3. Personalization and Guest Links
+Keep these public guest surfaces:
 
-Each guest should receive a unique link or token.
+- Guest portal: `/july2026`
+- Arrival card: `/july2026/arrival-card`
+- Day-of desk: `/july2026/day-of`
+- Resort FAQ: `/july2026/faq`
+- Resort map: `/july2026/map`
+- Directions hub: `/july2026/directions`
+- House directory: `/july2026/houses`
+- Guest concierge: `/july2026/concierge`
+- Weekend itinerary: `/july2026/itinerary`
+- Meals and coffee: `/july2026/meals`
+- Fleet guide: `/july2026/fleet`
+- Shared calendar: `/july2026/calendar.ics`
+- Host contact card: `/july2026/host-contact.vcf`
 
-When a guest opens their link, the site identifies them and displays their personalized view by default.
+Removed guest surfaces:
 
-The personalized view should include:
+- `/july2026/pass`
+- `/july2026/rain-plan`
+- `/july2026/safety`
+- `/july2026/weekend-guide.txt`
+- `/july2026/prep`
+- `/july2026/guest-list`
 
-- Guest name
-- Assigned lake house
-- Assigned room
-- Arrival/check-in information
-- Departure/check-out information
-- Relevant schedule details
-- House-specific itinerary highlights
-- Host contact/help button
-- Ability to view other guest assignments if desired
+## Contact Host
 
-### Identity Binding Behavior
+Use a mobile tap-to-message action:
 
-Current implementation: the first guest link opened on a device binds that guest identity through the `/api/july2026/guest-bindings` service and also stores the active identity locally in the browser.
+- Phone: `781-929-4932`
+- SMS target: `+17819294932`
+- Default body: `Hi, I need help with the July 4th weekend.`
 
-If a different guest link is opened later on the same device, it does not overwrite the original device/session binding. The page shows the viewed guest details while making clear that the device remains checked in as the originally bound guest.
+This should be the only guest-facing host-help mechanism needed on the main portal.
 
-The backend guest-link store records each guest slug, token, current binding state, and reset/regeneration timestamps.
-
-The admin page includes a local reset control for the current device plus persistent regenerate/reset controls for each guest link.
-
-### Calendar File
-
-The guest portal exposes a downloadable calendar file at `/july2026/calendar.ics`.
-
-The calendar includes the full July 3-5 weekend block plus major guest events:
-
-- Guest check-in
-- Friday welcome meal
-- Friday weekend orientation
-- Saturday yoga
-- Saturday motorized lake vehicle orientation
-- Saturday group boat ride
-- Saturday dinner
-- Saturday fireworks viewing
-- Sunday pancake brunch
-
-Each guest room-key page also exposes a personal calendar file at `/july2026/guest/{slug}/calendar.ics`.
-
-The personal calendar includes:
-
-- The guest's current assignment, or pending-assignment language when needed
-- Arrival and departure notes
-- Personal room-key URL
-- Personal room-key packet URL
-- Host SMS line
-
-### Host Contact Card
-
-The guest portal exposes a downloadable host contact card at `/july2026/host-contact.vcf`.
-
-The contact card saves:
-
-- Name: Famous Land Host
-- Organization: famous.land
-- Mobile: 781-929-4932
-- Website: https://famous.land/july2026
-
-### Offline Weekend Guide
-
-The guest portal exposes a downloadable plain-text guide at `/july2026/weekend-guide.txt`.
-
-The offline guide includes:
-
-- Event portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, host text line, host contact card, and calendar links
-- Arrival instructions
-- Arrival checklist and host text template prompts
-- Getting Around house flow
-- LH1, LH2, and LH3 directory notes
-- Key schedule
-- What to bring
-- Lake and host approval notes
-
-Each guest room-key page also exposes a personalized downloadable room-key packet at `/july2026/guest/{slug}/packet.txt`.
-
-The personalized packet includes:
-
-- Guest name
-- Current house and room assignment, or pending-assignment language when still awaiting host confirmation
-- Companions
-- Arrival and departure details
-- House note and house-specific itinerary highlights
-- Weekend essentials
-- Links to the room key, guest portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, calendar, offline guide, and host contact card
-- Host SMS line and approval notes
-
-### Weekend Itinerary
-
-The guest portal exposes a mobile-friendly and print/screenshot-friendly itinerary page at `/july2026/itinerary`.
-
-The weekend itinerary includes:
-
-- Guest portal, calendar, arrival card, directions hub, guest concierge, and packing prep actions
-- Weekend summary for check-in, fireworks, and brunch
-- Friday, Saturday, and Sunday schedule groupings
-- Meal and coffee moments
-- Contact Host footer
-
-### Meals and Coffee Guide
-
-The guest portal exposes a mobile-friendly meals and coffee guide at `/july2026/meals`.
-
-The meals and coffee guide includes:
-
-- Guest portal, weekend itinerary, packing prep, guest concierge, and text-dietary-note actions
-- Welcome meal, house coffee, smoothies, lunch, dinner, brunch, and departure food moments
-- LH1 Kona coffee, LH2 K-cup coffee, and LH3 drip coffee notes
-- Friday welcome food, Saturday lakeside patio dinner, and Sunday pancake brunch summaries
-- Dietary-note guidance and tap-to-text host action
-
-### Fleet Guide
-
-The guest portal exposes a mobile-friendly motorized vehicle guide at `/july2026/fleet`.
-
-The fleet guide includes:
-
-- Guest portal, weekend itinerary, guest concierge, and text-for-approval actions
-- Orientation, group ride, and host text summary
-- Guest-facing inventory cards for Laconic, Spikey Lizard, and Laika
-- Approval, start-point, best-use, capacity, and operating notes
-- Lake approval rules and Contact Host footer
-
-### Safety Guide
-
-The guest portal exposes a mobile-friendly safety and approval page at `/july2026/safety`.
-
-The safety guide includes:
-
-- Guest portal, guest concierge, fleet guide, arrival card, and text-host actions
-- Emergency-first guidance to call 911 first for urgent medical, fire, water, or safety emergencies
-- Host text line for non-emergency help and approval questions
-- Saturday motorized lake vehicle orientation timing
-- Lake rules for orientation, life jackets, dock plan, and texting before changes
-- Guest checklist for safe lake and activity flow
-- Host text prompts
-
-### Arrival Card
-
-The guest portal exposes a mobile-friendly and print-friendly arrival card at `/july2026/arrival-card`.
-
-The arrival card includes:
-
-- Generic event QR code
-- Guest portal link
-- Host text line
-- Calendar, host contact, and offline guide links
-- Friday check-in window
-- Arrival checklist
-- House-to-house flow
-- LH1, LH2, and LH3 directory notes
-- Key schedule moments
-- Tap-to-text host prompts
-
-### Resort Pass
-
-The guest portal exposes a mobile-friendly resort pass at `/july2026/pass`.
-
-The resort pass includes:
-
-- Generic event QR code
-- Weekend status strip
-- Prefilled host SMS action
-- Calendar, host contact, arrival card, directions hub, offline guide, and guest portal links
-- Pocket itinerary for the highest-priority Friday, Saturday, and Sunday moments
-- Print-friendly styling for screenshot or paper backup
-
-### Day-Of Desk
-
-The guest portal exposes a mobile-friendly day-of operations hub at `/july2026/day-of`.
-
-The Day-Of Desk includes:
-
-- Guest portal, resort pass, arrival card, rain plan, map, directions, meals, fleet, safety, offline guide, and host text actions
-- Fast priority cards for room keys, weather pivots, lake approvals, and meals
-- Weekend flow guidance for Friday arrival, Friday welcome, Saturday LH3 movement, fleet orientation, Saturday evening, and Sunday departures
-- Lake approval rules before motorized vehicle use
-- Tap-to-text host actions for general help, room help, and fleet approval
-
-### Resort FAQ
-
-The guest portal exposes a quick-answer FAQ at `/july2026/faq`.
-
-The resort FAQ includes:
-
-- Arrival window and first-stop guidance
-- LH2/LH3 direction readiness and LH1 pending-address guidance
-- Food, drinks, chair, and dietary-note answers
-- Motorized lake vehicle approval reminders
-- Lake safety and life-jacket reminders
-- Phone setup checklist for room key, host contact, calendar, and offline guide
-- Prefilled Contact Host action for anything still unclear
-
-### Rain Plan
-
-The guest portal exposes a weather backup guide at `/july2026/rain-plan`.
-
-The rain plan includes:
-
-- Host text updates as the source of truth
-- Indoor and covered gathering pivots for LH1 and LH3
-- Lake safety holds for thunder, lightning, heavy rain, dock footing, or host-directed pauses
-- Meal-continuity guidance
-- Fireworks and cruise confirmation guidance
-- Phone setup reminders for host contact, calendar, and offline guide
-
-### Resort Map
-
-The guest portal exposes a polished resort-map style movement guide at `/july2026/map`.
-
-The resort map includes:
-
-- Guest portal, directions hub, house directory, itinerary, meals, fleet, lake area map, and text-host actions
-- Visual LH1, LH2, and LH3 house-flow map with lake route treatment
-- House roles, direction status, room/spaces, and map actions
-- Movement moments showing when the weekend shifts houses
-- Getting Around, activity anchors, meal locations, and Contact Host footer
-
-### Directions Hub
-
-The guest portal exposes a mobile-friendly house movement and directions page at `/july2026/directions`.
-
-The directions hub includes:
-
-- Guest portal, arrival card, Lake Monomonac area map, and text-host actions
-- LH2 live Google Maps link
-- LH3 live Google Maps link
-- LH1 pending-address status and Lake Monomonac fallback map
-- House room lists
-- Confirmed guests by house
-- House-to-house weekend flow
-
-### House Directory
-
-The guest portal exposes a standalone house directory at `/july2026/houses`.
-
-The house directory includes:
-
-- Guest portal, directions hub, arrival card, weekend itinerary, and text-host actions
-- LH1, LH2, and LH3 profile cards
-- Current bundled house imagery and LH2 gallery images
-- Directions-ready or address-pending status for each house
-- Rooms and assigned guests by house
-- House-specific itinerary highlights
-- House-to-house weekend flow
-
-### Guest Registry
-
-The guest portal exposes a standalone guest registry at `/july2026/guest-list`.
-
-The guest registry includes:
-
-- Guest portal, Day-Of Desk, house directory, directions hub, arrival card, and text-host actions
-- Total guest, assigned guest, and pending guest summary
-- House-by-house roster for LH1, LH2, LH3, and pending assignments
-- Room-level guest groupings with companions
-- Direct room-key links for every guest
-- Pending-assignment language for Zach and Bee until host-confirmed lodging details are available
-
-### Guest Concierge
-
-The guest portal exposes a mobile-friendly guest help desk at `/july2026/concierge`.
-
-The guest concierge includes:
-
-- Guest portal, arrival card, directions hub, and text-host actions
-- Tap-to-text host prompts for room help, dietary notes, fleet approval, and link resets
-- Dietary, motorized fleet, quad/cruise, and room-key help notes
-- Lake use and approval rules
-- Resort Desk self-service links and explanations
-
-### Packing Prep
-
-The guest portal exposes a mobile-friendly packing and pre-arrival page at `/july2026/prep`.
-
-The packing prep page includes:
-
-- Guest portal, arrival card, guest concierge, and text-host actions
-- What to bring list
-- Provided logistics, including meals, host text prompts, calendar, contact card, and offline guide
-- Before-you-leave phone setup checklist
-- Nice-to-have personal items
-- Tap-to-text host prompts
-
-### Admin Page
-
-The admin page should show:
-
-- List of all guests
-- Each guest’s assigned house and room
-- Whether the current browser has a completed first-device binding
-- Persistent guest-link service status
-- Ability to generate or regenerate a guest link with a fresh token-style query string
-- Ability to reset a guest binding if needed
-- Ability to copy one SMS-ready packet of all current room-key links
-- Ability to copy a guest-specific SMS packet with assignment, room-key link, calendar, offline guide, host contact, and arrival notes
-- Ability to review a print-friendly sheet of all guest-specific SMS packets
-- Ability to review print-friendly day-of host text templates for arrival, movement, fleet approvals, meals, fireworks, and help
-- Ability to copy a missing-content request packet for the remaining host-supplied address, room assignment, photo, and checkout details
-- Ability to open a print-friendly media shot list for remaining house, room, and event-location photos
-- Readiness tracker for live, partial, and still-needed launch content
-
-## 4. Houses
-
-Each house should have a dedicated profile page or section with:
-
-- House name
-- Address
-- Google Maps link
-- Photos
-- Key gathering spaces
-- Any relevant notes or amenities
+## Houses
 
 ### LH1
 
-Address: TBD
-
-Google Maps link: pending until address is confirmed.
-
-Known spaces/events:
-
-- Sunroom
-- Great Room 1
-- Grand Peninsula
-- South Grand Peninsula fire pit
-- Dock/boat departure point
-
-Photos needed:
-
-- Exterior of LH1: provided as LH1 aerial photo
-- Sunroom
-- Great Room 1
-- Grand Peninsula
-- South Grand Peninsula fire pit
-- Relevant bedrooms
-
-### LH2
-
-Address: 63 Pine Eden Road, Rindge, New Hampshire
-
-Google Maps link: `https://www.google.com/maps/search/?api=1&query=63%20Pine%20Eden%20Road%2C%20Rindge%2C%20NH`
+Address: TBD.
 
 Known spaces:
 
-- South bedroom
-- North bedroom
-
-Photos needed:
-
-- Exterior of LH2
-- South bedroom
-- North bedroom
-- Any common spaces
-
-### LH3
-
-Address: 25 Sunny Cove Road, Winchendon, Massachusetts
-
-Google Maps link: `https://www.google.com/maps/search/?api=1&query=25%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA`
-
-Known spaces/events:
-
-- Beach
-- Lunch/dinner/brunch gathering location
-- Primary bedroom
-- Boat return point
-
-Photos needed:
-
-- Exterior of LH3
-- Beach
-- Primary bedroom
-- Dining/gathering area
-- Smoothie/lunch/dinner/brunch area
-
-## 5. Guest and Room Assignments
-
-### LH1
-
-| Guest(s) | Room |
-|---|---|
-| Heather and Eric | Second floor bedroom |
-| Morgan, Rowan, Emma, and Austin | Third floor bedroom, labeled “The Girls’ Room” |
-| Jack | Sunroom |
+- First floor bedroom
+- Second floor bedroom
+- The Girls' Room
+- Sunroom
+- Great Room 1
+- Grand Peninsula
+- South Grand Peninsula fire pit
+- Dock / boat departure point
 
 ### LH2
 
-| Guest(s) | Room |
-|---|---|
-| Cin and Vin | South bedroom |
-| Adam and Gage | North bedroom |
+Address:
+
+- 63 Pine Eden Road, Rindge, New Hampshire
+
+Rooms:
+
+- South bedroom
+- North bedroom
 
 ### LH3
 
-| Guest(s) | Room |
-|---|---|
-| Holly and Todd | Primary bedroom |
+Address:
 
-### Total Guests
+- 26 Sunny Cove Road, Winchendon, Massachusetts
 
-15 guests:
+Google Maps target:
 
-- Holly
-- Todd
-- Heather
-- Eric
-- Zach
-- Bee
-- Cin
-- Vin
-- Adam
-- Gage
-- Morgan
-- Rowan
-- Emma
-- Austin
-- Jack
+- `https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA`
 
-### Personalized Guest Links
+The home page location card should use the Lake Monomonac map image with a pin at 26 Sunny Cove Road and click through to this Google Maps target.
 
-Each guest has a persistent room-key URL. The admin page generates token-style URLs by appending `?t=...`.
+## Guest Assignments
 
-| Guest | URL | Current assignment |
+Guest roster and linked status table should appear on admin only.
+
+| Guest(s) | House | Room |
 |---|---|---|
-| Holly | `/july2026/guest/holly` | LH3 / Primary bedroom |
-| Todd | `/july2026/guest/todd` | LH3 / Primary bedroom |
-| Heather | `/july2026/guest/heather` | LH1 / Second floor bedroom |
-| Eric | `/july2026/guest/eric` | LH1 / Second floor bedroom |
-| Zach | `/july2026/guest/zach` | Assignment pending |
-| Bee | `/july2026/guest/bee` | Assignment pending |
-| Cin | `/july2026/guest/cin` | LH2 / South bedroom |
-| Vin | `/july2026/guest/vin` | LH2 / South bedroom |
-| Adam | `/july2026/guest/adam` | LH2 / North bedroom |
-| Gage | `/july2026/guest/gage` | LH2 / North bedroom |
-| Morgan | `/july2026/guest/morgan` | LH1 / The Girls' Room |
-| Rowan | `/july2026/guest/rowan` | LH1 / The Girls' Room |
-| Emma | `/july2026/guest/emma` | LH1 / The Girls' Room |
-| Austin | `/july2026/guest/austin` | LH1 / The Girls' Room |
-| Jack | `/july2026/guest/jack` | LH1 / Sunroom |
+| Holly and Tod | LH3 | Primary bedroom |
+| Heather and Eric | LH1 | Second floor bedroom |
+| Zack and Bee | LH1 | First floor bedroom |
+| Cin and Vin | LH2 | South bedroom |
+| Adam and Gage | LH2 | North bedroom |
+| Morgan, Rowan, Emma, and Austin | LH1 | The Girls' Room |
+| Jack | LH1 | Sunroom |
 
-Opening one of these links on a device records the first guest identity. Opening a different guest link afterward does not replace that stored check-in unless the local device binding is reset. If a tokenized link is already bound to another device or the token no longer matches, the guest page tells the guest to text the host for a fresh link.
+Admin guest table columns:
 
-Base guest-directory URLs without `?t=...` are browsable but should not claim the persistent backend room-key binding. Persistent first-device binding is for tokenized links generated from admin.
+- Name
+- Phone Number
+- Linked
 
-If a guest has an assignment pending, the guest page should show a host-confirmation notice instead of presenting “Pending” as a finished room assignment. The guest should be prompted to text the host for the current lodging details.
+Linked means the guest has clicked/opened the tokenized link and the binding service has recorded `bound_at`.
 
-## 6. Weekend Schedule
+## Schedule
 
-## Friday, July 3, 2026
+Friday, July 3:
 
-### 3:00 p.m. to 6:00 p.m.  
-Guest Check-In Window
+- 3:00-6:00 PM: Guest check-in window
+- 6:30 PM: Casual grab-and-go meal, Sunroom, LH1
+- 7:00-8:00 PM: Weekend orientation, Great Room 1, LH1
+- 8:00 PM: Campfire, cigars, and scotch, Grand Peninsula, LH1
 
-Guests arrive and settle into their assigned lake house and room.
+Saturday, July 4:
 
-### 6:30 p.m.  
-Casual Grab-and-Go Meal
+- 7:30-8:00 AM: Coffee at all houses
+- 8:00 AM: Yoga on the beach, LH3
+- 9:00 AM: Non-motorized lake activities, LH3 / lake access
+- 10:00 AM: Spa water, LH3
+- 11:00 AM: Motorized lake vehicle orientation, LH1
+- 11:30 AM-12:30 PM: Boat ride, depart LH1 and return LH3
+- 12:30 PM: Lunch, LH3
+- 2:00-6:00 PM: Free time and optional activities
+- 2:00 PM: Fourth of July boat parade, expected to pass near LH3 around 3:00 PM
+- 6:00 PM: Dinner, LH3, lakeside patio seating
+- 8:00 PM: S'mores at the fire pit, South Grand Peninsula, LH1
+- 8:30 PM: Sparklers and snacks
+- 9:00 PM: Optional fireworks viewing from LH1, LH3, or host-approved cruise
 
-Location: Sunroom, LH1
+Sunday, July 5:
 
-A casual, flexible meal after check-in.
+- 8:30 AM: Coffee at all houses
+- 10:00 AM: Pancake brunch with spa water, LH3
+- After brunch: Free time and lake activities
+- Sunday afternoon: Departure and grab-and-go food
 
-### 7:00 p.m. to 8:00 p.m.  
-Weekend Orientation
+## What To Bring
 
-Location: Great Room 1, LH1
+Guest-facing list:
 
-Overview of the weekend, key locations, schedule, activities, and safety/logistics.
+- Sunscreen
+- Swimsuit
+- Light jacket or hoodie
+- Patriotic spirit
 
-### 8:00 p.m.  
-Campfire, Cigars, and Scotch
+Drinks, chairs, towels, reusable water bottles, and bug spray should not be requested on the guest list.
 
-Location: Grand Peninsula, LH1
+## Fleet Inventory
 
-Relaxed evening gathering with fire, cigars, and scotch for those who partake.
+Motorized vehicles:
 
-## Saturday, July 4, 2026
+| Name | Vehicle | Color | Capacity |
+|---|---|---|---|
+| Laconic | Sea-Doo Switch Cruise 23 ft pontoon boat | Red | 10 persons |
+| Spikey Lizard | Sea-Doo GTX PWC | Blue | 3 seats |
+| Laika | Sea-Doo Spark Trixx PWC | Red | 2 seats |
+| Can-Am Quad | Can-Am XLT quad | Gray | 2 seats |
 
-### 7:30 a.m. to 8:00 a.m.  
-Coffee Time at All Houses
-
-Each house has its own coffee experience:
-
-- LH1: Kona coffee
-- LH2: K-cup coffee
-- LH3: Drip coffee
-
-Guests may visit any house for coffee.
-
-### 8:00 a.m.  
-Yoga on the Beach
-
-Location: Beach, LH3
-
-Morning yoga by the lake.
-
-### 9:00 a.m.  
-Non-Motorized Lake Activities
-
-Location: LH3 / Lake access
-
-Activities include:
+Non-motorized vehicles:
 
 - Kayaks
-- Canoes
-- Rowboats
-- Swimming
+- Two blue pedal boats
+- Walker Bay tender
 
-### 10:00 a.m.  
-Fruit Smoothies
+All motorized use requires host orientation and host approval.
 
-Location: LH3
+## Current Bundled Media
 
-Refreshing smoothies after morning lake activities.
-
-### 11:00 a.m.  
-Motorized Lake Vehicle Orientation
-
-Location: LH1
-
-Safety briefing and orientation for motorized lake vehicles, including boats or similar lake equipment.
-
-### 11:30 a.m. to 12:30 p.m.  
-Boat Ride
-
-Departure: LH1  
-Return: LH3
-
-Group boat ride across the lake.
-
-### 12:30 p.m.  
-Lunch
-
-Location: LH3
-
-Lunch begins immediately after the boat ride returns.
-
-### 2:00 p.m. to 6:00 p.m.  
-Free Time and Optional Activities
-
-Guests may choose from:
-
-- Hiking at Famous Land
-- Famous Land quests
-- Motorized boating
-- Non-motorized boating
-- Beach and lounging activities
-- Quad/four-wheeler by request or reservation
-- Napping or downtime
-
-### 2:00 p.m.  
-Fourth of July Boat Parade
-
-Guests may see the boat parade during afternoon free time.
-
-Expected viewing note: The parade may pass by LH3 around 3:00 p.m.
-
-### 6:00 p.m.  
-Dinner
-
-Location: LH3
-
-Lakeside patio seating.
-
-### 8:00 p.m.  
-S’mores at the Fire Pit
-
-Location: South Grand Peninsula, LH1
-
-Evening fire pit gathering with s’mores.
-
-### 8:30 p.m.  
-Sparklers and Snacks
-
-Location: South Grand Peninsula / LH1 area unless otherwise specified
-
-Evening snacks and sparklers after s’mores.
-
-### 9:00 p.m.  
-Optional Fireworks Viewing
-
-Viewing options:
-
-- Grand Peninsula at LH1
-- Beach at LH3
-- Chartered cruise experience on the lake
-
-## Sunday, July 5, 2026
-
-### 8:30 a.m.  
-Coffee Time at All Houses
-
-Same coffee setup as Saturday:
-
-- LH1: Kona coffee
-- LH2: K-cup coffee
-- LH3: Drip coffee
-
-### 10:00 a.m.  
-Pancake Brunch
-
-Location: LH3
-
-Relaxed Sunday brunch.
-
-### After Brunch  
-Free Time and Lake Activities
-
-Guests may continue enjoying the lake, lounging, hiking, boating, or relaxing.
-
-### Sunday Afternoon  
-Departure and Grab-and-Go Food
-
-Grab-and-go food available for guests as they depart.
-
-## 7. Activity List
-
-The guest page includes a dedicated Activities section with scan-friendly cards for:
-
-- Beach and swimming at LH3
-- Kayaks, canoes, and rowboats from LH3 / lake access
-- Motorized lake fleet after the LH1 orientation
-- Famous Land quests and hiking during free time
-- Campfire, s’mores, sparklers, and fireworks viewing from LH1 / LH3
-
-Activity approval rules:
-
-- Motorized lake fleet use requires the Saturday LH1 orientation and host approval.
-- Optional fireworks cruise plans are by host approval.
-- Quad/four-wheeler use is by host approval.
-- Dietary notes, allergies, or restrictions should be texted to the host at 781-929-4932.
-
-## 8. Lake Use and Approval Guide
-
-The guest page includes a dedicated Lake Rules section with:
-
-- Orientation first: motorized fleet use starts only after the Saturday LH1 safety briefing and a host go-ahead.
-- Life jackets: guests should wear the right-size life jacket for boating, PWC rides, and any lake activity where the host asks for one.
-- Dock plan: guests should use the host-designated departure and return points, especially for the LH1-to-LH3 group boat ride.
-- Text before changes: guests should text the host before changing cruise plans, taking out a motorized vehicle, or requesting quad/four-wheeler time.
-
-## 9. Food and Drinks
-
-The guest page includes a dedicated Food and Drinks section with:
-
-- Friday grab-and-go welcome meal in the LH1 sunroom
-- Saturday coffee at all houses
-- Saturday fruit smoothies at LH3
-- Saturday lunch at LH3
-- Saturday dinner at LH3 with lakeside patio seating
-- Sunday pancake brunch at LH3
-
-## 10. Motorized Vehicle Inventory
-
-| Name | Vehicle | Color | Capacity | Best for | Start point | Approval | Reference image | Operating note |
-|---|---|---|---|---|---|---|---|---|
-| Laconic | Sea-Doo Switch Cruise 23 ft pontoon boat | Red | 10 persons | Group cruise, boat parade viewing, and relaxed lake runs | LH1 dock / host-designated departure point | Host orientation required before use | Red Sea-Doo Switch Cruise 23 ft studio-style reference | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
-| Spikey Lizard | Sea-Doo GTX PWC | Blue | 3 seats | Three-seat PWC rides after the safety briefing | Host-approved lake launch point | Host orientation and PWC go-ahead required | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
-| Laika | Sea-Doo Spark Trixx PWC | Red | 2 seats | Compact two-seat Spark Trixx PWC outings | Host-approved lake launch point | Host orientation and PWC go-ahead required | Red Sea-Doo Spark Trixx 2up studio reference | Compact Spark Trixx PWC for host-approved lake use after orientation. |
-
-Inventory notes:
-
-- The website stores the vehicle reference images inside the July 2026 asset folder.
-- The three inventory cards should look visually similar, using clean studio-style Sea-Doo watercraft references.
-- Admin inventory cards link back to the original Sea-Doo reference image used for each vehicle.
-- The guest fleet cards show best-use, start-point, and approval notes so guests know what to text the host about.
-- All motorized vehicle use is part of the host-approved activity flow.
-
-## 11. Guest Experience Requirements
-
-The site should feel like a fun resort portal.
-
-Suggested sections:
-
-- Welcome / Check-In
-- Resort Desk quick guide
-- Arrival Desk checklist
-- Resort Pass at `/july2026/pass`
-- Resort FAQ at `/july2026/faq`
-- Rain Plan at `/july2026/rain-plan`
-- Host text templates
-- Add Calendar
-- Add My Calendar
-- Save Host Contact
-- Offline Guide
-- My Stay
-- My Room
-- Downloadable personal room-key packet
-- Weekend Itinerary
-- Houses
-- Activities
-- Motorized Fleet
-- Lake Rules and Approvals
-- Safety Guide at `/july2026/safety`
-- Food and Drinks
-- Resort Map at `/july2026/map`
-- Maps and Directions with known LH2 and LH3 address links
-- Directions Hub at `/july2026/directions`
-- House Directory at `/july2026/houses`
-- Guest Registry at `/july2026/guest-list`
-- Guest Concierge at `/july2026/concierge`
-- Packing Prep at `/july2026/prep`
-- Weekend Itinerary at `/july2026/itinerary`
-- Meals and Coffee Guide at `/july2026/meals`
-- Fleet Guide at `/july2026/fleet`
-- Getting Around guide for house-to-house weekend flow
-- Help / Contact Host
-- View Other Guests
-- Admin
-
-Admin operating sections:
-
-- Planning summary
-- Reference checkpoints
-- Launch readiness tracker
-- Asset and content checklist showing live bundled media and missing host-supplied content
-- Missing-content request packet for launch-completion follow-up
-- Resort Desk readiness
-- Arrival Desk readiness
-- Arrival card readiness
-- Resort map readiness
-- Directions hub readiness
-- House directory readiness
-- Guest concierge readiness
-- Packing prep readiness
-- Weekend itinerary readiness
-- Meals guide readiness
-- Fleet guide readiness
-- Safety guide readiness
-- Media shot list readiness
-- Calendar file readiness
-- Personalized calendar readiness
-- Host contact card readiness
-- Offline guide readiness
-- Guest-link packet readiness
-- Guest-specific SMS packet readiness
-- Guest SMS review sheet readiness
-- Host text template readiness
-- Personalized room-key packet readiness
-- Personalized itinerary readiness
-- Getting Around readiness
-- Motorized vehicle inventory
-- Lake rules readiness
-- Personalized room-key URLs
-- Embedded reference material with Proof edit link
-
-Getting Around guide:
-
-- Arrive at your assigned house using the guest room-key page; LH2 and LH3 directions are live, and LH1 directions remain pending until the host confirms the address.
-- Use the resort map for a polished guest-facing overview of house roles, lake movement, meal hubs, and activity anchors.
-- Use the directions hub for known house map links, LH1 pending-address fallback, and host text help.
-- Use the house directory for LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.
-- Use the guest registry for house rosters, room assignments, companions, pending guests, and room-key links.
-- Friday starts at LH1 for the welcome meal, orientation, and first-night fire gathering.
-- Saturday morning shifts to LH3 for yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch.
-- The Saturday group boat ride connects LH1 to LH3 after the motorized fleet orientation.
-
-Arrival Desk checklist:
-
-- Before guests leave: open the room-key link, save the host contact, and add the weekend calendar.
-- Arrival: go to the assigned house, settle into the assigned room, then use the schedule for the Friday LH1 welcome flow.
-- Friday night: LH1 sunroom for the 6:30 p.m. grab-and-go meal, then Great Room 1 for the 7:00 p.m. orientation.
-- Saturday lake day: start at LH3 for yoga and lake time, then wait for the 11:00 a.m. LH1 orientation before motorized fleet use.
-
-Host text templates:
-
-- Room help: "Hi, I need help with my July 4th weekend room assignment or arrival directions."
-- Dietary note: "Hi, I have a dietary note for the July 4th weekend:"
-- Fleet approval: "Hi, I would like host approval or timing guidance for motorized lake fleet use."
-- Link reset: "Hi, my July 2026 room-key link needs a reset or fresh token."
-- Generic Contact Host actions open a prefilled "Hi, I need help with the July 4th weekend." SMS draft to 781-929-4932.
-- Guest concierge: `/july2026/concierge` exposes the prompts as tap-to-text cards and pairs them with approval guidance.
-- Admin includes a print-friendly host text template sheet at `/july2026/admin/host-texts`.
-- The host text template sheet covers arrival reminder, Friday welcome flow, Saturday lake morning, fleet orientation, boat ride movement, dinner/fireworks, Sunday brunch, and general host help.
-
-Safety guide:
-
-- Guests should call 911 first for urgent medical, fire, water, or safety emergencies, then text the host when safe.
-- `/july2026/safety` centralizes emergency-first guidance, host line, Saturday orientation, life jackets, dock plan, text-before-changes rules, and host text prompts.
-- Guest portal, arrival card, fleet guide, concierge, offline guide, and admin launch review link to the safety guide.
-
-Packing prep:
-
-- Guests should bring sunscreen, swimsuit and towel, reusable water bottle, bug spray, light jacket or hoodie, and patriotic spirit.
-- Main meals and scheduled food moments are planned.
-- Host text prompts are ready for room help, dietary notes, fleet approval, link resets, and generic help.
-- Guest portal, calendar, host contact, and offline guide are available on the guest's phone.
-- Guests should open their room-key link, save the host contact, add the calendar, and download the guide before leaving.
-
-Meals and coffee guide:
-
-- `/july2026/meals` centralizes welcome food, house coffee, fruit smoothies, lunch, lakeside patio dinner, pancake brunch, and dietary-note texting.
-- Guest portal, arrival card, prep, itinerary, concierge, offline guide, and admin launch review link to the meals guide.
-- Guests can text dietary notes or food questions to 781-929-4932 from the meals guide.
-
-Resort map:
-
-- `/july2026/map` centralizes the visual house flow across LH1, LH2, and LH3.
-- The page keeps LH1 address pending while still giving guests a clear Lake Monomonac fallback and house-role overview.
-- Guest portal, arrival card, directions hub, house directory, itinerary, meals, fleet, offline guide, and admin launch review link to the resort map.
-
-Guest registry:
-
-- `/july2026/guest-list` centralizes guest rosters by LH1, LH2, LH3, and pending assignment.
-- The page shows total guests, assigned guests, pending guests, room groupings, companions, and direct room-key links.
-- Pending guests continue to show host-confirmation language rather than false house or room assignments.
-
-Guest-specific SMS packets:
-
-- Admin guest rows can copy a message for one guest at a time.
-- Admin guest rows show a preview of the guest-specific SMS packet before copying.
-- Each packet includes the tokenized room-key link when available, personal calendar link, personal packet link, current assignment, arrival and departure notes, calendar link, offline guide link, host contact card link, and host SMS number.
-- Pending guests receive language that their assignment still needs host confirmation instead of a false house or room.
-- Admin includes a print-friendly guest SMS packet review sheet at `/july2026/admin/sms-packets`.
-- The SMS review sheet uses stable guest URLs for review while the interactive admin page remains the source for fresh tokenized links.
-
-Personal room-key packets:
-
-- Each guest page links to a downloadable plain-text personal packet.
-- Packet route pattern: `/july2026/guest/{slug}/packet.txt`.
-- The packet is suitable for offline reference and includes house-specific highlights plus the core weekend links.
-- Personal room-key pages and packets include direct directions for LH2 and LH3 guests, the directions hub, while LH1 and pending guests use the general Lake Monomonac area map until the LH1 address is confirmed.
-
-Room-key QR codes:
-
-- Each guest page links to a self-contained QR code image for that guest's room-key URL.
-- QR route pattern: `/july2026/guest/{slug}/qr.svg`.
-- Admin guest rows show each guest's QR code and can open tokenized QR URLs when a current token is available.
-- Guest-specific SMS packets include the room-key QR code URL for screenshot or print-based sharing.
-
-Printable room-key sheet:
-
-- Admin includes a print-friendly room-key sheet at `/july2026/admin/room-keys`.
-- The sheet lists every guest, current assignment, arrival, departure, companions, stable room-key URL, and room-key QR code.
-- The sheet is intended for host check-in, arrival troubleshooting, and paper/screenshot backup.
-
-Printable host briefing sheet:
-
-- Admin includes a print-friendly host briefing sheet at `/july2026/admin/briefing-sheet`.
-- The sheet summarizes the host text line, guest portal, launch caveats, arrival checklist, house flow, weekend schedule, meals, lake approvals, packing list, activities, motorized fleet, and common text prompts.
-- The sheet is intended as a host operations backup for check-in, meal timing, lake rules, and day-of coordination.
-
-Printable house signs:
-
-- The guest portal exposes a generic event QR code at `/july2026/qr.svg`.
-- Admin includes print-ready LH1, LH2, and LH3 house signs at `/july2026/admin/house-signs`.
-- Each sign includes the house role, host text line, guest portal, address status, rooms/spaces, key moments at that house, and the portal QR code.
-- The signs are intended for on-site guest orientation and resort-style arrival polish.
-
-Personal calendar files:
-
-- Each guest page links to a personal downloadable `.ics` file.
-- Calendar route pattern: `/july2026/guest/{slug}/calendar.ics`.
-- The calendar includes the guest's assignment or pending-assignment language, arrival/departure notes, personal room-key URL, personal packet URL, and host SMS line.
-
-Missing-content request packet:
-
-- Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
-- The same packet is downloadable at `/july2026/admin/missing-content.txt`.
-- The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, Day-Of Desk, resort pass, resort FAQ, arrival card, resort map, directions hub, house directory, guest registry, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, admin reference, launch status, guest SMS packets, host text templates, media shot list, and offline guide.
-
-Launch status packet:
-
-- Admin includes a copy-friendly plain-text launch status packet at `/july2026/admin/status.txt`.
-- The packet summarizes published guest surfaces, admin review surfaces, ready items, assignment counts, pending guests, host-needed items, guest-facing caveats, and the next host action.
-- The packet is intended for fast launch review without scrolling through the full reference document.
-
-Media shot list:
-
-- Admin includes a print-friendly media shot list at `/july2026/admin/media-shot-list`.
-- The shot list shows current bundled media assets, remaining LH1/LH2/LH3 photo needs, framing guidance, and capture tips.
-- The shot list is intended to make the final media collection pass clear enough to hand to a host or photographer.
-
-Launch QA links:
-
-- Admin includes a compact review grid for the live guest portal, Day-Of Desk, admin reference, resort pass, resort FAQ, offline guide, arrival card, resort map, directions hub, house directory, guest registry, guest concierge, packing prep, weekend itinerary, meals guide, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, launch status, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
-- The launch QA links are intended for fast host review before sending guest SMS packets.
-
-## 12. Design Direction
-
-Style should feel:
-
-- Polished
-- Playful
-- Premium
-- Lake resort inspired
-- Family-friendly
-- Clear and easy to use on mobile
-
-Possible design language:
-
-- “Welcome to the Lake Weekend Resort”
-- “Your stay”
-- “Your itinerary”
-- “Resort map”
-- “Guest check-in”
-- “House profiles”
-- “Lake activities”
-- “Fourth of July experiences”
-
-Avoid making the site feel too corporate or too silly. It should be fun but still useful.
-
-## 13. Content and Asset Needs
-
-Images still needed:
-
-- LH1 exterior: provided as LH1 aerial photo
-- LH1 sunroom
-- LH1 Great Room 1
-- LH1 Grand Peninsula
-- LH1 South Grand Peninsula fire pit
-- LH1 bedrooms
-- LH2 exterior
-- LH2 bedrooms
-- LH3 exterior: provided as LH3 exterior patio photo
-- LH3 beach
-- LH3 primary bedroom
-- LH3 dining/gathering areas
-- Any room photos for personalized room pages
-
-Current bundled media:
-
-- Generated July 4th lake weekend hero artwork
+- July 4th hero artwork
+- Lake Monomonac map image with 26 Sunny Cove Road pin
 - LH1 aerial exterior photo
 - LH2 exterior front photo
 - LH2 exterior side photo
 - LH2 kitchen photo
 - LH2 living room photo
 - LH3 exterior patio photo
-- LH3 animated profile video
-- LH3 animated GIF profile generated from the LH3 drone video
-- Motorized vehicle reference images for Laconic, Spikey Lizard, and Laika
-- Resort FAQ content for arrival, directions, food, lake approvals, phone setup, and host help
-- Rain Plan content for host updates, indoor pivots, lake-safety holds, meals, fireworks, and phone setup
+- LH3 profile video
+- LH3 animated GIF profile
+- Motorized vehicle reference images
+- Non-motorized vehicle images
 
-Missing information:
+## Still Needed
 
 - LH1 address
-- Zach room assignment
-- Bee room assignment
-- Exact departure/check-out time, if needed
+- LH1 interior/activity photos
+- LH2 bedroom photos
+- LH3 beach/room/detail photos
+- Exact departure/check-out time, if desired

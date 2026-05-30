@@ -40,8 +40,6 @@ export default function July2026DayOfPage() {
           </div>
           <nav className={styles.quickLinks} aria-label="Day-of quick actions">
             <a href="/july2026">Guest Portal</a>
-            <a href="/july2026/pass">Resort Pass</a>
-            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
             <a href={hostSmsHref}>Text Host</a>
           </nav>
@@ -119,7 +117,6 @@ export default function July2026DayOfPage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href="/july2026/weekend-guide.txt">Offline Guide</a>
         </footer>
       </section>
     </main>
