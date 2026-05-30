@@ -41,13 +41,13 @@ The personalized view should include:
 
 ### Identity Binding Behavior
 
-Current self-contained implementation: the first guest link opened on a device binds that guest identity to local browser storage.
+Current implementation: the first guest link opened on a device binds that guest identity through the `/api/july2026/guest-bindings` service and also stores the active identity locally in the browser.
 
 If a different guest link is opened later on the same device, it does not overwrite the original device/session binding. The page shows the viewed guest details while making clear that the device remains checked in as the originally bound guest.
 
-The current implementation is local-device binding only. Full cross-device enforcement would require a backend binding store.
+The backend guest-link store records each guest slug, token, current binding state, and reset/regeneration timestamps.
 
-The admin page includes a local reset control for the current device and a fresh token-style link generator for each guest.
+The admin page includes a local reset control for the current device plus persistent regenerate/reset controls for each guest link.
 
 ### Admin Page
 
@@ -56,8 +56,9 @@ The admin page should show:
 - List of all guests
 - Each guest’s assigned house and room
 - Whether the current browser has a completed first-device binding
+- Persistent guest-link service status
 - Ability to generate or regenerate a guest link with a fresh token-style query string
-- Ability to reset the current device binding if needed
+- Ability to reset a guest binding if needed
 
 ## 4. Houses
 
@@ -177,7 +178,7 @@ Photos needed:
 
 ### Personalized Guest Links
 
-Each guest has a direct room-key URL. The admin page can also generate a fresh token-style URL by appending `?t=...`.
+Each guest has a persistent room-key URL. The admin page generates token-style URLs by appending `?t=...`.
 
 | Guest | URL | Current assignment |
 |---|---|---|
@@ -197,7 +198,7 @@ Each guest has a direct room-key URL. The admin page can also generate a fresh t
 | Austin | `/july2026/guest/austin` | LH1 / The Girls' Room |
 | Jack | `/july2026/guest/jack` | LH1 / Sunroom |
 
-Opening one of these links on a device records the first guest identity locally. Opening a different guest link afterward does not replace that stored check-in unless the local device binding is reset.
+Opening one of these links on a device records the first guest identity. Opening a different guest link afterward does not replace that stored check-in unless the local device binding is reset. If a tokenized link is already bound to another device or the token no longer matches, the guest page tells the guest to text the host for a fresh link.
 
 ## 6. Weekend Schedule
 

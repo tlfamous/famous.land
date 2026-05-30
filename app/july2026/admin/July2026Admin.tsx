@@ -44,15 +44,18 @@ type BoundGuest = {
   boundAt: string;
 };
 
-function createGuestToken() {
-  const bytes = new Uint8Array(8);
-  window.crypto.getRandomValues(bytes);
-  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
-}
+type GuestLinkRecord = {
+  slug: string;
+  token: string;
+  bound?: boolean;
+  bound_at?: string;
+  updated_at?: string;
+};
 
 export function July2026Admin() {
-  const [generatedTokens, setGeneratedTokens] = useState<Record<string, string>>({});
+  const [guestLinks, setGuestLinks] = useState<Record<string, GuestLinkRecord>>({});
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
+  const [linkStatus, setLinkStatus] = useState("Loading guest links");
   const origin = typeof window === "undefined" ? "" : window.location.origin;
   const boundGuestProfile = useMemo(
     () => guestAssignments.find((guest) => guest.slug === boundGuest?.slug),
@@ -66,13 +69,53 @@ export function July2026Admin() {
     } catch {
       setBoundGuest(null);
     }
+
+    void refreshGuestLinks();
   }, []);
 
-  function regenerateGuestLink(slug: string) {
-    setGeneratedTokens((tokens) => ({
-      ...tokens,
-      [slug]: createGuestToken()
-    }));
+  async function refreshGuestLinks() {
+    try {
+      const response = await fetch("/api/july2026/guest-links");
+      const result = (await response.json()) as { ok?: boolean; links?: GuestLinkRecord[] };
+
+      if (result.ok && result.links) {
+        setGuestLinks(Object.fromEntries(result.links.map((link) => [link.slug, link])));
+        setLinkStatus("Persistent guest links loaded");
+        return;
+      }
+
+      setLinkStatus("Guest-link service did not return links");
+    } catch {
+      setLinkStatus("Guest-link service unavailable");
+    }
+  }
+
+  async function updateGuestLink(slug: string, action: "regenerate" | "reset") {
+    setLinkStatus(action === "regenerate" ? "Regenerating link" : "Resetting binding");
+
+    try {
+      const response = await fetch("/api/july2026/guest-links", {
+        body: JSON.stringify({ action, slug }),
+        headers: {
+          "content-type": "application/json"
+        },
+        method: "POST"
+      });
+      const result = (await response.json()) as { ok?: boolean; link?: GuestLinkRecord };
+
+      if (response.ok && result.ok && result.link) {
+        setGuestLinks((links) => ({
+          ...links,
+          [slug]: result.link as GuestLinkRecord
+        }));
+        setLinkStatus(action === "regenerate" ? "Fresh link generated" : "Guest binding reset");
+        return;
+      }
+
+      setLinkStatus("Guest-link update failed");
+    } catch {
+      setLinkStatus("Guest-link service unavailable");
+    }
   }
 
   function resetLocalBinding() {
@@ -179,23 +222,32 @@ export function July2026Admin() {
                 : "No guest bound on this device yet"}
             </span>
           </div>
+          <div className={styles.bindingStatus}>
+            <strong>Persistent link service</strong>
+            <span>{linkStatus}</span>
+          </div>
           <div className={styles.guestLinkGrid}>
             {guestAssignments.map((guest) => {
-              const token = generatedTokens[guest.slug];
+              const token = guestLinks[guest.slug]?.token;
               const path = `/july2026/guest/${guest.slug}${token ? `?t=${token}` : ""}`;
               const href = `${origin}${path}`;
+              const boundAt = guestLinks[guest.slug]?.bound_at;
 
               return (
                 <article key={guest.slug}>
                   <div>
                     <strong>{guest.name}</strong>
                     <span>{guest.house === "Pending" ? "Assignment pending" : `${guest.house} / ${guest.room}`}</span>
+                    <span>{boundAt ? `Bound ${new Date(boundAt).toLocaleString()}` : "Not bound yet"}</span>
                     <code>{path}</code>
                   </div>
                   <div className={styles.guestLinkActions}>
                     <a href={path}>Open</a>
-                    <button type="button" onClick={() => regenerateGuestLink(guest.slug)}>
+                    <button type="button" onClick={() => updateGuestLink(guest.slug, "regenerate")}>
                       Regenerate
+                    </button>
+                    <button type="button" onClick={() => updateGuestLink(guest.slug, "reset")}>
+                      Reset
                     </button>
                     <button
                       type="button"

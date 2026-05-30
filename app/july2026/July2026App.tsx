@@ -87,6 +87,7 @@ type July2026AppProps = {
 };
 
 const bindingStorageKey = "famous.land.july2026.boundGuest";
+const deviceStorageKey = "famous.land.july2026.deviceId";
 
 type BoundGuest = {
   slug: string;
@@ -94,8 +95,18 @@ type BoundGuest = {
   boundAt: string;
 };
 
+type ServerBindingStatus =
+  | "idle"
+  | "local-only"
+  | "server-bound"
+  | "already-bound"
+  | "claimed"
+  | "token-mismatch"
+  | "unavailable";
+
 export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
+  const [serverBindingStatus, setServerBindingStatus] = useState<ServerBindingStatus>("idle");
   const selectedGuest = guestAssignments.find((guest) => guest.slug === selectedGuestSlug);
   const selectedGuestHouse =
     selectedGuest?.house && selectedGuest.house !== "Pending"
@@ -112,34 +123,117 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const isViewingBoundGuest = Boolean(selectedGuest && boundGuest?.slug === selectedGuest.slug);
 
   useEffect(() => {
+    let cancelled = false;
+
+    function getDeviceId() {
+      const storedDeviceId = window.localStorage.getItem(deviceStorageKey);
+
+      if (storedDeviceId) {
+        return storedDeviceId;
+      }
+
+      const nextDeviceId = crypto.randomUUID();
+      window.localStorage.setItem(deviceStorageKey, nextDeviceId);
+      return nextDeviceId;
+    }
+
+    function storeLocalBinding(nextBinding: BoundGuest, status: ServerBindingStatus) {
+      window.localStorage.setItem(bindingStorageKey, JSON.stringify(nextBinding));
+      if (!cancelled) {
+        setBoundGuest(nextBinding);
+        setServerBindingStatus(status);
+      }
+    }
+
     try {
       const storedBinding = window.localStorage.getItem(bindingStorageKey);
+      const parsedBinding = storedBinding ? (JSON.parse(storedBinding) as BoundGuest) : null;
 
-      if (storedBinding) {
-        setBoundGuest(JSON.parse(storedBinding) as BoundGuest);
-        return;
+      if (parsedBinding) {
+        setBoundGuest(parsedBinding);
       }
 
       if (selectedGuest) {
         const searchParams = new URLSearchParams(window.location.search);
+        const token = searchParams.get("t") ?? undefined;
+
+        if (parsedBinding && parsedBinding.slug !== selectedGuest.slug) {
+          setServerBindingStatus("local-only");
+          return;
+        }
+
         const nextBinding = {
           boundAt: new Date().toISOString(),
           slug: selectedGuest.slug,
-          token: searchParams.get("t") ?? undefined
+          token
         };
 
-        window.localStorage.setItem(bindingStorageKey, JSON.stringify(nextBinding));
-        setBoundGuest(nextBinding);
+        void fetch("/api/july2026/guest-bindings", {
+          body: JSON.stringify({
+            device_id: getDeviceId(),
+            slug: selectedGuest.slug,
+            token
+          }),
+          headers: {
+            "content-type": "application/json"
+          },
+          method: "POST"
+        })
+          .then(async (response) => {
+            const result = (await response.json().catch(() => null)) as
+              | {
+                  ok?: boolean;
+                  mode?: ServerBindingStatus;
+                  link?: { bound_at?: string; token?: string };
+                }
+              | null;
+
+            if (cancelled) {
+              return;
+            }
+
+            if (result?.ok) {
+              storeLocalBinding(
+                {
+                  boundAt: result.link?.bound_at ?? nextBinding.boundAt,
+                  slug: selectedGuest.slug,
+                  token: result.link?.token ?? token
+                },
+                result.mode === "already-bound" ? "already-bound" : "server-bound"
+              );
+              return;
+            }
+
+            if (result?.mode === "claimed" || result?.mode === "token-mismatch") {
+              setServerBindingStatus(result.mode);
+              return;
+            }
+
+            storeLocalBinding(nextBinding, "local-only");
+          })
+          .catch(() => {
+            if (!cancelled) {
+              storeLocalBinding(nextBinding, "unavailable");
+            }
+          });
       }
     } catch {
       setBoundGuest(null);
+      setServerBindingStatus("unavailable");
     }
+
+    return () => {
+      cancelled = true;
+    };
   }, [selectedGuest]);
 
   function resetDeviceBinding() {
     window.localStorage.removeItem(bindingStorageKey);
     setBoundGuest(null);
+    setServerBindingStatus("idle");
   }
+
+  const bindingIsClaimed = serverBindingStatus === "claimed" || serverBindingStatus === "token-mismatch";
 
   return (
     <div className={`${styles.app} july-2026-app`}>
@@ -255,11 +349,19 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
 
           {selectedGuest ? (
             <>
-              <div className={isViewingBoundGuest ? styles.bindingNotice : styles.bindingWarning}>
+              <div className={isViewingBoundGuest && !bindingIsClaimed ? styles.bindingNotice : styles.bindingWarning}>
                 <div>
-                  <strong>{isViewingBoundGuest ? "Device check-in active" : "Viewing without rebinding"}</strong>
+                  <strong>
+                    {bindingIsClaimed
+                      ? "Room-key needs host reset"
+                      : isViewingBoundGuest
+                        ? "Device check-in active"
+                        : "Viewing without rebinding"}
+                  </strong>
                   <p>
-                    {isViewingBoundGuest
+                    {bindingIsClaimed
+                      ? "This link is already bound or no longer matches the current room-key token. Text the host for a fresh link."
+                      : isViewingBoundGuest
                       ? `This device is checked in as ${selectedGuest.name}.`
                       : boundGuestProfile
                         ? `This device is already checked in as ${boundGuestProfile.name}; opening ${selectedGuest.name}'s link did not overwrite it.`
