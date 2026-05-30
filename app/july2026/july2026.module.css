@@ -125,8 +125,7 @@
 
 .primaryButton,
 .secondaryButton,
-.mapButton,
-.rsvpForm button {
+.mapButton {
   min-height: 52px;
   display: inline-flex;
   align-items: center;
@@ -137,8 +136,7 @@
   text-decoration: none;
 }
 
-.primaryButton,
-.rsvpForm button {
+.primaryButton {
   color: #fffdf7;
   border: 1px solid rgba(255, 253, 247, 0.08);
   background: var(--july-red);
@@ -329,7 +327,6 @@
 }
 
 .scheduleList p,
-.rsvpCopy,
 .address {
   margin: 4px 0 0;
   color: var(--july-muted);
@@ -535,65 +532,6 @@
   display: block;
   margin-bottom: 12px;
   color: #8a5260;
-  font-weight: 800;
-}
-
-.rsvpCopy {
-  margin: 12px 22px;
-}
-
-.rsvpForm {
-  display: grid;
-  gap: 12px;
-  margin: 0 22px 20px;
-}
-
-.rsvpForm label {
-  display: grid;
-  gap: 6px;
-  color: var(--july-muted);
-  font-size: 0.82rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.rsvpForm input,
-.rsvpForm select,
-.rsvpForm textarea {
-  width: 100%;
-  min-height: 44px;
-  color: var(--july-ink);
-  border: 1px solid var(--july-line);
-  border-radius: 8px;
-  background: #fff;
-  padding: 10px 12px;
-  font-size: 1rem;
-  text-transform: none;
-}
-
-.rsvpForm textarea {
-  min-height: 82px;
-  resize: vertical;
-}
-
-.formRow {
-  display: grid;
-  grid-template-columns: 1fr 96px;
-  gap: 10px;
-}
-
-.rsvpForm button {
-  width: 100%;
-  cursor: pointer;
-}
-
-.confirmation {
-  margin: -4px 22px 20px;
-  padding: 12px;
-  color: #123f27;
-  background: rgba(79, 122, 76, 0.14);
-  border: 1px solid rgba(79, 122, 76, 0.28);
-  border-radius: 8px;
   font-weight: 800;
 }
 
