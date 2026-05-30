@@ -948,20 +948,21 @@
 
 .vehicleRow {
   display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: 13px;
-  align-items: center;
-  padding: 14px 0;
+  gap: 12px;
+  align-items: start;
+  padding: 16px 0;
   border-bottom: 1px solid var(--july-line);
 }
 
 .vehicleImage {
-  width: 96px;
-  height: 70px;
+  width: 100%;
+  height: 122px;
   object-fit: contain;
   border: 1px solid rgba(8, 19, 38, 0.08);
   border-radius: 6px;
-  background: #f8faf6;
+  background:
+    linear-gradient(180deg, rgba(22, 79, 159, 0.06), rgba(255, 253, 247, 0.76)),
+    #f8faf6;
 }
 
 .vehicleBody strong {
@@ -1011,6 +1012,33 @@
   font-size: 0.8rem;
   font-weight: 900;
   line-height: 1.2;
+}
+
+.vehicleGuide {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.vehicleGuide span {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 8px;
+  align-items: start;
+  color: var(--july-ink);
+  font-size: 0.82rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.vehicleGuide span::before {
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  content: "";
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffdf7 0 22%, transparent 24%), var(--july-red);
+  box-shadow: 0 0 0 3px rgba(198, 30, 45, 0.1);
 }
 
 .bringList {

@@ -415,16 +415,17 @@ The guest page includes a dedicated Food and Drinks section with:
 
 ## 10. Motorized Vehicle Inventory
 
-| Name | Vehicle | Color | Capacity | Reference image | Operating note |
-|---|---|---|---|---|---|
-| Laconic | Sea-Doo Switch Cruise pontoon boat | Red | 10 persons | Red / Coral Blast Sea-Doo Switch Cruise 21-class studio reference; host reference says 23 ft | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
-| Spikey Lizard | Sea-Doo PWC | Blue | 3 seats | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
-| Laika | Sea-Doo Spark Trixx | Red | 2 seats | Red Sea-Doo Spark Trixx 2up studio reference | Compact Trixx-style PWC for host-approved lake use after orientation. |
+| Name | Vehicle | Color | Capacity | Best for | Start point | Approval | Reference image | Operating note |
+|---|---|---|---|---|---|---|---|---|
+| Laconic | Sea-Doo Switch Cruise pontoon boat | Red | 10 persons | Group cruise, boat parade viewing, and relaxed lake runs | LH1 dock / host-designated departure point | Host orientation required before use | Red / Coral Blast Sea-Doo Switch Cruise 21-class studio reference; host reference says 23 ft | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
+| Spikey Lizard | Sea-Doo PWC | Blue | 3 seats | Three-seat PWC rides after the safety briefing | Host-approved lake launch point | Host orientation and PWC go-ahead required | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
+| Laika | Sea-Doo Spark Trixx | Red | 2 seats | Compact two-seat Trixx-style PWC outings | Host-approved lake launch point | Host orientation and PWC go-ahead required | Red Sea-Doo Spark Trixx 2up studio reference | Compact Trixx-style PWC for host-approved lake use after orientation. |
 
 Inventory notes:
 
 - The website stores the vehicle reference images inside the July 2026 asset folder.
 - The three inventory cards should look visually similar, using clean studio-style Sea-Doo watercraft references.
+- The guest fleet cards show best-use, start-point, and approval notes so guests know what to text the host about.
 - All motorized vehicle use is part of the host-approved activity flow.
 
 ## 11. Guest Experience Requirements

@@ -525,6 +525,18 @@ export function July2026Admin() {
                         <dd>{vehicle.model}</dd>
                       </div>
                       <div>
+                        <dt>Best for</dt>
+                        <dd>{vehicle.bestFor}</dd>
+                      </div>
+                      <div>
+                        <dt>Start point</dt>
+                        <dd>{vehicle.pickup}</dd>
+                      </div>
+                      <div>
+                        <dt>Approval</dt>
+                        <dd>{vehicle.approval}</dd>
+                      </div>
+                      <div>
                         <dt>Color</dt>
                         <dd>{vehicle.color}</dd>
                       </div>

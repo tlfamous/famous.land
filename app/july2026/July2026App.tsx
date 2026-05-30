@@ -696,6 +696,11 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                           <dd>{vehicle.capacity}</dd>
                         </div>
                       </dl>
+                      <div className={styles.vehicleGuide} aria-label={`${vehicle.name} operating notes`}>
+                        <span>{vehicle.bestFor}</span>
+                        <span>{vehicle.pickup}</span>
+                        <span>{vehicle.approval}</span>
+                      </div>
                       <p>{vehicle.detail}</p>
                     </div>
                   </section>

@@ -310,6 +310,8 @@ export const lakeUseRules = [
 
 export const motorizedVehicles = [
   {
+    approval: "Host orientation required before use",
+    bestFor: "Group cruise, boat parade viewing, and relaxed lake runs",
     capacity: "10 persons",
     color: "Red",
     detail: "Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation.",
@@ -317,10 +319,13 @@ export const motorizedVehicles = [
     length: "Host reference: 23 ft",
     model: "Switch Cruise 21-class pontoon reference",
     name: "Laconic",
+    pickup: "LH1 dock / host-designated departure point",
     source: "Red / Coral Blast Sea-Doo Switch Cruise 21 studio reference",
     type: "Sea-Doo Switch Cruise pontoon boat"
   },
   {
+    approval: "Host orientation and PWC go-ahead required",
+    bestFor: "Three-seat PWC rides after the safety briefing",
     capacity: "3 seats",
     color: "Blue",
     detail: "Personal watercraft for approved lake use after the Saturday safety briefing.",
@@ -328,10 +333,13 @@ export const motorizedVehicles = [
     length: "PWC",
     model: "GTX-style PWC reference",
     name: "Spikey Lizard",
+    pickup: "Host-approved lake launch point",
     source: "Blue Sea-Doo GTX studio reference",
     type: "Sea-Doo PWC"
   },
   {
+    approval: "Host orientation and PWC go-ahead required",
+    bestFor: "Compact two-seat Trixx-style PWC outings",
     capacity: "2 seats",
     color: "Red",
     detail: "Compact Trixx-style PWC for host-approved lake use after orientation.",
@@ -339,6 +347,7 @@ export const motorizedVehicles = [
     length: "PWC",
     model: "Spark Trixx 2up-style PWC reference",
     name: "Laika",
+    pickup: "Host-approved lake launch point",
     source: "Red Sea-Doo Spark Trixx 2up studio reference",
     type: "Sea-Doo Spark Trixx"
   }
