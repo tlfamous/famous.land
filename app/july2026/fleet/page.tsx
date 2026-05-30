@@ -53,6 +53,7 @@ export default function July2026FleetPage() {
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
             <a href="/july2026/concierge">Guest Concierge</a>
+            <a href="/july2026/safety">Safety Guide</a>
             <a href={`sms:+17819294932?&body=${encodeURIComponent(approvalTemplate)}`}>Text For Approval</a>
           </nav>
         </header>

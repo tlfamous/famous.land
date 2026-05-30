@@ -155,6 +155,11 @@ export const resortDeskItems = [
     action: "Wait for the Saturday orientation",
     detail: "Pontoon, PWC, and quad/four-wheeler use needs the host go-ahead before anyone heads out.",
     label: "Approvals"
+  },
+  {
+    action: "Open the safety guide",
+    detail: "Emergency-first guidance, life jackets, dock plan, host approvals, and Saturday lake orientation live in one place.",
+    label: "Safety"
   }
 ];
 
@@ -453,7 +458,7 @@ export const motorizedVehicles = [
     detail: "Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation.",
     image: "laconic",
     length: "23 ft",
-    model: "Switch Cruise pontoon reference",
+    model: "23 ft Switch Cruise pontoon reference",
     name: "Laconic",
     pickup: "LH1 dock / host-designated departure point",
     source: "Red Sea-Doo Switch Cruise studio reference",
@@ -467,11 +472,11 @@ export const motorizedVehicles = [
     detail: "Personal watercraft for approved lake use after the Saturday safety briefing.",
     image: "spikey-lizard",
     length: "PWC",
-    model: "GTX-style PWC reference",
+    model: "GTX-style 3-seat PWC reference",
     name: "Spikey Lizard",
     pickup: "Host-approved lake launch point",
     source: "Blue Sea-Doo GTX studio reference",
-    type: "Sea-Doo PWC"
+    type: "Sea-Doo GTX-style PWC"
   },
   {
     approval: "Host orientation and PWC go-ahead required",
@@ -485,7 +490,7 @@ export const motorizedVehicles = [
     name: "Laika",
     pickup: "Host-approved lake launch point",
     source: "Red Sea-Doo Spark Trixx 2up studio reference",
-    type: "Sea-Doo Spark Trixx"
+    type: "Sea-Doo Spark Trixx-style PWC"
   }
 ];
 
@@ -539,6 +544,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Packing prep: ${baseUrl}/july2026/prep`,
     `Weekend itinerary: ${baseUrl}/july2026/itinerary`,
     `Fleet guide: ${baseUrl}/july2026/fleet`,
+    `Safety guide: ${baseUrl}/july2026/safety`,
     `Admin reference: ${baseUrl}/july2026/admin`,
     `Guest SMS packets: ${baseUrl}/july2026/admin/sms-packets`,
     `Host text templates: ${baseUrl}/july2026/admin/host-texts`,
@@ -812,6 +818,7 @@ Guest concierge: ${baseUrl}/july2026/concierge
 Packing prep: ${baseUrl}/july2026/prep
 Weekend itinerary: ${baseUrl}/july2026/itinerary
 Fleet guide: ${baseUrl}/july2026/fleet
+Safety guide: ${baseUrl}/july2026/safety
 Calendar: ${baseUrl}/july2026/calendar.ics
 Offline guide: ${baseUrl}/july2026/weekend-guide.txt
 Save host contact: ${baseUrl}/july2026/host-contact.vcf

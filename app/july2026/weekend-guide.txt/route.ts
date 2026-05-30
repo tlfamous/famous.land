@@ -24,6 +24,9 @@ https://famous.land/july2026/itinerary
 Fleet guide:
 https://famous.land/july2026/fleet
 
+Safety guide:
+https://famous.land/july2026/safety
+
 Host text line:
 781-929-4932
 
@@ -122,10 +125,12 @@ MOTORIZED VEHICLE INVENTORY
 - Laika: red Sea-Doo Spark Trixx-style PWC, 2 seats. Best for compact host-approved PWC outings after orientation.
 
 APPROVAL NOTES
+- For urgent medical, fire, water, or safety emergencies, call 911 first, then text the host when safe.
 - Motorized fleet use starts only after the Saturday LH1 safety briefing and host go-ahead.
 - Wear the right-size life jacket for boating, PWC rides, and lake activities where the host asks for one.
 - Text the host before changing cruise plans, taking out a motorized vehicle, or requesting quad/four-wheeler time.
 - Text dietary notes, allergies, arrival timing, or room-key help to 781-929-4932.
+- Use the safety guide for emergency-first guidance, dock plan, host approvals, and lake rules.
 `;
 
 export function GET() {

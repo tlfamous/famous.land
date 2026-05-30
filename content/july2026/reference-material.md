@@ -139,6 +139,20 @@ The fleet guide includes:
 - Approval, start-point, best-use, capacity, and operating notes
 - Lake approval rules and Contact Host footer
 
+### Safety Guide
+
+The guest portal exposes a mobile-friendly safety and approval page at `/july2026/safety`.
+
+The safety guide includes:
+
+- Guest portal, guest concierge, fleet guide, arrival card, and text-host actions
+- Emergency-first guidance to call 911 first for urgent medical, fire, water, or safety emergencies
+- Host text line for non-emergency help and approval questions
+- Saturday motorized lake vehicle orientation timing
+- Lake rules for orientation, life jackets, dock plan, and texting before changes
+- Guest checklist for safe lake and activity flow
+- Host text prompts
+
 ### Arrival Card
 
 The guest portal exposes a mobile-friendly and print-friendly arrival card at `/july2026/arrival-card`.
@@ -582,8 +596,8 @@ The guest page includes a dedicated Food and Drinks section with:
 | Name | Vehicle | Color | Capacity | Best for | Start point | Approval | Reference image | Operating note |
 |---|---|---|---|---|---|---|---|---|
 | Laconic | Sea-Doo Switch Cruise pontoon boat | Red | 10 persons | Group cruise, boat parade viewing, and relaxed lake runs | LH1 dock / host-designated departure point | Host orientation required before use | Red Sea-Doo Switch Cruise 23 ft studio-style reference | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
-| Spikey Lizard | Sea-Doo PWC | Blue | 3 seats | Three-seat PWC rides after the safety briefing | Host-approved lake launch point | Host orientation and PWC go-ahead required | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
-| Laika | Sea-Doo Spark Trixx | Red | 2 seats | Compact two-seat Trixx-style PWC outings | Host-approved lake launch point | Host orientation and PWC go-ahead required | Red Sea-Doo Spark Trixx 2up studio reference | Compact Trixx-style PWC for host-approved lake use after orientation. |
+| Spikey Lizard | Sea-Doo GTX-style PWC | Blue | 3 seats | Three-seat PWC rides after the safety briefing | Host-approved lake launch point | Host orientation and PWC go-ahead required | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
+| Laika | Sea-Doo Spark Trixx-style PWC | Red | 2 seats | Compact two-seat Trixx-style PWC outings | Host-approved lake launch point | Host orientation and PWC go-ahead required | Red Sea-Doo Spark Trixx 2up studio reference | Compact Trixx-style PWC for host-approved lake use after orientation. |
 
 Inventory notes:
 
@@ -614,6 +628,7 @@ Suggested sections:
 - Activities
 - Motorized Fleet
 - Lake Rules and Approvals
+- Safety Guide at `/july2026/safety`
 - Food and Drinks
 - Maps and Directions with known LH2 and LH3 address links
 - Directions Hub at `/july2026/directions`
@@ -643,6 +658,7 @@ Admin operating sections:
 - Packing prep readiness
 - Weekend itinerary readiness
 - Fleet guide readiness
+- Safety guide readiness
 - Media shot list readiness
 - Calendar file readiness
 - Personalized calendar readiness
@@ -685,6 +701,12 @@ Host text templates:
 - Guest concierge: `/july2026/concierge` exposes the prompts as tap-to-text cards and pairs them with approval guidance.
 - Admin includes a print-friendly host text template sheet at `/july2026/admin/host-texts`.
 - The host text template sheet covers arrival reminder, Friday welcome flow, Saturday lake morning, fleet orientation, boat ride movement, dinner/fireworks, Sunday brunch, and general host help.
+
+Safety guide:
+
+- Guests should call 911 first for urgent medical, fire, water, or safety emergencies, then text the host when safe.
+- `/july2026/safety` centralizes emergency-first guidance, host line, Saturday orientation, life jackets, dock plan, text-before-changes rules, and host text prompts.
+- Guest portal, arrival card, fleet guide, concierge, offline guide, and admin launch review link to the safety guide.
 
 Packing prep:
 
@@ -747,7 +769,7 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, fleet guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
+- The packet includes review links for the guest portal, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, fleet guide, safety guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
 
 Media shot list:
 
@@ -757,7 +779,7 @@ Media shot list:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, fleet guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, fleet guide, safety guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

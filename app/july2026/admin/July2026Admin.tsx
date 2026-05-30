@@ -53,6 +53,7 @@ const guestExperience = [
   "Activities",
   "Motorized Fleet",
   "Lake Rules and Approvals",
+  "Safety Guide",
   "Food and Drinks",
   "Maps and Directions",
   "Getting Around guide",
@@ -185,6 +186,12 @@ const readinessItems = [
   {
     detail: "Guest navigation now links directly to orientation, life jacket, dock, and host-approval guidance.",
     label: "Lake rules",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest-facing safety guide centralizes emergency-first guidance, host approvals, lake rules, life jackets, and dock movement.",
+    label: "Safety guide",
     status: "Ready",
     tone: "ready"
   },
@@ -364,6 +371,11 @@ export function July2026Admin() {
         detail: "Guest-facing motorized vehicle inventory with approval guidance and self-contained images.",
         href: `${baseUrl}/july2026/fleet`,
         label: "Fleet guide"
+      },
+      {
+        detail: "Emergency-first guidance, lake rules, life jackets, dock plan, and host approval notes.",
+        href: `${baseUrl}/july2026/safety`,
+        label: "Safety guide"
       },
       {
         detail: "Downloadable shared weekend calendar.",

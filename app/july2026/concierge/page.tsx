@@ -46,6 +46,7 @@ export default function July2026ConciergePage() {
             <a href="/july2026/prep">Packing Prep</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/fleet">Fleet Guide</a>
+            <a href="/july2026/safety">Safety Guide</a>
             <a href="sms:+17819294932">Text Host</a>
           </nav>
         </header>
