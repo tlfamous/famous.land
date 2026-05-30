@@ -79,6 +79,12 @@ const readinessItems = [
     tone: "ready"
   },
   {
+    detail: "Guest navigation now links directly to orientation, life jacket, dock, and host-approval guidance.",
+    label: "Lake rules",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
     detail: "LH2 and LH3 directions are live; LH1 still needs a confirmed address.",
     label: "Directions",
     status: "Partial",

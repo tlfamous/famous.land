@@ -256,6 +256,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="#stay">My Stay</a>
           <a href="#schedule">Schedule</a>
           <a href="#activities">Activities</a>
+          <a href="#lake-rules">Rules</a>
           <a href="#food">Food</a>
           <a href="#guests">Guests</a>
           <a href="#map">Map</a>

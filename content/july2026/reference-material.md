@@ -452,6 +452,7 @@ Admin operating sections:
 - Launch readiness tracker
 - Asset and content checklist showing live bundled media and missing host-supplied content
 - Motorized vehicle inventory
+- Lake rules readiness
 - Personalized room-key URLs
 - Embedded reference material with Proof edit link
 
