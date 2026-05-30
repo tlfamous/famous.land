@@ -66,9 +66,6 @@ export function July2026App() {
   return (
     <div className={`${styles.app} july-2026-app`}>
       <nav className={styles.topbar} aria-label="July 2026 event navigation">
-        <a className={styles.brand} href="#top">
-          famous.land
-        </a>
         <div className={styles.navLinks}>
           <a href="#stay">My Stay</a>
           <a href="#schedule">Schedule</a>

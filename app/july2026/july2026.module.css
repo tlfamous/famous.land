@@ -24,21 +24,13 @@
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 64px;
   padding: 0 clamp(18px, 4vw, 48px);
   color: #fffdf7;
   background: rgba(4, 14, 30, 0.86);
   border-bottom: 1px solid rgba(255, 253, 247, 0.14);
   backdrop-filter: blur(16px);
-}
-
-.brand {
-  color: inherit;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  font-weight: 800;
-  text-decoration: none;
 }
 
 .navLinks {
