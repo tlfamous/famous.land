@@ -22,7 +22,10 @@ export default function July2026RoomKeysPage() {
           <h1>July 4th, 2026 Room Keys</h1>
           <span>Print sheet for host check-in, room help, and QR-based guest sharing.</span>
         </div>
-        <a href="/july2026/admin">Admin</a>
+        <nav aria-label="Admin links">
+          <a href="/july2026/admin">Admin</a>
+          <a href="/july2026/admin/sms-packets">SMS packets</a>
+        </nav>
       </header>
 
       <section className={styles.summary} aria-label="Host instructions">

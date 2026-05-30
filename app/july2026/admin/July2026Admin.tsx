@@ -12,7 +12,14 @@ import lh3PosterImage from "../assets/lake-house-3.jpeg";
 import laconicVehicleImage from "../assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "../assets/vehicle-laika-trixx.png";
 import spikeyLizardVehicleImage from "../assets/vehicle-spikey-lizard-gtx.png";
-import { getLaunchCompletionRequestText, guestAssignments, launchCompletionItems, motorizedVehicles } from "../data";
+import {
+  getGuestQrPath,
+  getGuestSmsPacket,
+  getLaunchCompletionRequestText,
+  guestAssignments,
+  launchCompletionItems,
+  motorizedVehicles
+} from "../data";
 import { referenceMaterial } from "./referenceMaterial";
 
 const proofUrl = "https://www.proofeditor.ai/d/ado6gf4r?token=2b8510d8-4eaa-4fc9-b0e7-f802f6a0d12c";
@@ -23,6 +30,7 @@ const adminTools = [
   "Generate or regenerate guest links",
   "Reset the current device binding if needed",
   "Copy guest-specific SMS packets",
+  "Review printable guest SMS packets",
   "Copy missing-content request packet",
   "Print media shot list",
   "Track missing photos, addresses, and room-assignment decisions"
@@ -97,6 +105,12 @@ const readinessItems = [
   {
     detail: "Each guest row can copy a personalized SMS packet with assignment, room-key link, calendar, guide, host contact, and arrival notes.",
     label: "Guest SMS packets",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Admin includes a print-friendly review sheet for every guest outreach SMS.",
+    label: "SMS review sheet",
     status: "Ready",
     tone: "ready"
   },
@@ -348,6 +362,11 @@ export function July2026Admin() {
         label: "Missing-content request"
       },
       {
+        detail: "Print-friendly review sheet for every guest room-key SMS packet.",
+        href: `${baseUrl}/july2026/admin/sms-packets`,
+        label: "Guest SMS packets"
+      },
+      {
         detail: "Print-friendly shot list for remaining house, room, and event-location photos.",
         href: `${baseUrl}/july2026/admin/media-shot-list`,
         label: "Media shot list"
@@ -504,41 +523,9 @@ export function July2026Admin() {
     }
   }
 
-  function getGuestQrPath(guest: (typeof guestAssignments)[number], path: string) {
-    const queryIndex = path.indexOf("?");
-    return `/july2026/guest/${guest.slug}/qr.svg${queryIndex === -1 ? "" : path.slice(queryIndex)}`;
-  }
-
-  function getGuestSmsPacket(guest: (typeof guestAssignments)[number], path: string) {
-    const baseUrl = origin || "https://famous.land";
-    const qrPath = getGuestQrPath(guest, path);
-    const assignment =
-      guest.house === "Pending"
-        ? "Your room assignment is still pending host confirmation."
-        : `You are staying at ${guest.house}, ${guest.room}.`;
-
-    return [
-      `Hi ${guest.name}, here is your famous.land July 4th, 2026 room key:`,
-      `${baseUrl}${path}`,
-      "",
-      assignment,
-      `Arrival: ${guest.arrival}`,
-      `Departure: ${guest.departure}`,
-      "",
-      `Personal room-key packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
-      `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
-      `Room-key QR code: ${baseUrl}${qrPath}`,
-      `Calendar: ${baseUrl}/july2026/calendar.ics`,
-      `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
-      `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,
-      "",
-      "Text 781-929-4932 for room help, dietary notes, fleet approval, or link resets."
-    ].join("\n");
-  }
-
   async function copyGuestSmsPacket(guest: (typeof guestAssignments)[number], path: string) {
     try {
-      await navigator.clipboard.writeText(getGuestSmsPacket(guest, path));
+      await navigator.clipboard.writeText(getGuestSmsPacket(guest, path, origin || "https://famous.land"));
       setGuestCopyStatus((statuses) => ({
         ...statuses,
         [guest.slug]: "Copied SMS packet"
@@ -839,6 +826,7 @@ export function July2026Admin() {
               Copy packet
             </button>
             <a href="/july2026/admin/room-keys">Print room keys</a>
+            <a href="/july2026/admin/sms-packets">Review SMS</a>
             <a href="/july2026/admin/media-shot-list">Print shot list</a>
             <a href="/july2026/admin/briefing-sheet">Print briefing</a>
             <a href="/july2026/admin/house-signs">Print house signs</a>

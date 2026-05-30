@@ -32,6 +32,7 @@ export default function July2026BriefingSheetPage() {
         </div>
         <nav aria-label="Admin links">
           <a href="/july2026/admin">Admin</a>
+          <a href="/july2026/admin/sms-packets">SMS packets</a>
           <a href="/july2026/admin/media-shot-list">Media shot list</a>
           <a href="/july2026/admin/room-keys">Room keys</a>
         </nav>

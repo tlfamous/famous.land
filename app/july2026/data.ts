@@ -475,6 +475,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Weekend itinerary: ${baseUrl}/july2026/itinerary`,
     `Fleet guide: ${baseUrl}/july2026/fleet`,
     `Admin reference: ${baseUrl}/july2026/admin`,
+    `Guest SMS packets: ${baseUrl}/july2026/admin/sms-packets`,
     `Media shot list: ${baseUrl}/july2026/admin/media-shot-list`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Download this request: ${baseUrl}/july2026/admin/missing-content.txt`,
@@ -757,4 +758,39 @@ Notes:
 - Wear the right-size life jacket for boating, PWC rides, and lake activities where the host asks for one.
 - Text the host for room help, dietary notes, fleet approval, or link resets.
 `;
+}
+
+export function getGuestQrPath(guest: GuestAssignment, path?: string) {
+  const queryIndex = path?.indexOf("?") ?? -1;
+  return `/july2026/guest/${guest.slug}/qr.svg${queryIndex === -1 || !path ? "" : path.slice(queryIndex)}`;
+}
+
+export function getGuestSmsPacket(
+  guest: GuestAssignment,
+  path = `/july2026/guest/${guest.slug}`,
+  baseUrl = "https://famous.land"
+) {
+  const qrPath = getGuestQrPath(guest, path);
+  const assignment =
+    guest.house === "Pending"
+      ? "Your room assignment is still pending host confirmation."
+      : `You are staying at ${guest.house}, ${guest.room}.`;
+
+  return [
+    `Hi ${guest.name}, here is your famous.land July 4th, 2026 room key:`,
+    `${baseUrl}${path}`,
+    "",
+    assignment,
+    `Arrival: ${guest.arrival}`,
+    `Departure: ${guest.departure}`,
+    "",
+    `Personal room-key packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
+    `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
+    `Room-key QR code: ${baseUrl}${qrPath}`,
+    `Calendar: ${baseUrl}/july2026/calendar.ics`,
+    `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
+    `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,
+    "",
+    "Text 781-929-4932 for room help, dietary notes, fleet approval, or link resets."
+  ].join("\n");
 }
