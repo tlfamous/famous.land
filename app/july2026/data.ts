@@ -122,6 +122,11 @@ export const resortDeskItems = [
     label: "Check-in"
   },
   {
+    action: "Review the house directory",
+    detail: "Open the standalone LH1, LH2, and LH3 guide for rooms, assigned guests, house roles, maps, and weekend flow.",
+    label: "Houses"
+  },
+  {
     action: "Text the host",
     detail: "Questions, dietary notes, link resets, quad requests, and motorized lake plans all go to 781-929-4932.",
     label: "Help"
@@ -132,7 +137,7 @@ export const resortDeskItems = [
     label: "Contact"
   },
   {
-    action: "Use the house directory",
+    action: "Use the directions hub",
     detail: "LH2 and LH3 have live directions. LH1 directions will appear after the address is confirmed.",
     label: "Directions"
   },
@@ -529,6 +534,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Guest portal: ${baseUrl}/july2026`,
     `Arrival card: ${baseUrl}/july2026/arrival-card`,
     `Directions hub: ${baseUrl}/july2026/directions`,
+    `House directory: ${baseUrl}/july2026/houses`,
     `Guest concierge: ${baseUrl}/july2026/concierge`,
     `Packing prep: ${baseUrl}/july2026/prep`,
     `Weekend itinerary: ${baseUrl}/july2026/itinerary`,

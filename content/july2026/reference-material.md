@@ -170,6 +170,20 @@ The directions hub includes:
 - Confirmed guests by house
 - House-to-house weekend flow
 
+### House Directory
+
+The guest portal exposes a standalone house directory at `/july2026/houses`.
+
+The house directory includes:
+
+- Guest portal, directions hub, arrival card, weekend itinerary, and text-host actions
+- LH1, LH2, and LH3 profile cards
+- Current bundled house imagery and LH2 gallery images
+- Directions-ready or address-pending status for each house
+- Rooms and assigned guests by house
+- House-specific itinerary highlights
+- House-to-house weekend flow
+
 ### Guest Concierge
 
 The guest portal exposes a mobile-friendly guest help desk at `/july2026/concierge`.
@@ -603,6 +617,7 @@ Suggested sections:
 - Food and Drinks
 - Maps and Directions with known LH2 and LH3 address links
 - Directions Hub at `/july2026/directions`
+- House Directory at `/july2026/houses`
 - Guest Concierge at `/july2026/concierge`
 - Packing Prep at `/july2026/prep`
 - Weekend Itinerary at `/july2026/itinerary`
@@ -623,6 +638,7 @@ Admin operating sections:
 - Arrival Desk readiness
 - Arrival card readiness
 - Directions hub readiness
+- House directory readiness
 - Guest concierge readiness
 - Packing prep readiness
 - Weekend itinerary readiness
@@ -648,6 +664,7 @@ Getting Around guide:
 
 - Arrive at your assigned house using the guest room-key page; LH2 and LH3 directions are live, and LH1 directions remain pending until the host confirms the address.
 - Use the directions hub for known house map links, LH1 pending-address fallback, and host text help.
+- Use the house directory for LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.
 - Friday starts at LH1 for the welcome meal, orientation, and first-night fire gathering.
 - Saturday morning shifts to LH3 for yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch.
 - The Saturday group boat ride connects LH1 to LH3 after the motorized fleet orientation.
@@ -730,7 +747,7 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
+- The packet includes review links for the guest portal, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, fleet guide, admin reference, guest SMS packets, host text templates, media shot list, and offline guide.
 
 Media shot list:
 
@@ -740,7 +757,7 @@ Media shot list:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, house directory, guest concierge, packing prep, weekend itinerary, fleet guide, weekend calendar, host contact card, missing-content request, guest SMS packets, host text templates, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

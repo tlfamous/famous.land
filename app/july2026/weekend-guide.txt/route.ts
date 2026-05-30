@@ -9,6 +9,9 @@ https://famous.land/july2026/arrival-card
 Directions hub:
 https://famous.land/july2026/directions
 
+House directory:
+https://famous.land/july2026/houses
+
 Guest concierge:
 https://famous.land/july2026/concierge
 
@@ -48,6 +51,7 @@ GETTING AROUND
 - The Saturday group boat ride departs from LH1 after motorized fleet orientation and returns to LH3 for lunch.
 - LH2 and LH3 directions are live in the guest portal. LH1 directions will be added when confirmed by the host.
 - Use the directions hub for known house map links and the Lake Monomonac fallback map.
+- Use the house directory for LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.
 
 HOUSE DIRECTORY
 LH1

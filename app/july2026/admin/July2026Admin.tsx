@@ -42,6 +42,7 @@ const guestExperience = [
   "Resort Desk quick guide",
   "Arrival checklist",
   "Host text templates",
+  "House Directory",
   "Add Calendar",
   "Save Host Contact",
   "Offline Guide",
@@ -166,6 +167,12 @@ const readinessItems = [
   {
     detail: "Guest map section explains arrival, Friday LH1 flow, Saturday LH3 flow, and the LH1-to-LH3 boat connection.",
     label: "Getting around",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest-facing standalone directory shows LH1, LH2, and LH3 rooms, guests, photos, directions status, and house-specific highlights.",
+    label: "House directory",
     status: "Ready",
     tone: "ready"
   },
@@ -332,6 +339,11 @@ export function July2026Admin() {
         detail: "Public house movement page with live LH2/LH3 maps and LH1 pending-address fallback.",
         href: `${baseUrl}/july2026/directions`,
         label: "Directions hub"
+      },
+      {
+        detail: "Standalone LH1/LH2/LH3 directory with photos, rooms, guests, house roles, and direction status.",
+        href: `${baseUrl}/july2026/houses`,
+        label: "House directory"
       },
       {
         detail: "Public help desk with host text prompts, approvals, lake rules, and self-service links.",
