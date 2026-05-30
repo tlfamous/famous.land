@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   arrivalChecklistItems,
+  hostSmsHref,
   hostTextTemplates,
   houseProfiles,
   scheduleItems,
@@ -63,7 +64,7 @@ export default function July2026ArrivalCardPage() {
           <a href="/july2026/calendar.ics">Add Calendar</a>
           <a href="/july2026/host-contact.vcf">Save Host</a>
           <a href="/july2026/weekend-guide.txt">Offline Guide</a>
-          <a href="sms:+17819294932">Text 781-929-4932</a>
+          <a href={hostSmsHref}>Text 781-929-4932</a>
         </section>
 
         <section className={styles.essentials} aria-label="Arrival essentials">
@@ -152,7 +153,7 @@ export default function July2026ArrivalCardPage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href="sms:+17819294932">Contact Host</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
     </main>

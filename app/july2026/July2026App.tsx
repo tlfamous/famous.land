@@ -19,6 +19,7 @@ import {
   foodMoments,
   guestAssignments,
   hostHelpItems,
+  hostSmsHref,
   hostTextTemplates,
   houseProfiles,
   itineraryHighlights,
@@ -269,7 +270,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="#food">Food</a>
           <a href="#guests">Guests</a>
           <a href="#map">Map</a>
-          <a href="sms:+17819294932">Contact Host</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </div>
       </nav>
 
@@ -335,7 +336,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               <a className={styles.secondaryButton} href="#guests">
                 {selectedGuest ? "View My Stay" : "Guest Links"}
               </a>
-              <a className={styles.secondaryButton} href="sms:+17819294932">
+              <a className={styles.secondaryButton} href={hostSmsHref}>
                 Contact Host
               </a>
             </div>
@@ -362,7 +363,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             <b>{item.value}</b>
           </span>
         ))}
-        <a href="sms:+17819294932">Text 781-929-4932</a>
+        <a href={hostSmsHref}>Text 781-929-4932</a>
         <a href="/july2026/calendar.ics">Add Calendar</a>
         <a href="/july2026/host-contact.vcf">Save Host</a>
         <a href="/july2026/arrival-card">Arrival Card</a>
@@ -407,7 +408,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <span>Help</span>
           <strong>Host text line</strong>
           <p>
-            <a href="sms:+17819294932">Tap to message 781-929-4932</a>
+            <a href={hostSmsHref}>Tap to message 781-929-4932</a>
           </p>
         </div>
       </section>
@@ -447,7 +448,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="/july2026/calendar.ics">Add Calendar</a>
           <a href="/july2026/host-contact.vcf">Save Host Contact</a>
           <a href="/july2026/weekend-guide.txt">Offline Guide</a>
-          <a href="sms:+17819294932">Text Host</a>
+          <a href={hostSmsHref}>Text Host</a>
         </div>
       </section>
 
@@ -537,7 +538,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                       Text the host for the latest assignment before arrival.
                     </p>
                   </div>
-                  <a href="sms:+17819294932">Text Host</a>
+                  <a href={hostSmsHref}>Text Host</a>
                 </div>
               ) : null}
               <dl className={styles.stayDetails}>
@@ -922,7 +923,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 or room-key help.
               </p>
             </div>
-            <a className={styles.mapButton} href="sms:+17819294932">
+            <a className={styles.mapButton} href={hostSmsHref}>
               Text Host
             </a>
             <a className={styles.mapButton} href="/july2026/concierge">

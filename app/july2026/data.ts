@@ -1,3 +1,9 @@
+export const hostPhoneDisplay = "781-929-4932";
+export const hostSmsPhone = "+17819294932";
+export const defaultHostTextMessage =
+  "Hi, I need help with the July 4th weekend.";
+export const hostSmsHref = `sms:${hostSmsPhone}?&body=${encodeURIComponent(defaultHostTextMessage)}`;
+
 export const scheduleItems = [
   {
     time: "Fri 3-6 PM",
@@ -613,7 +619,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "",
     "Ready now:",
     "- Resort-style guest portal and supporting pages",
-    "- Contact Host SMS actions to 781-929-4932",
+    "- Prefilled Contact Host SMS actions to 781-929-4932",
     "- Downloadable host contact card",
     "- Shared weekend calendar and personal guest calendars",
     "- Offline weekend guide and personal room-key packets",

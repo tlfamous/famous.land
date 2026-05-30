@@ -6,7 +6,7 @@ import lakeHouse2ExteriorSideImage from "../assets/lake-house-2-exterior-side.jp
 import lakeHouse2KitchenImage from "../assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "../assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "../assets/lake-house-3.jpeg";
-import { guestAssignments, houseProfiles, itineraryHighlights, transitGuideItems } from "../data";
+import { guestAssignments, hostSmsHref, houseProfiles, itineraryHighlights, transitGuideItems } from "../data";
 import styles from "./houses.module.css";
 
 export const metadata: Metadata = {
@@ -77,7 +77,7 @@ export default function July2026HousesPage() {
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
-            <a href="sms:+17819294932">Text Host</a>
+            <a href={hostSmsHref}>Text Host</a>
           </nav>
         </header>
 
@@ -178,7 +178,7 @@ export default function July2026HousesPage() {
                       {mapsUrl ? house.mapLabel : "Open Lake Area Map"}
                     </a>
                     <a href="/july2026/directions">Directions Hub</a>
-                    <a href="sms:+17819294932">Text Host</a>
+                    <a href={hostSmsHref}>Text Host</a>
                   </div>
                 </div>
               </article>
@@ -203,7 +203,7 @@ export default function July2026HousesPage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href="sms:+17819294932">Contact Host</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
     </main>

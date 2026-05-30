@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { guestAssignments, hostTextTemplates, houseProfiles, transitGuideItems } from "../data";
+import { guestAssignments, hostSmsHref, hostTextTemplates, houseProfiles, transitGuideItems } from "../data";
 import styles from "./directions.module.css";
 
 export const metadata: Metadata = {
@@ -128,7 +128,7 @@ export default function July2026DirectionsPage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href="sms:+17819294932">Contact Host</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
     </main>

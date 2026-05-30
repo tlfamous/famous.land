@@ -17,6 +17,7 @@ import {
   getGuestSmsPacket,
   getLaunchCompletionRequestText,
   guestAssignments,
+  hostSmsHref,
   launchCompletionItems,
   motorizedVehicles
 } from "../data";
@@ -637,7 +638,7 @@ export function July2026Admin() {
             <h2>Mobile text action</h2>
             <p>
               Guest-facing contact buttons should launch a message to{" "}
-              <a href="sms:+17819294932">781-929-4932</a>.
+              <a href={hostSmsHref}>781-929-4932</a>.
             </p>
           </article>
 

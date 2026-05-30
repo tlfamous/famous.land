@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { foodMoments, scheduleItems } from "../data";
+import { foodMoments, hostSmsHref, scheduleItems } from "../data";
 import styles from "./itinerary.module.css";
 
 export const metadata: Metadata = {
@@ -114,7 +114,7 @@ export default function July2026ItineraryPage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href="sms:+17819294932">Contact Host</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
     </main>

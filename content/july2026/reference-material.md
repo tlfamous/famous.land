@@ -728,6 +728,7 @@ Host text templates:
 - Dietary note: "Hi, I have a dietary note for the July 4th weekend:"
 - Fleet approval: "Hi, I would like host approval or timing guidance for motorized lake fleet use."
 - Link reset: "Hi, my July 2026 room-key link needs a reset or fresh token."
+- Generic Contact Host actions open a prefilled "Hi, I need help with the July 4th weekend." SMS draft to 781-929-4932.
 - Guest concierge: `/july2026/concierge` exposes the prompts as tap-to-text cards and pairs them with approval guidance.
 - Admin includes a print-friendly host text template sheet at `/july2026/admin/host-texts`.
 - The host text template sheet covers arrival reminder, Friday welcome flow, Saturday lake morning, fleet orientation, boat ride movement, dinner/fireworks, Sunday brunch, and general host help.
@@ -742,7 +743,7 @@ Packing prep:
 
 - Guests should bring sunscreen, swimsuit and towel, reusable water bottle, bug spray, light jacket or hoodie, and patriotic spirit.
 - Main meals and scheduled food moments are planned.
-- Host text prompts are ready for room help, dietary notes, fleet approval, and link resets.
+- Host text prompts are ready for room help, dietary notes, fleet approval, link resets, and generic help.
 - Guest portal, calendar, host contact, and offline guide are available on the guest's phone.
 - Guests should open their room-key link, save the host contact, add the calendar, and download the guide before leaving.
 

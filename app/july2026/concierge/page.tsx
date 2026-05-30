@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { hostHelpItems, hostTextTemplates, lakeUseRules, resortDeskItems } from "../data";
+import { hostHelpItems, hostSmsHref, hostTextTemplates, lakeUseRules, resortDeskItems } from "../data";
 import styles from "./concierge.module.css";
 
 export const metadata: Metadata = {
@@ -49,7 +49,7 @@ export default function July2026ConciergePage() {
             <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>
             <a href="/july2026/safety">Safety Guide</a>
-            <a href="sms:+17819294932">Text Host</a>
+            <a href={hostSmsHref}>Text Host</a>
           </nav>
         </header>
 
@@ -119,7 +119,7 @@ export default function July2026ConciergePage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href="sms:+17819294932">Contact Host</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
     </main>
