@@ -475,12 +475,17 @@
   background: rgba(8, 33, 65, 0.05);
 }
 
-.houseGalleryImage {
+.houseGalleryFrame {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
   display: block;
+  overflow: hidden;
   border: 1px solid rgba(8, 19, 38, 0.08);
   border-radius: 6px;
+}
+
+.houseGalleryImage {
   object-fit: cover;
 }
 

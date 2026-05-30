@@ -237,13 +237,15 @@ export function July2026App() {
                     {houseImage && "gallery" in houseImage ? (
                       <div className={styles.houseGallery} aria-label={`${house.name} photos`}>
                         {houseImage.gallery.map((image) => (
-                          <Image
-                            key={image.alt}
-                            src={image.src}
-                            alt={image.alt}
-                            className={styles.houseGalleryImage}
-                            sizes="(max-width: 1080px) 33vw, 110px"
-                          />
+                          <span className={styles.houseGalleryFrame} key={image.alt}>
+                            <Image
+                              src={image.src}
+                              alt={image.alt}
+                              className={styles.houseGalleryImage}
+                              fill
+                              sizes="(max-width: 1080px) 33vw, 110px"
+                            />
+                          </span>
                         ))}
                       </div>
                     ) : null}
