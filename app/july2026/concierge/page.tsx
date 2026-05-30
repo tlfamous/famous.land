@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { hostHelpItems, hostSmsHref, hostTextTemplates, lakeUseRules, resortDeskItems } from "../data";
+import { hostHelpItems, hostSmsHref, lakeUseRules, resortDeskItems } from "../data";
 import styles from "./concierge.module.css";
 
 export const metadata: Metadata = {
   title: "July 4th, 2026 Guest Concierge | famous.land",
-  description: "Guest help, host text prompts, approvals, and lake rules for the famous.land July 4th, 2026 weekend.",
+  description: "Guest help, approvals, and lake rules for the famous.land July 4th, 2026 weekend.",
   robots: {
     index: false,
     follow: false
@@ -32,11 +32,11 @@ export default function July2026ConciergePage() {
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land concierge</p>
+            <p className={styles.kicker}>Guest concierge</p>
             <h1>Guest Help Desk</h1>
             <p>
               Quick answers for food notes, room-key help, activity approvals, lake rules,
-              and what to text the host during the weekend.
+              and when to contact the host during the weekend.
             </p>
           </div>
           <nav className={styles.quickLinks} aria-label="Concierge quick actions">
@@ -49,7 +49,7 @@ export default function July2026ConciergePage() {
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>
-            <a href={hostSmsHref}>Text Host</a>
+            <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>
 
@@ -74,19 +74,6 @@ export default function July2026ConciergePage() {
 
         <section className={styles.twoColumn}>
           <article className={styles.panel}>
-            <p className={styles.kicker}>Tap to send</p>
-            <h2>Host Text Prompts</h2>
-            <div className={styles.promptGrid}>
-              {hostTextTemplates.map((template) => (
-                <a key={template.label} href={`sms:+17819294932?&body=${encodeURIComponent(template.body)}`}>
-                  <strong>{template.label}</strong>
-                  <span>{template.body}</span>
-                </a>
-              ))}
-            </div>
-          </article>
-
-          <article className={styles.panel}>
             <p className={styles.kicker}>Fast answers</p>
             <h2>What To Ask About</h2>
             <div className={styles.helpList}>
@@ -97,6 +84,16 @@ export default function July2026ConciergePage() {
                 </section>
               ))}
             </div>
+          </article>
+
+          <article className={styles.panel}>
+            <p className={styles.kicker}>Host contact</p>
+            <h2>One Line For Help</h2>
+            <p>
+              Room questions, dietary notes, lake approvals, cruise plans, and link resets
+              all go through the Contact Host button.
+            </p>
+            <a className={styles.sectionLink} href={hostSmsHref}>Contact Host</a>
           </article>
         </section>
 

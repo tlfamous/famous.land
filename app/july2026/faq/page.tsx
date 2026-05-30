@@ -19,7 +19,7 @@ export default function July2026FaqPage() {
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land resort answers</p>
+            <p className={styles.kicker}>Resort answers</p>
             <h1>Guest FAQ</h1>
             <p>
               Fast answers for arrival, directions, meals, lake approvals, phone setup,
@@ -31,7 +31,7 @@ export default function July2026FaqPage() {
             <a href="/july2026/day-of">Day-Of Desk</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/directions">Directions Hub</a>
-            <a href={hostSmsHref}>Text Host</a>
+            <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>
 

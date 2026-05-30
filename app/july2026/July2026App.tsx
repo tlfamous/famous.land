@@ -9,7 +9,6 @@ import lakeHouse2ExteriorSideImage from "./assets/lake-house-2-exterior-side.jpe
 import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
-import lakeMonomonacMapImage from "./assets/lake-monomonac-map.png";
 import canAmQuadImage from "./assets/vehicle-can-am-quad.png";
 import laconicVehicleImage from "./assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "./assets/vehicle-laika-trixx.png";
@@ -24,7 +23,6 @@ import {
   itineraryHighlights,
   lakeUseRules,
   motorizedVehicles,
-  resortDeskItems,
   scheduleItems
 } from "./data";
 import styles from "./july2026.module.css";
@@ -32,6 +30,8 @@ import styles from "./july2026.module.css";
 const lakeHouse3Video = new URL("./assets/lh3-profile.mp4", import.meta.url).toString();
 const sunnyCoveMapsHref =
   "https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA";
+const sunnyCoveEmbedHref =
+  "https://www.google.com/maps?q=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA&output=embed";
 
 function Icon({ path }: { path: string }) {
   return (
@@ -265,14 +265,12 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
     <div className={`${styles.app} july-2026-app`}>
       <nav className={styles.topbar} aria-label="July 2026 event navigation">
         <div className={styles.navLinks}>
-          <a href="#stay">My Stay</a>
-          <a href="#resort-desk">Desk</a>
           <a href="#schedule">Schedule</a>
-          <a href="#activities">Activities</a>
-          <a href="#lake-rules">Rules</a>
-          <a href="#food">Food</a>
-          <a href="#guests">Guests</a>
           <a href="#map">Map</a>
+          <a href="#guests">{selectedGuest ? "My Stay" : "Room Key"}</a>
+          <a href="/july2026/houses">Houses</a>
+          <a href="/july2026/meals">Meals</a>
+          <a href="/july2026/fleet">Fleet</a>
           <a href={hostSmsHref}>Contact Host</a>
         </div>
       </nav>
@@ -289,8 +287,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         <div className={styles.heroContent}>
           <div className={styles.heroCopy}>
             <h1>July 4th, 2026</h1>
-            <p className={styles.date}>A Famous Land lake weekend</p>
-            <p className={styles.sponsor}>Sponsored by famous.land</p>
+            <p className={styles.date}>Lake weekend</p>
             <p className={styles.lede}>
               {selectedGuest
                 ? `Welcome, ${selectedGuest.name}. Your private lake-weekend check-in is ready with your room, house, schedule, and Contact Host button.`
@@ -300,9 +297,11 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               <a className={styles.secondaryButton} href="#schedule">
                 Schedule
               </a>
-              <a className={styles.secondaryButton} href="#guests">
-                {selectedGuest ? "My Stay" : "Guest Links"}
-              </a>
+              {selectedGuest ? (
+                <a className={styles.secondaryButton} href="#guests">
+                  My Stay
+                </a>
+              ) : null}
               <a className={styles.secondaryButton} href="/july2026/houses">
                 Houses
               </a>
@@ -329,75 +328,15 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         </div>
       </section>
 
-      <section className={styles.stayStrip} id="stay" aria-label="Personalized stay preview">
-        <div>
-          <span>Welcome</span>
-          <strong>{selectedGuest ? `${selectedGuest.name}'s lake-weekend check-in` : "Your lake-weekend check-in"}</strong>
-          <p>
-            {selectedGuest
-              ? "This personalized link opens directly to your weekend stay details."
-              : "Personalized guest links open directly to each guest's house, room, and itinerary."}
-          </p>
-        </div>
-        <div>
-          <span>Room key</span>
-          <strong>
-            {selectedGuest
-              ? selectedGuestNeedsHostAssignment
-                ? "Host confirmation pending"
-                : `${selectedGuest.house} / ${selectedGuest.room}`
-              : "House and room assignment"}
-          </strong>
-          <p>
-            {selectedGuest
-              ? selectedGuest.note
-              : "Guest room-key links open directly to the assigned house, room, and itinerary."}
-          </p>
-        </div>
-      </section>
+      {selectedGuest ? (
+        <section className={styles.guestDesk} id="guests" aria-label="Guest stay details">
+          <article className={styles.guestCard}>
+            <div>
+              <span className={styles.sectionLabel}>My Stay</span>
+              <h2>{`${selectedGuest.name}'s stay`}</h2>
+              <p>A concise room-key view for arrival, room assignment, house context, and host help.</p>
+            </div>
 
-      <section className={styles.resortDesk} id="resort-desk" aria-label="Resort desk guide">
-        <div className={styles.resortDeskHeader}>
-          <span className={styles.sectionLabel}>Resort Desk</span>
-          <h2>Fast answers for arrival weekend</h2>
-          <p>
-            The essentials guests will need most: room keys, host contact, live directions, and
-            approval rules for lake and quad activities.
-          </p>
-        </div>
-        <div className={styles.resortDeskGrid}>
-          {resortDeskItems.map((item) => (
-            <section key={item.label}>
-              <span>{item.label}</span>
-              <strong>{item.action}</strong>
-              <p>{item.detail}</p>
-            </section>
-          ))}
-        </div>
-        <div className={styles.resortDeskActions}>
-          <a href="#guests">Find My Room</a>
-          <a href="/july2026/directions">Directions</a>
-          <a href="/july2026/houses">Houses</a>
-          <a href="/july2026/meals">Meals</a>
-          <a href="/july2026/fleet">Fleet</a>
-          <a href={hostSmsHref}>Contact Host</a>
-        </div>
-      </section>
-
-      <section className={styles.guestDesk} id="guests" aria-label="Guest stay details">
-        <article className={styles.guestCard}>
-          <div>
-            <span className={styles.sectionLabel}>{selectedGuest ? "My Stay" : "Guest Check-In"}</span>
-            <h2>{selectedGuest ? `${selectedGuest.name}'s stay` : "Use your private room key"}</h2>
-            <p>
-              {selectedGuest
-                ? "A concise room-key view for arrival, room assignment, house context, and host help."
-                : "Open the personal link sent by the host to view your room, house, and itinerary."}
-            </p>
-          </div>
-
-          {selectedGuest ? (
-            <>
               <div className={isViewingBoundGuest && !bindingIsClaimed ? styles.bindingNotice : styles.bindingWarning}>
                 <div>
                   <strong>
@@ -432,7 +371,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                       Text the host for the latest assignment before arrival.
                     </p>
                   </div>
-                  <a href={hostSmsHref}>Text Host</a>
+                  <a href={hostSmsHref}>Contact Host</a>
                 </div>
               ) : null}
               <dl className={styles.stayDetails}>
@@ -494,15 +433,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                   ))}
                 </ol>
               </div>
-            </>
-          ) : (
-            <div className={styles.guestLinkIntro}>
-              <strong>Private room-key links</strong>
-              <p>Open the personal link sent by the host to view your room, house, and itinerary.</p>
-            </div>
-          )}
-        </article>
-      </section>
+          </article>
+        </section>
+      ) : null}
 
       <section className={styles.contentGrid} aria-label="Event planning">
         <article className={styles.panel} id="schedule">
@@ -529,20 +462,21 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             <h2>Location</h2>
           </div>
           <p className={styles.address}>
-            Famous Land
-            <br />
             26 Sunny Cove Road
             <br />
             Winchendon, MA
           </p>
-          <a className={styles.mapCard} href={sunnyCoveMapsHref} target="_blank" rel="noreferrer" aria-label="Open Google Maps for 26 Sunny Cove Road, Winchendon">
-            <Image
-              src={lakeMonomonacMapImage}
-              alt="Map of Lake Monomonac with a pin at 26 Sunny Cove Road."
-              className={styles.mapImage}
-              sizes="(max-width: 1080px) 100vw, 420px"
+          <div className={styles.mapCard}>
+            <iframe
+              allowFullScreen
+              aria-label="Embedded Google Map for 26 Sunny Cove Road, Winchendon"
+              className={styles.mapEmbed}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src={sunnyCoveEmbedHref}
+              title="26 Sunny Cove Road Google Map"
             />
-          </a>
+          </div>
           <a className={styles.mapButton} href={sunnyCoveMapsHref} target="_blank" rel="noreferrer">
             Open Google Maps
           </a>
@@ -767,6 +701,11 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <span>Fireworks</span>
         </div>
       </section>
+
+      <footer className={styles.footer}>
+        <span>Sponsored by famous.land</span>
+        <a href={hostSmsHref}>Contact Host</a>
+      </footer>
     </div>
   );
 }

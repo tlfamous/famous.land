@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { hostSmsHref, hostTextTemplates, houseProfiles, transitGuideItems } from "../data";
+import { hostSmsHref, houseProfiles, transitGuideItems } from "../data";
 import styles from "./directions.module.css";
 
 export const metadata: Metadata = {
@@ -13,17 +13,13 @@ export const metadata: Metadata = {
 
 const lakeAreaUrl =
   "https://www.google.com/maps/search/?api=1&query=Lake%20Monomonac%20Rindge%20NH%20Winchendon%20MA";
-const roomHelpTemplate =
-  hostTextTemplates.find((template) => template.label === "Room help")?.body ??
-  "Hi, I need help with my July 4th weekend room assignment or arrival directions.";
-
 export default function July2026DirectionsPage() {
   return (
     <main className={`${styles.page} july-2026-app`}>
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land resort map</p>
+            <p className={styles.kicker}>Directions</p>
             <h1>July 2026 Directions Hub</h1>
             <p>
               Use this for arrival, house-to-house movement, and the known LH2 and LH3 map links.
@@ -43,9 +39,7 @@ export default function July2026DirectionsPage() {
             <a href={lakeAreaUrl} target="_blank" rel="noreferrer">
               Lake Area Map
             </a>
-            <a href={`sms:+17819294932?&body=${encodeURIComponent(roomHelpTemplate)}`}>
-              Text Host
-            </a>
+            <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>
 
@@ -96,9 +90,7 @@ export default function July2026DirectionsPage() {
                       Open Lake Area Map
                     </a>
                   )}
-                  <a href={`sms:+17819294932?&body=${encodeURIComponent(roomHelpTemplate)}`}>
-                    Text Host
-                  </a>
+                  <a href={hostSmsHref}>Contact Host</a>
                 </div>
               </article>
             );

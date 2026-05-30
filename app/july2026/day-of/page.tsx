@@ -4,7 +4,6 @@ import {
   dayOfFlowItems,
   dayOfPriorityItems,
   hostSmsHref,
-  hostTextTemplates,
   lakeUseRules
 } from "../data";
 import styles from "./day-of.module.css";
@@ -18,30 +17,23 @@ export const metadata: Metadata = {
   }
 };
 
-const roomHelpTemplate =
-  hostTextTemplates.find((template) => template.label === "Room help")?.body ??
-  "Hi, I need help with my July 4th weekend room assignment or arrival directions.";
-const fleetTemplate =
-  hostTextTemplates.find((template) => template.label === "Fleet approval")?.body ??
-  "Hi, I would like host approval or timing guidance for motorized lake fleet use.";
-
 export default function July2026DayOfPage() {
   return (
     <main className={`${styles.page} july-2026-app`}>
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land resort operations</p>
+            <p className={styles.kicker}>Resort operations</p>
             <h1>Day-Of Desk</h1>
             <p>
               A fast guest hub for arrival, room keys, weather pivots, lake approvals,
-              meals, maps, and host texts during July 4th weekend.
+              meals, maps, and host contact during July 4th weekend.
             </p>
           </div>
           <nav className={styles.quickLinks} aria-label="Day-of quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/map">Resort Map</a>
-            <a href={hostSmsHref}>Text Host</a>
+            <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>
 
@@ -57,7 +49,7 @@ export default function July2026DayOfPage() {
 
         <section className={styles.panel}>
           <p className={styles.kicker}>Tap what you need</p>
-          <h2>Guest Links</h2>
+          <h2>Weekend Links</h2>
           <div className={styles.linkGrid}>
             {dayOfDeskItems.map((item) => (
               <a href={item.href} key={item.label}>
@@ -99,24 +91,9 @@ export default function July2026DayOfPage() {
           </article>
         </section>
 
-        <section className={styles.hostPanel} aria-label="Contact host">
-          <div>
-            <p className={styles.kicker}>Host line</p>
-            <h2>Need a human?</h2>
-            <p>
-              Text for room help, weather movement, food notes, directions, fleet approval,
-              cruise questions, or a room-key reset.
-            </p>
-          </div>
-          <div className={styles.hostActions}>
-            <a href={hostSmsHref}>Text Host</a>
-            <a href={`sms:+17819294932?&body=${encodeURIComponent(roomHelpTemplate)}`}>Room Help</a>
-            <a href={`sms:+17819294932?&body=${encodeURIComponent(fleetTemplate)}`}>Fleet Approval</a>
-          </div>
-        </section>
-
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
+          <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
     </main>

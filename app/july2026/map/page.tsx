@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import {
   activityItems,
   foodMoments,
-  hostTextTemplates,
+  hostSmsHref,
   houseProfiles,
   scheduleItems,
   transitGuideItems
@@ -20,10 +20,6 @@ export const metadata: Metadata = {
 
 const lakeAreaUrl =
   "https://www.google.com/maps/search/?api=1&query=Lake%20Monomonac%20Rindge%20NH%20Winchendon%20MA";
-const roomHelpTemplate =
-  hostTextTemplates.find((template) => template.label === "Room help")?.body ??
-  "Hi, I need help with my July 4th weekend room assignment or arrival directions.";
-
 const mapStops = [
   {
     house: "LH1",
@@ -60,7 +56,7 @@ export default function July2026ResortMapPage() {
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land resort map</p>
+            <p className={styles.kicker}>Resort map</p>
             <h1>Resort Map</h1>
             <p>
               A guest-friendly movement map for LH1, LH2, LH3, lake routes, gathering hubs,
@@ -78,7 +74,7 @@ export default function July2026ResortMapPage() {
             <a href={lakeAreaUrl} target="_blank" rel="noreferrer">
               Lake Area Map
             </a>
-            <a href={`sms:+17819294932?&body=${encodeURIComponent(roomHelpTemplate)}`}>Text Host</a>
+            <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>
 
@@ -191,7 +187,7 @@ export default function July2026ResortMapPage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href={`sms:+17819294932?&body=${encodeURIComponent(roomHelpTemplate)}`}>Contact Host</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
     </main>

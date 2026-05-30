@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { foodMoments, hostSmsHref, hostTextTemplates, scheduleItems } from "../data";
+import { foodMoments, hostSmsHref, scheduleItems } from "../data";
 import styles from "./meals.module.css";
 
 export const metadata: Metadata = {
@@ -10,10 +10,6 @@ export const metadata: Metadata = {
     follow: false
   }
 };
-
-const dietaryTemplate =
-  hostTextTemplates.find((template) => template.label === "Dietary note")?.body ??
-  "Hi, I have a dietary note for the July 4th weekend:";
 
 const coffeeMoments = scheduleItems.filter((item) => item.title === "Coffee time at all houses");
 const saturdayDinner = foodMoments.find((moment) => moment.title === "Dinner");
@@ -43,11 +39,11 @@ export default function July2026MealsPage() {
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land dining</p>
+            <p className={styles.kicker}>Meals</p>
             <h1>Meals and Coffee</h1>
             <p>
               The guest dining guide for welcome food, house coffee, spa water, lunch,
-              lakeside patio dinner, pancake brunch, and dietary notes.
+              lakeside patio dinner, and pancake brunch.
             </p>
           </div>
           <nav className={styles.quickLinks} aria-label="Meals quick actions">
@@ -56,7 +52,7 @@ export default function July2026MealsPage() {
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
             <a href="/july2026/concierge">Guest Concierge</a>
-            <a href={`sms:+17819294932?&body=${encodeURIComponent(dietaryTemplate)}`}>Text Dietary Note</a>
+            <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>
 
@@ -122,18 +118,6 @@ export default function July2026MealsPage() {
               ))}
             </div>
           </article>
-        </section>
-
-        <section className={styles.servicePanel}>
-          <div>
-            <p className={styles.kicker}>Dietary notes</p>
-            <h2>Tell the host early</h2>
-            <p>
-              Allergies, dietary restrictions, arrival timing, or meal questions should go
-              straight to the host line so the plan can be adjusted before the weekend.
-            </p>
-          </div>
-          <a href={`sms:+17819294932?&body=${encodeURIComponent(dietaryTemplate)}`}>Text Dietary Note</a>
         </section>
 
         <footer className={styles.footer}>

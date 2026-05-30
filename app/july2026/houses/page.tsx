@@ -66,7 +66,7 @@ export default function July2026HousesPage() {
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land house directory</p>
+            <p className={styles.kicker}>House directory</p>
             <h1>LH1, LH2, and LH3</h1>
             <p>
               A resort-style house guide for where guests are staying, where the weekend gathers,
@@ -81,7 +81,7 @@ export default function July2026HousesPage() {
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
-            <a href={hostSmsHref}>Text Host</a>
+            <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>
 
@@ -171,7 +171,7 @@ export default function July2026HousesPage() {
                       {mapsUrl ? house.mapLabel : "Open Lake Area Map"}
                     </a>
                     <a href="/july2026/directions">Directions Hub</a>
-                    <a href={hostSmsHref}>Text Host</a>
+                    <a href={hostSmsHref}>Contact Host</a>
                   </div>
                 </div>
               </article>

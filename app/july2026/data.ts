@@ -63,7 +63,7 @@ export const scheduleItems = [
   {
     time: "Sat 2-6 PM",
     title: "Free time and optional activities",
-    detail: "Hiking, Famous Land quests, motorized or non-motorized boating, beach lounging, quad by request, or downtime."
+    detail: "Hiking, lake activities, motorized or non-motorized boating, beach lounging, quad by request, or downtime."
   },
   {
     time: "Sat 2:00 PM",
@@ -131,11 +131,6 @@ export const resortDeskItems = [
     label: "Houses"
   },
   {
-    action: "Open the guest registry",
-    detail: "Use the standalone house-by-house roster for room assignments, companions, pending placements, and guest room-key links.",
-    label: "Registry"
-  },
-  {
     action: "Text the host",
     detail: "Questions, dietary notes, link resets, quad requests, and motorized lake plans all go to 781-929-4932.",
     label: "Help"
@@ -152,7 +147,7 @@ export const resortDeskItems = [
   },
   {
     action: "Add the weekend calendar",
-    detail: "Download the famous.land calendar file for check-in, meals, yoga, boat ride, fireworks, brunch, and departure weekend.",
+    detail: "Download the weekend calendar file for check-in, meals, yoga, boat ride, fireworks, brunch, and departure weekend.",
     label: "Calendar"
   },
   {
@@ -191,7 +186,7 @@ export const dayOfDeskItems = [
   {
     href: "/july2026/meals",
     label: "Meals Guide",
-    note: "Welcome food, coffee, spa water, lunch, dinner, brunch, and dietary-note texting."
+    note: "Welcome food, coffee, spa water, lunch, dinner, and brunch."
   },
   {
     href: "/july2026/fleet",
@@ -208,8 +203,8 @@ export const dayOfPriorityItems = [
   },
   {
     label: "Weather",
-    title: "Watch host texts",
-    detail: "If the sky changes the plan, host texts are the source of truth for lake holds, meals, and fireworks."
+    title: "Watch host updates",
+    detail: "If the sky changes the plan, host updates are the source of truth for lake holds, meals, and fireworks."
   },
   {
     label: "Lake",
@@ -219,7 +214,7 @@ export const dayOfPriorityItems = [
   {
     label: "Food",
     title: "Follow the meals guide",
-    detail: "Welcome meal, coffee, spa water, lunch, dinner, brunch, and dietary-note texting all live in one guest page."
+    detail: "Welcome meal, coffee, spa water, lunch, dinner, and brunch all live in one guest page."
   }
 ] as const;
 
@@ -441,8 +436,8 @@ export const activityItems = [
     detail: "Use begins after the Saturday safety briefing and follows host direction."
   },
   {
-    title: "Famous Land quests and hiking",
-    location: "Famous Land",
+    title: "Quests and hiking",
+    location: "Lake area",
     detail: "Optional dry-land exploring during the Saturday afternoon free-time block."
   },
   {

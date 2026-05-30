@@ -8,7 +8,7 @@ import kayakTwoImage from "../assets/non-motor-kayaks-2.png";
 import pedalBoatsImage from "../assets/non-motor-pedal-boats.png";
 import spikeyLizardVehicleImage from "../assets/vehicle-spikey-lizard-gtx.png";
 import walkerBayImage from "../assets/non-motor-walker-bay.webp";
-import { hostTextTemplates, lakeUseRules, motorizedVehicles, nonMotorizedVehicles, scheduleItems } from "../data";
+import { hostSmsHref, lakeUseRules, motorizedVehicles, nonMotorizedVehicles, scheduleItems } from "../data";
 import styles from "./fleet.module.css";
 
 export const metadata: Metadata = {
@@ -60,17 +60,13 @@ const nonMotorizedImages = {
 
 const orientation = scheduleItems.find((item) => item.title === "Motorized lake vehicle orientation");
 const boatRide = scheduleItems.find((item) => item.title === "Boat ride");
-const approvalTemplate =
-  hostTextTemplates.find((template) => template.label === "Fleet approval")?.body ??
-  "Hi, I would like host approval or timing guidance for motorized lake fleet use.";
-
 export default function July2026FleetPage() {
   return (
     <main className={`${styles.page} july-2026-app`}>
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land lake fleet</p>
+            <p className={styles.kicker}>Lake fleet</p>
             <h1>Lake Fleet</h1>
             <p>
               The named lake vehicles for July 4th weekend, with capacity, best-use,
@@ -83,7 +79,7 @@ export default function July2026FleetPage() {
             <a href="/july2026/faq">Guest FAQ</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
-            <a href={`sms:+17819294932?&body=${encodeURIComponent(approvalTemplate)}`}>Text For Approval</a>
+            <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>
 
@@ -228,7 +224,7 @@ export default function July2026FleetPage() {
 
         <footer className={styles.footer}>
           <span>Sponsored by famous.land</span>
-          <a href={`sms:+17819294932?&body=${encodeURIComponent(approvalTemplate)}`}>Contact Host</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
     </main>

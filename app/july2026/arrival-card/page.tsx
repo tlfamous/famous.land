@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   arrivalChecklistItems,
   hostSmsHref,
-  hostTextTemplates,
   houseProfiles,
   scheduleItems,
   transitGuideItems
@@ -38,7 +37,7 @@ export default function July2026ArrivalCardPage() {
       <section className={styles.sheet} aria-labelledby="arrival-card-title">
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land guest card</p>
+            <p className={styles.kicker}>Guest card</p>
             <h1 id="arrival-card-title">July 4th, 2026 Arrival Card</h1>
             <p>
               Keep this handy for check-in, house movement, host help, and the first
@@ -46,8 +45,8 @@ export default function July2026ArrivalCardPage() {
             </p>
           </div>
           <figure className={styles.qrBlock}>
-            <img src="/july2026/qr.svg" alt="QR code for famous.land/july2026" />
-            <figcaption>famous.land/july2026</figcaption>
+            <img src="/july2026/qr.svg" alt="QR code for the July 2026 guest portal" />
+            <figcaption>Guest portal</figcaption>
           </figure>
         </header>
 
@@ -62,7 +61,7 @@ export default function July2026ArrivalCardPage() {
           <a href="/july2026/fleet">Fleet Guide</a>
           <a href="/july2026/calendar.ics">Add Calendar</a>
           <a href="/july2026/host-contact.vcf">Save Host</a>
-          <a href={hostSmsHref}>Text 781-929-4932</a>
+          <a href={hostSmsHref}>Contact Host</a>
         </section>
 
         <section className={styles.essentials} aria-label="Arrival essentials">
@@ -78,7 +77,7 @@ export default function July2026ArrivalCardPage() {
           </article>
           <article>
             <span>Portal</span>
-            <strong>famous.land/july2026</strong>
+            <strong>Guest portal</strong>
             <p>Use your room-key link for your assignment, directions, calendar, QR, and personal packet.</p>
           </article>
         </section>
@@ -135,18 +134,6 @@ export default function July2026ArrivalCardPage() {
               </li>
             ))}
           </ol>
-        </section>
-
-        <section className={styles.panel}>
-          <h2>Text Prompts</h2>
-          <div className={styles.promptGrid}>
-            {hostTextTemplates.map((template) => (
-              <a key={template.label} href={`sms:+17819294932?&body=${encodeURIComponent(template.body)}`}>
-                <strong>{template.label}</strong>
-                <span>{template.body}</span>
-              </a>
-            ))}
-          </div>
         </section>
 
         <footer className={styles.footer}>

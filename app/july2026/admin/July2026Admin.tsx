@@ -47,12 +47,10 @@ const adminTools = [
 ];
 
 const guestExperience = [
-  "Welcome / Check-In",
-  "Resort Desk quick guide",
+  "Welcome",
   "Day-Of Desk",
   "Arrival checklist",
   "Resort FAQ",
-  "Host text templates",
   "House Directory",
   "Add Calendar",
   "Save Host Contact",
@@ -69,8 +67,7 @@ const guestExperience = [
   "Resort Map",
   "Maps and Directions",
   "Getting Around guide",
-  "Contact Host",
-  "View Other Guests"
+  "Contact Host"
 ];
 
 const contentNeeds = [
@@ -135,20 +132,14 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Guest page now has a Resort Desk guide for room keys, host SMS, directions, and approval rules.",
-    label: "Resort Desk",
-    status: "Ready",
-    tone: "ready"
-  },
-  {
-    detail: "Guest-facing day-of desk centralizes arrival, room keys, weather pivots, lake approvals, meals, maps, and host texts.",
+    detail: "Guest-facing day-of desk centralizes arrival, room keys, weather pivots, lake approvals, meals, and maps.",
     label: "Day-Of Desk",
     status: "Ready",
     tone: "ready"
   },
   {
-    detail: "Guest page includes an Arrival Desk checklist plus one-tap SMS templates for room help, dietary notes, fleet approval, and link resets.",
-    label: "Arrival Desk",
+    detail: "Arrival card includes the check-in checklist, house flow, schedule, QR, calendar, and Contact Host action.",
+    label: "Arrival Card",
     status: "Ready",
     tone: "ready"
   },

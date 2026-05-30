@@ -35,7 +35,7 @@ export default function July2026ItineraryPage() {
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div>
-            <p className={styles.kicker}>famous.land itinerary</p>
+            <p className={styles.kicker}>Weekend itinerary</p>
             <h1>Weekend Itinerary</h1>
             <p>
               The full July 3-5 lake-weekend run of show, with the main house movements,
