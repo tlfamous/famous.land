@@ -625,3 +625,66 @@ export const houseProfiles = [
     image: "lake-house-3"
   }
 ];
+
+export function getGuestPacketText(guest: GuestAssignment, baseUrl = "https://famous.land") {
+  const assignment =
+    guest.house === "Pending"
+      ? "Assignment pending: text the host before arrival for the latest lodging details."
+      : `${guest.house} / ${guest.room}`;
+  const companionText = guest.companions.length ? guest.companions.join(", ") : "Solo room assignment";
+  const house =
+    guest.house === "Pending" ? null : houseProfiles.find((profile) => profile.name === guest.house);
+  const highlights = itineraryHighlights[guest.house].map(
+    (item) => `- ${item.time}: ${item.title}. ${item.detail}`
+  );
+
+  return `FAMOUS.LAND JULY 4TH, 2026 ROOM KEY
+
+Guest:
+${guest.name}
+
+Assignment:
+${assignment}
+
+Staying with:
+${companionText}
+
+Arrival:
+${guest.arrival}
+
+Departure:
+${guest.departure}
+
+House note:
+${guest.house === "Pending" ? guest.note : house?.role ?? guest.note}
+
+Personal highlights:
+${highlights.join("\n")}
+
+Weekend essentials:
+- Friday 3:00-6:00 PM: guest check-in window.
+- Friday 6:30 PM: grab-and-go welcome meal, Sunroom, LH1.
+- Friday 7:00 PM: weekend orientation, Great Room 1, LH1.
+- Saturday 8:00 AM: yoga on the beach, LH3.
+- Saturday 11:00 AM: motorized lake vehicle orientation, LH1.
+- Saturday 11:30 AM: boat ride, depart LH1 and return LH3.
+- Saturday 6:00 PM: dinner, LH3, lakeside patio seating.
+- Saturday 9:00 PM: fireworks viewing from LH1, LH3, or host-approved cruise.
+- Sunday 10:00 AM: pancake brunch, LH3.
+
+Links:
+Room key: ${baseUrl}/july2026/guest/${guest.slug}
+Guest portal: ${baseUrl}/july2026
+Calendar: ${baseUrl}/july2026/calendar.ics
+Offline guide: ${baseUrl}/july2026/weekend-guide.txt
+Save host contact: ${baseUrl}/july2026/host-contact.vcf
+
+Host text line:
+781-929-4932
+
+Notes:
+- Motorized fleet use starts only after the Saturday LH1 safety briefing and host go-ahead.
+- Wear the right-size life jacket for boating, PWC rides, and lake activities where the host asks for one.
+- Text the host for room help, dietary notes, fleet approval, or link resets.
+`;
+}

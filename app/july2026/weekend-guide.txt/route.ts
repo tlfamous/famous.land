@@ -21,6 +21,7 @@ ARRIVAL
 Friday 3:00-6:00 PM
 Arrive, settle into your assigned lake house, and find your room.
 Use your personalized room-key link for your house, room, companions, and host help.
+Each room-key page also includes a personal downloadable room-key packet.
 
 GETTING AROUND
 - Friday starts at LH1 for the welcome meal, weekend orientation, and first-night fire gathering.

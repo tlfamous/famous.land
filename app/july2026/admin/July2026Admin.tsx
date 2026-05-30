@@ -410,6 +410,7 @@ export function July2026Admin() {
       `Arrival: ${guest.arrival}`,
       `Departure: ${guest.departure}`,
       "",
+      `Personal room-key packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
       `Calendar: ${baseUrl}/july2026/calendar.ics`,
       `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
       `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,

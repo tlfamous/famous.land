@@ -608,6 +608,31 @@
   font-weight: 900;
 }
 
+.roomKeyActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.roomKeyActions a {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  color: #fffdf7;
+  border-radius: 8px;
+  background: var(--july-blue);
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.roomKeyActions a:first-child {
+  background: var(--july-red);
+  box-shadow: 0 12px 26px rgba(190, 29, 39, 0.18);
+}
+
 .personalItinerary {
   overflow: hidden;
   border: 1px solid rgba(8, 33, 65, 0.12);

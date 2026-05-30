@@ -520,6 +520,12 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                   <dd>{selectedGuest.companions.length ? selectedGuest.companions.join(", ") : "Solo room assignment"}</dd>
                 </div>
               </dl>
+              <div className={styles.roomKeyActions}>
+                <a href={`/july2026/guest/${selectedGuest.slug}/packet.txt`}>
+                  Download My Room Key
+                </a>
+                <a href="/july2026/weekend-guide.txt">Download Weekend Guide</a>
+              </div>
               <div className={styles.personalItinerary}>
                 <div className={styles.personalItineraryHeader}>
                   <span className={styles.sectionLabel}>My Itinerary</span>

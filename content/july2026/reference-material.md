@@ -92,6 +92,19 @@ The offline guide includes:
 - What to bring
 - Lake and host approval notes
 
+Each guest room-key page also exposes a personalized downloadable room-key packet at `/july2026/guest/{slug}/packet.txt`.
+
+The personalized packet includes:
+
+- Guest name
+- Current house and room assignment, or pending-assignment language when still awaiting host confirmation
+- Companions
+- Arrival and departure details
+- House note and house-specific itinerary highlights
+- Weekend essentials
+- Links to the room key, guest portal, calendar, offline guide, and host contact card
+- Host SMS line and approval notes
+
 ### Admin Page
 
 The admin page should show:
@@ -486,6 +499,7 @@ Suggested sections:
 - Offline Guide
 - My Stay
 - My Room
+- Downloadable personal room-key packet
 - Weekend Itinerary
 - Houses
 - Activities
@@ -511,6 +525,7 @@ Admin operating sections:
 - Offline guide readiness
 - Guest-link packet readiness
 - Guest-specific SMS packet readiness
+- Personalized room-key packet readiness
 - Personalized itinerary readiness
 - Getting Around readiness
 - Motorized vehicle inventory
@@ -543,8 +558,14 @@ Guest-specific SMS packets:
 
 - Admin guest rows can copy a message for one guest at a time.
 - Admin guest rows show a preview of the guest-specific SMS packet before copying.
-- Each packet includes the tokenized room-key link when available, current assignment, arrival and departure notes, calendar link, offline guide link, host contact card link, and host SMS number.
+- Each packet includes the tokenized room-key link when available, personal packet link, current assignment, arrival and departure notes, calendar link, offline guide link, host contact card link, and host SMS number.
 - Pending guests receive language that their assignment still needs host confirmation instead of a false house or room.
+
+Personal room-key packets:
+
+- Each guest page links to a downloadable plain-text personal packet.
+- Packet route pattern: `/july2026/guest/{slug}/packet.txt`.
+- The packet is suitable for offline reference and includes house-specific highlights plus the core weekend links.
 
 ## 12. Design Direction
 
