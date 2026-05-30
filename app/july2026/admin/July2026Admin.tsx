@@ -40,6 +40,63 @@ const contentNeeds = [
   "Zach and Bee room assignments"
 ];
 
+const readinessItems = [
+  {
+    detail: "Published at /july2026 with /July2026 redirect support.",
+    label: "Guest portal",
+    status: "Live",
+    tone: "ready"
+  },
+  {
+    detail: "Editable Proof link and embedded reference material are available on admin.",
+    label: "Admin reference",
+    status: "Live",
+    tone: "ready"
+  },
+  {
+    detail: "Guest CTAs launch SMS to 781-929-4932.",
+    label: "Contact Host",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "15 persistent room-key URLs with reset and regenerate controls.",
+    label: "Guest links",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Laconic, Spikey Lizard, and Laika are listed with self-contained reference images.",
+    label: "Motorized fleet",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "LH2 and LH3 directions are live; LH1 still needs a confirmed address.",
+    label: "Directions",
+    status: "Partial",
+    tone: "partial"
+  },
+  {
+    detail: "LH1, LH2, and LH3 exterior/common imagery is started; bedroom and beach/detail photos remain.",
+    label: "Media set",
+    status: "Partial",
+    tone: "partial"
+  },
+  {
+    detail: "Zach and Bee remain in the guest list with assignment pending.",
+    label: "Room assignments",
+    status: "Needed",
+    tone: "needed"
+  },
+  {
+    detail: "Current guest pages say Sunday afternoon until a precise check-out time is confirmed.",
+    label: "Departure time",
+    status: "Optional",
+    tone: "partial"
+  }
+];
+
 const vehicleImages = {
   laconic: {
     alt: "Red Sea-Doo Switch pontoon reference for Laconic.",
@@ -217,6 +274,30 @@ export function July2026Admin() {
               ))}
             </ul>
           </article>
+        </section>
+
+        <section className={styles.readinessSection} aria-label="July 2026 readiness tracker">
+          <div className={styles.proofHeader}>
+            <div>
+              <span className={styles.label}>Readiness</span>
+              <h2>Launch Checklist</h2>
+              <p>
+                Current operating view for what is live, what is partial, and what still needs host
+                confirmation before the guest experience is final.
+              </p>
+            </div>
+          </div>
+          <div className={styles.readinessGrid}>
+            {readinessItems.map((item) => (
+              <article className={styles[item.tone as "ready" | "partial" | "needed"]} key={item.label}>
+                <div>
+                  <span>{item.status}</span>
+                  <strong>{item.label}</strong>
+                </div>
+                <p>{item.detail}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className={styles.vehicleInventorySection} aria-label="Motorized vehicle inventory">

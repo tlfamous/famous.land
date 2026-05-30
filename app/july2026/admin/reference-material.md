@@ -59,6 +59,7 @@ The admin page should show:
 - Persistent guest-link service status
 - Ability to generate or regenerate a guest link with a fresh token-style query string
 - Ability to reset a guest binding if needed
+- Readiness tracker for live, partial, and still-needed launch content
 
 ## 4. Houses
 
@@ -429,6 +430,15 @@ Suggested sections:
 - Help / Contact Host
 - View Other Guests
 - Admin
+
+Admin operating sections:
+
+- Planning summary
+- Reference checkpoints
+- Launch readiness tracker
+- Motorized vehicle inventory
+- Personalized room-key URLs
+- Embedded reference material with Proof edit link
 
 ## 11. Design Direction
 

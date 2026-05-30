@@ -10,6 +10,7 @@
 .hero,
 .grid,
 .lists,
+.readinessSection,
 .vehicleInventorySection,
 .guestLinksSection,
 .proofSection {
@@ -95,6 +96,7 @@
 }
 
 .panel,
+.readinessSection,
 .vehicleInventorySection,
 .proofSection {
   border: 1px solid rgba(8, 19, 38, 0.13);
@@ -159,6 +161,7 @@
 }
 
 .guestLinksSection,
+.readinessSection,
 .vehicleInventorySection,
 .proofSection {
   overflow: hidden;
@@ -166,8 +169,69 @@
 }
 
 .guestLinksSection,
+.readinessSection,
 .vehicleInventorySection {
   margin-bottom: 24px;
+}
+
+.readinessGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(8, 19, 38, 0.13);
+}
+
+.readinessGrid article {
+  min-height: 142px;
+  display: grid;
+  align-content: space-between;
+  gap: 16px;
+  padding: 18px;
+  background: rgba(255, 253, 247, 0.98);
+}
+
+.readinessGrid article div {
+  display: grid;
+  gap: 8px;
+}
+
+.readinessGrid article span {
+  width: fit-content;
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.readinessGrid article strong {
+  color: #082141;
+  font-size: 1.05rem;
+  line-height: 1.14;
+}
+
+.readinessGrid article p {
+  margin: 0;
+  color: #596476;
+  line-height: 1.42;
+}
+
+.ready span {
+  color: #f9fff6;
+  background: #4f7a4c;
+}
+
+.partial span {
+  color: #071429;
+  background: #f3bb55;
+}
+
+.needed span {
+  color: #fffdf7;
+  background: #be1d27;
 }
 
 .vehicleInventoryGrid {
@@ -374,6 +438,7 @@
   .hero,
   .grid,
   .lists,
+  .readinessGrid,
   .vehicleInventoryGrid,
   .guestLinkGrid {
     grid-template-columns: 1fr;
