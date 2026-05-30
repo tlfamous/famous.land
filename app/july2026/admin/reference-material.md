@@ -201,6 +201,10 @@ Each guest has a persistent room-key URL. The admin page generates token-style U
 
 Opening one of these links on a device records the first guest identity. Opening a different guest link afterward does not replace that stored check-in unless the local device binding is reset. If a tokenized link is already bound to another device or the token no longer matches, the guest page tells the guest to text the host for a fresh link.
 
+Base guest-directory URLs without `?t=...` are browsable but should not claim the persistent backend room-key binding. Persistent first-device binding is for tokenized links generated from admin.
+
+If a guest has an assignment pending, the guest page should show a host-confirmation notice instead of presenting “Pending” as a finished room assignment. The guest should be prompted to text the host for the current lodging details.
+
 ## 6. Weekend Schedule
 
 ## Friday, July 3, 2026

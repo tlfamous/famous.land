@@ -319,6 +319,44 @@
   cursor: pointer;
 }
 
+.pendingAssignmentNotice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid rgba(243, 187, 85, 0.38);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 247, 0.96), rgba(255, 243, 226, 0.78)),
+    radial-gradient(circle at 100% 0%, rgba(243, 187, 85, 0.2), transparent 28%);
+}
+
+.pendingAssignmentNotice strong {
+  color: var(--july-blue);
+}
+
+.pendingAssignmentNotice p {
+  margin: 4px 0 0;
+  color: var(--july-muted);
+  font-size: 0.9rem;
+}
+
+.pendingAssignmentNotice a {
+  min-height: 40px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 13px;
+  color: #fffdf7;
+  border-radius: 8px;
+  background: var(--july-red);
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .stayDetails {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1086,6 +1124,7 @@
   .heroPanel,
   .bindingNotice,
   .bindingWarning,
+  .pendingAssignmentNotice,
   .activityGrid,
   .hostHelpGrid,
   .formRow,

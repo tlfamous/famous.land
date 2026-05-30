@@ -122,6 +122,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
     [boundGuest]
   );
   const isViewingBoundGuest = Boolean(selectedGuest && boundGuest?.slug === selectedGuest.slug);
+  const selectedGuestNeedsHostAssignment = selectedGuest?.house === "Pending";
 
   useEffect(() => {
     let cancelled = false;
@@ -168,6 +169,16 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           slug: selectedGuest.slug,
           token
         };
+
+        if (!token) {
+          if (parsedBinding) {
+            setServerBindingStatus("local-only");
+            return;
+          }
+
+          storeLocalBinding(nextBinding, "local-only");
+          return;
+        }
 
         void fetch("/api/july2026/guest-bindings", {
           body: JSON.stringify({
@@ -319,7 +330,11 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         <div>
           <span>Room key</span>
           <strong>
-            {selectedGuest ? `${selectedGuest.house} / ${selectedGuest.room}` : "House and room assignment"}
+            {selectedGuest
+              ? selectedGuestNeedsHostAssignment
+                ? "Host confirmation pending"
+                : `${selectedGuest.house} / ${selectedGuest.room}`
+              : "House and room assignment"}
           </strong>
           <p>
             {selectedGuest
@@ -375,14 +390,26 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                   </button>
                 ) : null}
               </div>
+              {selectedGuestNeedsHostAssignment ? (
+                <div className={styles.pendingAssignmentNotice}>
+                  <div>
+                    <strong>Room assignment coming from the host</strong>
+                    <p>
+                      You are on the guest list, but your lake house and room are still being finalized.
+                      Text the host for the latest assignment before arrival.
+                    </p>
+                  </div>
+                  <a href="sms:+17819294932">Text Host</a>
+                </div>
+              ) : null}
               <dl className={styles.stayDetails}>
                 <div>
                   <dt>House</dt>
-                  <dd>{selectedGuest.house}</dd>
+                  <dd>{selectedGuestNeedsHostAssignment ? "Pending host confirmation" : selectedGuest.house}</dd>
                 </div>
                 <div>
                   <dt>Room</dt>
-                  <dd>{selectedGuest.room}</dd>
+                  <dd>{selectedGuestNeedsHostAssignment ? "Pending host confirmation" : selectedGuest.room}</dd>
                 </div>
                 <div>
                   <dt>Arrival</dt>
@@ -394,7 +421,11 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 </div>
                 <div>
                   <dt>House note</dt>
-                  <dd>{selectedGuestHouse?.role ?? selectedGuest.note}</dd>
+                  <dd>
+                    {selectedGuestNeedsHostAssignment
+                      ? "Text the host for current lodging details."
+                      : selectedGuestHouse?.role ?? selectedGuest.note}
+                  </dd>
                 </div>
                 <div>
                   <dt>Staying with</dt>
