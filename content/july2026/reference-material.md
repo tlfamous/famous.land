@@ -594,6 +594,12 @@ Printable room-key sheet:
 - The sheet lists every guest, current assignment, arrival, departure, companions, stable room-key URL, and room-key QR code.
 - The sheet is intended for host check-in, arrival troubleshooting, and paper/screenshot backup.
 
+Printable host briefing sheet:
+
+- Admin includes a print-friendly host briefing sheet at `/july2026/admin/briefing-sheet`.
+- The sheet summarizes the host text line, guest portal, launch caveats, arrival checklist, house flow, weekend schedule, meals, lake approvals, packing list, activities, motorized fleet, and common text prompts.
+- The sheet is intended as a host operations backup for check-in, meal timing, lake rules, and day-of coordination.
+
 Personal calendar files:
 
 - Each guest page links to a personal downloadable `.ics` file.
@@ -609,7 +615,7 @@ Missing-content request packet:
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, weekend calendar, host contact card, missing-content request, printable room-key sheet, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction
