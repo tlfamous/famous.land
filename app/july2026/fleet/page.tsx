@@ -52,6 +52,7 @@ export default function July2026FleetPage() {
           <nav className={styles.quickLinks} aria-label="Fleet quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/faq">Guest FAQ</a>
+            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/itinerary">Weekend Itinerary</a>
             <a href="/july2026/concierge">Guest Concierge</a>
@@ -90,7 +91,7 @@ export default function July2026FleetPage() {
                     alt={vehicleImage.alt}
                     className={styles.vehicleImage}
                     sizes="(max-width: 860px) 100vw, 420px"
-                    priority={vehicle.name === "Laconic"}
+                    priority
                   />
                 </div>
                 <div className={styles.vehicleBody}>

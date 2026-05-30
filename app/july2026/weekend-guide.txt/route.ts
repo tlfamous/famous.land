@@ -9,6 +9,9 @@ https://famous.land/july2026/pass
 Resort FAQ:
 https://famous.land/july2026/faq
 
+Rain plan:
+https://famous.land/july2026/rain-plan
+
 Arrival card:
 https://famous.land/july2026/arrival-card
 
@@ -145,10 +148,18 @@ QUICK FAQ
 - Phone setup: open your room key, save the host contact, add the calendar, and download this guide before leaving.
 - More answers: https://famous.land/july2026/faq
 
+RAIN PLAN
+- Host updates: if weather changes the plan, use host texts as the source of truth.
+- Indoor pivot: Friday stays anchored at LH1; Saturday meals and hangout time can shift toward LH1 and LH3 indoor or covered gathering areas.
+- Lake safety: swimming, boats, PWC rides, and dock movement pause during thunder, lightning, heavy rain, or any host-directed safety hold.
+- Meals: Friday welcome meal, Saturday lunch and dinner, and Sunday pancake brunch stay planned unless the host texts otherwise.
+- Fireworks: LH1, LH3, and cruise options depend on lake conditions and host confirmation.
+- Full rain plan: https://famous.land/july2026/rain-plan
+
 MOTORIZED VEHICLE INVENTORY
-- Laconic: red Sea-Doo Switch Cruise pontoon boat, 23 ft, 10 persons. Best for group cruises, boat parade viewing, relaxed lake runs, and the Saturday LH1-to-LH3 ride after host orientation.
-- Spikey Lizard: blue Sea-Doo GTX-style PWC, 3 seats. Best for host-approved PWC rides after the Saturday safety briefing.
-- Laika: red Sea-Doo Spark Trixx-style PWC, 2 seats. Best for compact host-approved PWC outings after orientation.
+- Laconic: red Sea-Doo Switch Cruise 23 ft pontoon boat, 10 persons. Best for group cruises, boat parade viewing, relaxed lake runs, and the Saturday LH1-to-LH3 ride after host orientation.
+- Spikey Lizard: blue Sea-Doo GTX PWC, 3 seats. Best for host-approved PWC rides after the Saturday safety briefing.
+- Laika: red Sea-Doo Spark Trixx PWC, 2 seats. Best for compact host-approved PWC outings after orientation.
 
 APPROVAL NOTES
 - For urgent medical, fire, water, or safety emergencies, call 911 first, then text the host when safe.

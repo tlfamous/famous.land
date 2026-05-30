@@ -209,6 +209,19 @@ The resort FAQ includes:
 - Phone setup checklist for room key, host contact, calendar, and offline guide
 - Prefilled Contact Host action for anything still unclear
 
+### Rain Plan
+
+The guest portal exposes a weather backup guide at `/july2026/rain-plan`.
+
+The rain plan includes:
+
+- Host text updates as the source of truth
+- Indoor and covered gathering pivots for LH1 and LH3
+- Lake safety holds for thunder, lightning, heavy rain, dock footing, or host-directed pauses
+- Meal-continuity guidance
+- Fireworks and cruise confirmation guidance
+- Phone setup reminders for host contact, calendar, and offline guide
+
 ### Resort Map
 
 The guest portal exposes a polished resort-map style movement guide at `/july2026/map`.
@@ -646,9 +659,9 @@ The guest page includes a dedicated Food and Drinks section with:
 
 | Name | Vehicle | Color | Capacity | Best for | Start point | Approval | Reference image | Operating note |
 |---|---|---|---|---|---|---|---|---|
-| Laconic | Sea-Doo Switch Cruise pontoon boat | Red | 10 persons | Group cruise, boat parade viewing, and relaxed lake runs | LH1 dock / host-designated departure point | Host orientation required before use | Red Sea-Doo Switch Cruise 23 ft studio-style reference | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
-| Spikey Lizard | Sea-Doo GTX-style PWC | Blue | 3 seats | Three-seat PWC rides after the safety briefing | Host-approved lake launch point | Host orientation and PWC go-ahead required | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
-| Laika | Sea-Doo Spark Trixx-style PWC | Red | 2 seats | Compact two-seat Trixx-style PWC outings | Host-approved lake launch point | Host orientation and PWC go-ahead required | Red Sea-Doo Spark Trixx 2up studio reference | Compact Trixx-style PWC for host-approved lake use after orientation. |
+| Laconic | Sea-Doo Switch Cruise 23 ft pontoon boat | Red | 10 persons | Group cruise, boat parade viewing, and relaxed lake runs | LH1 dock / host-designated departure point | Host orientation required before use | Red Sea-Doo Switch Cruise 23 ft studio-style reference | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
+| Spikey Lizard | Sea-Doo GTX PWC | Blue | 3 seats | Three-seat PWC rides after the safety briefing | Host-approved lake launch point | Host orientation and PWC go-ahead required | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
+| Laika | Sea-Doo Spark Trixx PWC | Red | 2 seats | Compact two-seat Spark Trixx PWC outings | Host-approved lake launch point | Host orientation and PWC go-ahead required | Red Sea-Doo Spark Trixx 2up studio reference | Compact Spark Trixx PWC for host-approved lake use after orientation. |
 
 Inventory notes:
 
@@ -669,6 +682,7 @@ Suggested sections:
 - Arrival Desk checklist
 - Resort Pass at `/july2026/pass`
 - Resort FAQ at `/july2026/faq`
+- Rain Plan at `/july2026/rain-plan`
 - Host text templates
 - Add Calendar
 - Add My Calendar
@@ -914,6 +928,7 @@ Current bundled media:
 - LH3 animated profile video
 - Motorized vehicle reference images for Laconic, Spikey Lizard, and Laika
 - Resort FAQ content for arrival, directions, food, lake approvals, phone setup, and host help
+- Rain Plan content for host updates, indoor pivots, lake-safety holds, meals, fireworks, and phone setup
 
 Missing information:
 

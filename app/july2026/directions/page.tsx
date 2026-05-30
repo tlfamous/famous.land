@@ -33,6 +33,7 @@ export default function July2026DirectionsPage() {
           <nav className={styles.quickLinks} aria-label="Directions quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/faq">Guest FAQ</a>
+            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/map">Resort Map</a>
             <a href="/july2026/houses">House Directory</a>
             <a href="/july2026/arrival-card">Arrival Card</a>

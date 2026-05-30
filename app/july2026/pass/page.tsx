@@ -53,6 +53,11 @@ const passActions = [
     note: "Quick answers for arrival, directions, food, lake approvals, and host help"
   },
   {
+    href: "/july2026/rain-plan",
+    label: "Rain Plan",
+    note: "Weather backup, host-update, indoor-pivot, and lake-safety guidance"
+  },
+  {
     href: "/july2026/weekend-guide.txt",
     label: "Offline Guide",
     note: "Plain-text backup for low-signal moments"

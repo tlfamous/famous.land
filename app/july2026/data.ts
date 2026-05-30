@@ -490,6 +490,45 @@ export const faqItems = [
   }
 ] as const;
 
+export const rainPlanItems = [
+  {
+    label: "Host updates",
+    title: "Watch the text line",
+    detail:
+      "If weather changes the plan, the host will send the latest timing, house movement, and lake-activity guidance by text."
+  },
+  {
+    label: "Indoor pivot",
+    title: "Use the house hubs",
+    detail:
+      "Friday stays anchored at LH1. If rain affects Saturday, meals and hangout time can shift toward LH1 and LH3 indoor or covered gathering areas."
+  },
+  {
+    label: "Lake safety",
+    title: "Pause before water",
+    detail:
+      "Swimming, boats, PWC rides, and dock movement pause during thunder, lightning, heavy rain, or any host-directed safety hold."
+  },
+  {
+    label: "Meals",
+    title: "Food stays planned",
+    detail:
+      "The meal rhythm stays the same unless the host texts otherwise: Friday welcome meal, Saturday lunch and dinner, and Sunday pancake brunch."
+  },
+  {
+    label: "Fireworks",
+    title: "Evening call by host",
+    detail:
+      "Fireworks viewing options depend on lake conditions and local timing. Use LH1, LH3, or the host-approved cruise only after the host confirms."
+  },
+  {
+    label: "Phone setup",
+    title: "Keep offline links ready",
+    detail:
+      "Save the host contact, add the calendar, and download the offline guide before leaving so updates and backup links stay easy to find."
+  }
+] as const;
+
 export const lakeUseRules = [
   {
     label: "Orientation first",
@@ -537,13 +576,13 @@ export const motorizedVehicles = [
     detail: "Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation.",
     image: "laconic",
     length: "23 ft",
-    model: "23 ft Switch Cruise pontoon reference",
+    model: "23 ft Sea-Doo Switch Cruise reference",
     name: "Laconic",
     pickup: "LH1 dock / host-designated departure point",
     source: "Red Sea-Doo Switch Cruise studio reference",
     sourceUrl:
       "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my23/studio/switch/cruise/SEA-MY23-Can-Am-SWIC-230hp-21-Coral-Blast-00046PT00-34FR-NA.png",
-    type: "Sea-Doo Switch Cruise pontoon boat"
+    type: "Sea-Doo Switch Cruise 23 ft pontoon boat"
   },
   {
     approval: "Host orientation and PWC go-ahead required",
@@ -553,29 +592,29 @@ export const motorizedVehicles = [
     detail: "Personal watercraft for approved lake use after the Saturday safety briefing.",
     image: "spikey-lizard",
     length: "PWC",
-    model: "GTX-style 3-seat PWC reference",
+    model: "Sea-Doo GTX 3-seat PWC reference",
     name: "Spikey Lizard",
     pickup: "Host-approved lake launch point",
     source: "Blue Sea-Doo GTX studio reference",
     sourceUrl:
       "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my26/studio/touring/gtx/SEA-MY26-GTX-Standard-NoSS-M170-Blue-Abyss-Gulfstream-Blue-00011TD00-Studio-34FR-CU.png",
-    type: "Sea-Doo GTX-style PWC"
+    type: "Sea-Doo GTX PWC"
   },
   {
     approval: "Host orientation and PWC go-ahead required",
-    bestFor: "Compact two-seat Trixx-style PWC outings",
+    bestFor: "Compact two-seat Spark Trixx PWC outings",
     capacity: "2 seats",
     color: "Red",
-    detail: "Compact Trixx-style PWC for host-approved lake use after orientation.",
+    detail: "Compact Spark Trixx PWC for host-approved lake use after orientation.",
     image: "laika",
     length: "PWC",
-    model: "Spark Trixx 2up-style PWC reference",
+    model: "Sea-Doo Spark Trixx 2up PWC reference",
     name: "Laika",
     pickup: "Host-approved lake launch point",
     source: "Red Sea-Doo Spark Trixx 2up studio reference",
     sourceUrl:
       "https://sea-doo.brp.com/content/dam/global/en/sea-doo/my22/studio/rec-lite/SEA-MY22-SPARK-2up-IBR-TRIXX-withoutSS-90-Can-Am-Red-SKU00065NA00-Studio-34FR-NA-661x480.png",
-    type: "Sea-Doo Spark Trixx-style PWC"
+    type: "Sea-Doo Spark Trixx PWC"
   }
 ];
 
@@ -624,6 +663,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Guest portal: ${baseUrl}/july2026`,
     `Resort pass: ${baseUrl}/july2026/pass`,
     `Resort FAQ: ${baseUrl}/july2026/faq`,
+    `Rain plan: ${baseUrl}/july2026/rain-plan`,
     `Arrival card: ${baseUrl}/july2026/arrival-card`,
     `Resort map: ${baseUrl}/july2026/map`,
     `Directions hub: ${baseUrl}/july2026/directions`,
@@ -660,6 +700,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     `- Admin reference: ${baseUrl}/july2026/admin`,
     `- Resort pass: ${baseUrl}/july2026/pass`,
     `- Resort FAQ: ${baseUrl}/july2026/faq`,
+    `- Rain plan: ${baseUrl}/july2026/rain-plan`,
     `- Arrival card: ${baseUrl}/july2026/arrival-card`,
     `- Resort map: ${baseUrl}/july2026/map`,
     `- Directions hub: ${baseUrl}/july2026/directions`,
@@ -688,6 +729,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "- Resort-style guest portal and supporting pages",
     "- Mobile resort pass with QR, host text, calendar, offline guide, and key itinerary actions",
     "- Resort FAQ for arrival, directions, food, lake approvals, phone setup, and host help",
+    "- Rain plan with host-update, indoor-pivot, lake-safety, and meal-continuity guidance",
     "- Prefilled Contact Host SMS actions to 781-929-4932",
     "- Downloadable host contact card",
     "- Shared weekend calendar and personal guest calendars",
@@ -974,6 +1016,7 @@ Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
 Resort pass: ${baseUrl}/july2026/pass
 Resort FAQ: ${baseUrl}/july2026/faq
+Rain plan: ${baseUrl}/july2026/rain-plan
 Arrival card: ${baseUrl}/july2026/arrival-card
 Resort map: ${baseUrl}/july2026/map
 Directions hub: ${baseUrl}/july2026/directions
@@ -1026,6 +1069,7 @@ export function getGuestSmsPacket(
     `Room-key QR code: ${baseUrl}${qrPath}`,
     `Resort pass: ${baseUrl}/july2026/pass`,
     `Resort FAQ: ${baseUrl}/july2026/faq`,
+    `Rain plan: ${baseUrl}/july2026/rain-plan`,
     `Calendar: ${baseUrl}/july2026/calendar.ics`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,

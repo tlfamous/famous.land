@@ -43,6 +43,7 @@ const guestExperience = [
   "Resort Desk quick guide",
   "Arrival checklist",
   "Resort FAQ",
+  "Rain Plan",
   "Host text templates",
   "House Directory",
   "Add Calendar",
@@ -142,6 +143,12 @@ const readinessItems = [
   {
     detail: "Guest-facing FAQ collects arrival, directions, food, lake approvals, phone setup, and host-help answers.",
     label: "Resort FAQ",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest-facing rain plan explains host updates, indoor pivots, lake-safety holds, meals, fireworks, and phone backup.",
+    label: "Rain Plan",
     status: "Ready",
     tone: "ready"
   },
@@ -306,7 +313,7 @@ const vehicleImages = {
     src: laconicVehicleImage
   },
   laika: {
-    alt: "Red Sea-Doo Trixx reference for Laika.",
+    alt: "Red Sea-Doo Spark Trixx reference for Laika.",
     src: laikaVehicleImage
   },
   "spikey-lizard": {
@@ -363,6 +370,11 @@ export function July2026Admin() {
         detail: "Quick guest answers for arrival, directions, food, lake approvals, phone setup, and host help.",
         href: `${baseUrl}/july2026/faq`,
         label: "Resort FAQ"
+      },
+      {
+        detail: "Weather backup guidance for host updates, indoor pivots, lake holds, meals, fireworks, and phone setup.",
+        href: `${baseUrl}/july2026/rain-plan`,
+        label: "Rain plan"
       },
       {
         detail: "Plain-text offline guest guide.",

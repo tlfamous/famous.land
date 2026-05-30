@@ -29,6 +29,7 @@ export default function July2026FaqPage() {
           <nav className={styles.quickLinks} aria-label="FAQ quick actions">
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/pass">Resort Pass</a>
+            <a href="/july2026/rain-plan">Rain Plan</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/prep">Packing Prep</a>
