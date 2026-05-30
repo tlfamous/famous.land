@@ -10,6 +10,7 @@
 .hero,
 .grid,
 .lists,
+.vehicleInventorySection,
 .guestLinksSection,
 .proofSection {
   width: min(100%, 1320px);
@@ -94,6 +95,7 @@
 }
 
 .panel,
+.vehicleInventorySection,
 .proofSection {
   border: 1px solid rgba(8, 19, 38, 0.13);
   border-radius: 8px;
@@ -157,13 +159,92 @@
 }
 
 .guestLinksSection,
+.vehicleInventorySection,
 .proofSection {
   overflow: hidden;
   padding: 0;
 }
 
-.guestLinksSection {
+.guestLinksSection,
+.vehicleInventorySection {
   margin-bottom: 24px;
+}
+
+.vehicleInventoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(8, 19, 38, 0.13);
+}
+
+.vehicleInventoryGrid article {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  background: rgba(255, 253, 247, 0.98);
+}
+
+.vehicleInventoryImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  border: 1px solid rgba(8, 19, 38, 0.09);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.vehicleInventoryGrid strong {
+  display: block;
+  color: #082141;
+  font-size: 1.18rem;
+  line-height: 1.12;
+}
+
+.vehicleInventoryGrid span {
+  display: block;
+  margin-top: 5px;
+  color: #596476;
+  font-weight: 850;
+}
+
+.vehicleInventoryGrid dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin: 13px 0 0;
+}
+
+.vehicleInventoryGrid dl div {
+  padding: 8px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 8px;
+  background: rgba(8, 33, 65, 0.04);
+}
+
+.vehicleInventoryGrid dt,
+.vehicleInventoryGrid dd {
+  margin: 0;
+}
+
+.vehicleInventoryGrid dt {
+  color: #596476;
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.vehicleInventoryGrid dd {
+  margin-top: 3px;
+  color: #082141;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.vehicleInventoryGrid p {
+  margin: 13px 0 0;
+  color: #596476;
+  line-height: 1.42;
 }
 
 .proofHeader {
@@ -289,7 +370,12 @@
   .hero,
   .grid,
   .lists,
+  .vehicleInventoryGrid,
   .guestLinkGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicleInventoryGrid dl {
     grid-template-columns: 1fr;
   }
 

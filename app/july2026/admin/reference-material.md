@@ -379,11 +379,12 @@ The guest page includes a dedicated Activities section with scan-friendly cards 
 - Famous Land quests and hiking during free time
 - Campfire, s’mores, sparklers, and fireworks viewing from LH1 / LH3
 
-Activity approval still needs host rules for:
+Activity approval rules:
 
-- Motorized lake fleet use
-- Optional fireworks cruise
-- Quad/four-wheeler use
+- Motorized lake fleet use requires the Saturday LH1 orientation and host approval.
+- Optional fireworks cruise plans are by host approval.
+- Quad/four-wheeler use is by host approval.
+- Dietary notes, allergies, or restrictions should be texted to the host at 781-929-4932.
 
 ## 8. Food and Drinks
 
@@ -400,9 +401,15 @@ The guest page includes a dedicated Food and Drinks section with:
 
 | Name | Vehicle | Color | Capacity | Reference image |
 |---|---|---|---|---|
-| Laconic | Sea-Doo Switch pontoon boat | Red | 10 persons | Red Sea-Doo Switch / Cruise-style pontoon |
-| Spikey Lizard | Sea-Doo GTX PWC | Blue | 3 seats | Blue Sea-Doo GTX |
-| Laika | Sea-Doo Spark Trixx | Red | 2 seats | Red Sea-Doo Trixx |
+| Laconic | Sea-Doo Switch pontoon boat | Red | 10 persons | Red Sea-Doo Switch Cruise-style pontoon |
+| Spikey Lizard | Sea-Doo PWC | Blue | 3 seats | Blue Sea-Doo GTX-style PWC |
+| Laika | Sea-Doo Trixx | Red | 2 seats | Red Sea-Doo Spark Trixx-style PWC |
+
+Inventory notes:
+
+- The website stores the vehicle reference images inside the July 2026 asset folder.
+- The three inventory cards should look visually similar, using clean studio-style watercraft references.
+- All motorized vehicle use is part of the host-approved activity flow.
 
 ## 10. Guest Experience Requirements
 
@@ -416,6 +423,7 @@ Suggested sections:
 - Weekend Itinerary
 - Houses
 - Activities
+- Motorized Fleet
 - Food and Drinks
 - Maps and Directions with known LH2 and LH3 address links
 - Help / Contact Host
@@ -470,6 +478,3 @@ Missing information:
 - Zach room assignment
 - Bee room assignment
 - Exact departure/check-out time, if needed
-- Any dietary notes or restrictions
-- Whether boat/fireworks cruise or activity sign-ups need host approval
-- Whether the quad requires specific safety restrictions or host approval

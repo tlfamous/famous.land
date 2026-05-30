@@ -17,6 +17,7 @@ import {
   bringItems,
   foodMoments,
   guestAssignments,
+  hostHelpItems,
   houseProfiles,
   motorizedVehicles,
   scheduleItems,
@@ -567,6 +568,10 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                       <p>{vehicle.type}</p>
                       <dl className={styles.vehicleMeta}>
                         <div>
+                          <dt>Model</dt>
+                          <dd>{vehicle.model}</dd>
+                        </div>
+                        <div>
                           <dt>Color</dt>
                           <dd>{vehicle.color}</dd>
                         </div>
@@ -629,6 +634,32 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               </li>
             ))}
           </ol>
+        </article>
+      </section>
+
+      <section className={styles.hostHelp} id="host-help" aria-label="Host help and approvals">
+        <article className={styles.panel}>
+          <div className={styles.hostHelpIntro}>
+            <div>
+              <span className={styles.sectionLabel}>Host Help</span>
+              <h2>Questions, notes, and approvals</h2>
+              <p>
+                Text the host for dietary notes, motorized lake use, quad requests, cruise plans,
+                or room-key help.
+              </p>
+            </div>
+            <a className={styles.mapButton} href="sms:+17819294932">
+              Text Host
+            </a>
+          </div>
+          <div className={styles.hostHelpGrid}>
+            {hostHelpItems.map((item) => (
+              <section key={item.title}>
+                <strong>{item.title}</strong>
+                <p>{item.detail}</p>
+              </section>
+            ))}
+          </div>
         </article>
       </section>
 

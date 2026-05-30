@@ -1,8 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./admin.module.css";
-import { guestAssignments } from "../data";
+import laconicVehicleImage from "../assets/vehicle-laconic-switch.png";
+import laikaVehicleImage from "../assets/vehicle-laika-trixx.png";
+import spikeyLizardVehicleImage from "../assets/vehicle-spikey-lizard-gtx.png";
+import { guestAssignments, motorizedVehicles } from "../data";
 import { referenceMaterial } from "./referenceMaterial";
 
 const proofUrl = "https://www.proofeditor.ai/d/ado6gf4r?token=2b8510d8-4eaa-4fc9-b0e7-f802f6a0d12c";
@@ -12,7 +16,7 @@ const adminTools = [
   "First-device identity binding status",
   "Generate or regenerate guest links",
   "Reset the current device binding if needed",
-  "Track missing photos, addresses, dietary notes, and activity decisions"
+  "Track missing photos, addresses, and room-assignment decisions"
 ];
 
 const guestExperience = [
@@ -32,9 +36,23 @@ const contentNeeds = [
   "LH1 address",
   "House and room photos",
   "Exact departure or check-out time",
-  "Dietary notes and restrictions",
-  "Boat, cruise, and quad reservation rules"
+  "Zach and Bee room assignments"
 ];
+
+const vehicleImages = {
+  laconic: {
+    alt: "Red Sea-Doo Switch pontoon reference for Laconic.",
+    src: laconicVehicleImage
+  },
+  laika: {
+    alt: "Red Sea-Doo Trixx reference for Laika.",
+    src: laikaVehicleImage
+  },
+  "spikey-lizard": {
+    alt: "Blue Sea-Doo GTX PWC reference for Spikey Lizard.",
+    src: spikeyLizardVehicleImage
+  }
+} as const;
 
 const bindingStorageKey = "famous.land.july2026.boundGuest";
 
@@ -198,6 +216,54 @@ export function July2026Admin() {
               ))}
             </ul>
           </article>
+        </section>
+
+        <section className={styles.vehicleInventorySection} aria-label="Motorized vehicle inventory">
+          <div className={styles.proofHeader}>
+            <div>
+              <span className={styles.label}>Inventory</span>
+              <h2>Motorized Vehicles</h2>
+              <p>
+                Self-contained reference images and working names for the lake fleet. All motorized
+                use requires host approval after orientation.
+              </p>
+            </div>
+          </div>
+          <div className={styles.vehicleInventoryGrid}>
+            {motorizedVehicles.map((vehicle) => {
+              const vehicleImage = vehicleImages[vehicle.image as keyof typeof vehicleImages];
+
+              return (
+                <article key={vehicle.name}>
+                  <Image
+                    src={vehicleImage.src}
+                    alt={vehicleImage.alt}
+                    className={styles.vehicleInventoryImage}
+                    sizes="(max-width: 980px) 100vw, 360px"
+                  />
+                  <div>
+                    <strong>{vehicle.name}</strong>
+                    <span>{vehicle.type}</span>
+                    <dl>
+                      <div>
+                        <dt>Reference</dt>
+                        <dd>{vehicle.model}</dd>
+                      </div>
+                      <div>
+                        <dt>Color</dt>
+                        <dd>{vehicle.color}</dd>
+                      </div>
+                      <div>
+                        <dt>Capacity</dt>
+                        <dd>{vehicle.capacity}</dd>
+                      </div>
+                    </dl>
+                    <p>{vehicle.detail}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </section>
 
         <section className={styles.guestLinksSection} aria-label="Personalized guest links">

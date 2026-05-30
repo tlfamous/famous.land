@@ -176,27 +176,52 @@ export const foodMoments = [
   }
 ];
 
+export const hostHelpItems = [
+  {
+    title: "Dietary notes",
+    detail: "Text the host with allergies, dietary restrictions, or anything the kitchen should know before the weekend."
+  },
+  {
+    title: "Motorized fleet approval",
+    detail: "Sea-Doo, pontoon, and other motorized lake use require the Saturday orientation and host go-ahead."
+  },
+  {
+    title: "Quad and cruise requests",
+    detail: "Quad/four-wheeler use and optional fireworks cruise plans are by host approval."
+  },
+  {
+    title: "Room-key help",
+    detail: "If a guest link says it needs a host reset, text the host for a fresh room-key link."
+  }
+];
+
 export const motorizedVehicles = [
   {
-    name: "Laconic",
-    type: "Sea-Doo Switch pontoon boat",
-    color: "Red",
     capacity: "10 persons",
-    image: "laconic"
-  },
-  {
-    name: "Spikey Lizard",
-    type: "Sea-Doo GTX PWC",
-    color: "Blue",
-    capacity: "3 seats",
-    image: "spikey-lizard"
-  },
-  {
-    name: "Laika",
-    type: "Sea-Doo Spark Trixx",
     color: "Red",
+    detail: "Group lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation.",
+    image: "laconic",
+    model: "Switch Cruise-style pontoon reference",
+    name: "Laconic",
+    type: "Sea-Doo Switch pontoon boat"
+  },
+  {
+    capacity: "3 seats",
+    color: "Blue",
+    detail: "Personal watercraft for approved lake use after the Saturday safety briefing.",
+    image: "spikey-lizard",
+    model: "GTX-style PWC reference",
+    name: "Spikey Lizard",
+    type: "Sea-Doo PWC"
+  },
+  {
     capacity: "2 seats",
-    image: "laika"
+    color: "Red",
+    detail: "Compact Trixx-style PWC for host-approved lake use after orientation.",
+    image: "laika",
+    model: "Spark Trixx-style PWC reference",
+    name: "Laika",
+    type: "Sea-Doo Trixx"
   }
 ];
 
