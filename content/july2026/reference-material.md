@@ -580,6 +580,7 @@ Personal room-key packets:
 - Each guest page links to a downloadable plain-text personal packet.
 - Packet route pattern: `/july2026/guest/{slug}/packet.txt`.
 - The packet is suitable for offline reference and includes house-specific highlights plus the core weekend links.
+- Personal room-key pages and packets include direct directions for LH2 and LH3 guests, while LH1 and pending guests use the general Lake Monomonac area map until the LH1 address is confirmed.
 
 Room-key QR codes:
 

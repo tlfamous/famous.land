@@ -685,6 +685,10 @@ export function getGuestPacketText(guest: GuestAssignment, baseUrl = "https://fa
   const companionText = guest.companions.length ? guest.companions.join(", ") : "Solo room assignment";
   const house =
     guest.house === "Pending" ? null : houseProfiles.find((profile) => profile.name === guest.house);
+  const directionsUrl =
+    house && "mapsUrl" in house && house.mapsUrl
+      ? house.mapsUrl
+      : "https://www.google.com/maps/search/?api=1&query=Lake%20Monomonac%20Rindge%20NH%20Winchendon%20MA";
   const highlights = itineraryHighlights[guest.house].map(
     (item) => `- ${item.time}: ${item.title}. ${item.detail}`
   );
@@ -726,6 +730,7 @@ Weekend essentials:
 Links:
 Room key: ${baseUrl}/july2026/guest/${guest.slug}
 Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
+Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
 Calendar: ${baseUrl}/july2026/calendar.ics
 Offline guide: ${baseUrl}/july2026/weekend-guide.txt
