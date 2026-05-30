@@ -467,6 +467,23 @@
   object-position: center;
 }
 
+.houseGallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 6px;
+  background: rgba(8, 33, 65, 0.05);
+}
+
+.houseGalleryImage {
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  border: 1px solid rgba(8, 19, 38, 0.08);
+  border-radius: 6px;
+  object-fit: cover;
+}
+
 .houseList strong {
   display: block;
   font-size: 1rem;

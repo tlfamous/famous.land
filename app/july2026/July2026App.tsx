@@ -4,6 +4,10 @@ import Image from "next/image";
 import { FormEvent, useMemo, useState } from "react";
 import heroImage from "./assets/july-4-hero.png";
 import lakeHouse1Image from "./assets/lake-house-1.jpeg";
+import lakeHouse2ExteriorFrontImage from "./assets/lake-house-2-exterior-front.jpeg";
+import lakeHouse2ExteriorSideImage from "./assets/lake-house-2-exterior-side.jpeg";
+import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
+import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
 import { bringItems, houseProfiles, scheduleItems, statusItems } from "./data";
 import styles from "./july2026.module.css";
@@ -35,6 +39,25 @@ const houseImages = {
     alt: "Aerial view of Lake House 1 on a wooded peninsula.",
     label: "LH1",
     src: lakeHouse1Image
+  },
+  "lake-house-2": {
+    alt: "Lake House 2 exterior with Camp Peace sign and lake view.",
+    gallery: [
+      {
+        alt: "Lake House 2 side exterior above the lake.",
+        src: lakeHouse2ExteriorSideImage
+      },
+      {
+        alt: "Lake House 2 kitchen with a canoe mounted overhead.",
+        src: lakeHouse2KitchenImage
+      },
+      {
+        alt: "Lake House 2 living room with stone fireplace.",
+        src: lakeHouse2LivingRoomImage
+      }
+    ],
+    label: "LH2",
+    src: lakeHouse2ExteriorFrontImage
   },
   "lake-house-3": {
     alt: "Exterior of Lake House 3 with stone siding, green roof, and patio.",
@@ -197,8 +220,8 @@ export function July2026App() {
             <div className={styles.houseList}>
               {houseProfiles.map((house) => {
                 const houseImage =
-                  house.image === "lake-house-1" || house.image === "lake-house-3"
-                    ? houseImages[house.image]
+                  house.image && house.image in houseImages
+                    ? houseImages[house.image as keyof typeof houseImages]
                     : null;
 
                 return (
@@ -210,6 +233,19 @@ export function July2026App() {
                         className={styles.houseImage}
                         sizes="(max-width: 1080px) 100vw, 360px"
                       />
+                    ) : null}
+                    {houseImage && "gallery" in houseImage ? (
+                      <div className={styles.houseGallery} aria-label={`${house.name} photos`}>
+                        {houseImage.gallery.map((image) => (
+                          <Image
+                            key={image.alt}
+                            src={image.src}
+                            alt={image.alt}
+                            className={styles.houseGalleryImage}
+                            sizes="(max-width: 1080px) 33vw, 110px"
+                          />
+                        ))}
+                      </div>
                     ) : null}
                     <strong>{houseImage ? houseImage.label : house.name}</strong>
                     <p>{house.role}</p>
