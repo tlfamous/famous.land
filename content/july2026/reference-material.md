@@ -127,6 +127,7 @@ The admin page should show:
 - Ability to reset a guest binding if needed
 - Ability to copy one SMS-ready packet of all current room-key links
 - Ability to copy a guest-specific SMS packet with assignment, room-key link, calendar, offline guide, host contact, and arrival notes
+- Ability to copy a missing-content request packet for the remaining host-supplied address, room assignment, photo, and checkout details
 - Readiness tracker for live, partial, and still-needed launch content
 
 ## 4. Houses
@@ -529,6 +530,7 @@ Admin operating sections:
 - Reference checkpoints
 - Launch readiness tracker
 - Asset and content checklist showing live bundled media and missing host-supplied content
+- Missing-content request packet for launch-completion follow-up
 - Resort Desk readiness
 - Arrival Desk readiness
 - Calendar file readiness
@@ -584,6 +586,12 @@ Personal calendar files:
 - Each guest page links to a personal downloadable `.ics` file.
 - Calendar route pattern: `/july2026/guest/{slug}/calendar.ics`.
 - The calendar includes the guest's assignment or pending-assignment language, arrival/departure notes, personal room-key URL, personal packet URL, and host SMS line.
+
+Missing-content request packet:
+
+- Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
+- The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
+- The packet includes review links for the guest portal, admin reference, and offline guide.
 
 ## 12. Design Direction
 

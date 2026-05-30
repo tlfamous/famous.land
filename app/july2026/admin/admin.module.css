@@ -470,7 +470,23 @@
   border-bottom: 1px solid rgba(8, 19, 38, 0.12);
 }
 
-.linkPacket h3 {
+.contentRequestPacket {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px 18px;
+  align-items: start;
+  margin-top: 18px;
+  padding: 18px;
+  color: #071429;
+  border: 1px solid rgba(8, 19, 38, 0.12);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 247, 0.98), rgba(255, 243, 226, 0.72)),
+    radial-gradient(circle at 100% 0%, rgba(190, 29, 39, 0.12), transparent 30%);
+}
+
+.linkPacket h3,
+.contentRequestPacket h3 {
   margin: 8px 0 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.45rem;
@@ -478,14 +494,16 @@
   letter-spacing: 0;
 }
 
-.linkPacket p {
+.linkPacket p,
+.contentRequestPacket p {
   max-width: 700px;
   margin: 9px 0 0;
   color: #596476;
   line-height: 1.42;
 }
 
-.linkPacket button {
+.linkPacket button,
+.contentRequestPacket button {
   min-height: 42px;
   display: inline-flex;
   align-items: center;
@@ -517,7 +535,8 @@
   font-weight: 900;
 }
 
-.linkPacket pre {
+.linkPacket pre,
+.contentRequestPacket pre {
   grid-column: 1 / -1;
   max-height: 300px;
   overflow: auto;

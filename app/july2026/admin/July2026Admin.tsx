@@ -23,6 +23,7 @@ const adminTools = [
   "Generate or regenerate guest links",
   "Reset the current device binding if needed",
   "Copy guest-specific SMS packets",
+  "Copy missing-content request packet",
   "Track missing photos, addresses, and room-assignment decisions"
 ];
 
@@ -83,6 +84,12 @@ const readinessItems = [
   {
     detail: "Admin can copy one SMS-ready packet of all current room-key links.",
     label: "Link packet",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Admin can copy a launch-completion request for the remaining host-supplied address, room, photo, and checkout details.",
+    label: "Content request",
     status: "Ready",
     tone: "ready"
   },
@@ -298,8 +305,10 @@ export function July2026Admin() {
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
   const [linkStatus, setLinkStatus] = useState("Loading guest links");
   const [packetCopyStatus, setPacketCopyStatus] = useState("Ready to copy");
+  const [contentRequestStatus, setContentRequestStatus] = useState("Ready to copy");
   const [guestCopyStatus, setGuestCopyStatus] = useState<Record<string, string>>({});
   const packetRef = useRef<HTMLPreElement>(null);
+  const contentRequestRef = useRef<HTMLPreElement>(null);
   const origin = typeof window === "undefined" ? "" : window.location.origin;
   const boundGuestProfile = useMemo(
     () => guestAssignments.find((guest) => guest.slug === boundGuest?.slug),
@@ -318,6 +327,24 @@ export function July2026Admin() {
       })
       .join("\n\n");
   }, [guestLinks, origin]);
+  const contentRequestPacket = useMemo(() => {
+    const baseUrl = origin || "https://famous.land";
+
+    return [
+      "July 4th, 2026 famous.land launch completion request",
+      "",
+      "Please send or confirm these remaining items so the guest portal can be final:",
+      "",
+      ...missingContentChecklist.map((item, index) => `${index + 1}. ${item.label} (${item.status})\n   ${item.detail}`),
+      "",
+      "Current review links:",
+      `Guest portal: ${baseUrl}/july2026`,
+      `Admin reference: ${baseUrl}/july2026/admin`,
+      `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
+      "",
+      "Once these are confirmed, the site can replace pending room/address language and add the remaining room/detail media."
+    ].join("\n");
+  }, [origin]);
 
   useEffect(() => {
     try {
@@ -398,6 +425,27 @@ export function July2026Admin() {
       }
 
       setPacketCopyStatus("Copy blocked; select the packet manually");
+    }
+  }
+
+  async function copyContentRequestPacket() {
+    try {
+      await navigator.clipboard.writeText(contentRequestPacket);
+      setContentRequestStatus("Copied missing-content request");
+    } catch {
+      const selection = window.getSelection();
+      const packet = contentRequestRef.current;
+
+      if (selection && packet) {
+        const range = document.createRange();
+        range.selectNodeContents(packet);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        setContentRequestStatus("Copy blocked; request selected");
+        return;
+      }
+
+      setContentRequestStatus("Copy blocked; select the request manually");
     }
   }
 
@@ -580,6 +628,21 @@ export function July2026Admin() {
                 <p>{item.detail}</p>
               </article>
             ))}
+          </div>
+          <div className={styles.contentRequestPacket}>
+            <div>
+              <span className={styles.label}>Host Request</span>
+              <h3>Launch completion packet</h3>
+              <p>
+                Copy this checklist when asking for the final address, assignments, photos, and
+                checkout detail needed to remove the remaining pending states.
+              </p>
+            </div>
+            <button type="button" onClick={copyContentRequestPacket}>
+              Copy request
+            </button>
+            <span className={styles.packetStatus}>{contentRequestStatus}</span>
+            <pre ref={contentRequestRef}>{contentRequestPacket}</pre>
           </div>
         </section>
 
