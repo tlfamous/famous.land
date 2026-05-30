@@ -316,6 +316,11 @@ export function July2026Admin() {
         label: "Packing prep"
       },
       {
+        detail: "Public print/screenshot-friendly run of show grouped by weekend day.",
+        href: `${baseUrl}/july2026/itinerary`,
+        label: "Weekend itinerary"
+      },
+      {
         detail: "Downloadable shared weekend calendar.",
         href: `${baseUrl}/july2026/calendar.ics`,
         label: "Weekend calendar"

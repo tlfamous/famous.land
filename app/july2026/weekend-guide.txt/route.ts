@@ -15,6 +15,9 @@ https://famous.land/july2026/concierge
 Packing prep:
 https://famous.land/july2026/prep
 
+Weekend itinerary:
+https://famous.land/july2026/itinerary
+
 Host text line:
 781-929-4932
 

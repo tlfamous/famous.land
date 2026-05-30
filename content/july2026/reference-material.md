@@ -93,7 +93,7 @@ The guest portal exposes a downloadable plain-text guide at `/july2026/weekend-g
 
 The offline guide includes:
 
-- Event portal, arrival card, directions hub, guest concierge, packing prep, host text line, host contact card, and calendar links
+- Event portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, host text line, host contact card, and calendar links
 - Arrival instructions
 - Arrival checklist and host text template prompts
 - Getting Around house flow
@@ -112,8 +112,20 @@ The personalized packet includes:
 - Arrival and departure details
 - House note and house-specific itinerary highlights
 - Weekend essentials
-- Links to the room key, guest portal, arrival card, directions hub, guest concierge, packing prep, calendar, offline guide, and host contact card
+- Links to the room key, guest portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, calendar, offline guide, and host contact card
 - Host SMS line and approval notes
+
+### Weekend Itinerary
+
+The guest portal exposes a mobile-friendly and print/screenshot-friendly itinerary page at `/july2026/itinerary`.
+
+The weekend itinerary includes:
+
+- Guest portal, calendar, arrival card, directions hub, guest concierge, and packing prep actions
+- Weekend summary for check-in, fireworks, and brunch
+- Friday, Saturday, and Sunday schedule groupings
+- Meal and coffee moments
+- Contact Host footer
 
 ### Arrival Card
 
@@ -578,6 +590,7 @@ Suggested sections:
 - Directions Hub at `/july2026/directions`
 - Guest Concierge at `/july2026/concierge`
 - Packing Prep at `/july2026/prep`
+- Weekend Itinerary at `/july2026/itinerary`
 - Getting Around guide for house-to-house weekend flow
 - Help / Contact Host
 - View Other Guests
@@ -596,6 +609,7 @@ Admin operating sections:
 - Directions hub readiness
 - Guest concierge readiness
 - Packing prep readiness
+- Weekend itinerary readiness
 - Calendar file readiness
 - Personalized calendar readiness
 - Host contact card readiness
@@ -692,11 +706,11 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, directions hub, guest concierge, packing prep, admin reference, and offline guide.
+- The packet includes review links for the guest portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, admin reference, and offline guide.
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, guest concierge, packing prep, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

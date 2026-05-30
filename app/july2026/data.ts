@@ -472,6 +472,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Directions hub: ${baseUrl}/july2026/directions`,
     `Guest concierge: ${baseUrl}/july2026/concierge`,
     `Packing prep: ${baseUrl}/july2026/prep`,
+    `Weekend itinerary: ${baseUrl}/july2026/itinerary`,
     `Admin reference: ${baseUrl}/july2026/admin`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Download this request: ${baseUrl}/july2026/admin/missing-content.txt`,
@@ -740,6 +741,7 @@ Arrival card: ${baseUrl}/july2026/arrival-card
 Directions hub: ${baseUrl}/july2026/directions
 Guest concierge: ${baseUrl}/july2026/concierge
 Packing prep: ${baseUrl}/july2026/prep
+Weekend itinerary: ${baseUrl}/july2026/itinerary
 Calendar: ${baseUrl}/july2026/calendar.ics
 Offline guide: ${baseUrl}/july2026/weekend-guide.txt
 Save host contact: ${baseUrl}/july2026/host-contact.vcf
