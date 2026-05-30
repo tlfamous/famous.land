@@ -29,6 +29,7 @@ const guestExperience = [
   "Welcome / Check-In",
   "Resort Desk quick guide",
   "Add Calendar",
+  "Save Host Contact",
   "My Stay",
   "My Room",
   "Weekend Itinerary",
@@ -90,6 +91,12 @@ const readinessItems = [
   {
     detail: "Guest CTAs download a self-contained weekend .ics file from /july2026/calendar.ics.",
     label: "Calendar file",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest CTAs download a host vCard from /july2026/host-contact.vcf with the SMS line and event URL.",
+    label: "Host contact card",
     status: "Ready",
     tone: "ready"
   },

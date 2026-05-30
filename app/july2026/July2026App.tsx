@@ -297,6 +297,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               <a className={styles.secondaryButton} href="/july2026/calendar.ics">
                 Add Calendar
               </a>
+              <a className={styles.secondaryButton} href="/july2026/host-contact.vcf">
+                Save Host
+              </a>
               <a className={styles.secondaryButton} href="#guests">
                 {selectedGuest ? "View My Stay" : "Guest Links"}
               </a>
@@ -329,6 +332,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         ))}
         <a href="sms:+17819294932">Text 781-929-4932</a>
         <a href="/july2026/calendar.ics">Add Calendar</a>
+        <a href="/july2026/host-contact.vcf">Save Host</a>
       </section>
 
       <section className={styles.stayStrip} id="stay" aria-label="Personalized stay preview">
@@ -387,6 +391,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="#guests">Find My Room</a>
           <a href="#map">House Directions</a>
           <a href="/july2026/calendar.ics">Add Calendar</a>
+          <a href="/july2026/host-contact.vcf">Save Host Contact</a>
           <a href="sms:+17819294932">Text Host</a>
         </div>
       </section>

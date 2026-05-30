@@ -66,6 +66,17 @@ The calendar includes the full July 3-5 weekend block plus major guest events:
 - Saturday fireworks viewing
 - Sunday pancake brunch
 
+### Host Contact Card
+
+The guest portal exposes a downloadable host contact card at `/july2026/host-contact.vcf`.
+
+The contact card saves:
+
+- Name: Famous Land Host
+- Organization: famous.land
+- Mobile: 781-929-4932
+- Website: https://famous.land/july2026
+
 ### Admin Page
 
 The admin page should show:
@@ -453,6 +464,7 @@ Suggested sections:
 - Welcome / Check-In
 - Resort Desk quick guide
 - Add Calendar
+- Save Host Contact
 - My Stay
 - My Room
 - Weekend Itinerary
@@ -475,6 +487,7 @@ Admin operating sections:
 - Asset and content checklist showing live bundled media and missing host-supplied content
 - Resort Desk readiness
 - Calendar file readiness
+- Host contact card readiness
 - Guest-link packet readiness
 - Personalized itinerary readiness
 - Getting Around readiness

@@ -127,6 +127,11 @@ export const resortDeskItems = [
     label: "Help"
   },
   {
+    action: "Save the host contact",
+    detail: "Add the famous.land host card to your phone so the weekend text line is easy to find.",
+    label: "Contact"
+  },
+  {
     action: "Use the house directory",
     detail: "LH2 and LH3 have live directions. LH1 directions will appear after the address is confirmed.",
     label: "Directions"
