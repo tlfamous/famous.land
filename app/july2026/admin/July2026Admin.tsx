@@ -9,6 +9,7 @@ import lh2ExteriorImage from "../assets/lake-house-2-exterior-front.jpeg";
 import lh2KitchenImage from "../assets/lake-house-2-kitchen.jpeg";
 import lh2LivingRoomImage from "../assets/lake-house-2-living-room.jpeg";
 import lh3PosterImage from "../assets/lake-house-3.jpeg";
+import lh3ProfileGif from "../assets/lh3-profile.gif";
 import laconicVehicleImage from "../assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "../assets/vehicle-laika-trixx.png";
 import spikeyLizardVehicleImage from "../assets/vehicle-spikey-lizard-gtx.png";
@@ -313,11 +314,20 @@ const assetChecklist = [
   },
   {
     alt: "Exterior of LH3 with stone siding, green roof, and patio.",
-    detail: "LH3 poster and animated profile fallback.",
+    detail: "LH3 poster and MP4 fallback.",
     label: "LH3 exterior",
     src: lh3PosterImage,
     status: "Live",
     tone: "ready"
+  },
+  {
+    alt: "Animated aerial profile of LH3, showing the patio and lakeside setting.",
+    detail: "Self-contained animated GIF profile made from the LH3 drone video.",
+    label: "LH3 animated profile",
+    src: lh3ProfileGif,
+    status: "Live",
+    tone: "ready",
+    unoptimized: true
   }
 ] as const;
 
@@ -777,6 +787,7 @@ export function July2026Admin() {
                   alt={item.alt}
                   className={styles.assetImage}
                   sizes="(max-width: 980px) 100vw, 210px"
+                  unoptimized={"unoptimized" in item ? item.unoptimized : false}
                 />
                 <div>
                   <span className={styles.readyBadge}>{item.status}</span>

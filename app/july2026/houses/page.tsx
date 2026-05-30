@@ -6,6 +6,7 @@ import lakeHouse2ExteriorSideImage from "../assets/lake-house-2-exterior-side.jp
 import lakeHouse2KitchenImage from "../assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "../assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "../assets/lake-house-3.jpeg";
+import lakeHouse3ProfileGif from "../assets/lh3-profile.gif";
 import { guestAssignments, hostSmsHref, houseProfiles, itineraryHighlights, transitGuideItems } from "../data";
 import styles from "./houses.module.css";
 
@@ -25,6 +26,7 @@ const houseMedia: Record<
   string,
   {
     alt: string;
+    animatedSrc?: StaticImageData;
     gallery?: { alt: string; src: StaticImageData }[];
     src: StaticImageData;
   }
@@ -52,7 +54,8 @@ const houseMedia: Record<
     src: lakeHouse2ExteriorFrontImage
   },
   "lake-house-3": {
-    alt: "Exterior of LH3 with stone siding, green roof, and patio.",
+    alt: "Animated aerial profile of LH3, showing the patio and lakeside setting.",
+    animatedSrc: lakeHouse3ProfileGif,
     src: lakeHouse3Image
   }
 };
@@ -110,7 +113,7 @@ export default function July2026HousesPage() {
                 {media ? (
                   <div className={styles.mediaColumn}>
                     <img
-                      src={media.src.src}
+                      src={(media.animatedSrc ?? media.src).src}
                       alt={media.alt}
                       className={styles.houseImage}
                       loading="eager"

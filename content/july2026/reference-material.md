@@ -959,6 +959,7 @@ Current bundled media:
 - LH2 living room photo
 - LH3 exterior patio photo
 - LH3 animated profile video
+- LH3 animated GIF profile generated from the LH3 drone video
 - Motorized vehicle reference images for Laconic, Spikey Lizard, and Laika
 - Resort FAQ content for arrival, directions, food, lake approvals, phone setup, and host help
 - Rain Plan content for host updates, indoor pivots, lake-safety holds, meals, fireworks, and phone setup

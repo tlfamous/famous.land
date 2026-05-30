@@ -867,6 +867,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "- Guest-specific SMS packet review",
     "- Printable room-key sheet, host briefing sheet, and house signs",
     "- LH2 and LH3 live directions",
+    "- LH3 animated profile GIF and MP4 house media",
     "- Motorized fleet inventory for Laconic, Spikey Lizard, and Laika",
     "",
     "Guest assignment status:",
