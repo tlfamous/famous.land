@@ -710,6 +710,10 @@
   margin: 9px 0 0;
 }
 
+.vehicleMeta div:first-child {
+  grid-column: 1 / -1;
+}
+
 .vehicleMeta div {
   padding: 6px 7px;
   border: 1px solid rgba(8, 33, 65, 0.1);
@@ -733,6 +737,7 @@
   color: var(--july-blue);
   font-size: 0.8rem;
   font-weight: 900;
+  line-height: 1.2;
 }
 
 .bringList {

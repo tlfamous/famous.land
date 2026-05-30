@@ -214,6 +214,10 @@
   margin: 13px 0 0;
 }
 
+.vehicleInventoryGrid dl div:first-child {
+  grid-column: 1 / -1;
+}
+
 .vehicleInventoryGrid dl div {
   padding: 8px;
   border: 1px solid rgba(8, 33, 65, 0.1);

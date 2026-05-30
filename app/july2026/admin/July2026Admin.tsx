@@ -26,6 +26,7 @@ const guestExperience = [
   "Weekend Itinerary",
   "Houses",
   "Activities",
+  "Motorized Fleet",
   "Food and Drinks",
   "Maps and Directions",
   "Contact Host",
