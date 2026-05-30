@@ -41,11 +41,13 @@ The personalized view should include:
 
 ### Identity Binding Behavior
 
-The first device that opens a guest’s unique link should bind that guest identity to that device/session.
+Current self-contained implementation: the first guest link opened on a device binds that guest identity to local browser storage.
 
-If the same link is forwarded or opened on another device later, it should not automatically re-bind the identity or overwrite the original device/session.
+If a different guest link is opened later on the same device, it does not overwrite the original device/session binding. The page shows the viewed guest details while making clear that the device remains checked in as the originally bound guest.
 
-There should be an admin tool that allows the host to generate a fresh unique link for a guest if something goes wrong.
+The current implementation is local-device binding only. Full cross-device enforcement would require a backend binding store.
+
+The admin page includes a local reset control for the current device and a fresh token-style link generator for each guest.
 
 ### Admin Page
 
@@ -53,9 +55,9 @@ The admin page should show:
 
 - List of all guests
 - Each guest’s assigned house and room
-- Whether the guest has completed their first-device binding
-- Ability to generate or regenerate a guest link
-- Ability to reset a guest binding if needed
+- Whether the current browser has a completed first-device binding
+- Ability to generate or regenerate a guest link with a fresh token-style query string
+- Ability to reset the current device binding if needed
 
 ## 4. Houses
 
@@ -169,7 +171,7 @@ Photos needed:
 
 ### Personalized Guest Links
 
-Each guest currently has a direct room-key URL:
+Each guest has a direct room-key URL. The admin page can also generate a fresh token-style URL by appending `?t=...`.
 
 | Guest | URL | Current assignment |
 |---|---|---|
@@ -189,7 +191,7 @@ Each guest currently has a direct room-key URL:
 | Austin | `/july2026/guest/austin` | LH1 / The Girls' Room |
 | Jack | `/july2026/guest/jack` | LH1 / Sunroom |
 
-Tokenized first-device binding is still a later admin feature. These direct links are the current guest-facing test links.
+Opening one of these links on a device records the first guest identity locally. Opening a different guest link afterward does not replace that stored check-in unless the local device binding is reset.
 
 ## 6. Weekend Schedule
 
@@ -455,8 +457,7 @@ Missing information:
 - LH1 address
 - Zach room assignment
 - Bee room assignment
-- Final host contact information
 - Exact departure/check-out time, if needed
 - Any dietary notes or restrictions
-- Whether guests should RSVP for boat/fireworks cruise or activities
+- Whether boat/fireworks cruise or activity sign-ups need host approval
 - Whether the quad requires specific safety restrictions or host approval

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
 import heroImage from "./assets/july-4-hero.png";
 import lakeHouse1Image from "./assets/lake-house-1.jpeg";
 import lakeHouse2ExteriorFrontImage from "./assets/lake-house-2-exterior-front.jpeg";
@@ -83,12 +84,56 @@ type July2026AppProps = {
   selectedGuestSlug?: string;
 };
 
+const bindingStorageKey = "famous.land.july2026.boundGuest";
+
+type BoundGuest = {
+  slug: string;
+  token?: string;
+  boundAt: string;
+};
+
 export function July2026App({ selectedGuestSlug }: July2026AppProps) {
+  const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
   const selectedGuest = guestAssignments.find((guest) => guest.slug === selectedGuestSlug);
   const selectedGuestHouse =
     selectedGuest?.house && selectedGuest.house !== "Pending"
       ? houseProfiles.find((house) => house.name === selectedGuest.house)
       : null;
+  const boundGuestProfile = useMemo(
+    () => guestAssignments.find((guest) => guest.slug === boundGuest?.slug),
+    [boundGuest]
+  );
+  const isViewingBoundGuest = Boolean(selectedGuest && boundGuest?.slug === selectedGuest.slug);
+
+  useEffect(() => {
+    try {
+      const storedBinding = window.localStorage.getItem(bindingStorageKey);
+
+      if (storedBinding) {
+        setBoundGuest(JSON.parse(storedBinding) as BoundGuest);
+        return;
+      }
+
+      if (selectedGuest) {
+        const searchParams = new URLSearchParams(window.location.search);
+        const nextBinding = {
+          boundAt: new Date().toISOString(),
+          slug: selectedGuest.slug,
+          token: searchParams.get("t") ?? undefined
+        };
+
+        window.localStorage.setItem(bindingStorageKey, JSON.stringify(nextBinding));
+        setBoundGuest(nextBinding);
+      }
+    } catch {
+      setBoundGuest(null);
+    }
+  }, [selectedGuest]);
+
+  function resetDeviceBinding() {
+    window.localStorage.removeItem(bindingStorageKey);
+    setBoundGuest(null);
+  }
 
   return (
     <div className={`${styles.app} july-2026-app`}>
@@ -201,32 +246,51 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           </div>
 
           {selectedGuest ? (
-            <dl className={styles.stayDetails}>
-              <div>
-                <dt>House</dt>
-                <dd>{selectedGuest.house}</dd>
+            <>
+              <div className={isViewingBoundGuest ? styles.bindingNotice : styles.bindingWarning}>
+                <div>
+                  <strong>{isViewingBoundGuest ? "Device check-in active" : "Viewing without rebinding"}</strong>
+                  <p>
+                    {isViewingBoundGuest
+                      ? `This device is checked in as ${selectedGuest.name}.`
+                      : boundGuestProfile
+                        ? `This device is already checked in as ${boundGuestProfile.name}; opening ${selectedGuest.name}'s link did not overwrite it.`
+                        : "This browser could not store a device check-in, but the room-key details are still available."}
+                  </p>
+                </div>
+                {boundGuest ? (
+                  <button type="button" onClick={resetDeviceBinding}>
+                    Reset device
+                  </button>
+                ) : null}
               </div>
-              <div>
-                <dt>Room</dt>
-                <dd>{selectedGuest.room}</dd>
-              </div>
-              <div>
-                <dt>Arrival</dt>
-                <dd>{selectedGuest.arrival}</dd>
-              </div>
-              <div>
-                <dt>Departure</dt>
-                <dd>{selectedGuest.departure}</dd>
-              </div>
-              <div>
-                <dt>House note</dt>
-                <dd>{selectedGuestHouse?.role ?? selectedGuest.note}</dd>
-              </div>
-              <div>
-                <dt>Staying with</dt>
-                <dd>{selectedGuest.companions.length ? selectedGuest.companions.join(", ") : "Solo room assignment"}</dd>
-              </div>
-            </dl>
+              <dl className={styles.stayDetails}>
+                <div>
+                  <dt>House</dt>
+                  <dd>{selectedGuest.house}</dd>
+                </div>
+                <div>
+                  <dt>Room</dt>
+                  <dd>{selectedGuest.room}</dd>
+                </div>
+                <div>
+                  <dt>Arrival</dt>
+                  <dd>{selectedGuest.arrival}</dd>
+                </div>
+                <div>
+                  <dt>Departure</dt>
+                  <dd>{selectedGuest.departure}</dd>
+                </div>
+                <div>
+                  <dt>House note</dt>
+                  <dd>{selectedGuestHouse?.role ?? selectedGuest.note}</dd>
+                </div>
+                <div>
+                  <dt>Staying with</dt>
+                  <dd>{selectedGuest.companions.length ? selectedGuest.companions.join(", ") : "Solo room assignment"}</dd>
+                </div>
+              </dl>
+            </>
           ) : (
             <div className={styles.guestLinkIntro}>
               <strong>Private room-key links</strong>

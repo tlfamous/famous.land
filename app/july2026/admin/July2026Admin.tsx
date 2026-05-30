@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
 import styles from "./admin.module.css";
 import { guestAssignments } from "../data";
 import { referenceMaterial } from "./referenceMaterial";
@@ -8,7 +11,7 @@ const adminTools = [
   "Guest list with assigned house and room",
   "First-device identity binding status",
   "Generate or regenerate guest links",
-  "Reset a guest binding if needed",
+  "Reset the current device binding if needed",
   "Track missing photos, addresses, dietary notes, and activity decisions"
 ];
 
@@ -28,13 +31,55 @@ const guestExperience = [
 const contentNeeds = [
   "LH1 address",
   "House and room photos",
-  "Final host contact information",
   "Exact departure or check-out time",
   "Dietary notes and restrictions",
   "Boat, cruise, and quad reservation rules"
 ];
 
+const bindingStorageKey = "famous.land.july2026.boundGuest";
+
+type BoundGuest = {
+  slug: string;
+  token?: string;
+  boundAt: string;
+};
+
+function createGuestToken() {
+  const bytes = new Uint8Array(8);
+  window.crypto.getRandomValues(bytes);
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
 export function July2026Admin() {
+  const [generatedTokens, setGeneratedTokens] = useState<Record<string, string>>({});
+  const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
+  const origin = typeof window === "undefined" ? "" : window.location.origin;
+  const boundGuestProfile = useMemo(
+    () => guestAssignments.find((guest) => guest.slug === boundGuest?.slug),
+    [boundGuest]
+  );
+
+  useEffect(() => {
+    try {
+      const storedBinding = window.localStorage.getItem(bindingStorageKey);
+      setBoundGuest(storedBinding ? (JSON.parse(storedBinding) as BoundGuest) : null);
+    } catch {
+      setBoundGuest(null);
+    }
+  }, []);
+
+  function regenerateGuestLink(slug: string) {
+    setGeneratedTokens((tokens) => ({
+      ...tokens,
+      [slug]: createGuestToken()
+    }));
+  }
+
+  function resetLocalBinding() {
+    window.localStorage.removeItem(bindingStorageKey);
+    setBoundGuest(null);
+  }
+
   return (
     <div className="july-2026-app">
       <div className={styles.adminPage}>
@@ -118,20 +163,52 @@ export function July2026Admin() {
               <span className={styles.label}>Guest Links</span>
               <h2>Personalized room-key URLs</h2>
               <p>
-                Current direct links for testing each guest's stay view. Pending assignments are
-                visible until the host confirms those rooms.
+                Generate fresh token-style links for guest testing. The first guest opened on a
+                device is remembered locally and later guest links do not overwrite that check-in.
               </p>
             </div>
-            <a href="/july2026/guest/holly">Preview Holly</a>
+            <button className={styles.localResetButton} type="button" onClick={resetLocalBinding}>
+              Reset this device
+            </button>
+          </div>
+          <div className={styles.bindingStatus}>
+            <strong>Current device binding</strong>
+            <span>
+              {boundGuestProfile
+                ? `${boundGuestProfile.name} since ${new Date(boundGuest?.boundAt ?? "").toLocaleString()}`
+                : "No guest bound on this device yet"}
+            </span>
           </div>
           <div className={styles.guestLinkGrid}>
-            {guestAssignments.map((guest) => (
-              <a href={`/july2026/guest/${guest.slug}`} key={guest.slug}>
-                <strong>{guest.name}</strong>
-                <span>{guest.house === "Pending" ? "Assignment pending" : `${guest.house} / ${guest.room}`}</span>
-                <code>/july2026/guest/{guest.slug}</code>
-              </a>
-            ))}
+            {guestAssignments.map((guest) => {
+              const token = generatedTokens[guest.slug];
+              const path = `/july2026/guest/${guest.slug}${token ? `?t=${token}` : ""}`;
+              const href = `${origin}${path}`;
+
+              return (
+                <article key={guest.slug}>
+                  <div>
+                    <strong>{guest.name}</strong>
+                    <span>{guest.house === "Pending" ? "Assignment pending" : `${guest.house} / ${guest.room}`}</span>
+                    <code>{path}</code>
+                  </div>
+                  <div className={styles.guestLinkActions}>
+                    <a href={path}>Open</a>
+                    <button type="button" onClick={() => regenerateGuestLink(guest.slug)}>
+                      Regenerate
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void navigator.clipboard.writeText(href);
+                      }}
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
