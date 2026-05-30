@@ -445,6 +445,7 @@ Suggested sections:
 - Lake Rules and Approvals
 - Food and Drinks
 - Maps and Directions with known LH2 and LH3 address links
+- Getting Around guide for house-to-house weekend flow
 - Help / Contact Host
 - View Other Guests
 - Admin
@@ -458,10 +459,18 @@ Admin operating sections:
 - Resort Desk readiness
 - Guest-link packet readiness
 - Personalized itinerary readiness
+- Getting Around readiness
 - Motorized vehicle inventory
 - Lake rules readiness
 - Personalized room-key URLs
 - Embedded reference material with Proof edit link
+
+Getting Around guide:
+
+- Arrive at your assigned house using the guest room-key page; LH2 and LH3 directions are live, and LH1 directions remain pending until the host confirms the address.
+- Friday starts at LH1 for the welcome meal, orientation, and first-night fire gathering.
+- Saturday morning shifts to LH3 for yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch.
+- The Saturday group boat ride connects LH1 to LH3 after the motorized fleet orientation.
 
 ## 12. Design Direction
 

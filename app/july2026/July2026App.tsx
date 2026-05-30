@@ -24,7 +24,8 @@ import {
   motorizedVehicles,
   resortDeskItems,
   scheduleItems,
-  statusItems
+  statusItems,
+  transitGuideItems
 } from "./data";
 import styles from "./july2026.module.css";
 
@@ -549,6 +550,17 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             <span className={styles.eventPin}>Event area</span>
             <span className={styles.parkingPin}>Parking</span>
             <span className={styles.lakeLabel}>Lake Monomonac</span>
+          </div>
+          <div className={styles.transitGuide} aria-label="House-to-house guide">
+            <span className={styles.sectionLabel}>Getting Around</span>
+            <div>
+              {transitGuideItems.map((item) => (
+                <section key={item.label}>
+                  <strong>{item.label}</strong>
+                  <p>{item.detail}</p>
+                </section>
+              ))}
+            </div>
           </div>
           <div className={styles.resortDirectory} aria-label="Lake house directory">
             {houseProfiles.map((house) => (

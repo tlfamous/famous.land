@@ -308,6 +308,25 @@ export const lakeUseRules = [
   }
 ];
 
+export const transitGuideItems = [
+  {
+    label: "Arrive at your assigned house",
+    detail: "Use your room-key page for the best known directions. LH2 and LH3 are live; LH1 directions will be added when the host confirms the address."
+  },
+  {
+    label: "Friday starts at LH1",
+    detail: "Welcome meal, weekend orientation, and the first-night fire gathering are based at LH1."
+  },
+  {
+    label: "Saturday morning shifts to LH3",
+    detail: "Yoga, beach time, non-motorized boats, smoothies, lunch, dinner, and Sunday brunch are centered at LH3."
+  },
+  {
+    label: "Boat ride connects LH1 to LH3",
+    detail: "The Saturday group ride departs from LH1 after motorized fleet orientation and returns to LH3 for lunch."
+  }
+];
+
 export const motorizedVehicles = [
   {
     approval: "Host orientation required before use",

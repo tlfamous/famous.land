@@ -857,6 +857,52 @@
   font-style: italic;
 }
 
+.transitGuide {
+  margin: 0 22px 16px;
+  padding: 14px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 247, 0.96), rgba(241, 220, 169, 0.18)),
+    radial-gradient(circle at 100% 0, rgba(22, 79, 159, 0.12), transparent 36%);
+}
+
+.transitGuide > div {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.transitGuide section {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 9px;
+}
+
+.transitGuide section::before {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  content: "";
+  border: 2px solid rgba(198, 30, 45, 0.22);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--july-red) 0 32%, transparent 34%);
+}
+
+.transitGuide strong {
+  color: var(--july-blue);
+  font-size: 0.94rem;
+  line-height: 1.15;
+}
+
+.transitGuide p {
+  grid-column: 2;
+  margin: 3px 0 0;
+  color: var(--july-muted);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
 .resortDirectory {
   display: grid;
   gap: 8px;

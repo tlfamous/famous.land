@@ -37,6 +37,7 @@ const guestExperience = [
   "Lake Rules and Approvals",
   "Food and Drinks",
   "Maps and Directions",
+  "Getting Around guide",
   "Contact Host",
   "View Other Guests"
 ];
@@ -88,6 +89,12 @@ const readinessItems = [
   {
     detail: "Guest room-key pages show house-specific itinerary highlights for LH1, LH2, LH3, and pending assignments.",
     label: "Personal itinerary",
+    status: "Ready",
+    tone: "ready"
+  },
+  {
+    detail: "Guest map section explains arrival, Friday LH1 flow, Saturday LH3 flow, and the LH1-to-LH3 boat connection.",
+    label: "Getting around",
     status: "Ready",
     tone: "ready"
   },
