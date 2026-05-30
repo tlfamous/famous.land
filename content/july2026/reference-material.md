@@ -458,7 +458,7 @@ The guest page includes a dedicated Food and Drinks section with:
 
 | Name | Vehicle | Color | Capacity | Best for | Start point | Approval | Reference image | Operating note |
 |---|---|---|---|---|---|---|---|---|
-| Laconic | Sea-Doo Switch Cruise pontoon boat | Red | 10 persons | Group cruise, boat parade viewing, and relaxed lake runs | LH1 dock / host-designated departure point | Host orientation required before use | Red / Coral Blast Sea-Doo Switch Cruise 21-class studio reference; host reference says 23 ft | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
+| Laconic | Sea-Doo Switch Cruise pontoon boat | Red | 10 persons | Group cruise, boat parade viewing, and relaxed lake runs | LH1 dock / host-designated departure point | Host orientation required before use | Red Sea-Doo Switch Cruise 23 ft studio-style reference | Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation. |
 | Spikey Lizard | Sea-Doo PWC | Blue | 3 seats | Three-seat PWC rides after the safety briefing | Host-approved lake launch point | Host orientation and PWC go-ahead required | Blue Sea-Doo GTX studio reference | Personal watercraft for approved lake use after the Saturday safety briefing. |
 | Laika | Sea-Doo Spark Trixx | Red | 2 seats | Compact two-seat Trixx-style PWC outings | Host-approved lake launch point | Host orientation and PWC go-ahead required | Red Sea-Doo Spark Trixx 2up studio reference | Compact Trixx-style PWC for host-approved lake use after orientation. |
 

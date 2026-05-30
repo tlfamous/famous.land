@@ -350,11 +350,11 @@ export const motorizedVehicles = [
     color: "Red",
     detail: "Primary group pontoon for lake runs, boat parade viewing, and the Saturday LH1-to-LH3 ride after host orientation.",
     image: "laconic",
-    length: "Host reference: 23 ft",
-    model: "Switch Cruise 21-class pontoon reference",
+    length: "23 ft",
+    model: "Switch Cruise pontoon reference",
     name: "Laconic",
     pickup: "LH1 dock / host-designated departure point",
-    source: "Red / Coral Blast Sea-Doo Switch Cruise 21 studio reference",
+    source: "Red Sea-Doo Switch Cruise studio reference",
     type: "Sea-Doo Switch Cruise pontoon boat"
   },
   {

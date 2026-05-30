@@ -73,6 +73,11 @@ WHAT TO BRING
 - Light jacket or hoodie
 - Patriotic spirit
 
+MOTORIZED VEHICLE INVENTORY
+- Laconic: red Sea-Doo Switch Cruise pontoon boat, 23 ft, 10 persons. Best for group cruises, boat parade viewing, relaxed lake runs, and the Saturday LH1-to-LH3 ride after host orientation.
+- Spikey Lizard: blue Sea-Doo GTX-style PWC, 3 seats. Best for host-approved PWC rides after the Saturday safety briefing.
+- Laika: red Sea-Doo Spark Trixx-style PWC, 2 seats. Best for compact host-approved PWC outings after orientation.
+
 APPROVAL NOTES
 - Motorized fleet use starts only after the Saturday LH1 safety briefing and host go-ahead.
 - Wear the right-size life jacket for boating, PWC rides, and lake activities where the host asks for one.
