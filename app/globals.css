@@ -108,6 +108,23 @@ body:has(.image-home) .safety-footer {
   display: none;
 }
 
+body:has(.july-2026-app) {
+  min-height: 100svh;
+  background: #f7f5ee;
+}
+
+body:has(.july-2026-app) .site-header {
+  display: none;
+}
+
+main:has(.july-2026-app) {
+  width: 100%;
+  max-width: none;
+  min-height: 100svh;
+  margin: 0;
+  padding: 0;
+}
+
 main:has(.image-home) {
   width: 100%;
   max-width: none;

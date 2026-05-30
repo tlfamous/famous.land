@@ -1,0 +1,431 @@
+# Lake Weekend Guest Website Reference Document
+
+## 1. Project Overview
+
+Create a polished, playful, luxury-resort-inspired guest website for a private lake weekend from Friday, July 3 through Sunday, July 5, 2026.
+
+The site should feel like a boutique resort experience, but still be practical and clear. Guests should be able to see their personalized lodging details, weekend schedule, house information, maps, activity options, and host contact information.
+
+The theme should lean into the idea that the three lake houses are part of a fictional “resort” experience.
+
+## 2. Core Website Goals
+
+The website should help guests quickly answer:
+
+- Where am I staying?
+- What room am I assigned to?
+- What is the weekend schedule?
+- Where are the lake houses?
+- What activities are available?
+- Where do I go for each event?
+- Who do I contact if I need help?
+
+The site should also create a fun “check-in” experience where each guest opens a personalized link and sees their own room assignment and itinerary.
+
+## 3. Personalization and Guest Links
+
+Each guest should receive a unique link or token.
+
+When a guest opens their link, the site identifies them and displays their personalized view by default.
+
+The personalized view should include:
+
+- Guest name
+- Assigned lake house
+- Assigned room
+- Arrival/check-in information
+- Departure/check-out information
+- Relevant schedule details
+- Host contact/help button
+- Ability to view other guest assignments if desired
+
+### Identity Binding Behavior
+
+The first device that opens a guest’s unique link should bind that guest identity to that device/session.
+
+If the same link is forwarded or opened on another device later, it should not automatically re-bind the identity or overwrite the original device/session.
+
+There should be an admin tool that allows the host to generate a fresh unique link for a guest if something goes wrong.
+
+### Admin Page
+
+The admin page should show:
+
+- List of all guests
+- Each guest’s assigned house and room
+- Whether the guest has completed their first-device binding
+- Ability to generate or regenerate a guest link
+- Ability to reset a guest binding if needed
+
+## 4. Houses
+
+Each house should have a dedicated profile page or section with:
+
+- House name
+- Address
+- Google Maps link
+- Photos
+- Key gathering spaces
+- Any relevant notes or amenities
+
+### Lake House 1
+
+Address: TBD
+
+Known spaces/events:
+
+- Sunroom
+- Great Room 1
+- Grand Peninsula
+- South Grand Peninsula fire pit
+- Dock/boat departure point
+
+Photos needed:
+
+- Exterior of Lake House 1: provided as LH1 aerial photo
+- Sunroom
+- Great Room 1
+- Grand Peninsula
+- South Grand Peninsula fire pit
+- Relevant bedrooms
+
+### Lake House 2
+
+Address: 63 Pine Eden Road, Rindge, New Hampshire
+
+Known spaces:
+
+- First floor bedroom
+- South bedroom
+- North bedroom
+
+Photos needed:
+
+- Exterior of Lake House 2
+- First floor bedroom
+- South bedroom
+- North bedroom
+- Any common spaces
+
+### Lake House 3
+
+Address: 25 Sunny Cove Road, Winchendon, Massachusetts
+
+Known spaces/events:
+
+- Beach
+- Lunch/dinner/brunch gathering location
+- Primary bedroom
+- Boat return point
+
+Photos needed:
+
+- Exterior of Lake House 3
+- Beach
+- Primary bedroom
+- Dining/gathering area
+- Smoothie/lunch/dinner/brunch area
+
+## 5. Guest and Room Assignments
+
+### Lake House 1
+
+| Guest(s) | Room |
+|---|---|
+| Heather and Eric | Second floor bedroom |
+| Morgan, Rowan, Emma, and Austin | Third floor bedroom, labeled “The Girls’ Room” |
+| Jack | Sunroom |
+
+### Lake House 2
+
+| Guest(s) | Room |
+|---|---|
+| Zach and Bee | First floor bedroom |
+| Cin and Vin | South bedroom |
+| Adam and Gage | North bedroom |
+
+### Lake House 3
+
+| Guest(s) | Room |
+|---|---|
+| Holly and Todd | Primary bedroom |
+
+### Total Guests
+
+15 guests:
+
+- Holly
+- Todd
+- Heather
+- Eric
+- Zach
+- Bee
+- Cin
+- Vin
+- Adam
+- Gage
+- Morgan
+- Rowan
+- Emma
+- Austin
+- Jack
+
+## 6. Weekend Schedule
+
+## Friday, July 3, 2026
+
+### 3:00 p.m. to 6:00 p.m.  
+Guest Check-In Window
+
+Guests arrive and settle into their assigned lake house and room.
+
+### 6:30 p.m.  
+Casual Grab-and-Go Meal
+
+Location: Sunroom, Lake House 1
+
+A casual, flexible meal after check-in.
+
+### 7:00 p.m. to 8:00 p.m.  
+Weekend Orientation
+
+Location: Great Room 1, Lake House 1
+
+Overview of the weekend, key locations, schedule, activities, and safety/logistics.
+
+### 8:00 p.m.  
+Campfire, Cigars, and Scotch
+
+Location: Grand Peninsula, Lake House 1
+
+Relaxed evening gathering with fire, cigars, and scotch for those who partake.
+
+## Saturday, July 4, 2026
+
+### 7:30 a.m. to 8:00 a.m.  
+Coffee Time at All Houses
+
+Each house has its own coffee experience:
+
+- Lake House 1: Kona coffee
+- Lake House 2: K-cup coffee
+- Lake House 3: Drip coffee
+
+Guests may visit any house for coffee.
+
+### 8:00 a.m.  
+Yoga on the Beach
+
+Location: Beach, Lake House 3
+
+Morning yoga by the lake.
+
+### 9:00 a.m.  
+Non-Motorized Lake Activities
+
+Location: Lake House 3 / Lake access
+
+Activities include:
+
+- Kayaks
+- Canoes
+- Rowboats
+- Swimming
+
+### 10:00 a.m.  
+Fruit Smoothies
+
+Location: Lake House 3
+
+Refreshing smoothies after morning lake activities.
+
+### 11:00 a.m.  
+Motorized Lake Vehicle Orientation
+
+Location: Lake House 1
+
+Safety briefing and orientation for motorized lake vehicles, including boats or similar lake equipment.
+
+### 11:30 a.m. to 12:30 p.m.  
+Boat Ride
+
+Departure: Lake House 1  
+Return: Lake House 3
+
+Group boat ride across the lake.
+
+### 12:30 p.m.  
+Lunch
+
+Location: Lake House 3
+
+Lunch begins immediately after the boat ride returns.
+
+### 2:00 p.m. to 6:00 p.m.  
+Free Time and Optional Activities
+
+Guests may choose from:
+
+- Hiking at Famous Land
+- Famous Land quests
+- Motorized boating
+- Non-motorized boating
+- Beach and lounging activities
+- Quad/four-wheeler by request or reservation
+- Napping or downtime
+
+### 2:00 p.m.  
+Fourth of July Boat Parade
+
+Guests may see the boat parade during afternoon free time.
+
+Expected viewing note: The parade may pass by Lake House 3 around 3:00 p.m.
+
+### 6:00 p.m.  
+Dinner
+
+Location: Lake House 3
+
+Beer and wine available.
+
+### 8:00 p.m.  
+S’mores at the Fire Pit
+
+Location: South Grand Peninsula, Lake House 1
+
+Evening fire pit gathering with s’mores.
+
+### 8:30 p.m.  
+Sparklers and Snacks
+
+Location: South Grand Peninsula / Lake House 1 area unless otherwise specified
+
+Evening snacks and sparklers after s’mores.
+
+### 9:00 p.m.  
+Optional Fireworks Viewing
+
+Viewing options:
+
+- Grand Peninsula at Lake House 1
+- Beach at Lake House 3
+- Chartered cruise experience on the lake
+
+## Sunday, July 5, 2026
+
+### 8:30 a.m.  
+Coffee Time at All Houses
+
+Same coffee setup as Saturday:
+
+- Lake House 1: Kona coffee
+- Lake House 2: K-cup coffee
+- Lake House 3: Drip coffee
+
+### 10:00 a.m.  
+Pancake Brunch
+
+Location: Lake House 3
+
+Relaxed Sunday brunch.
+
+### After Brunch  
+Free Time and Lake Activities
+
+Guests may continue enjoying the lake, lounging, hiking, boating, or relaxing.
+
+### Sunday Afternoon  
+Departure and Grab-and-Go Food
+
+Grab-and-go food available for guests as they depart.
+
+## 7. Activity List
+
+The site should include an activities page or section with descriptions for:
+
+- Yoga on the beach
+- Kayaks
+- Canoes
+- Rowboats
+- Swimming
+- Motorized lake vehicles
+- Boat ride
+- Chartered fireworks cruise
+- Famous Land hiking
+- Famous Land quests
+- Quad/four-wheeler by request or reservation
+- Beach lounging
+- Napping and downtime
+- Campfire
+- S’mores
+- Sparklers
+- Fireworks viewing
+
+## 8. Guest Experience Requirements
+
+The site should feel like a fun resort portal.
+
+Suggested sections:
+
+- Welcome / Check-In
+- My Stay
+- My Room
+- Weekend Itinerary
+- Houses
+- Activities
+- Food and Drinks
+- Maps and Directions
+- Help / Contact Host
+- View Other Guests
+- Admin
+
+## 9. Design Direction
+
+Style should feel:
+
+- Polished
+- Playful
+- Premium
+- Lake resort inspired
+- Family-friendly
+- Clear and easy to use on mobile
+
+Possible design language:
+
+- “Welcome to the Lake Weekend Resort”
+- “Your stay”
+- “Your itinerary”
+- “Resort map”
+- “Guest check-in”
+- “House profiles”
+- “Lake activities”
+- “Fourth of July experiences”
+
+Avoid making the site feel too corporate or too silly. It should be fun but still useful.
+
+## 10. Content and Asset Needs
+
+Images still needed:
+
+- Lake House 1 exterior
+- Lake House 1 sunroom
+- Lake House 1 Great Room 1
+- Lake House 1 Grand Peninsula
+- Lake House 1 South Grand Peninsula fire pit
+- Lake House 1 bedrooms
+- Lake House 2 exterior
+- Lake House 2 bedrooms
+- Lake House 3 exterior: provided as LH3 exterior patio photo
+- Lake House 3 beach
+- Lake House 3 primary bedroom
+- Lake House 3 dining/gathering areas
+- Any room photos for personalized room pages
+
+Missing information:
+
+- Lake House 1 address
+- Final host contact information
+- Exact departure/check-out time, if needed
+- Any dietary notes or restrictions
+- Whether guests should RSVP for boat/fireworks cruise or activities
+- Whether the quad requires specific safety restrictions or host approval
