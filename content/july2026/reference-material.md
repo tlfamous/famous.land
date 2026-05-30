@@ -208,6 +208,7 @@ The admin page should show:
 - Ability to copy one SMS-ready packet of all current room-key links
 - Ability to copy a guest-specific SMS packet with assignment, room-key link, calendar, offline guide, host contact, and arrival notes
 - Ability to copy a missing-content request packet for the remaining host-supplied address, room assignment, photo, and checkout details
+- Ability to open a print-friendly media shot list for remaining house, room, and event-location photos
 - Readiness tracker for live, partial, and still-needed launch content
 
 ## 4. Houses
@@ -624,6 +625,7 @@ Admin operating sections:
 - Packing prep readiness
 - Weekend itinerary readiness
 - Fleet guide readiness
+- Media shot list readiness
 - Calendar file readiness
 - Personalized calendar readiness
 - Host contact card readiness
@@ -720,11 +722,17 @@ Missing-content request packet:
 - Admin includes a copy-ready launch-completion request for the remaining host-supplied content.
 - The same packet is downloadable at `/july2026/admin/missing-content.txt`.
 - The packet lists LH1 address, LH1 interior/activity photos, LH2 bedroom photos, LH3 beach/room/detail photos, Zach and Bee assignments, and optional exact departure time.
-- The packet includes review links for the guest portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, admin reference, and offline guide.
+- The packet includes review links for the guest portal, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, admin reference, media shot list, and offline guide.
+
+Media shot list:
+
+- Admin includes a print-friendly media shot list at `/july2026/admin/media-shot-list`.
+- The shot list shows current bundled media assets, remaining LH1/LH2/LH3 photo needs, framing guidance, and capture tips.
+- The shot list is intended to make the final media collection pass clear enough to hand to a host or photographer.
 
 Launch QA links:
 
-- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, weekend calendar, host contact card, missing-content request, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
+- Admin includes a compact review grid for the live guest portal, admin reference, offline guide, arrival card, directions hub, guest concierge, packing prep, weekend itinerary, fleet guide, weekend calendar, host contact card, missing-content request, media shot list, printable room-key sheet, printable host briefing sheet, house signs, sample assigned room key, and sample pending room key.
 - The launch QA links are intended for fast host review before sending guest SMS packets.
 
 ## 12. Design Direction

@@ -24,6 +24,7 @@ const adminTools = [
   "Reset the current device binding if needed",
   "Copy guest-specific SMS packets",
   "Copy missing-content request packet",
+  "Print media shot list",
   "Track missing photos, addresses, and room-assignment decisions"
 ];
 
@@ -170,6 +171,12 @@ const readinessItems = [
     label: "Media set",
     status: "Partial",
     tone: "partial"
+  },
+  {
+    detail: "Printable shot list is available for the remaining LH1, LH2, and LH3 media capture.",
+    label: "Media shot list",
+    status: "Ready",
+    tone: "ready"
   },
   {
     detail: "Zach and Bee remain in the guest list with assignment pending.",
@@ -339,6 +346,11 @@ export function July2026Admin() {
         detail: "Downloadable packet for the remaining host-supplied content.",
         href: `${baseUrl}/july2026/admin/missing-content.txt`,
         label: "Missing-content request"
+      },
+      {
+        detail: "Print-friendly shot list for remaining house, room, and event-location photos.",
+        href: `${baseUrl}/july2026/admin/media-shot-list`,
+        label: "Media shot list"
       },
       {
         detail: "Print-friendly guest room-key links and QR codes.",
@@ -692,6 +704,7 @@ export function July2026Admin() {
               Copy request
             </button>
             <a href="/july2026/admin/missing-content.txt">Download .txt</a>
+            <a href="/july2026/admin/media-shot-list">Print shot list</a>
             <span className={styles.packetStatus}>{contentRequestStatus}</span>
             <pre ref={contentRequestRef}>{contentRequestPacket}</pre>
           </div>
@@ -826,6 +839,7 @@ export function July2026Admin() {
               Copy packet
             </button>
             <a href="/july2026/admin/room-keys">Print room keys</a>
+            <a href="/july2026/admin/media-shot-list">Print shot list</a>
             <a href="/july2026/admin/briefing-sheet">Print briefing</a>
             <a href="/july2026/admin/house-signs">Print house signs</a>
             <span className={styles.packetStatus}>{packetCopyStatus}</span>

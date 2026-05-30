@@ -475,6 +475,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Weekend itinerary: ${baseUrl}/july2026/itinerary`,
     `Fleet guide: ${baseUrl}/july2026/fleet`,
     `Admin reference: ${baseUrl}/july2026/admin`,
+    `Media shot list: ${baseUrl}/july2026/admin/media-shot-list`,
     `Offline guide: ${baseUrl}/july2026/weekend-guide.txt`,
     `Download this request: ${baseUrl}/july2026/admin/missing-content.txt`,
     "",
