@@ -47,7 +47,7 @@ export async function GET(_request: Request, { params }: GuestCalendarRouteProps
       ? "Assignment pending. Text the host before arrival for current lodging details."
       : `${guest.house} / ${guest.room}`;
   const description = [
-    `${guest.name}'s famous.land July 4th, 2026 room-key calendar.`,
+    `${guest.name}'s July 4th, 2026 room-key calendar.`,
     `Assignment: ${assignment}`,
     `Arrival: ${guest.arrival}`,
     `Departure: ${guest.departure}`,
@@ -62,7 +62,7 @@ export async function GET(_request: Request, { params }: GuestCalendarRouteProps
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     `X-WR-CALNAME:${escapeCalendarText(`${guest.name}'s July 4th, 2026 Stay`)}`,
-    "X-WR-CALDESC:Famous Land personal room-key calendar.",
+    "X-WR-CALDESC:Personal room-key calendar.",
     "BEGIN:VEVENT",
     `UID:july2026-${guest.slug}-stay@famous.land`,
     "DTSTAMP:20260530T000000Z",

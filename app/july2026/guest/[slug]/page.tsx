@@ -21,13 +21,13 @@ export async function generateMetadata({ params }: GuestPageProps): Promise<Meta
 
   if (!guest) {
     return {
-      title: "July 4th, 2026 Guest | famous.land"
+      title: "July 4th, 2026 Guest"
     };
   }
 
   return {
-    title: `${guest.name}'s July 4th, 2026 Stay | famous.land`,
-    description: `Personalized room-key view for ${guest.name} at the famous.land July 4th, 2026 lake weekend.`,
+    title: `${guest.name}'s July 4th, 2026 Stay`,
+    description: `Personalized room-key view for ${guest.name} at the July 4th, 2026 lake weekend.`,
     robots: {
       follow: false,
       index: false

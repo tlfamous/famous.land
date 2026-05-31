@@ -71,7 +71,6 @@ const guestExperience = [
 ];
 
 const contentNeeds = [
-  "LH1 address",
   "House and room photos",
   "Exact departure or check-out time"
 ];
@@ -403,11 +402,6 @@ export function July2026Admin() {
         detail: "Public resort map for house flow, lake route, gathering hubs, meal locations, and activity anchors.",
         href: `${baseUrl}/july2026/map`,
         label: "Resort map"
-      },
-      {
-        detail: "Public house movement page with live LH2/LH3 maps and LH1 pending-address fallback.",
-        href: `${baseUrl}/july2026/directions`,
-        label: "Directions hub"
       },
       {
         detail: "Standalone LH1/LH2/LH3 directory with photos, rooms, guests, house roles, and direction status.",

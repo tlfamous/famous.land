@@ -3,7 +3,7 @@ import { faqItems, hostSmsHref } from "../data";
 import styles from "./faq.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Resort FAQ | famous.land",
+  title: "July 4th, 2026 Resort FAQ",
   description: "Fast guest answers for arrival, directions, food, lake approvals, phone setup, and host help.",
   robots: {
     index: false,
@@ -30,7 +30,6 @@ export default function July2026FaqPage() {
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/day-of">Day-Of Desk</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
-            <a href="/july2026/directions">Directions Hub</a>
             <a href={hostSmsHref}>Contact Host</a>
           </nav>
         </header>

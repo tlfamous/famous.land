@@ -3,8 +3,8 @@ import { hostHelpItems, hostSmsHref, lakeUseRules, resortDeskItems } from "../da
 import styles from "./concierge.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Guest Concierge | famous.land",
-  description: "Guest help, approvals, and lake rules for the famous.land July 4th, 2026 weekend.",
+  title: "July 4th, 2026 Guest Concierge",
+  description: "Guest help, approvals, and lake rules for the July 4th, 2026 weekend.",
   robots: {
     index: false,
     follow: false
@@ -45,7 +45,6 @@ export default function July2026ConciergePage() {
             <a href="/july2026/faq">Guest FAQ</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/map">Resort Map</a>
-            <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>

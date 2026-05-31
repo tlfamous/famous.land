@@ -11,8 +11,8 @@ import { hostSmsHref, houseProfiles, itineraryHighlights, transitGuideItems } fr
 import styles from "./houses.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 House Directory | famous.land",
-  description: "LH1, LH2, and LH3 house directory for the famous.land July 4th, 2026 lake weekend.",
+  title: "July 4th, 2026 House Directory",
+  description: "LH1, LH2, and LH3 house directory for the July 4th, 2026 lake weekend.",
   robots: {
     index: false,
     follow: false
@@ -77,7 +77,6 @@ export default function July2026HousesPage() {
             <a href="/july2026">Guest Portal</a>
             <a href="/july2026/faq">Guest FAQ</a>
             <a href="/july2026/map">Resort Map</a>
-            <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/itinerary">Itinerary</a>
             <a href="/july2026/meals">Meals Guide</a>
@@ -170,7 +169,6 @@ export default function July2026HousesPage() {
                     <a href={mapsUrl ?? lakeAreaUrl} target="_blank" rel="noreferrer">
                       {mapsUrl ? house.mapLabel : "Open Lake Area Map"}
                     </a>
-                    <a href="/july2026/directions">Directions Hub</a>
                     <a href={hostSmsHref}>Contact Host</a>
                   </div>
                 </div>

@@ -4,16 +4,16 @@ const calendarLines = [
   "PRODID:-//famous.land//July 2026 Lake Weekend//EN",
   "CALSCALE:GREGORIAN",
   "METHOD:PUBLISH",
-  "X-WR-CALNAME:July 4th, 2026 at famous.land",
-  "X-WR-CALDESC:Famous Land lake weekend guest schedule.",
+  "X-WR-CALNAME:July 4th, 2026 Lake Weekend",
+  "X-WR-CALDESC:Lake weekend guest schedule.",
   "BEGIN:VEVENT",
   "UID:july2026-weekend@famous.land",
   "DTSTAMP:20260530T000000Z",
   "DTSTART:20260703T190000Z",
   "DTEND:20260705T210000Z",
-  "SUMMARY:July 4th, 2026 at famous.land",
+  "SUMMARY:July 4th, 2026 Lake Weekend",
   "LOCATION:Lake Monomonac, Rindge NH / Winchendon MA",
-  "DESCRIPTION:Private famous.land lake weekend. Use https://famous.land/july2026 for room keys, schedule, house directions, activities, and host help.",
+  "DESCRIPTION:Private Lake Monomonac weekend. Use https://famous.land/july2026 for room keys, schedule, house directions, activities, and host help.",
   "URL:https://famous.land/july2026",
   "END:VEVENT",
   "BEGIN:VEVENT",
@@ -104,7 +104,7 @@ export function GET() {
   return new Response(`${calendarLines.join("\r\n")}\r\n`, {
     headers: {
       "cache-control": "public, max-age=3600",
-      "content-disposition": 'attachment; filename="famous-land-july-2026.ics"',
+      "content-disposition": 'attachment; filename="july-2026-lake-weekend.ics"',
       "content-type": "text/calendar; charset=utf-8"
     }
   });

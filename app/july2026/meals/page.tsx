@@ -3,8 +3,8 @@ import { foodMoments, hostSmsHref, scheduleItems } from "../data";
 import styles from "./meals.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Meals and Coffee | famous.land",
-  description: "Guest meal, coffee, spa water, dinner, and brunch guide for the famous.land July 4th, 2026 lake weekend.",
+  title: "July 4th, 2026 Meals and Coffee",
+  description: "Guest meal, coffee, spa water, dinner, and brunch guide for the July 4th, 2026 lake weekend.",
   robots: {
     index: false,
     follow: false

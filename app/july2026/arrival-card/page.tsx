@@ -9,8 +9,8 @@ import {
 import styles from "./arrival-card.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Arrival Card | famous.land",
-  description: "A print-friendly arrival card for the famous.land July 4th, 2026 lake weekend.",
+  title: "July 4th, 2026 Arrival Card",
+  description: "A print-friendly arrival card for the July 4th, 2026 lake weekend.",
   robots: {
     index: false,
     follow: false
@@ -54,7 +54,6 @@ export default function July2026ArrivalCardPage() {
           <a href="/july2026">Guest Portal</a>
           <a href="/july2026/faq">Guest FAQ</a>
           <a href="/july2026/map">Resort Map</a>
-          <a href="/july2026/directions">Directions Hub</a>
           <a href="/july2026/concierge">Guest Concierge</a>
           <a href="/july2026/itinerary">Itinerary</a>
           <a href="/july2026/meals">Meals Guide</a>

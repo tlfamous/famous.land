@@ -3,8 +3,8 @@ import { foodMoments, hostSmsHref, scheduleItems } from "../data";
 import styles from "./itinerary.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Weekend Itinerary | famous.land",
-  description: "A guest-friendly weekend itinerary for the famous.land July 4th, 2026 lake weekend.",
+  title: "July 4th, 2026 Weekend Itinerary",
+  description: "A guest-friendly weekend itinerary for the July 4th, 2026 lake weekend.",
   robots: {
     index: false,
     follow: false
@@ -48,7 +48,6 @@ export default function July2026ItineraryPage() {
             <a href="/july2026/calendar.ics">Add Calendar</a>
             <a href="/july2026/arrival-card">Arrival Card</a>
             <a href="/july2026/map">Resort Map</a>
-            <a href="/july2026/directions">Directions Hub</a>
             <a href="/july2026/concierge">Guest Concierge</a>
             <a href="/july2026/meals">Meals Guide</a>
             <a href="/july2026/fleet">Fleet Guide</a>

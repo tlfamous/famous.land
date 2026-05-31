@@ -23,7 +23,6 @@ Keep these public guest surfaces:
 - Day-of desk: `/july2026/day-of`
 - Resort FAQ: `/july2026/faq`
 - Resort map: `/july2026/map`
-- Directions hub: `/july2026/directions`
 - House directory: `/july2026/houses`
 - Guest concierge: `/july2026/concierge`
 - Weekend itinerary: `/july2026/itinerary`
@@ -40,6 +39,7 @@ Removed guest surfaces:
 - `/july2026/weekend-guide.txt`
 - `/july2026/prep`
 - `/july2026/guest-list`
+- `/july2026/directions`
 
 ## Contact Host
 
@@ -55,7 +55,9 @@ This should be the only guest-facing host-help mechanism needed on the main port
 
 ### LH1
 
-Address: TBD.
+Address:
+
+- 26 Sunny Cove Road, Winchendon, Massachusetts
 
 Known spaces:
 
@@ -83,11 +85,11 @@ Rooms:
 
 Address:
 
-- 26 Sunny Cove Road, Winchendon, Massachusetts
+- 25 Sunny Cove Road, Winchendon, Massachusetts
 
 Google Maps target:
 
-- `https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA`
+- `https://www.google.com/maps/search/?api=1&query=25%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA`
 
 The home page location card should use the Lake Monomonac map image with a pin at 26 Sunny Cove Road and click through to this Google Maps target.
 
@@ -165,7 +167,7 @@ Motorized vehicles:
 | Laconic | Sea-Doo Switch Cruise 23 ft pontoon boat | Red | 10 persons |
 | Spikey Lizard | Sea-Doo GTX PWC | Blue | 3 seats |
 | Laika | Sea-Doo Spark Trixx PWC | Red | 2 seats |
-| Can-Am Quad | Can-Am XLT quad | Gray | 2 seats |
+| Can-Am Quad | Can-Am Outlander XT quad | Gray | 2 seats |
 
 Non-motorized vehicles:
 
@@ -192,7 +194,6 @@ All motorized use requires host orientation and host approval.
 
 ## Still Needed
 
-- LH1 address
 - LH1 interior/activity photos
 - LH2 bedroom photos
 - LH3 beach/room/detail photos

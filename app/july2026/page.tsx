@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { July2026App } from "./July2026App";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 | famous.land",
+  title: "July 4th, 2026",
   description:
-    "A resort-style guest portal for the famous.land July 4th, 2026 lake weekend.",
+    "A resort-style guest portal for the July 4th, 2026 lake weekend.",
   alternates: {
     canonical: "/july2026"
   }

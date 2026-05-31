@@ -54,7 +54,7 @@ export default function July2026BriefingSheetPage() {
         </article>
         <article>
           <strong>Launch caveats</strong>
-          <span>LH1 address, checkout time, and remaining room photos are pending.</span>
+          <span>Checkout time and remaining room photos are pending.</span>
         </article>
       </section>
 

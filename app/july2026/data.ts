@@ -136,11 +136,6 @@ export const resortDeskItems = [
     label: "Help"
   },
   {
-    action: "Use the directions hub",
-    detail: "LH2 and LH3 have live directions. LH1 directions will appear after the address is confirmed.",
-    label: "Directions"
-  },
-  {
     action: "Open the resort map",
     detail: "See the weekend house flow across LH1, LH2, LH3, lake routes, meals, and gathering hubs.",
     label: "Map"
@@ -177,11 +172,6 @@ export const dayOfDeskItems = [
     href: "/july2026/map",
     label: "Resort Map",
     note: "How LH1, LH2, LH3, lake routes, meals, and gathering hubs fit together."
-  },
-  {
-    href: "/july2026/directions",
-    label: "Directions Hub",
-    note: "Known LH2/LH3 directions and the LH1 pending-address fallback."
   },
   {
     href: "/july2026/meals",
@@ -295,7 +285,7 @@ export const hostBroadcastMessages = [
     label: "Arrival reminder",
     timing: "Friday morning",
     body:
-      "Welcome to the famous.land July 4th weekend. Please open your room key before you leave, save the host contact, and text 781-929-4932 if you need arrival help. Check-in is Friday, July 3, 3-6 PM."
+      "Welcome to the July 4th weekend. Please open your room key before you leave, save the host contact, and text 781-929-4932 if you need arrival help. Check-in is Friday, July 3, 3-6 PM."
   },
   {
     audience: "All guests",
@@ -696,12 +686,12 @@ export const motorizedVehicles = [
     detail: "Gray Can-Am quad for host-approved land use after orientation and timing guidance.",
     image: "can-am-quad",
     length: "Quad",
-    model: "Can-Am XLT gray 2-seat quad reference",
+    model: "Can-Am Outlander XT gray quad reference",
     name: "Can-Am Quad",
     pickup: "Host-designated land staging point",
-    source: "Generated gray Can-Am quad reference render",
-    sourceUrl: "/july2026/assets/vehicle-can-am-quad.png",
-    type: "Can-Am XLT quad"
+    source: "Official 2024 Can-Am Outlander XT reference",
+    sourceUrl: "https://can-am.brp.com/off-road/us/en/models/previous-models/2024/outlander.html",
+    type: "Can-Am Outlander XT quad"
   }
 ];
 
@@ -738,11 +728,6 @@ export const nonMotorizedVehicles = [
 
 export const launchCompletionItems = [
   {
-    detail: "Needed before LH1 directions can be shown.",
-    label: "LH1 address",
-    status: "Needed"
-  },
-  {
     detail: "Sunroom, Great Room 1, Grand Peninsula, South Grand Peninsula fire pit, and assigned rooms.",
     label: "LH1 interior and activity photos",
     status: "Needed"
@@ -778,7 +763,6 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Resort FAQ: ${baseUrl}/july2026/faq`,
     `Arrival card: ${baseUrl}/july2026/arrival-card`,
     `Resort map: ${baseUrl}/july2026/map`,
-    `Directions hub: ${baseUrl}/july2026/directions`,
     `House directory: ${baseUrl}/july2026/houses`,
     `Guest concierge: ${baseUrl}/july2026/concierge`,
     `Weekend itinerary: ${baseUrl}/july2026/itinerary`,
@@ -811,7 +795,6 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     `- Resort FAQ: ${baseUrl}/july2026/faq`,
     `- Arrival card: ${baseUrl}/july2026/arrival-card`,
     `- Resort map: ${baseUrl}/july2026/map`,
-    `- Directions hub: ${baseUrl}/july2026/directions`,
     `- House directory: ${baseUrl}/july2026/houses`,
     `- Guest concierge: ${baseUrl}/july2026/concierge`,
     `- Weekend itinerary: ${baseUrl}/july2026/itinerary`,
@@ -1041,8 +1024,9 @@ export const houseProfiles = [
     name: "LH1",
     role: "Welcome, orientation, boat departure, fire pit",
     rooms: ["First floor bedroom", "Second floor bedroom", "The Girls' Room", "Sunroom"],
-    note: "Address TBD",
-    mapLabel: "Directions pending",
+    note: "26 Sunny Cove Road, Winchendon, Massachusetts",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA",
+    mapLabel: "Open LH1 directions",
     image: "lake-house-1"
   },
   {
@@ -1058,8 +1042,8 @@ export const houseProfiles = [
     name: "LH3",
     role: "Beach, meals, brunch, boat return",
     rooms: ["Primary bedroom"],
-    note: "26 Sunny Cove Road, Winchendon, Massachusetts",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA",
+    note: "25 Sunny Cove Road, Winchendon, Massachusetts",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=25%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA",
     mapLabel: "Open LH3 directions",
     image: "lake-house-3"
   }
@@ -1081,7 +1065,7 @@ export function getGuestPacketText(guest: GuestAssignment, baseUrl = "https://fa
     (item) => `- ${item.time}: ${item.title}. ${item.detail}`
   );
 
-  return `FAMOUS.LAND JULY 4TH, 2026 ROOM KEY
+  return `JULY 4TH, 2026 ROOM KEY
 
 Guest:
 ${guest.name}
@@ -1124,7 +1108,6 @@ Day-Of Desk: ${baseUrl}/july2026/day-of
 Resort FAQ: ${baseUrl}/july2026/faq
 Arrival card: ${baseUrl}/july2026/arrival-card
 Resort map: ${baseUrl}/july2026/map
-Directions hub: ${baseUrl}/july2026/directions
 Guest concierge: ${baseUrl}/july2026/concierge
 Weekend itinerary: ${baseUrl}/july2026/itinerary
 Meals and coffee: ${baseUrl}/july2026/meals
@@ -1159,7 +1142,7 @@ export function getGuestSmsPacket(
       : `You are staying at ${guest.house}, ${guest.room}.`;
 
   return [
-    `Hi ${guest.name}, here is your famous.land July 4th, 2026 room key:`,
+    `Hi ${guest.name}, here is your July 4th, 2026 room key:`,
     `${baseUrl}${path}`,
     "",
     assignment,

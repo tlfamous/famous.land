@@ -266,8 +266,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       <nav className={styles.topbar} aria-label="July 2026 event navigation">
         <div className={styles.navLinks}>
           <a href="#schedule">Schedule</a>
-          <a href="#map">Map</a>
-          <a href="#guests">{selectedGuest ? "My Stay" : "Room Key"}</a>
           <a href="/july2026/houses">Houses</a>
           <a href="/july2026/meals">Meals</a>
           <a href="/july2026/fleet">Fleet</a>
@@ -278,7 +276,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       <section className={styles.hero} id="top">
         <Image
           src={heroImage}
-          alt="Famous Land lake at dusk with chairs, a campfire, cabin lights, and fireworks."
+          alt="Lake at dusk with chairs, a campfire, cabin lights, and fireworks."
           className={styles.heroImage}
           priority
           sizes="100vw"
@@ -297,11 +295,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               <a className={styles.secondaryButton} href="#schedule">
                 Schedule
               </a>
-              {selectedGuest ? (
-                <a className={styles.secondaryButton} href="#guests">
-                  My Stay
-                </a>
-              ) : null}
               <a className={styles.secondaryButton} href="/july2026/houses">
                 Houses
               </a>
@@ -329,7 +322,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       </section>
 
       {selectedGuest ? (
-        <section className={styles.guestDesk} id="guests" aria-label="Guest stay details">
+        <section className={styles.guestDesk} id="stay" aria-label="Guest stay details">
           <article className={styles.guestCard}>
             <div>
               <span className={styles.sectionLabel}>My Stay</span>

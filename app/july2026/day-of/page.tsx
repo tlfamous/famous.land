@@ -9,8 +9,8 @@ import {
 import styles from "./day-of.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Day-Of Desk | famous.land",
-  description: "A mobile day-of operations hub for famous.land July 4th, 2026 guests.",
+  title: "July 4th, 2026 Day-Of Desk",
+  description: "A mobile day-of operations hub for July 4th, 2026 guests.",
   robots: {
     index: false,
     follow: false

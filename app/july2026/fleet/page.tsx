@@ -12,8 +12,8 @@ import { hostSmsHref, lakeUseRules, motorizedVehicles, nonMotorizedVehicles, sch
 import styles from "./fleet.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Lake Fleet | famous.land",
-  description: "Guest-facing motorized and non-motorized lake fleet guide for the famous.land July 4th, 2026 weekend.",
+  title: "July 4th, 2026 Lake Fleet",
+  description: "Guest-facing motorized and non-motorized lake fleet guide for the July 4th, 2026 weekend.",
   robots: {
     index: false,
     follow: false
