@@ -21,7 +21,7 @@
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(24px, 5vw, 58px);
   align-items: end;
   padding: clamp(28px, 5vw, 58px);
@@ -58,12 +58,6 @@
   line-height: 1.5;
 }
 
-.quickLinks {
-  display: grid;
-  gap: 10px;
-}
-
-.quickLinks a,
 .categoryNav a,
 .hostPanel a,
 .footer a {
@@ -78,11 +72,6 @@
   border-radius: 8px;
   font-weight: 950;
   text-decoration: none;
-}
-
-.quickLinks a {
-  background: rgba(255, 253, 247, 0.1);
-  border-color: rgba(255, 253, 247, 0.35);
 }
 
 .summaryGrid {

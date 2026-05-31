@@ -28,7 +28,7 @@ export async function GET(_request: Request, { params }: GuestPacketRouteProps) 
   return new Response(getGuestPacketText(guest), {
     headers: {
       "cache-control": "public, max-age=3600",
-      "content-disposition": `attachment; filename="famous-land-july-2026-${guest.slug}-room-key.txt"`,
+      "content-disposition": `attachment; filename="famous-land-july-2026-${guest.slug}-stay-details.txt"`,
       "content-type": "text/plain; charset=utf-8"
     }
   });

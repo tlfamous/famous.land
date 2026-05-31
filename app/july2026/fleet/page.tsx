@@ -41,15 +41,15 @@ const vehicleImages = {
 
 const nonMotorizedImages = {
   "kayaks-1": {
-    alt: "Rendered kayaks for the non-motorized lake fleet.",
+    alt: "Turquoise Pelican kayak product reference for the non-motorized lake fleet.",
     src: kayakOneImage
   },
   "kayaks-2": {
-    alt: "Second rendered kayak view for the non-motorized lake fleet.",
+    alt: "Second turquoise Pelican kayak product reference for the non-motorized lake fleet.",
     src: kayakTwoImage
   },
   "pedal-boats": {
-    alt: "Rendered blue pedal boats for relaxed lake use.",
+    alt: "Blue and white Sun Dolphin pedal boat product reference for relaxed lake use.",
     src: pedalBoatsImage
   },
   "walker-bay": {
@@ -73,14 +73,6 @@ export default function July2026FleetPage() {
               start-point, and host-approval notes in one guest-friendly guide.
             </p>
           </div>
-          <nav className={styles.quickLinks} aria-label="Fleet quick actions">
-            <a href="/july2026">Guest Portal</a>
-            <a href="/july2026/day-of">Day-Of Desk</a>
-            <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/map">Resort Map</a>
-            <a href="/july2026/itinerary">Weekend Itinerary</a>
-            <a href={hostSmsHref}>Contact Host</a>
-          </nav>
         </header>
 
         <section className={styles.summaryGrid} aria-label="Fleet operating summary">
@@ -93,11 +85,6 @@ export default function July2026FleetPage() {
             <span>Group ride</span>
             <strong>{boatRide?.time ?? "Sat 11:30 AM"}</strong>
             <p>{boatRide?.detail ?? "Departure from LH1 and return to LH3."}</p>
-          </article>
-          <article>
-            <span>Host line</span>
-            <strong>781-929-4932</strong>
-            <p>Text before taking out a motorized vehicle, changing cruise plans, or requesting timing guidance.</p>
           </article>
         </section>
 
@@ -211,7 +198,7 @@ export default function July2026FleetPage() {
 
         <section className={styles.panel}>
           <p className={styles.kicker}>Before use</p>
-          <h2>Lake Approval Rules</h2>
+          <h2>Lake Rules</h2>
           <div className={styles.ruleGrid}>
             {lakeUseRules.map((rule) => (
               <article key={rule.label}>

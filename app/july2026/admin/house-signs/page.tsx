@@ -105,7 +105,7 @@ export default function July2026HouseSignsPage() {
               </section>
 
               <footer>
-                <span>Scan for schedule, maps, room keys, host contact, and offline guide.</span>
+                <span>Scan for schedule, maps, guest links, and host contact.</span>
               </footer>
             </article>
           );

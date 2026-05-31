@@ -27,7 +27,7 @@ export default function July2026HostTextsPage() {
           <a href="/july2026/admin">Admin</a>
           <a href="/july2026/admin/sms-packets">SMS packets</a>
           <a href="/july2026/admin/briefing-sheet">Briefing</a>
-          <a href="/july2026/admin/room-keys">Room keys</a>
+          <a href="/july2026/admin/guest-links">Guest links</a>
         </nav>
       </header>
 

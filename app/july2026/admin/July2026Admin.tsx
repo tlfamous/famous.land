@@ -95,13 +95,13 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "15 persistent room-key URLs with reset and regenerate controls.",
+    detail: "15 persistent guest link URLs with reset and regenerate controls.",
     label: "Guest links",
     status: "Ready",
     tone: "ready"
   },
   {
-    detail: "Admin can copy one SMS-ready packet of all current room-key links.",
+    detail: "Admin can copy one SMS-ready packet of all current guest links.",
     label: "Link packet",
     status: "Ready",
     tone: "ready"
@@ -113,7 +113,7 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Each guest row can copy a personalized SMS packet with assignment, room-key link, calendar, guide, host contact, and arrival notes.",
+    detail: "Each guest row can copy a personalized SMS packet with assignment, guest link, calendar, guide, host contact, and arrival notes.",
     label: "Guest SMS packets",
     status: "Ready",
     tone: "ready"
@@ -131,7 +131,7 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Guest-facing day-of desk centralizes arrival, room keys, weather pivots, lake approvals, meals, and maps.",
+    detail: "Guest-facing day-of desk centralizes arrival, guest links, weather pivots, lake approvals, meals, and maps.",
     label: "Day-Of Desk",
     status: "Ready",
     tone: "ready"
@@ -155,7 +155,7 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Each guest room-key page exposes a personal .ics file with their assignment, packet link, room-key URL, and host SMS line.",
+    detail: "Each guest page exposes a personal .ics file with their assignment, packet link, guest link URL, and host SMS line.",
     label: "Personal calendars",
     status: "Ready",
     tone: "ready"
@@ -167,7 +167,7 @@ const readinessItems = [
     tone: "ready"
   },
   {
-    detail: "Guest room-key pages show house-specific itinerary highlights for LH1, LH2, LH3, and pending assignments.",
+    detail: "Guest pages show house-specific itinerary highlights for LH1, LH2, LH3, and pending assignments.",
     label: "Personal itinerary",
     status: "Ready",
     tone: "ready"
@@ -449,7 +449,7 @@ export function July2026Admin() {
         label: "Launch status"
       },
       {
-        detail: "Print-friendly review sheet for every guest room-key SMS packet.",
+        detail: "Print-friendly review sheet for every guest SMS packet.",
         href: `${baseUrl}/july2026/admin/sms-packets`,
         label: "Guest SMS packets"
       },
@@ -464,9 +464,9 @@ export function July2026Admin() {
         label: "Media shot list"
       },
       {
-        detail: "Print-friendly guest room-key links and QR codes.",
-        href: `${baseUrl}/july2026/admin/room-keys`,
-        label: "Printable room keys"
+        detail: "Print-friendly guest links and QR codes.",
+        href: `${baseUrl}/july2026/admin/guest-links`,
+        label: "Printable guest links"
       },
       {
         detail: "Print-friendly host run of show, food, lake rules, and text prompts.",
@@ -484,14 +484,14 @@ export function July2026Admin() {
         label: "Fleet signs"
       },
       {
-        detail: "Sample personalized room key for QA.",
+        detail: "Sample personalized guest link for QA.",
         href: `${baseUrl}/july2026/guest/holly`,
-        label: "Sample room key"
+        label: "Sample guest link"
       },
       {
-        detail: "Sample LH1 first-floor room key for QA.",
+        detail: "Sample LH1 first-floor guest link for QA.",
         href: `${baseUrl}/july2026/guest/zack`,
-        label: "Sample Zack room key"
+        label: "Sample Zack guest link"
       }
     ],
     [baseUrl]
@@ -581,7 +581,7 @@ export function July2026Admin() {
   async function copyGuestLinkPacket() {
     try {
       await navigator.clipboard.writeText(guestLinkPacket);
-      setPacketCopyStatus("Copied all room-key links");
+      setPacketCopyStatus("Copied all guest links");
     } catch {
       const selection = window.getSelection();
       const packet = packetRef.current;
@@ -803,7 +803,7 @@ export function July2026Admin() {
               <h2>Live URLs to Review</h2>
               <p>
                 Fast links for checking the published guest portal, admin reference, downloads, and
-                the two room-key states guests can see.
+                the two guest-link states guests can see.
               </p>
             </div>
           </div>
@@ -956,7 +956,7 @@ export function July2026Admin() {
           <div className={styles.proofHeader}>
             <div>
               <span className={styles.label}>Guest Links</span>
-              <h2>Personalized room-key URLs</h2>
+              <h2>Personalized guest link URLs</h2>
               <p>
                 Generate fresh token-style links for guest testing. The first guest opened on a
                 device is remembered locally and later guest links do not overwrite that check-in.
@@ -1006,7 +1006,7 @@ export function July2026Admin() {
           <div className={styles.linkPacket}>
             <div>
               <span className={styles.label}>Share Packet</span>
-              <h3>All room-key links</h3>
+              <h3>All guest links</h3>
               <p>
                 SMS-ready list with current tokenized links when available. Regenerate or reset
                 individual guests below, then copy this packet for host outreach.
@@ -1015,7 +1015,7 @@ export function July2026Admin() {
             <button type="button" onClick={copyGuestLinkPacket}>
               Copy packet
             </button>
-            <a href="/july2026/admin/room-keys">Print room keys</a>
+            <a href="/july2026/admin/guest-links">Print guest links</a>
             <a href="/july2026/admin/sms-packets">Review SMS</a>
             <a href="/july2026/admin/host-texts">Host texts</a>
             <a href="/july2026/admin/media-shot-list">Print shot list</a>
@@ -1042,9 +1042,9 @@ export function July2026Admin() {
                     <code>{path}</code>
                   </div>
                   <div className={styles.guestQrPreview}>
-                    <img src={qrPath} alt={`${guest.name} room-key QR code`} />
+                    <img src={qrPath} alt={`${guest.name} guest QR code`} />
                     <div>
-                      <strong>Room-key QR</strong>
+                      <strong>Guest QR</strong>
                       <span>{qrPath}</span>
                     </div>
                   </div>

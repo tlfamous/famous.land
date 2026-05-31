@@ -47,22 +47,22 @@ export async function GET(_request: Request, { params }: GuestCalendarRouteProps
       ? "Assignment pending. Text the host before arrival for current lodging details."
       : `${guest.house} / ${guest.room}`;
   const description = [
-    `${guest.name}'s July 4th, 2026 room-key calendar.`,
+    `${guest.name}'s July 4th, 2026 guest calendar.`,
     `Assignment: ${assignment}`,
     `Arrival: ${guest.arrival}`,
     `Departure: ${guest.departure}`,
-    `Room key: https://famous.land/july2026/guest/${guest.slug}`,
+    `Guest link: https://famous.land/july2026/guest/${guest.slug}`,
     `Personal packet: https://famous.land/july2026/guest/${guest.slug}/packet.txt`,
     "Host text line: 781-929-4932"
   ].join("\n");
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//famous.land//July 2026 Personal Room Key//EN",
+    "PRODID:-//famous.land//July 2026 Guest Link//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     `X-WR-CALNAME:${escapeCalendarText(`${guest.name}'s July 4th, 2026 Stay`)}`,
-    "X-WR-CALDESC:Personal room-key calendar.",
+    "X-WR-CALDESC:Personal guest calendar.",
     "BEGIN:VEVENT",
     `UID:july2026-${guest.slug}-stay@famous.land`,
     "DTSTAMP:20260530T000000Z",

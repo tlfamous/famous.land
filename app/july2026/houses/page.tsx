@@ -73,15 +73,6 @@ export default function July2026HousesPage() {
               and which directions are ready before arrival.
             </p>
           </div>
-          <nav className={styles.quickLinks} aria-label="House directory quick actions">
-            <a href="/july2026">Guest Portal</a>
-            <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/map">Resort Map</a>
-            <a href="/july2026/arrival-card">Arrival Card</a>
-            <a href="/july2026/itinerary">Itinerary</a>
-            <a href="/july2026/meals">Meals Guide</a>
-            <a href={hostSmsHref}>Contact Host</a>
-          </nav>
         </header>
 
         <section className={styles.summaryGrid} aria-label="House summary">

@@ -42,16 +42,6 @@ export default function July2026ItineraryPage() {
               meals, lake moments, and fireworks timing in one guest-friendly view.
             </p>
           </div>
-          <nav className={styles.quickLinks} aria-label="Itinerary quick actions">
-            <a href="/july2026">Guest Portal</a>
-            <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/calendar.ics">Add Calendar</a>
-            <a href="/july2026/arrival-card">Arrival Card</a>
-            <a href="/july2026/map">Resort Map</a>
-            <a href="/july2026/concierge">Guest Concierge</a>
-            <a href="/july2026/meals">Meals Guide</a>
-            <a href="/july2026/fleet">Fleet Guide</a>
-          </nav>
         </header>
 
         <section className={styles.summaryGrid} aria-label="Weekend summary">

@@ -59,6 +59,10 @@ Address:
 
 - 26 Sunny Cove Road, Winchendon, Massachusetts
 
+Description:
+
+- OG lakehouse. Features poured cement countertops, live edge bar, sunroom, lots of furniture from the neighbors, and the Grand Peninsula firepit.
+
 Known spaces:
 
 - First floor bedroom
@@ -76,6 +80,10 @@ Address:
 
 - 63 Pine Eden Road, Rindge, New Hampshire
 
+Description:
+
+- Quiet oasis from annoying relatives. Two-zone air conditioning, cozy fireplace, Starlink Internet, and a canoe hanging from the ceiling for some reason.
+
 Rooms:
 
 - South bedroom
@@ -87,11 +95,17 @@ Address:
 
 - 25 Sunny Cove Road, Winchendon, Massachusetts
 
+Description:
+
+- Newest property. Second ugliest house. Indoor/outdoor kitchen. Large patio and beach for prime entertaining.
+
 Google Maps target:
 
 - `https://www.google.com/maps/search/?api=1&query=25%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA`
 
-The home page location card should use the Lake Monomonac map image with a pin at 26 Sunny Cove Road and click through to this Google Maps target.
+The home page location card should use the embedded Google Map for Lake Monomonac / 26 Sunny Cove Road and click through to:
+
+- `https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA`
 
 ## Guest Assignments
 

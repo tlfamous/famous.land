@@ -26,15 +26,10 @@ export default function July2026DayOfPage() {
             <p className={styles.kicker}>Resort operations</p>
             <h1>Day-Of Desk</h1>
             <p>
-              A fast guest hub for arrival, room keys, weather pivots, lake approvals,
+              A fast guest hub for arrival, guest links, weather pivots, lake approvals,
               meals, maps, and host contact during July 4th weekend.
             </p>
           </div>
-          <nav className={styles.quickLinks} aria-label="Day-of quick actions">
-            <a href="/july2026">Guest Portal</a>
-            <a href="/july2026/map">Resort Map</a>
-            <a href={hostSmsHref}>Contact Host</a>
-          </nav>
         </header>
 
         <section className={styles.priorityGrid} aria-label="Day-of priorities">

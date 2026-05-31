@@ -36,18 +36,6 @@ export default function July2026ResortMapPage() {
               and the moments when the weekend shifts from one house to another.
             </p>
           </div>
-          <nav className={styles.quickLinks} aria-label="Resort map quick actions">
-            <a href="/july2026">Guest Portal</a>
-            <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/houses">House Directory</a>
-            <a href="/july2026/itinerary">Itinerary</a>
-            <a href="/july2026/meals">Meals Guide</a>
-            <a href="/july2026/fleet">Fleet Guide</a>
-            <a href={lakeAreaUrl} target="_blank" rel="noreferrer">
-              Lake Area Map
-            </a>
-            <a href={hostSmsHref}>Contact Host</a>
-          </nav>
         </header>
 
         <section className={styles.houseGrid} aria-label="House roles and map status">

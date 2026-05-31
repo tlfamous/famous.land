@@ -121,7 +121,7 @@ export const bringItems = [
 
 export const resortDeskItems = [
   {
-    action: "Open your room-key link",
+    action: "Open your guest link",
     detail: "Use your personalized guest link for house, room, arrival, departure, companions, and host help.",
     label: "Check-in"
   },
@@ -161,7 +161,7 @@ export const dayOfDeskItems = [
   {
     href: "/july2026",
     label: "Guest Portal",
-    note: "Full resort experience, room-key entry, schedule, houses, and activities."
+    note: "Full resort experience, guest check-in, schedule, houses, and activities."
   },
   {
     href: "/july2026/arrival-card",
@@ -188,7 +188,7 @@ export const dayOfDeskItems = [
 export const dayOfPriorityItems = [
   {
     label: "First move",
-    title: "Open your room key",
+    title: "Open your guest link",
     detail: "Check your assigned house, room, companions, arrival notes, and personal packet before you leave or as soon as you arrive."
   },
   {
@@ -244,7 +244,7 @@ export const dayOfFlowItems = [
 export const arrivalChecklistItems = [
   {
     label: "Before you leave",
-    detail: "Open your room-key link, save the host contact, and add the weekend calendar while you still have an easy signal."
+    detail: "Open your guest link, save the host contact, and add the weekend calendar while you still have an easy signal."
   },
   {
     label: "When you arrive",
@@ -275,7 +275,7 @@ export const hostTextTemplates = [
   },
   {
     label: "Link reset",
-    body: "Hi, my July 2026 room-key link needs a reset or fresh token."
+    body: "Hi, my July 2026 guest link needs a reset or fresh token."
   }
 ];
 
@@ -285,7 +285,7 @@ export const hostBroadcastMessages = [
     label: "Arrival reminder",
     timing: "Friday morning",
     body:
-      "Welcome to the July 4th weekend. Please open your room key before you leave, save the host contact, and text 781-929-4932 if you need arrival help. Check-in is Friday, July 3, 3-6 PM."
+      "Welcome to the July 4th weekend. Please open your guest link before you leave, save the host contact, and text 781-929-4932 if you need arrival help. Check-in is Friday, July 3, 3-6 PM."
   },
   {
     audience: "All guests",
@@ -334,7 +334,7 @@ export const hostBroadcastMessages = [
     label: "Host help",
     timing: "Anytime",
     body:
-      "Text 781-929-4932 for room help, dietary notes, arrival directions, motorized fleet approval, cruise questions, or room-key link resets."
+      "Text 781-929-4932 for room help, dietary notes, arrival directions, motorized fleet approval, cruise questions, or guest link resets."
   }
 ] as const;
 
@@ -484,8 +484,8 @@ export const hostHelpItems = [
     detail: "Quad/four-wheeler use and optional fireworks cruise plans are by host approval."
   },
   {
-    title: "Room-key help",
-    detail: "If a guest link says it needs a host reset, text the host for a fresh room-key link."
+    title: "Guest link help",
+    detail: "If a guest link says it needs a host reset, text the host for a fresh guest link."
   }
 ];
 
@@ -494,7 +494,7 @@ export const faqItems = [
     category: "Arrival",
     question: "When should I arrive?",
     answer:
-      "Plan to arrive Friday, July 3 between 3:00 and 6:00 PM. Open your room-key link before you leave so you know your assigned house and room."
+      "Plan to arrive Friday, July 3 between 3:00 and 6:00 PM. Open your guest link before you leave so you know your assigned house and room."
   },
   {
     category: "Arrival",
@@ -548,7 +548,7 @@ export const faqItems = [
     category: "Phone setup",
     question: "What should I save on my phone before leaving?",
     answer:
-      "Open your room-key link, save the host contact card, add the weekend calendar, and download the offline guide while you still have an easy signal."
+      "Open your guest link, save the host contact card, and add the weekend calendar while you still have an easy signal."
   }
 ] as const;
 
@@ -587,7 +587,7 @@ export const rainPlanItems = [
     label: "Phone setup",
     title: "Keep offline links ready",
     detail:
-      "Save the host contact, add the calendar, and download the offline guide before leaving so updates and backup links stay easy to find."
+      "Save the host contact and add the calendar before leaving so updates and backup links stay easy to find."
   }
 ] as const;
 
@@ -613,7 +613,7 @@ export const lakeUseRules = [
 export const transitGuideItems = [
   {
     label: "Arrive at your assigned house",
-    detail: "Use your room-key page for the best known directions. LH2 and LH3 are live; LH1 directions will be added when the host confirms the address."
+    detail: "Use your guest page for the best known directions. LH1, LH2, and LH3 directions are live."
   },
   {
     label: "Friday starts at LH1",
@@ -809,22 +809,22 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     `- Guest SMS packets: ${baseUrl}/july2026/admin/sms-packets`,
     `- Host text templates: ${baseUrl}/july2026/admin/host-texts`,
     `- Media shot list: ${baseUrl}/july2026/admin/media-shot-list`,
-    `- Printable room keys: ${baseUrl}/july2026/admin/room-keys`,
+    `- Printable guest links: ${baseUrl}/july2026/admin/guest-links`,
     `- Host briefing sheet: ${baseUrl}/july2026/admin/briefing-sheet`,
     `- House signs: ${baseUrl}/july2026/admin/house-signs`,
     "",
     "Ready now:",
     "- Resort-style guest portal and supporting pages",
     "- Day-Of Desk for arrival, weather pivots, lake approvals, meals, maps, and host texts",
-    "- Guest registry for house rosters, room assignments, companions, pending assignments, and room-key links",
-    "- Mobile resort pass with QR, host text, calendar, offline guide, and key itinerary actions",
+    "- Guest registry for house rosters, room assignments, companions, pending assignments, and guest links",
+    "- Guest QR, host text, calendar, and key itinerary actions",
     "- Resort FAQ for arrival, directions, food, lake approvals, phone setup, and host help",
     "- Prefilled Contact Host SMS actions to 781-929-4932",
     "- Downloadable host contact card",
     "- Shared weekend calendar and personal guest calendars",
-    "- Offline weekend guide and personal room-key packets",
+    "- Personal guest packets",
     "- Guest-specific SMS packet review",
-    "- Printable room-key sheet, host briefing sheet, and house signs",
+    "- Printable guest-link sheet, host briefing sheet, and house signs",
     "- LH2 and LH3 live directions",
     "- LH3 animated profile GIF and MP4 house media",
     "- Motorized fleet inventory for Laconic, Spikey Lizard, and Laika",
@@ -1022,7 +1022,7 @@ export const statusItems = [
 export const houseProfiles = [
   {
     name: "LH1",
-    role: "Welcome, orientation, boat departure, fire pit",
+    role: "OG lakehouse. Features poured cement countertops, live edge bar, sunroom, lots of furniture from the neighbors, and the Grand Peninsula firepit.",
     rooms: ["First floor bedroom", "Second floor bedroom", "The Girls' Room", "Sunroom"],
     note: "26 Sunny Cove Road, Winchendon, Massachusetts",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA",
@@ -1031,7 +1031,7 @@ export const houseProfiles = [
   },
   {
     name: "LH2",
-    role: "Quiet guest rooms and coffee stop",
+    role: "Quiet oasis from annoying relatives. Two-zone air conditioning, cozy fireplace, Starlink Internet, and a canoe hanging from the ceiling for some reason.",
     rooms: ["South bedroom", "North bedroom"],
     note: "63 Pine Eden Road, Rindge, New Hampshire",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=63%20Pine%20Eden%20Road%2C%20Rindge%2C%20NH",
@@ -1040,7 +1040,7 @@ export const houseProfiles = [
   },
   {
     name: "LH3",
-    role: "Beach, meals, brunch, boat return",
+    role: "Newest property. Second ugliest house. Indoor/outdoor kitchen. Large patio and beach for prime entertaining.",
     rooms: ["Primary bedroom"],
     note: "25 Sunny Cove Road, Winchendon, Massachusetts",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=25%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA",
@@ -1065,7 +1065,7 @@ export function getGuestPacketText(guest: GuestAssignment, baseUrl = "https://fa
     (item) => `- ${item.time}: ${item.title}. ${item.detail}`
   );
 
-  return `JULY 4TH, 2026 ROOM KEY
+  return `JULY 4TH, 2026 STAY DETAILS
 
 Guest:
 ${guest.name}
@@ -1100,8 +1100,8 @@ Weekend essentials:
 - Sunday 10:00 AM: pancake brunch, LH3.
 
 Links:
-Room key: ${baseUrl}/july2026/guest/${guest.slug}
-Room-key QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
+Guest link: ${baseUrl}/july2026/guest/${guest.slug}
+Guest QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
 Day-Of Desk: ${baseUrl}/july2026/day-of
@@ -1142,16 +1142,16 @@ export function getGuestSmsPacket(
       : `You are staying at ${guest.house}, ${guest.room}.`;
 
   return [
-    `Hi ${guest.name}, here is your July 4th, 2026 room key:`,
+    `Hi ${guest.name}, here is your July 4th, 2026 guest link:`,
     `${baseUrl}${path}`,
     "",
     assignment,
     `Arrival: ${guest.arrival}`,
     `Departure: ${guest.departure}`,
     "",
-    `Personal room-key packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
+    `Personal guest packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
     `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
-    `Room-key QR code: ${baseUrl}${qrPath}`,
+    `Guest QR code: ${baseUrl}${qrPath}`,
     `Day-Of Desk: ${baseUrl}/july2026/day-of`,
     `Resort FAQ: ${baseUrl}/july2026/faq`,
     `Calendar: ${baseUrl}/july2026/calendar.ics`,

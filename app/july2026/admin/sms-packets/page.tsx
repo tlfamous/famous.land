@@ -4,7 +4,7 @@ import styles from "./sms-packets.module.css";
 
 export const metadata: Metadata = {
   title: "July 4th, 2026 Guest SMS Packets | famous.land",
-  description: "Print-friendly review sheet for July 2026 guest room-key SMS packets.",
+  description: "Print-friendly review sheet for July 2026 guest SMS packets.",
   robots: {
     index: false,
     follow: false
@@ -20,11 +20,11 @@ export default function July2026SmsPacketsPage() {
         <div>
           <p>famous.land guest outreach</p>
           <h1>Guest SMS Packets</h1>
-          <span>Review-ready messages for sending each guest their July 4th, 2026 room key and weekend links.</span>
+          <span>Review-ready messages for sending each guest their July 4th, 2026 guest link and weekend links.</span>
         </div>
         <nav aria-label="Admin links">
           <a href="/july2026/admin">Admin</a>
-          <a href="/july2026/admin/room-keys">Room keys</a>
+          <a href="/july2026/admin/guest-links">Guest links</a>
           <a href="/july2026/admin/host-texts">Host texts</a>
           <a href="/july2026/admin/briefing-sheet">Briefing</a>
         </nav>
@@ -60,7 +60,7 @@ export default function July2026SmsPacketsPage() {
                   <h2>{guest.name}</h2>
                   <p>{assignment}</p>
                 </div>
-                <img src={qrPath} alt={`${guest.name} room-key QR code`} />
+                <img src={qrPath} alt={`${guest.name} guest QR code`} />
               </div>
               <a className={styles.smsLink} href={`sms:+17819294932?&body=${encodeURIComponent(message)}`}>
                 Open SMS Draft

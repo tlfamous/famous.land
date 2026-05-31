@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: GuestPageProps): Promise<Meta
 
   return {
     title: `${guest.name}'s July 4th, 2026 Stay`,
-    description: `Personalized room-key view for ${guest.name} at the July 4th, 2026 lake weekend.`,
+    description: `Personalized guest view for ${guest.name} at the July 4th, 2026 lake weekend.`,
     robots: {
       follow: false,
       index: false

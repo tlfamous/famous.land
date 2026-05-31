@@ -117,7 +117,7 @@ const shotGroups = [
         framing: "One clean horizontal image per sleeping area, with bed/sofa layout readable.",
         priority: "Medium",
         title: "Bedrooms",
-        use: "Room-key confidence for Heather/Eric, The Girls' Room group, and Jack."
+        use: "Guest assignment confidence for Heather/Eric, The Girls' Room group, and Jack."
       }
     ]
   },
@@ -129,13 +129,13 @@ const shotGroups = [
         framing: "Horizontal room photo showing beds, windows, and guest storage if available.",
         priority: "High",
         title: "South bedroom",
-        use: "Room-key confidence for Cin and Vin."
+        use: "Guest assignment confidence for Cin and Vin."
       },
       {
         framing: "Horizontal room photo showing the sleep setup and path into the room.",
         priority: "High",
         title: "North bedroom",
-        use: "Room-key confidence for Adam and Gage."
+        use: "Guest assignment confidence for Adam and Gage."
       }
     ]
   },
@@ -153,7 +153,7 @@ const shotGroups = [
         framing: "Clean horizontal room image showing bed and key room character.",
         priority: "High",
         title: "Primary bedroom",
-        use: "Room-key confidence for Holly and Tod."
+        use: "Guest assignment confidence for Holly and Tod."
       },
       {
         framing: "Wide gathering image with table/seating flow clear.",
@@ -172,7 +172,7 @@ const shotGroups = [
 ] as const;
 
 const captureTips = [
-  "Prefer horizontal photos for house cards and room-key pages.",
+  "Prefer horizontal photos for house cards and guest pages.",
   "Shoot one clean wide photo first, then one detail photo if the space has character.",
   "Avoid tight crops; leave room around the subject for responsive web cropping.",
   "Bright daylight works best for rooms, beach, decks, and lake access.",

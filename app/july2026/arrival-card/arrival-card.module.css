@@ -77,15 +77,6 @@
   font-weight: 900;
 }
 
-.commandBar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 18px clamp(18px, 4vw, 40px);
-  background: #081326;
-}
-
-.commandBar a,
 .promptGrid a,
 .footer a {
   min-height: 46px;
@@ -98,11 +89,6 @@
   border-radius: 8px;
   font-weight: 950;
   text-decoration: none;
-}
-
-.commandBar a {
-  background: rgba(255, 253, 247, 0.1);
-  border: 1px solid rgba(255, 253, 247, 0.28);
 }
 
 .essentials {
@@ -320,10 +306,6 @@
     width: min(220px, 100%);
   }
 
-  .commandBar a {
-    flex: 1 1 180px;
-  }
-
   .schedule li {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -347,7 +329,6 @@
     box-shadow: none;
   }
 
-  .commandBar a,
   .footer a,
   .promptGrid a {
     color: #081326;

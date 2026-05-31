@@ -21,8 +21,8 @@ const helpPriorities = [
     detail: "Motorized lake fleet, quad/four-wheeler time, and optional cruise plans need host approval."
   },
   {
-    label: "Room keys",
-    detail: "If your guest link looks stale, bound, or confusing, text the host for a fresh room-key link."
+    label: "Guest links",
+    detail: "If your guest link looks stale, bound, or confusing, text the host for a fresh guest link."
   }
 ];
 
@@ -35,21 +35,10 @@ export default function July2026ConciergePage() {
             <p className={styles.kicker}>Guest concierge</p>
             <h1>Guest Help Desk</h1>
             <p>
-              Quick answers for food notes, room-key help, activity approvals, lake rules,
+              Quick answers for food notes, guest-link help, activity approvals, lake rules,
               and when to contact the host during the weekend.
             </p>
           </div>
-          <nav className={styles.quickLinks} aria-label="Concierge quick actions">
-            <a href="/july2026">Guest Portal</a>
-            <a href="/july2026/day-of">Day-Of Desk</a>
-            <a href="/july2026/faq">Guest FAQ</a>
-            <a href="/july2026/arrival-card">Arrival Card</a>
-            <a href="/july2026/map">Resort Map</a>
-            <a href="/july2026/itinerary">Itinerary</a>
-            <a href="/july2026/meals">Meals Guide</a>
-            <a href="/july2026/fleet">Fleet Guide</a>
-            <a href={hostSmsHref}>Contact Host</a>
-          </nav>
         </header>
 
         <section className={styles.priorityGrid} aria-label="Concierge priorities">

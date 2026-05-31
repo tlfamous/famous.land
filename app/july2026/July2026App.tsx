@@ -291,23 +291,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 ? `Welcome, ${selectedGuest.name}. Your private lake-weekend check-in is ready with your room, house, schedule, and Contact Host button.`
                 : "A private resort-style guest portal for check-in, room assignments, lake-house directions, activities, meals, fireworks, and host help all weekend."}
             </p>
-            <div className={styles.heroActions}>
-              <a className={styles.secondaryButton} href="#schedule">
-                Schedule
-              </a>
-              <a className={styles.secondaryButton} href="/july2026/houses">
-                Houses
-              </a>
-              <a className={styles.secondaryButton} href="/july2026/meals">
-                Meals
-              </a>
-              <a className={styles.secondaryButton} href="/july2026/fleet">
-                Fleet
-              </a>
-              <a className={styles.secondaryButton} href={hostSmsHref}>
-                Contact Host
-              </a>
-            </div>
           </div>
 
           <div className={styles.heroPanel} aria-label="Event details">
@@ -327,26 +310,26 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             <div>
               <span className={styles.sectionLabel}>My Stay</span>
               <h2>{`${selectedGuest.name}'s stay`}</h2>
-              <p>A concise room-key view for arrival, room assignment, house context, and host help.</p>
+              <p>A concise guest view for arrival, room assignment, house context, and host help.</p>
             </div>
 
               <div className={isViewingBoundGuest && !bindingIsClaimed ? styles.bindingNotice : styles.bindingWarning}>
                 <div>
                   <strong>
                     {bindingIsClaimed
-                      ? "Room-key needs host reset"
+                      ? "Guest link needs host reset"
                       : isViewingBoundGuest
                         ? "Device check-in active"
                         : "Viewing without rebinding"}
                   </strong>
                   <p>
                     {bindingIsClaimed
-                      ? "This link is already bound or no longer matches the current room-key token. Text the host for a fresh link."
+                      ? "This link is already bound or no longer matches the current guest token. Text the host for a fresh link."
                       : isViewingBoundGuest
                       ? `This device is checked in as ${selectedGuest.name}.`
                       : boundGuestProfile
                         ? `This device is already checked in as ${boundGuestProfile.name}; opening ${selectedGuest.name}'s link did not overwrite it.`
-                        : "This browser could not store a device check-in, but the room-key details are still available."}
+                        : "This browser could not store a device check-in, but the stay details are still available."}
                   </p>
                 </div>
                 {boundGuest ? (
@@ -397,9 +380,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                   <dd>{selectedGuest.companions.length ? selectedGuest.companions.join(", ") : "Solo room assignment"}</dd>
                 </div>
               </dl>
-              <div className={styles.roomKeyActions}>
+              <div className={styles.stayActions}>
                 <a href={`/july2026/guest/${selectedGuest.slug}/packet.txt`}>
-                  Download My Room Key
+                  Download My Stay Details
                 </a>
                 <a href={`/july2026/guest/${selectedGuest.slug}/calendar.ics`}>Add My Calendar</a>
                 <a href={directionsHref} target="_blank" rel="noreferrer">
@@ -449,33 +432,33 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           </ol>
         </article>
 
-        <article className={styles.panel} id="map">
-          <div className={styles.panelHeader}>
-            <Icon path="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z" />
-            <h2>Location</h2>
-          </div>
-          <p className={styles.address}>
-            26 Sunny Cove Road
-            <br />
-            Winchendon, MA
-          </p>
-          <div className={styles.mapCard}>
-            <iframe
-              allowFullScreen
-              aria-label="Embedded Google Map for 26 Sunny Cove Road, Winchendon"
-              className={styles.mapEmbed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              src={sunnyCoveEmbedHref}
-              title="26 Sunny Cove Road Google Map"
-            />
-          </div>
-          <a className={styles.mapButton} href={sunnyCoveMapsHref} target="_blank" rel="noreferrer">
-            Open Google Maps
-          </a>
-        </article>
+        <div className={styles.middleStack}>
+          <article className={styles.panel} id="map">
+            <div className={styles.panelHeader}>
+              <Icon path="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z" />
+              <h2>Location</h2>
+            </div>
+            <p className={styles.address}>
+              26 Sunny Cove Road
+              <br />
+              Winchendon, MA
+            </p>
+            <div className={styles.mapCard}>
+              <iframe
+                allowFullScreen
+                aria-label="Embedded Google Map for 26 Sunny Cove Road, Winchendon"
+                className={styles.mapEmbed}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                src={sunnyCoveEmbedHref}
+                title="26 Sunny Cove Road Google Map"
+              />
+            </div>
+            <a className={styles.mapButton} href={sunnyCoveMapsHref} target="_blank" rel="noreferrer">
+              Open Google Maps
+            </a>
+          </article>
 
-        <div className={styles.sideStack}>
           <article className={styles.panel}>
             <div className={styles.panelHeader}>
               <Icon path="M4 10.5 12 4l8 6.5V21h-6v-6h-4v6H4V10.5Z" />
@@ -556,11 +539,13 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 );
               })}
             </div>
-            <a className={styles.mapButton} href="/july2026/fleet">
-              Open Fleet Guide
+            <a className={styles.mapButton} href="/july2026/houses">
+              Open House Directory
             </a>
           </article>
+        </div>
 
+        <div className={styles.sideStack}>
           <article className={styles.panel} id="fleet">
             <div className={styles.panelHeader}>
               <Icon path="M4 15h16l-2.1-5.4A3 3 0 0 0 15.1 7H8.9a3 3 0 0 0-2.8 2.6L4 15Zm3-6h10l1.2 4H5.8L7 9Zm-.5 8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm11 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" />

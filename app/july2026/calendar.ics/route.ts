@@ -13,7 +13,7 @@ const calendarLines = [
   "DTEND:20260705T210000Z",
   "SUMMARY:July 4th, 2026 Lake Weekend",
   "LOCATION:Lake Monomonac, Rindge NH / Winchendon MA",
-  "DESCRIPTION:Private Lake Monomonac weekend. Use https://famous.land/july2026 for room keys, schedule, house directions, activities, and host help.",
+  "DESCRIPTION:Private Lake Monomonac weekend. Use https://famous.land/july2026 for guest links, schedule, house directions, activities, and host help.",
   "URL:https://famous.land/july2026",
   "END:VEVENT",
   "BEGIN:VEVENT",

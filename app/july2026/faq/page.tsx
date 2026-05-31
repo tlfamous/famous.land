@@ -26,18 +26,12 @@ export default function July2026FaqPage() {
               and the host line before the July 4th weekend.
             </p>
           </div>
-          <nav className={styles.quickLinks} aria-label="FAQ quick actions">
-            <a href="/july2026">Guest Portal</a>
-            <a href="/july2026/day-of">Day-Of Desk</a>
-            <a href="/july2026/arrival-card">Arrival Card</a>
-            <a href={hostSmsHref}>Contact Host</a>
-          </nav>
         </header>
 
         <section className={styles.summaryGrid} aria-label="FAQ summary">
           <article>
             <span>Best first step</span>
-            <strong>Open your room key</strong>
+            <strong>Open your guest link</strong>
             <p>Your personal link has house, room, companion, directions, and host-help context.</p>
           </article>
           <article>
@@ -48,7 +42,7 @@ export default function July2026FaqPage() {
           <article>
             <span>Phone setup</span>
             <strong>Save the essentials</strong>
-            <p>Add the calendar, save the host contact, and download the offline guide before leaving.</p>
+            <p>Add the calendar and save the host contact before leaving.</p>
           </article>
         </section>
 

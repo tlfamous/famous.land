@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { guestAssignments } from "../../data";
-import styles from "./room-keys.module.css";
+import styles from "./guest-links.module.css";
 
 export const metadata: Metadata = {
-  title: "July 4th, 2026 Room Key Sheet | famous.land",
-  description: "Print-friendly July 2026 room-key links and QR codes.",
+  title: "July 4th, 2026 Guest Link Sheet | famous.land",
+  description: "Print-friendly July 2026 guest links and QR codes.",
   robots: {
     index: false,
     follow: false
   }
 };
 
-export default function July2026RoomKeysPage() {
+export default function July2026GuestLinksPage() {
   const baseUrl = "https://famous.land";
 
   return (
@@ -19,8 +19,8 @@ export default function July2026RoomKeysPage() {
       <header className={styles.header}>
         <div>
           <p>famous.land guest operations</p>
-          <h1>July 4th, 2026 Room Keys</h1>
-          <span>Print sheet for host check-in, room help, and QR-based guest sharing.</span>
+          <h1>July 4th, 2026 Guest Links</h1>
+          <span>Print sheet for host check-in, lodging help, and QR-based guest sharing.</span>
         </div>
         <nav aria-label="Admin links">
           <a href="/july2026/admin">Admin</a>
@@ -43,7 +43,7 @@ export default function July2026RoomKeysPage() {
         </div>
       </section>
 
-      <section className={styles.grid} aria-label="Printable guest room keys">
+      <section className={styles.grid} aria-label="Printable guest links">
         {guestAssignments.map((guest) => {
           const assignment =
             guest.house === "Pending" ? "Assignment pending" : `${guest.house} / ${guest.room}`;
@@ -57,7 +57,7 @@ export default function July2026RoomKeysPage() {
                   <h2>{guest.name}</h2>
                   <p>{assignment}</p>
                 </div>
-                <img src={qrUrl} alt={`${guest.name} room-key QR code`} />
+                <img src={qrUrl} alt={`${guest.name} guest QR code`} />
               </div>
               <dl>
                 <div>
@@ -73,7 +73,7 @@ export default function July2026RoomKeysPage() {
                   <dd>{guest.companions.length ? guest.companions.join(", ") : "Solo room assignment"}</dd>
                 </div>
                 <div>
-                  <dt>Room key</dt>
+                  <dt>Guest link</dt>
                   <dd>{guestUrl}</dd>
                 </div>
               </dl>

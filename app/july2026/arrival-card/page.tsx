@@ -50,19 +50,6 @@ export default function July2026ArrivalCardPage() {
           </figure>
         </header>
 
-        <section className={styles.commandBar} aria-label="Arrival quick actions">
-          <a href="/july2026">Guest Portal</a>
-          <a href="/july2026/faq">Guest FAQ</a>
-          <a href="/july2026/map">Resort Map</a>
-          <a href="/july2026/concierge">Guest Concierge</a>
-          <a href="/july2026/itinerary">Itinerary</a>
-          <a href="/july2026/meals">Meals Guide</a>
-          <a href="/july2026/fleet">Fleet Guide</a>
-          <a href="/july2026/calendar.ics">Add Calendar</a>
-          <a href="/july2026/host-contact.vcf">Save Host</a>
-          <a href={hostSmsHref}>Contact Host</a>
-        </section>
-
         <section className={styles.essentials} aria-label="Arrival essentials">
           <article>
             <span>Check-in</span>
@@ -77,7 +64,7 @@ export default function July2026ArrivalCardPage() {
           <article>
             <span>Portal</span>
             <strong>Guest portal</strong>
-            <p>Use your room-key link for your assignment, directions, calendar, QR, and personal packet.</p>
+            <p>Use your guest link for your assignment, directions, calendar, QR, and personal packet.</p>
           </article>
         </section>
 

@@ -32,13 +32,13 @@ export async function GET(request: Request, { params }: GuestQrRouteProps) {
 
   const url = new URL(request.url);
   const token = url.searchParams.get("t");
-  const roomKeyUrl = new URL(`/july2026/guest/${guest.slug}`, "https://famous.land");
+  const guestLinkUrl = new URL(`/july2026/guest/${guest.slug}`, "https://famous.land");
 
   if (token) {
-    roomKeyUrl.searchParams.set("t", token);
+    guestLinkUrl.searchParams.set("t", token);
   }
 
-  const qrSvg = await QRCode.toString(roomKeyUrl.toString(), {
+  const qrSvg = await QRCode.toString(guestLinkUrl.toString(), {
     color: {
       dark: "#082141",
       light: "#fffdf7"
@@ -50,10 +50,10 @@ export async function GET(request: Request, { params }: GuestQrRouteProps) {
   });
   const svg = qrSvg.replace(
     "<svg ",
-    `<svg role="img" aria-labelledby="room-key-qr-title room-key-qr-desc" `
+    `<svg role="img" aria-labelledby="guest-link-qr-title guest-link-qr-desc" `
   ).replace(
     ">",
-    `><title id="room-key-qr-title">${escapeSvgText(`${guest.name}'s room-key QR code`)}</title><desc id="room-key-qr-desc">${escapeSvgText(roomKeyUrl.toString())}</desc>`
+    `><title id="guest-link-qr-title">${escapeSvgText(`${guest.name}'s guest QR code`)}</title><desc id="guest-link-qr-desc">${escapeSvgText(guestLinkUrl.toString())}</desc>`
   );
 
   return new Response(svg, {
