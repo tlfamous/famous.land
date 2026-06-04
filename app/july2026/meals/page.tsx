@@ -43,7 +43,9 @@ export default function July2026MealsPage() {
             <h1>Meals and Coffee</h1>
             <p>
               The guest dining guide for welcome food, house coffee, spa water, lunch,
-              lakeside patio dinner, and pancake brunch.
+              lakeside patio dinner, and pancake brunch. Veg or non-veg, no gluten or
+              max gluten, coffee or tea, alcoholic or non-alcoholic beverage:
+              preferences will all be considered in provided meals.
             </p>
           </div>
         </header>
