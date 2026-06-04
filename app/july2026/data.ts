@@ -28,7 +28,8 @@ export const scheduleItems = [
   {
     time: "Sat 7:30-8 AM",
     title: "Coffee time at all houses",
-    detail: "LH1: Kona coffee. LH2: K-cup coffee. LH3: drip coffee. Guests may visit any house."
+    detail:
+      "LH1: Kona coffee. LH2: K-cup coffee. LH3: drip coffee. Premium tea selection also offered. Guests may visit any house."
   },
   {
     time: "Sat 8:00 AM",
@@ -93,7 +94,8 @@ export const scheduleItems = [
   {
     time: "Sun 8:30 AM",
     title: "Coffee time at all houses",
-    detail: "Same coffee setup as Saturday: Kona at LH1, K-cups at LH2, drip coffee at LH3."
+    detail:
+      "Same coffee and tea setup as Saturday: Kona at LH1, K-cups at LH2, drip coffee at LH3, plus premium tea selection."
   },
   {
     time: "Sun 10:00 AM",
@@ -237,7 +239,7 @@ export const dayOfFlowItems = [
   {
     time: "Sun",
     title: "Brunch and departures",
-    detail: "Coffee at all houses, pancake brunch at LH3, free time, and Sunday afternoon departures."
+    detail: "Coffee and premium tea at all houses, pancake brunch at LH3, free time, and Sunday afternoon departures."
   }
 ] as const;
 
@@ -299,7 +301,7 @@ export const hostBroadcastMessages = [
     label: "Saturday lake morning",
     timing: "Saturday 7:30 AM",
     body:
-      "Good morning. Coffee is available at all houses from 7:30-8 AM. Yoga is 8 AM at the LH3 beach, followed by non-motorized lake time and spa water at LH3."
+      "Good morning. Coffee and premium tea are available at all houses from 7:30-8 AM. Yoga is 8 AM at the LH3 beach, followed by non-motorized lake time and spa water at LH3."
   },
   {
     audience: "Motorized fleet guests",
@@ -327,7 +329,7 @@ export const hostBroadcastMessages = [
     label: "Sunday brunch",
     timing: "Sunday 9:00 AM",
     body:
-      "Sunday coffee starts at 8:30 AM at all houses. Pancake brunch is 10 AM at LH3, followed by free time, lake activities, and Sunday afternoon departures."
+      "Sunday coffee and premium tea start at 8:30 AM at all houses. Pancake brunch is 10 AM at LH3, followed by free time, lake activities, and Sunday afternoon departures."
   },
   {
     audience: "Guests needing help",
@@ -446,7 +448,7 @@ export const foodMoments = [
   {
     time: "Sat 7:30 AM",
     title: "Coffee at all houses",
-    detail: "Kona at LH1, K-cups at LH2, and drip coffee at LH3."
+    detail: "Kona at LH1, K-cups at LH2, drip coffee at LH3, and premium tea selection at all houses."
   },
   {
     time: "Sat 10:00 AM",
@@ -591,6 +593,13 @@ export const rainPlanItems = [
   }
 ] as const;
 
+export const radioRulesHref = "/july2026/radio-rules";
+
+export const radioRules = [
+  "All communication on channel 6.1 unless otherwise instructed",
+  'Begin all conversations with "Patka Patka"'
+] as const;
+
 export const lakeUseRules = [
   {
     label: "Orientation first",
@@ -607,6 +616,12 @@ export const lakeUseRules = [
   {
     label: "Text before changes",
     detail: "Text the host before changing cruise plans, taking out a motorized vehicle, or requesting quad/four-wheeler time."
+  },
+  {
+    label: "Radio handles",
+    detail: "Walkie-talkies to be provided.",
+    href: radioRulesHref,
+    action: "Radio Rules"
   }
 ];
 
@@ -964,7 +979,7 @@ export const guestAssignments: GuestAssignment[] = [
     name: "Morgan",
     house: "LH1",
     room: "The Girls' Room",
-    companions: ["Rowan", "Emma", "Austin"],
+    companions: ["Rowan", "Emma", "Austen"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
     note: "The Girls' Room is the third floor bedroom at LH1."
@@ -974,7 +989,7 @@ export const guestAssignments: GuestAssignment[] = [
     name: "Rowan",
     house: "LH1",
     room: "The Girls' Room",
-    companions: ["Morgan", "Emma", "Austin"],
+    companions: ["Morgan", "Emma", "Austen"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
     note: "The Girls' Room is the third floor bedroom at LH1."
@@ -984,14 +999,14 @@ export const guestAssignments: GuestAssignment[] = [
     name: "Emma",
     house: "LH1",
     room: "The Girls' Room",
-    companions: ["Morgan", "Rowan", "Austin"],
+    companions: ["Morgan", "Rowan", "Austen"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
     note: "The Girls' Room is the third floor bedroom at LH1."
   },
   {
-    slug: "austin",
-    name: "Austin",
+    slug: "austen",
+    name: "Austen",
     house: "LH1",
     room: "The Girls' Room",
     companions: ["Morgan", "Rowan", "Emma"],
@@ -1010,6 +1025,30 @@ export const guestAssignments: GuestAssignment[] = [
     note: "The Friday grab-and-go meal is also in the LH1 sunroom."
   }
 ];
+
+const guestRadioHandles: Record<string, string> = {
+  holly: "Witchy Woman",
+  tod: "Pastey White Boy",
+  heather: "LloydHeat",
+  eric: "King Eric",
+  zack: "Whimpy Whitey",
+  bee: "Just B",
+  cin: "Dr Lu",
+  vin: "Big Sikh",
+  adam: "TBD",
+  gage: "TBD",
+  morgan: "TBD",
+  rowan: "TBD",
+  emma: "TBD",
+  austen: "Crazy Baby",
+  jack: "TBD"
+};
+
+export const radioHandleRows = guestAssignments.map((guest) => ({
+  slug: guest.slug,
+  name: guest.name.split(" ")[0],
+  handle: guestRadioHandles[guest.slug] ?? "TBD"
+}));
 
 export const statusItems = [
   { label: "Weekend", value: "Jul 3-5" },

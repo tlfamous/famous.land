@@ -28,6 +28,7 @@ Keep these public guest surfaces:
 - Weekend itinerary: `/july2026/itinerary`
 - Meals and coffee: `/july2026/meals`
 - Fleet guide: `/july2026/fleet`
+- Radio rules: `/july2026/radio-rules`
 - Shared calendar: `/july2026/calendar.ics`
 - Host contact card: `/july2026/host-contact.vcf`
 
@@ -118,7 +119,7 @@ Guest roster and linked status table should appear on admin only.
 | Zack and Bee | LH1 | First floor bedroom |
 | Cin and Vin | LH2 | South bedroom |
 | Adam and Gage | LH2 | North bedroom |
-| Morgan, Rowan, Emma, and Austin | LH1 | The Girls' Room |
+| Morgan, Rowan, Emma, and Austen | LH1 | The Girls' Room |
 | Jack | LH1 | Sunroom |
 
 Admin guest table columns:
@@ -140,7 +141,7 @@ Friday, July 3:
 
 Saturday, July 4:
 
-- 7:30-8:00 AM: Coffee at all houses
+- 7:30-8:00 AM: Coffee and premium tea at all houses
 - 8:00 AM: Yoga on the beach, LH3
 - 9:00 AM: Non-motorized lake activities, LH3 / lake access
 - 10:00 AM: Spa water, LH3
@@ -156,7 +157,7 @@ Saturday, July 4:
 
 Sunday, July 5:
 
-- 8:30 AM: Coffee at all houses
+- 8:30 AM: Coffee and premium tea at all houses
 - 10:00 AM: Pancake brunch with spa water, LH3
 - After brunch: Free time and lake activities
 - Sunday afternoon: Departure and grab-and-go food
@@ -191,6 +192,35 @@ Non-motorized vehicles:
 
 All motorized use requires host orientation and host approval.
 
+## Radio Rules
+
+Walkie-talkies to be provided.
+
+Radios provided at the houses on Lake Monomonac.
+
+- All communication on channel 6.1 unless otherwise instructed
+- Begin all conversations with "Patka Patka"
+
+Guest radio handles:
+
+| Name | Handle |
+|---|---|
+| Holly | Witchy Woman |
+| Tod | Pastey White Boy |
+| Heather | LloydHeat |
+| Eric | King Eric |
+| Zack | Whimpy Whitey |
+| Bee | Just B |
+| Cin | Dr Lu |
+| Vin | Big Sikh |
+| Adam | TBD |
+| Gage | TBD |
+| Morgan | TBD |
+| Rowan | TBD |
+| Emma | TBD |
+| Austen | Crazy Baby |
+| Jack | TBD |
+
 ## Current Bundled Media
 
 - July 4th hero artwork
@@ -205,6 +235,7 @@ All motorized use requires host orientation and host approval.
 - LH3 animated GIF profile
 - Motorized vehicle reference images
 - Non-motorized vehicle images
+- Motorola T605 H2O walkie-talkie image
 
 ## Still Needed
 

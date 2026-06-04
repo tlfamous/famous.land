@@ -204,6 +204,11 @@ export default function July2026FleetPage() {
               <article key={rule.label}>
                 <strong>{rule.label}</strong>
                 <p>{rule.detail}</p>
+                {"href" in rule && rule.href ? (
+                  <a className={styles.ruleLink} href={rule.href}>
+                    {rule.action}
+                  </a>
+                ) : null}
               </article>
             ))}
           </div>

@@ -638,6 +638,11 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               <section key={rule.label}>
                 <strong>{rule.label}</strong>
                 <p>{rule.detail}</p>
+                {"href" in rule && rule.href ? (
+                  <a className={styles.ruleLink} href={rule.href}>
+                    {rule.action}
+                  </a>
+                ) : null}
               </section>
             ))}
           </div>

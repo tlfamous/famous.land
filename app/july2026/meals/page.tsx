@@ -18,17 +18,17 @@ const sundayBrunch = foodMoments.find((moment) => moment.title === "Pancake brun
 const houseCoffee = [
   {
     house: "LH1",
-    note: "Kona coffee",
+    note: "Kona coffee + premium tea",
     detail: "Friday welcome flow starts at LH1, and Saturday motorized orientation also gathers there."
   },
   {
     house: "LH2",
-    note: "K-cup coffee",
+    note: "K-cup coffee + premium tea",
     detail: "Quiet guest-room house and coffee stop for LH2 guests."
   },
   {
     house: "LH3",
-    note: "Drip coffee",
+    note: "Drip coffee + premium tea",
     detail: "Saturday yoga, beach time, meals, and Sunday brunch center here."
   }
 ];

@@ -1416,6 +1416,22 @@
   line-height: 1.36;
 }
 
+.ruleLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  margin-top: 12px;
+  padding: 0 14px;
+  color: #fffdf7;
+  background: var(--july-blue);
+  border: 1px solid rgba(8, 33, 65, 0.16);
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .foodList {
   display: grid;
   margin: 14px 22px 22px;
