@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "famous-land-summer-quest",
+  "account_id": "d66c04796bf11481f6af6ae78492bd63",
   "main": "custom-worker.js",
   "compatibility_date": "2026-04-28",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -27,7 +28,7 @@
     {
       "binding": "DB",
       "database_name": "famous-land-quest",
-      "database_id": "9a4caa16-4c29-4a6d-ac5b-f92c0ba58749"
+      "database_id": "a5e9f465-9d47-4af1-bf1a-06137fc626c2"
     }
   ],
   "routes": [
