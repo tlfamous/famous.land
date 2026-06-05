@@ -9,6 +9,7 @@ import lakeHouse2ExteriorSideImage from "./assets/lake-house-2-exterior-side.jpe
 import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
+import lilyRooCoverImage from "./assets/lily-roo-i-learned-cover.jpg";
 import canAmQuadImage from "./assets/vehicle-can-am-quad.png";
 import laconicVehicleImage from "./assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "./assets/vehicle-laika-trixx.png";
@@ -32,6 +33,8 @@ const sunnyCoveMapsHref =
   "https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA";
 const sunnyCoveEmbedHref =
   "https://www.google.com/maps?q=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA&output=embed";
+const lilyRooSiteHref = "https://www.lilyroo.com/";
+const lilyRooSpotifyHref = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
 
 function Icon({ path }: { path: string }) {
   return (
@@ -269,9 +272,38 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="/july2026/houses">Houses</a>
           <a href="/july2026/meals">Meals</a>
           <a href="/july2026/fleet">Fleet</a>
+          <a href="#sponsor">Sponsor</a>
           <a href={hostSmsHref}>Contact Host</a>
         </div>
       </nav>
+
+      <section className={styles.sponsorBillboard} id="sponsor" aria-label="Lily Roo sponsor announcement">
+        <a className={styles.sponsorFeature} href={lilyRooSiteHref} target="_blank" rel="noreferrer">
+          <span className={styles.adLabel}>Paid sponsor</span>
+          <Image
+            src={lilyRooCoverImage}
+            alt="Remastered cover art for I Learned It All in Fifteen Seconds by Lily Roo"
+            className={styles.sponsorArtwork}
+            sizes="(max-width: 720px) 84px, 112px"
+          />
+          <div className={styles.sponsorCopy}>
+            <span>Spotify debut + remastered art</span>
+            <h2>Lily Roo: I Learned It All in Fifteen Seconds</h2>
+            <p>
+              The first Lily Roo single is live on Spotify with newly remastered album art. Click through to
+              LilyRoo.com for the launch.
+            </p>
+          </div>
+        </a>
+        <div className={styles.sponsorActions}>
+          <a href={lilyRooSiteHref} target="_blank" rel="noreferrer">
+            Visit LilyRoo.com
+          </a>
+          <a href={lilyRooSpotifyHref} target="_blank" rel="noreferrer">
+            Spotify
+          </a>
+        </div>
+      </section>
 
       <section className={styles.hero} id="top">
         <Image
@@ -286,6 +318,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <div className={styles.heroCopy}>
             <h1>July 4th, 2026</h1>
             <p className={styles.date}>Lake weekend</p>
+            <p className={styles.sponsor}>Sponsored by Lily Roo</p>
             <p className={styles.lede}>
               {selectedGuest
                 ? `Welcome, ${selectedGuest.name}. Your private lake-weekend check-in is ready with your room, house, schedule, and Contact Host button.`
@@ -686,7 +719,13 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       </section>
 
       <footer className={styles.footer}>
-        <span>Sponsored by famous.land</span>
+        <span>July 2026 sponsor: Lily Roo</span>
+        <a href={lilyRooSpotifyHref} target="_blank" rel="noreferrer">
+          Spotify debut
+        </a>
+        <a href={lilyRooSiteHref} target="_blank" rel="noreferrer">
+          Lily Roo site
+        </a>
         <a href={hostSmsHref}>Contact Host</a>
       </footer>
     </div>
