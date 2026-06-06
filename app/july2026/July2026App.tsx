@@ -122,6 +122,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
   const [lh3VideoReady, setLh3VideoReady] = useState(false);
   const [serverBindingStatus, setServerBindingStatus] = useState<ServerBindingStatus>("idle");
+  const [sponsorAdMounted, setSponsorAdMounted] = useState(false);
+  const [sponsorAdOpen, setSponsorAdOpen] = useState(false);
+  const [sponsorAdDismissed, setSponsorAdDismissed] = useState(false);
   const selectedGuest = guestAssignments.find((guest) => guest.slug === selectedGuestSlug);
   const selectedGuestHouse =
     selectedGuest?.house && selectedGuest.house !== "Pending"
@@ -140,6 +143,23 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   );
   const isViewingBoundGuest = Boolean(selectedGuest && boundGuest?.slug === selectedGuest.slug);
   const selectedGuestNeedsHostAssignment = selectedGuest?.house === "Pending";
+
+  useEffect(() => {
+    let openTimer: number | undefined;
+    const sponsorTimer = window.setTimeout(() => {
+      setSponsorAdMounted(true);
+      openTimer = window.setTimeout(() => {
+        setSponsorAdOpen(true);
+      }, 40);
+    }, 650);
+
+    return () => {
+      window.clearTimeout(sponsorTimer);
+      if (openTimer) {
+        window.clearTimeout(openTimer);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -277,33 +297,39 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         </div>
       </nav>
 
-      <section className={styles.sponsorBillboard} id="sponsor" aria-label="Lily Roo sponsor announcement">
-        <a className={styles.sponsorFeature} href={lilyRooSiteHref} target="_blank" rel="noreferrer">
-          <span className={styles.adLabel}>Paid sponsor</span>
-          <Image
-            src={lilyRooCoverImage}
-            alt="Remastered cover art for I Learned It All in Fifteen Seconds by Lily Roo"
-            className={styles.sponsorArtwork}
-            sizes="(max-width: 720px) 84px, 112px"
-          />
-          <div className={styles.sponsorCopy}>
-            <span>Spotify debut + remastered art</span>
-            <h2>Lily Roo: I Learned It All in Fifteen Seconds</h2>
-            <p>
-              The first Lily Roo single is live on Spotify with newly remastered album art. Click through to
-              LilyRoo.com for the launch.
-            </p>
-          </div>
-        </a>
-        <div className={styles.sponsorActions}>
-          <a href={lilyRooSiteHref} target="_blank" rel="noreferrer">
-            Visit LilyRoo.com
+      {sponsorAdMounted && !sponsorAdDismissed ? (
+        <section
+          className={`${styles.sponsorBillboard} ${sponsorAdOpen ? styles.sponsorBillboardOpen : ""}`}
+          id="sponsor"
+          aria-label="Lily Roo sponsor announcement"
+        >
+          <a className={styles.sponsorFeature} href={lilyRooSiteHref} target="_blank" rel="noreferrer">
+            <span className={styles.adLabel}>Paid sponsor</span>
+            <Image
+              src={lilyRooCoverImage}
+              alt="Remastered cover art for I Learned It All in Fifteen Seconds by Lily Roo"
+              className={styles.sponsorArtwork}
+              sizes="(max-width: 720px) 72px, 88px"
+            />
+            <div className={styles.sponsorCopy}>
+              <span>Hot new music link!!!</span>
+              <h2>Lily Roo: I Learned It All in Fifteen Seconds</h2>
+              <p>Now on Spotify with remastered cover art. Click here for LilyRoo.com.</p>
+            </div>
           </a>
-          <a href={lilyRooSpotifyHref} target="_blank" rel="noreferrer">
-            Spotify
-          </a>
-        </div>
-      </section>
+          <button
+            aria-label="Dismiss Lily Roo sponsor announcement"
+            className={styles.sponsorDismiss}
+            type="button"
+            onClick={() => {
+              setSponsorAdOpen(false);
+              setSponsorAdDismissed(true);
+            }}
+          >
+            x
+          </button>
+        </section>
+      ) : null}
 
       <section className={styles.hero} id="top">
         <Image
