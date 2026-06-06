@@ -10,6 +10,7 @@ import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
 import lilyRooCoverImage from "./assets/lily-roo-i-learned-cover.jpg";
+import lmptfyCowBannerImage from "./assets/lmptfy-cow-banner.png";
 import canAmQuadImage from "./assets/vehicle-can-am-quad.png";
 import laconicVehicleImage from "./assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "./assets/vehicle-laika-trixx.png";
@@ -35,6 +36,38 @@ const sunnyCoveEmbedHref =
   "https://www.google.com/maps?q=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA&output=embed";
 const lilyRooSiteHref = "https://www.lilyroo.com/";
 const lilyRooSpotifyHref = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
+const lmptfySiteHref = "https://letmepromptthatforyou.net/";
+
+const sponsorAds = [
+  {
+    alt: "Remastered cover art for I Learned It All in Fifteen Seconds by Lily Roo",
+    ariaLabel: "Lily Roo sponsor announcement",
+    body: "Now on Spotify with remastered cover art. Click here for LilyRoo.com.",
+    headline: "Lily Roo: I Learned It All in Fifteen Seconds",
+    href: lilyRooSiteHref,
+    image: lilyRooCoverImage,
+    imageClassName: styles.sponsorArtwork,
+    imageSizes: "(max-width: 720px) 72px, 88px",
+    label: "Paid Sponsor",
+    tag: "Hot new music link!!!",
+    variant: "music"
+  },
+  {
+    alt: "Cartoon cow asking, Do you have relatives still Googling? Try LetMePromptThatForYou.net.",
+    ariaLabel: "LetMePromptThatForYou.net sponsor announcement",
+    body: "Try LetMePromptThatForYou.net.",
+    headline: "Do you have relatives still Googling?",
+    href: lmptfySiteHref,
+    image: lmptfyCowBannerImage,
+    imageClassName: `${styles.sponsorArtwork} ${styles.sponsorArtworkWide}`,
+    imageSizes: "(max-width: 720px) 86px, 112px",
+    label: "Wifi Sponsor",
+    tag: "Ask a better question!!!",
+    variant: "prompt"
+  }
+] as const;
+
+type SponsorAd = (typeof sponsorAds)[number];
 
 function Icon({ path }: { path: string }) {
   return (
@@ -125,6 +158,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const [sponsorAdMounted, setSponsorAdMounted] = useState(false);
   const [sponsorAdOpen, setSponsorAdOpen] = useState(false);
   const [sponsorAdDismissed, setSponsorAdDismissed] = useState(false);
+  const [selectedSponsorIndex, setSelectedSponsorIndex] = useState<number | null>(null);
   const selectedGuest = guestAssignments.find((guest) => guest.slug === selectedGuestSlug);
   const selectedGuestHouse =
     selectedGuest?.house && selectedGuest.house !== "Pending"
@@ -143,10 +177,12 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   );
   const isViewingBoundGuest = Boolean(selectedGuest && boundGuest?.slug === selectedGuest.slug);
   const selectedGuestNeedsHostAssignment = selectedGuest?.house === "Pending";
+  const selectedSponsorAd = selectedSponsorIndex === null ? null : sponsorAds[selectedSponsorIndex];
 
   useEffect(() => {
     let openTimer: number | undefined;
     const sponsorTimer = window.setTimeout(() => {
+      setSelectedSponsorIndex(Math.floor(Math.random() * sponsorAds.length));
       setSponsorAdMounted(true);
       openTimer = window.setTimeout(() => {
         setSponsorAdOpen(true);
@@ -160,6 +196,22 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!sponsorAdMounted || sponsorAdDismissed) {
+      return;
+    }
+
+    const cycleTimer = window.setInterval(() => {
+      setSelectedSponsorIndex((currentIndex) =>
+        currentIndex === null ? 0 : (currentIndex + 1) % sponsorAds.length
+      );
+    }, 5000);
+
+    return () => {
+      window.clearInterval(cycleTimer);
+    };
+  }, [sponsorAdDismissed, sponsorAdMounted]);
 
   useEffect(() => {
     let cancelled = false;
@@ -297,28 +349,39 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         </div>
       </nav>
 
-      {sponsorAdMounted && !sponsorAdDismissed ? (
+      {sponsorAdMounted && selectedSponsorAd && !sponsorAdDismissed ? (
         <section
           className={`${styles.sponsorBillboard} ${sponsorAdOpen ? styles.sponsorBillboardOpen : ""}`}
           id="sponsor"
-          aria-label="Lily Roo sponsor announcement"
+          aria-label={selectedSponsorAd.ariaLabel}
         >
-          <a className={styles.sponsorFeature} href={lilyRooSiteHref} target="_blank" rel="noreferrer">
-            <span className={styles.adLabel}>Paid sponsor</span>
+          <a
+            className={`${styles.sponsorFeature} ${
+              selectedSponsorAd.variant === "prompt" ? styles.sponsorFeaturePrompt : ""
+            }`}
+            href={selectedSponsorAd.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className={styles.adLabel}>{selectedSponsorAd.label}</span>
             <Image
-              src={lilyRooCoverImage}
-              alt="Remastered cover art for I Learned It All in Fifteen Seconds by Lily Roo"
-              className={styles.sponsorArtwork}
-              sizes="(max-width: 720px) 72px, 88px"
+              src={selectedSponsorAd.image}
+              alt={selectedSponsorAd.alt}
+              className={selectedSponsorAd.imageClassName}
+              sizes={selectedSponsorAd.imageSizes}
             />
-            <div className={styles.sponsorCopy}>
-              <span>Hot new music link!!!</span>
-              <h2>Lily Roo: I Learned It All in Fifteen Seconds</h2>
-              <p>Now on Spotify with remastered cover art. Click here for LilyRoo.com.</p>
+            <div
+              className={`${styles.sponsorCopy} ${
+                selectedSponsorAd.variant === "prompt" ? styles.sponsorPromptBubble : ""
+              }`}
+            >
+              <span>{selectedSponsorAd.tag}</span>
+              <h2>{selectedSponsorAd.headline}</h2>
+              <p>{selectedSponsorAd.body}</p>
             </div>
           </a>
           <button
-            aria-label="Dismiss Lily Roo sponsor announcement"
+            aria-label={`Dismiss ${selectedSponsorAd.ariaLabel}`}
             className={styles.sponsorDismiss}
             type="button"
             onClick={() => {
@@ -344,7 +407,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <div className={styles.heroCopy}>
             <h1>July 4th, 2026</h1>
             <p className={styles.date}>Lake weekend</p>
-            <p className={styles.sponsor}>Sponsored by Lily Roo</p>
+            <p className={styles.sponsor}>Sponsored by friends of the lake</p>
             <p className={styles.lede}>
               {selectedGuest
                 ? `Welcome, ${selectedGuest.name}. Your private lake-weekend check-in is ready with your room, house, schedule, and Contact Host button.`
@@ -745,12 +808,15 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       </section>
 
       <footer className={styles.footer}>
-        <span>July 2026 sponsor: Lily Roo</span>
+        <span>July 2026 sponsors</span>
         <a href={lilyRooSpotifyHref} target="_blank" rel="noreferrer">
           Spotify debut
         </a>
         <a href={lilyRooSiteHref} target="_blank" rel="noreferrer">
           Lily Roo site
+        </a>
+        <a href={lmptfySiteHref} target="_blank" rel="noreferrer">
+          LetMePromptThatForYou.net
         </a>
         <a href={hostSmsHref}>Contact Host</a>
       </footer>

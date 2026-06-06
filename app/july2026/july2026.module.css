@@ -189,7 +189,6 @@
   font-size: 0.64rem;
   font-weight: 950;
   letter-spacing: 0;
-  text-transform: uppercase;
 }
 
 .sponsorArtwork {
@@ -201,6 +200,12 @@
   border: 3px inset #fff;
   border-radius: 0;
   box-shadow: 5px 5px 0 rgba(8, 19, 38, 0.42);
+}
+
+.sponsorArtworkWide {
+  width: 112px;
+  height: 72px;
+  object-position: left center;
 }
 
 .sponsorCopy {
@@ -246,6 +251,40 @@
   font-size: 0.9rem;
   font-weight: 900;
   line-height: 1.12;
+}
+
+.sponsorFeaturePrompt {
+  grid-template-columns: 112px minmax(0, 1fr);
+  background:
+    linear-gradient(90deg, rgba(0, 223, 255, 0.94), rgba(255, 240, 0, 0.9) 44%, rgba(255, 0, 153, 0.86)),
+    repeating-linear-gradient(135deg, rgba(8, 19, 38, 0.13) 0 6px, rgba(255, 255, 255, 0.16) 6px 12px);
+}
+
+.sponsorFeaturePrompt::after {
+  content: "AI!";
+}
+
+.sponsorPromptBubble {
+  padding: 7px 10px;
+  border: 3px solid #081326;
+  border-radius: 20px 20px 20px 5px;
+  background: rgba(255, 253, 247, 0.95);
+  box-shadow:
+    4px 4px 0 #d8006d,
+    inset 0 -8px 0 rgba(0, 223, 255, 0.12);
+}
+
+.sponsorPromptBubble span {
+  background: #d8006d;
+}
+
+.sponsorPromptBubble h2 {
+  font-size: clamp(1.18rem, 2.7vw, 1.92rem);
+}
+
+.sponsorPromptBubble p {
+  color: #d8006d;
+  font-size: 1rem;
 }
 
 .sponsorDismiss {
@@ -1762,6 +1801,15 @@
     height: 54px;
   }
 
+  .sponsorArtworkWide {
+    width: 86px;
+    height: 58px;
+  }
+
+  .sponsorFeaturePrompt {
+    grid-template-columns: 86px minmax(0, 1fr);
+  }
+
   .sponsorCopy span {
     font-size: 0.58rem;
   }
@@ -1773,6 +1821,27 @@
 
   .sponsorCopy p {
     display: none;
+  }
+
+  .sponsorPromptBubble {
+    padding: 5px 6px;
+    border-width: 2px;
+    border-radius: 14px 14px 14px 4px;
+    box-shadow:
+      3px 3px 0 #d8006d,
+      inset 0 -6px 0 rgba(0, 223, 255, 0.12);
+  }
+
+  .sponsorPromptBubble h2 {
+    font-size: 0.86rem;
+    line-height: 0.98;
+  }
+
+  .sponsorPromptBubble p {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.68rem;
+    line-height: 1.05;
   }
 
   .sponsorDismiss {
