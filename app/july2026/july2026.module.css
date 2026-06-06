@@ -208,6 +208,12 @@
   object-position: left center;
 }
 
+.sponsorArtworkPodcast {
+  width: 112px;
+  height: 72px;
+  object-position: center;
+}
+
 .sponsorCopy {
   grid-area: copy;
   position: relative;
@@ -285,6 +291,34 @@
 .sponsorPromptBubble p {
   color: #d8006d;
   font-size: 1rem;
+}
+
+.sponsorFeaturePodcast {
+  grid-template-columns: 112px minmax(0, 1fr);
+  background:
+    linear-gradient(90deg, rgba(34, 84, 81, 0.96), rgba(239, 159, 51, 0.9) 54%, rgba(255, 244, 208, 0.88)),
+    repeating-linear-gradient(90deg, rgba(8, 19, 38, 0.18) 0 4px, rgba(255, 255, 255, 0.13) 4px 8px);
+}
+
+.sponsorFeaturePodcast::after {
+  color: rgba(255, 244, 208, 0.32);
+  content: "LISTEN!";
+}
+
+.sponsorPodcastCopy span {
+  background: #225451;
+}
+
+.sponsorPodcastCopy h2 {
+  color: #fff4d0;
+  font-size: clamp(1.42rem, 3.1vw, 2.25rem);
+  text-shadow:
+    2px 2px 0 #081326,
+    3px 3px 0 #a45324;
+}
+
+.sponsorPodcastCopy p {
+  color: #081326;
 }
 
 .sponsorDismiss {
@@ -1806,7 +1840,16 @@
     height: 58px;
   }
 
+  .sponsorArtworkPodcast {
+    width: 86px;
+    height: 58px;
+  }
+
   .sponsorFeaturePrompt {
+    grid-template-columns: 86px minmax(0, 1fr);
+  }
+
+  .sponsorFeaturePodcast {
     grid-template-columns: 86px minmax(0, 1fr);
   }
 
@@ -1838,6 +1881,17 @@
   }
 
   .sponsorPromptBubble p {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.68rem;
+    line-height: 1.05;
+  }
+
+  .sponsorPodcastCopy h2 {
+    font-size: 1rem;
+  }
+
+  .sponsorPodcastCopy p {
     display: block;
     margin-top: 3px;
     font-size: 0.68rem;

@@ -9,6 +9,7 @@ import lakeHouse2ExteriorSideImage from "./assets/lake-house-2-exterior-side.jpe
 import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
+import echoThreadPodcastImage from "./assets/echo-thread-podcast.jpg";
 import lilyRooCoverImage from "./assets/lily-roo-i-learned-cover.jpg";
 import lmptfyCowBannerImage from "./assets/lmptfy-cow-banner.png";
 import canAmQuadImage from "./assets/vehicle-can-am-quad.png";
@@ -37,6 +38,7 @@ const sunnyCoveEmbedHref =
 const lilyRooSiteHref = "https://www.lilyroo.com/";
 const lilyRooSpotifyHref = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
 const lmptfySiteHref = "https://letmepromptthatforyou.net/";
+const echoThreadYouTubeHref = "https://www.youtube.com/watch?v=f6Vf0YJLzyo";
 
 const sponsorAds = [
   {
@@ -64,6 +66,19 @@ const sponsorAds = [
     label: "Wifi Sponsor",
     tag: "Ask a better question!!!",
     variant: "prompt"
+  },
+  {
+    alt: "Echo Thread podcast art for Jasper Fields with headphones and microphone.",
+    ariaLabel: "Echo Thread Podcast sponsor announcement",
+    body: "Echo Thread Podcast from Jasper Fields. Watch on YouTube.",
+    headline: "Echo Thread Podcast",
+    href: echoThreadYouTubeHref,
+    image: echoThreadPodcastImage,
+    imageClassName: `${styles.sponsorArtwork} ${styles.sponsorArtworkPodcast}`,
+    imageSizes: "(max-width: 720px) 86px, 112px",
+    label: "Podcast Sponsor",
+    tag: "Now transmitting!!!",
+    variant: "podcast"
   }
 ] as const;
 
@@ -178,6 +193,18 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const isViewingBoundGuest = Boolean(selectedGuest && boundGuest?.slug === selectedGuest.slug);
   const selectedGuestNeedsHostAssignment = selectedGuest?.house === "Pending";
   const selectedSponsorAd = selectedSponsorIndex === null ? null : sponsorAds[selectedSponsorIndex];
+  const sponsorFeatureVariantClass =
+    selectedSponsorAd?.variant === "prompt"
+      ? styles.sponsorFeaturePrompt
+      : selectedSponsorAd?.variant === "podcast"
+        ? styles.sponsorFeaturePodcast
+        : "";
+  const sponsorCopyVariantClass =
+    selectedSponsorAd?.variant === "prompt"
+      ? styles.sponsorPromptBubble
+      : selectedSponsorAd?.variant === "podcast"
+        ? styles.sponsorPodcastCopy
+        : "";
 
   useEffect(() => {
     let openTimer: number | undefined;
@@ -356,9 +383,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           aria-label={selectedSponsorAd.ariaLabel}
         >
           <a
-            className={`${styles.sponsorFeature} ${
-              selectedSponsorAd.variant === "prompt" ? styles.sponsorFeaturePrompt : ""
-            }`}
+            className={`${styles.sponsorFeature} ${sponsorFeatureVariantClass}`}
             href={selectedSponsorAd.href}
             target="_blank"
             rel="noreferrer"
@@ -371,9 +396,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               sizes={selectedSponsorAd.imageSizes}
             />
             <div
-              className={`${styles.sponsorCopy} ${
-                selectedSponsorAd.variant === "prompt" ? styles.sponsorPromptBubble : ""
-              }`}
+              className={`${styles.sponsorCopy} ${sponsorCopyVariantClass}`}
             >
               <span>{selectedSponsorAd.tag}</span>
               <h2>{selectedSponsorAd.headline}</h2>
@@ -817,6 +840,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         </a>
         <a href={lmptfySiteHref} target="_blank" rel="noreferrer">
           LetMePromptThatForYou.net
+        </a>
+        <a href={echoThreadYouTubeHref} target="_blank" rel="noreferrer">
+          Echo Thread
         </a>
         <a href={hostSmsHref}>Contact Host</a>
       </footer>
