@@ -430,7 +430,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <div className={styles.heroCopy}>
             <h1>July 4th, 2026</h1>
             <p className={styles.date}>Lake weekend</p>
-            <p className={styles.sponsor}>Sponsored by friends of the lake</p>
             <p className={styles.lede}>
               {selectedGuest
                 ? `Welcome, ${selectedGuest.name}. Your private lake-weekend check-in is ready with your room, house, schedule, and Contact Host button.`

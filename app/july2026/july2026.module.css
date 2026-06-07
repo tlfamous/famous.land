@@ -98,17 +98,6 @@
   font-weight: 900;
 }
 
-.sponsor {
-  width: fit-content;
-  margin: 12px 0 0;
-  padding: 8px 12px;
-  color: #fff7dd;
-  border: 1px solid rgba(255, 253, 247, 0.34);
-  border-radius: 8px;
-  background: rgba(8, 33, 65, 0.58);
-  font-weight: 900;
-}
-
 .sponsorBillboard {
   position: fixed;
   top: 72px;
