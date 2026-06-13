@@ -2,7 +2,18 @@ import { GameUnavailableScanLogger } from "@/components/GameUnavailableScanLogge
 
 const contactHref = "sms:+19784310135";
 
-export function GameUnavailablePage({ markerId }: { markerId?: string }) {
+export function GameUnavailablePage({
+  markerId,
+  markerNumber
+}: {
+  markerId?: string;
+  markerNumber?: number;
+}) {
+  const tagLabel =
+    markerNumber === undefined
+      ? ""
+      : ` Tag ${String(markerNumber).padStart(2, "0")}`;
+
   return (
     <div className="game-off-page" aria-label="Famous Land">
       {markerId ? <GameUnavailableScanLogger markerId={markerId} /> : null}
@@ -13,7 +24,10 @@ export function GameUnavailablePage({ markerId }: { markerId?: string }) {
           </span>
         </div>
         <h1 id="game-off-title">Famous Land</h1>
-        <p>Welcome to Famous Land. Contact us if you have any questions about this property</p>
+        <p>
+          Welcome to Famous Land{tagLabel}. Contact us if you have any questions
+          about this property
+        </p>
         <div className="game-off-actions">
           <a className="button primary game-off-contact-button" href={contactHref}>
             Contact

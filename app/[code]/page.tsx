@@ -28,7 +28,7 @@ export default async function MarkerByCodePage({
   const availability = await getGameAvailability();
 
   if (!availability.enabled) {
-    return <GameUnavailablePage markerId={marker.marker_id} />;
+    return <GameUnavailablePage markerId={marker.marker_id} markerNumber={marker.marker_number} />;
   }
 
   return <MarkerScanClient marker={marker} />;
