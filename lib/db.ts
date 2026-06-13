@@ -610,7 +610,7 @@ function resolveScanReportFilters(input: ScanReportFilterInput): ScanReportFilte
     unit,
     zone: input.zone?.trim() ?? "",
     player_id: input.player_id?.trim() ?? "",
-    include_tests: input.include_tests !== false
+    include_tests: input.include_tests === true
   };
 }
 
