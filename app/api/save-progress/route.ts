@@ -1,11 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { saveProgress } from "@/lib/db";
+import { getGameAvailability, saveProgress } from "@/lib/db";
 
 export const runtime = "nodejs";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: NextRequest) {
+  const availability = await getGameAvailability();
+
+  if (!availability.enabled) {
+    return NextResponse.json(
+      { ok: false, error: "The Famous Land game is currently off." },
+      { status: 503 }
+    );
+  }
+
   const body = (await request.json().catch(() => null)) as
     | { player_id?: string; email?: string; marker_ids?: string[] }
     | null;

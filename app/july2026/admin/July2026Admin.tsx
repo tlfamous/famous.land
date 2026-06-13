@@ -424,9 +424,9 @@ export function July2026Admin() {
         label: "Meals and coffee"
       },
       {
-        detail: "Guest-facing motorized and non-motorized inventory with approval guidance and self-contained images.",
-        href: `${baseUrl}/july2026/fleet`,
-        label: "Fleet guide"
+        detail: "Home page motorized and non-motorized inventory with approval guidance and self-contained images.",
+        href: `${baseUrl}/july2026#fleet`,
+        label: "Home fleet sections"
       },
       {
         detail: "Downloadable shared weekend calendar.",

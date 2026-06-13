@@ -1,10 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { recordScan } from "@/lib/db";
+import { getGameAvailability, recordScan } from "@/lib/db";
 import { getMarkerById } from "@/lib/markers";
 
 export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
+  const availability = await getGameAvailability();
+
+  if (!availability.enabled) {
+    return NextResponse.json(
+      { ok: false, error: "The Famous Land game is currently off." },
+      { status: 503 }
+    );
+  }
+
   const body = (await request.json().catch(() => null)) as
     | { player_id?: string; marker_id?: string; is_test?: boolean }
     | null;

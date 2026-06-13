@@ -108,6 +108,17 @@ body:has(.image-home) .safety-footer {
   display: none;
 }
 
+body:has(.game-off-page) {
+  min-height: 100svh;
+  overflow: hidden;
+  background: #0c0b09;
+}
+
+body:has(.game-off-page) .site-header,
+body:has(.game-off-page) .safety-footer {
+  display: none;
+}
+
 body:has(.july-2026-app) {
   min-height: 100svh;
   background: #f7f5ee;
@@ -133,6 +144,14 @@ main:has(.image-home) {
   padding: 0;
 }
 
+main:has(.game-off-page) {
+  width: 100%;
+  max-width: none;
+  min-height: 100svh;
+  margin: 0;
+  padding: 0;
+}
+
 .image-home,
 .image-home img {
   width: 100vw;
@@ -150,7 +169,7 @@ main:has(.image-home) {
   object-position: center;
 }
 
-.home-couch-button {
+.home-launch-teaser {
   position: absolute;
   right: clamp(18px, 5vw, 72px);
   bottom: clamp(18px, 7vw, 72px);
@@ -168,17 +187,99 @@ main:has(.image-home) {
   font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: 900;
   line-height: 1;
-  text-decoration: none;
   backdrop-filter: blur(12px);
+  cursor: default;
 }
 
-.home-couch-button:hover {
-  background: rgba(38, 54, 28, 0.94);
+.game-off-page {
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  padding: clamp(24px, 7vw, 84px);
+  color: var(--paper-strong);
+  background:
+    linear-gradient(90deg, rgba(12, 11, 9, 0.9), rgba(12, 11, 9, 0.62) 44%, rgba(12, 11, 9, 0.18)),
+    linear-gradient(180deg, rgba(12, 11, 9, 0.16), rgba(12, 11, 9, 0.72)),
+    url("/assets/FamousLand2.png") center / cover no-repeat;
+}
+
+.game-off-hero {
+  width: min(100%, 680px);
+  display: grid;
+  gap: 20px;
+  padding-bottom: max(18px, env(safe-area-inset-bottom));
+}
+
+.game-off-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 250, 240, 0.82);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.game-off-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  border-radius: 999px;
+  background: var(--paper-strong);
+  font-size: 1.1rem;
+}
+
+.game-off-page h1 {
+  max-width: 10ch;
+  margin-bottom: 0;
+  font-size: clamp(4.2rem, 16vw, 8.8rem);
+  line-height: 0.86;
+}
+
+.game-off-page p {
+  max-width: 30rem;
+  margin-bottom: 0;
+  color: rgba(255, 250, 240, 0.82);
+  font-size: clamp(1.08rem, 3vw, 1.45rem);
+  font-weight: 780;
+  line-height: 1.25;
+}
+
+.game-off-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.game-off-contact-button {
+  min-width: 150px;
+  min-height: 58px;
+  padding-right: 24px;
+  padding-left: 24px;
+  color: var(--ink);
+  background: var(--paper-strong);
+  font-size: 1.05rem;
+}
+
+.game-off-actions span {
+  color: rgba(255, 250, 240, 0.74);
+  font-size: 0.94rem;
+  font-weight: 780;
 }
 
 @media (max-width: 700px) and (orientation: portrait) {
   .image-home img {
     object-position: 12% center;
+  }
+
+  .game-off-page {
+    align-items: end;
+    background:
+      linear-gradient(180deg, rgba(12, 11, 9, 0.18), rgba(12, 11, 9, 0.84)),
+      url("/assets/FamousLand2.png") 12% center / cover no-repeat;
   }
 }
 
@@ -747,6 +848,115 @@ button.button,
 .admin-shell-content > * {
   min-width: 0;
   max-width: 100%;
+}
+
+.game-availability-toggle {
+  width: 100%;
+  max-width: 1480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 auto 18px;
+  padding: 20px;
+  color: var(--paper-strong);
+  border: 1px solid rgba(255, 250, 240, 0.18);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(17, 20, 15, 0.96), rgba(38, 54, 28, 0.9)),
+    url("/assets/FamousLand2.png") center / cover;
+  box-shadow: 0 16px 42px rgba(17, 20, 15, 0.14);
+}
+
+.game-availability-toggle[data-state="off"] {
+  background:
+    linear-gradient(135deg, rgba(17, 20, 15, 0.96), rgba(109, 84, 60, 0.9)),
+    url("/assets/FamousLand2.png") center / cover;
+}
+
+.game-availability-toggle h2 {
+  margin-bottom: 4px;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.game-availability-toggle p:not(.eyebrow) {
+  max-width: 42rem;
+  margin-bottom: 0;
+  color: rgba(255, 250, 240, 0.78);
+  font-weight: 740;
+}
+
+.game-availability-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.game-availability-actions form {
+  margin: 0;
+}
+
+.game-power-switch {
+  min-width: 214px;
+  min-height: 74px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 18px 10px 10px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 250, 240, 0.22);
+  border-radius: 999px;
+  background: var(--paper-strong);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+  font: inherit;
+  font-size: 1.35rem;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.game-power-switch-track {
+  width: 86px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgba(109, 84, 60, 0.36);
+  transition: background 160ms ease;
+}
+
+.game-power-switch-knob {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--paper-strong);
+  box-shadow: 0 3px 10px rgba(17, 20, 15, 0.24);
+  transform: translateX(0);
+  transition: transform 160ms ease;
+}
+
+.game-power-switch[aria-pressed="true"] .game-power-switch-track {
+  background: var(--moss);
+}
+
+.game-power-switch[aria-pressed="true"] .game-power-switch-knob {
+  transform: translateX(36px);
+}
+
+.game-power-switch:focus-visible,
+.game-off-preview-link:focus-visible {
+  outline: 3px solid rgba(255, 250, 240, 0.44);
+  outline-offset: 3px;
+}
+
+.game-off-preview-link {
+  min-height: 58px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background: rgba(255, 250, 240, 0.92);
 }
 
 .admin-side-nav {
@@ -3596,6 +3806,21 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
 }
 
 @media (max-width: 700px) {
+  .game-availability-toggle {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .game-availability-actions {
+    justify-content: stretch;
+  }
+
+  .game-availability-actions form,
+  .game-power-switch,
+  .game-off-preview-link {
+    width: 100%;
+  }
+
   .dashboard-page-header,
   .report-filter-summary {
     align-items: stretch;

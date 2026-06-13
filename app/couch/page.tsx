@@ -3,7 +3,7 @@ import { TestPhone } from "@/components/TestPhone";
 import { markerRoute, markers } from "@/lib/markers";
 
 export const metadata: Metadata = {
-  title: "Play from your Couch",
+  title: "Coming July 2026",
   description: "A couch-friendly Famous Land QR quest tester."
 };
 

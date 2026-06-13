@@ -179,11 +179,6 @@ export const dayOfDeskItems = [
     href: "/july2026/meals",
     label: "Meals Guide",
     note: "Welcome food, coffee, spa water, lunch, dinner, and brunch."
-  },
-  {
-    href: "/july2026/fleet",
-    label: "Fleet Guide",
-    note: "Laconic, Spikey Lizard, Laika, Saturday orientation, and host approval rules."
   }
 ] as const;
 
@@ -782,7 +777,7 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Guest concierge: ${baseUrl}/july2026/concierge`,
     `Weekend itinerary: ${baseUrl}/july2026/itinerary`,
     `Meals and coffee: ${baseUrl}/july2026/meals`,
-    `Fleet guide: ${baseUrl}/july2026/fleet`,
+    `Home page fleet sections: ${baseUrl}/july2026#fleet`,
     `Admin reference: ${baseUrl}/july2026/admin`,
     `Launch status: ${baseUrl}/july2026/admin/status.txt`,
     `Guest SMS packets: ${baseUrl}/july2026/admin/sms-packets`,
@@ -814,7 +809,7 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     `- Guest concierge: ${baseUrl}/july2026/concierge`,
     `- Weekend itinerary: ${baseUrl}/july2026/itinerary`,
     `- Meals and coffee: ${baseUrl}/july2026/meals`,
-    `- Fleet guide: ${baseUrl}/july2026/fleet`,
+    `- Home page fleet sections: ${baseUrl}/july2026#fleet`,
     `- Weekend calendar: ${baseUrl}/july2026/calendar.ics`,
     `- Host contact card: ${baseUrl}/july2026/host-contact.vcf`,
     "",
@@ -1150,7 +1145,7 @@ Resort map: ${baseUrl}/july2026/map
 Guest concierge: ${baseUrl}/july2026/concierge
 Weekend itinerary: ${baseUrl}/july2026/itinerary
 Meals and coffee: ${baseUrl}/july2026/meals
-Fleet guide: ${baseUrl}/july2026/fleet
+Home page fleet sections: ${baseUrl}/july2026#fleet
 Calendar: ${baseUrl}/july2026/calendar.ics
 Save host contact: ${baseUrl}/july2026/host-contact.vcf
 

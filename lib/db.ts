@@ -61,6 +61,17 @@ export type AdminAuditEventRow = {
   created_at: string;
 };
 
+type GameSettingRecord = {
+  name: string;
+  value: string;
+  updated_at: string;
+};
+
+export type GameAvailability = {
+  enabled: boolean;
+  updated_at?: string;
+};
+
 type DbShape = {
   scans: ScanRecord[];
   scan_events: ScanEventRecord[];
@@ -69,6 +80,7 @@ type DbShape = {
   recovery_requests: RecoveryRequest[];
   message_events: MessageEventRow[];
   admin_audit_events: AdminAuditEventRow[];
+  game_settings: GameSettingRecord[];
 };
 
 type ScanEventRecord = ScanRecord & {
@@ -241,10 +253,12 @@ const emptyDb: DbShape = {
   player_contacts: [],
   recovery_requests: [],
   message_events: [],
-  admin_audit_events: []
+  admin_audit_events: [],
+  game_settings: []
 };
 
 const EASTERN_TIME_ZONE = "America/New_York";
+const GAME_ENABLED_SETTING_NAME = "game_enabled";
 const REPORT_START_MONTH_INDEX = 4;
 const REPORT_MONTHS = 6;
 const REPORT_DAY_MS = 24 * 60 * 60 * 1000;
@@ -334,7 +348,8 @@ async function readLocalDb(): Promise<DbShape> {
       scan_events: (parsed.scan_events ?? scans.map(scanToLegacyEvent)).map(normalizeLocalScanEvent),
       player_contacts: parsed.player_contacts ?? contactsFromSavedPlayers(parsed.saved_players ?? []),
       message_events: parsed.message_events ?? [],
-      admin_audit_events: parsed.admin_audit_events ?? []
+      admin_audit_events: parsed.admin_audit_events ?? [],
+      game_settings: parsed.game_settings ?? []
     };
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
@@ -350,6 +365,105 @@ async function writeLocalDb(db: DbShape) {
   const file = await dbPath();
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, JSON.stringify(db, null, 2), "utf8");
+}
+
+export async function getGameAvailability(): Promise<GameAvailability> {
+  const d1 = await getD1();
+
+  if (d1) {
+    try {
+      await ensureD1GameSettings(d1);
+      const row = await d1
+        .prepare("select value, updated_at from game_settings where name = ?")
+        .bind(GAME_ENABLED_SETTING_NAME)
+        .first<{ value?: string | null; updated_at?: string | null }>();
+
+      return gameAvailabilityFromSetting(row?.value, row?.updated_at);
+    } catch (error) {
+      console.error("Famous Land game setting query failed", error);
+      return { enabled: true };
+    }
+  }
+
+  const db = await readLocalDb();
+  const setting = db.game_settings.find((row) => row.name === GAME_ENABLED_SETTING_NAME);
+  return gameAvailabilityFromSetting(setting?.value, setting?.updated_at);
+}
+
+export async function setGameAvailability(enabled: boolean): Promise<GameAvailability> {
+  const value = enabled ? "on" : "off";
+  const updated_at = new Date().toISOString();
+  const d1 = await getD1();
+
+  if (d1) {
+    await ensureD1GameSettings(d1);
+    const result = await d1
+      .prepare(
+        `insert into game_settings (name, value, updated_at)
+         values (?, ?, ?)
+         on conflict(name) do update set
+           value = excluded.value,
+           updated_at = excluded.updated_at`
+      )
+      .bind(GAME_ENABLED_SETTING_NAME, value, updated_at)
+      .run();
+
+    if (!result.success) {
+      throw new Error(result.error ?? "game_settings update failed");
+    }
+
+    await recordAdminAuditEvent({
+      action: "game.availability.update",
+      target: GAME_ENABLED_SETTING_NAME,
+      result: value,
+      detail: enabled ? "Admin turned the game on." : "Admin turned the game off."
+    });
+
+    return { enabled, updated_at };
+  }
+
+  const db = await readLocalDb();
+  db.game_settings = [
+    ...db.game_settings.filter((setting) => setting.name !== GAME_ENABLED_SETTING_NAME),
+    { name: GAME_ENABLED_SETTING_NAME, value, updated_at }
+  ];
+  db.admin_audit_events.push(
+    makeAdminAuditEvent({
+      action: "game.availability.update",
+      target: GAME_ENABLED_SETTING_NAME,
+      result: value,
+      detail: enabled ? "Admin turned the game on." : "Admin turned the game off."
+    })
+  );
+  await writeLocalDb(db);
+
+  return { enabled, updated_at };
+}
+
+async function ensureD1GameSettings(d1: FamousLandD1) {
+  const result = await d1
+    .prepare(
+      `create table if not exists game_settings (
+         name text primary key,
+         value text not null,
+         updated_at text not null
+       )`
+    )
+    .run();
+
+  if (!result.success) {
+    throw new Error(result.error ?? "game_settings schema check failed");
+  }
+}
+
+function gameAvailabilityFromSetting(
+  value?: string | null,
+  updated_at?: string | null
+): GameAvailability {
+  return {
+    enabled: value !== "off",
+    updated_at: updated_at ?? undefined
+  };
 }
 
 async function getScanEvents(): Promise<ScanEventRecord[]> {
@@ -658,15 +772,22 @@ async function getD1IdentifiedPlayerIds(d1: FamousLandD1): Promise<Set<string>> 
 
     return new Set((result.results ?? []).map((row) => row.player_id));
   } catch {
-    const result = await d1
-      .prepare(
-        `select distinct player_id
-         from saved_players
-         where email is not null and trim(email) <> ''`
-      )
-      .all<{ player_id: string }>();
+    try {
+      const result = await d1
+        .prepare(
+          `select distinct player_id
+           from saved_players
+           where email is not null and trim(email) <> ''`
+        )
+        .all<{ player_id: string }>();
 
-    return new Set((result.results ?? []).map((row) => row.player_id));
+      return new Set((result.results ?? []).map((row) => row.player_id));
+    } catch (error) {
+      if (!isMissingTableError(error)) {
+        console.error("Famous Land identified player query failed", error);
+      }
+      return new Set();
+    }
   }
 }
 
@@ -854,7 +975,9 @@ async function recordAdminAuditEvent(
         throw new Error(result.error ?? "admin audit event insert failed");
       }
     } catch (error) {
-      console.error("Famous Land admin audit insert failed", error);
+      if (!isMissingTableError(error)) {
+        console.error("Famous Land admin audit insert failed", error);
+      }
     }
     return;
   }
@@ -1723,15 +1846,22 @@ async function getD1ScanEvents(d1: FamousLandD1): Promise<ScanEventRecord[]> {
 
       return (eventResult.results ?? []).map(normalizeD1ScanEvent);
     } catch {
-      const scanResult = await d1
-        .prepare(
-          `select player_id, marker_id, scanned_at, user_agent
-           from marker_scans
-           order by scanned_at desc`
-        )
-        .all<ScanRecord>();
+      try {
+        const scanResult = await d1
+          .prepare(
+            `select player_id, marker_id, scanned_at, user_agent
+             from marker_scans
+             order by scanned_at desc`
+          )
+          .all<ScanRecord>();
 
-      return (scanResult.results ?? []).map(scanToLegacyEvent);
+        return (scanResult.results ?? []).map(scanToLegacyEvent);
+      } catch (error) {
+        if (!isMissingTableError(error)) {
+          console.error("Famous Land scan event query failed", error);
+        }
+        return [];
+      }
     }
   }
 }
@@ -1779,6 +1909,10 @@ function normalizeBoolean(value: boolean | number | string | null | undefined) {
 
 function makeScanEventId(): string {
   return crypto.randomUUID();
+}
+
+function isMissingTableError(error: unknown) {
+  return error instanceof Error && /no such table/i.test(error.message);
 }
 
 function buildTimeline(events: ScanEventRecord[], filters: ScanReportFilters): ScanTimelineBucket[] {

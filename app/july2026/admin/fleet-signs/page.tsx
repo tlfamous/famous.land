@@ -50,7 +50,7 @@ export default function July2026FleetSignsPage() {
         </div>
         <nav aria-label="Admin links">
           <a href="/july2026/admin">Admin</a>
-          <a href="/july2026/fleet">Fleet Guide</a>
+          <a href="/july2026#fleet">Home Fleet</a>
           <a href="/july2026/admin/briefing-sheet">Briefing</a>
         </nav>
       </header>
@@ -79,8 +79,8 @@ export default function July2026FleetSignsPage() {
               <dd>{approvalText}</dd>
             </div>
             <div>
-              <dt>Fleet guide</dt>
-              <dd>famous.land/july2026/fleet</dd>
+              <dt>Fleet section</dt>
+              <dd>famous.land/july2026#fleet</dd>
             </div>
           </dl>
 

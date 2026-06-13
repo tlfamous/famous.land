@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getProgress } from "@/lib/db";
+import { getGameAvailability, getProgress } from "@/lib/db";
 
 export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
+  const availability = await getGameAvailability();
+
+  if (!availability.enabled) {
+    return NextResponse.json(
+      { ok: false, error: "The Famous Land game is currently off." },
+      { status: 503 }
+    );
+  }
+
   const playerId = request.nextUrl.searchParams.get("player_id");
 
   if (!playerId) {

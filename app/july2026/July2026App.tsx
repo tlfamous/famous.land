@@ -9,6 +9,10 @@ import lakeHouse2ExteriorSideImage from "./assets/lake-house-2-exterior-side.jpe
 import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
+import kayakOneImage from "./assets/non-motor-kayaks-1.png";
+import kayakTwoImage from "./assets/non-motor-kayaks-2.png";
+import pedalBoatsImage from "./assets/non-motor-pedal-boats.png";
+import walkerBayImage from "./assets/non-motor-walker-bay.webp";
 import canAmQuadImage from "./assets/vehicle-can-am-quad.png";
 import laconicVehicleImage from "./assets/vehicle-laconic-switch.png";
 import laikaVehicleImage from "./assets/vehicle-laika-trixx.png";
@@ -23,6 +27,7 @@ import {
   itineraryHighlights,
   lakeUseRules,
   motorizedVehicles,
+  nonMotorizedVehicles,
   scheduleItems
 } from "./data";
 import styles from "./july2026.module.css";
@@ -32,12 +37,48 @@ const sunnyCoveMapsHref =
   "https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA";
 const sunnyCoveEmbedHref =
   "https://www.google.com/maps?q=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA&output=embed";
+const lilyRooSiteHref = "https://www.lilyroo.com/";
+const lilyRooSpotifyHref = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
 
 function Icon({ path }: { path: string }) {
   return (
     <svg aria-hidden="true" className={styles.icon} viewBox="0 0 24 24">
       <path d={path} />
     </svg>
+  );
+}
+
+function ActionIcon({ name }: { name: "meal" | "radio" }) {
+  return (
+    <svg aria-hidden="true" className={styles.actionIcon} viewBox="0 0 24 24">
+      {name === "radio" ? (
+        <>
+          <path d="M9 8 15 3" />
+          <rect x="4" y="8" width="16" height="11" rx="3" />
+          <circle cx="9" cy="13.5" r="1.8" />
+          <path d="M14 12h3" />
+          <path d="M14 15h2" />
+        </>
+      ) : (
+        <>
+          <path d="M7 3v8" />
+          <path d="M4.5 3v5.5A2.5 2.5 0 0 0 7 11v10" />
+          <path d="M9.5 3v5.5A2.5 2.5 0 0 1 7 11" />
+          <path d="M16 3v18" />
+          <path d="M16 3c2.2 1.2 3.5 3.3 3.5 6.1V11H16" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+function CtaIcon({ name }: { name: "house" | "map" | "meal" | "radio" }) {
+  return (
+    <span className={styles.actionIconBadge}>
+      {name === "map" ? <Icon path="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z" /> : null}
+      {name === "house" ? <Icon path="M4 10.5 12 4l8 6.5V21h-6v-6h-4v6H4V10.5Z" /> : null}
+      {name === "meal" || name === "radio" ? <ActionIcon name={name} /> : null}
+    </span>
   );
 }
 
@@ -90,6 +131,25 @@ const vehicleImages = {
   "can-am-quad": {
     alt: "Gray Can-Am quad reference for the two-seat quad.",
     src: canAmQuadImage
+  }
+} as const;
+
+const nonMotorizedImages = {
+  "kayaks-1": {
+    alt: "Turquoise Pelican kayak reference for LH3 lake access.",
+    src: kayakOneImage
+  },
+  "kayaks-2": {
+    alt: "Second turquoise Pelican kayak reference for LH3 lake access.",
+    src: kayakTwoImage
+  },
+  "pedal-boats": {
+    alt: "Blue and white pedal boat reference for LH3 lake access.",
+    src: pedalBoatsImage
+  },
+  "walker-bay": {
+    alt: "Walker Bay tender reference for host-guided shoreline use.",
+    src: walkerBayImage
   }
 } as const;
 
@@ -268,7 +328,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="#schedule">Schedule</a>
           <a href="/july2026/houses">Houses</a>
           <a href="/july2026/meals">Meals</a>
-          <a href="/july2026/fleet">Fleet</a>
+          <a href="#sponsor">Sponsor</a>
           <a href={hostSmsHref}>Contact Host</a>
         </div>
       </nav>
@@ -286,6 +346,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <div className={styles.heroCopy}>
             <h1>July 4th, 2026</h1>
             <p className={styles.date}>Lake weekend</p>
+            <p className={styles.sponsor}>Sponsored by Lily Roo</p>
             <p className={styles.lede}>
               {selectedGuest
                 ? `Welcome, ${selectedGuest.name}. Your private lake-weekend check-in is ready with your room, house, schedule, and Contact Host button.`
@@ -301,6 +362,25 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             <span>Brunch</span>
             <strong>Sun 10 AM</strong>
           </div>
+        </div>
+      </section>
+
+      <section className={styles.sponsorBillboard} id="sponsor" aria-label="Lily Roo sponsor announcement">
+        <div>
+          <span>Event sponsor</span>
+          <h2>Lily Roo debut single is live on Spotify</h2>
+          <p>
+            July 2026 is sponsored by Lily Roo. Stream "I Learned It All in Fifteen Seconds" now, featuring the
+            newly remastered album art.
+          </p>
+        </div>
+        <div className={styles.sponsorActions}>
+          <a href={lilyRooSpotifyHref} target="_blank" rel="noreferrer">
+            Play on Spotify
+          </a>
+          <a href={lilyRooSiteHref} target="_blank" rel="noreferrer">
+            Visit Lily Roo
+          </a>
         </div>
       </section>
 
@@ -455,7 +535,8 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               />
             </div>
             <a className={styles.mapButton} href={sunnyCoveMapsHref} target="_blank" rel="noreferrer">
-              Open Google Maps
+              <CtaIcon name="map" />
+              <span>Open Google Maps</span>
             </a>
           </article>
 
@@ -530,7 +611,8 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                     <small>{house.note}</small>
                     {"mapsUrl" in house && house.mapsUrl ? (
                       <a className={styles.houseMapLink} href={house.mapsUrl} target="_blank" rel="noreferrer">
-                        {house.mapLabel}
+                        <CtaIcon name="map" />
+                        <span>{house.mapLabel}</span>
                       </a>
                     ) : (
                       <span className={styles.houseMapPending}>{house.mapLabel}</span>
@@ -540,7 +622,8 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               })}
             </div>
             <a className={styles.mapButton} href="/july2026/houses">
-              Open House Directory
+              <CtaIcon name="house" />
+              <span>Open House Directory</span>
             </a>
           </article>
         </div>
@@ -596,6 +679,64 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               })}
             </div>
           </article>
+        </div>
+
+        <div className={styles.fourthStack}>
+          <article className={styles.panel} id="non-motorized-fleet">
+            <div className={styles.panelHeader}>
+              <Icon path="M4 18.5c2.5 0 2.5-1.5 5-1.5s2.5 1.5 5 1.5 2.5-1.5 5-1.5v2c-2.5 0-2.5 1.5-5 1.5s-2.5-1.5-5-1.5-2.5 1.5-5 1.5v-2Zm2-5.5 3.2-6.8 3.1 5.4 1.8-2.8L20 16H4l2-3Zm3.4-2.7L7.8 14h3.9L9.4 10.3Z" />
+              <h2>Non-Motorized Fleet</h2>
+            </div>
+            <div className={styles.nonMotorizedList}>
+              {nonMotorizedVehicles.map((vehicle) => {
+                const vehicleImage = nonMotorizedImages[vehicle.image as keyof typeof nonMotorizedImages];
+                const gallery = "gallery" in vehicle ? vehicle.gallery ?? [] : [];
+
+                return (
+                  <section className={styles.nonMotorizedCard} key={vehicle.name}>
+                    <Image
+                      src={vehicleImage.src}
+                      alt={vehicleImage.alt}
+                      className={styles.nonMotorizedImage}
+                      sizes="(max-width: 1080px) 100vw, 260px"
+                    />
+                    {gallery.length ? (
+                      <div className={styles.nonMotorizedGallery} aria-label={`${vehicle.name} photos`}>
+                        {gallery.map((imageKey) => {
+                          const galleryImage = nonMotorizedImages[imageKey as keyof typeof nonMotorizedImages];
+
+                          return (
+                            <Image
+                              key={imageKey}
+                              src={galleryImage.src}
+                              alt={galleryImage.alt}
+                              className={styles.nonMotorizedThumb}
+                              sizes="64px"
+                            />
+                          );
+                        })}
+                      </div>
+                    ) : null}
+                    <div>
+                      <strong>{vehicle.name}</strong>
+                      <p>{vehicle.type}</p>
+                      <dl className={styles.nonMotorizedMeta}>
+                        <div>
+                          <dt>Best for</dt>
+                          <dd>{vehicle.bestFor}</dd>
+                        </div>
+                        <div>
+                          <dt>Start point</dt>
+                          <dd>{vehicle.pickup}</dd>
+                        </div>
+                      </dl>
+                      <p>{vehicle.detail}</p>
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+          </article>
 
           <article className={styles.panel}>
             <div className={styles.panelHeader}>
@@ -640,7 +781,8 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                 <p>{rule.detail}</p>
                 {"href" in rule && rule.href ? (
                   <a className={styles.ruleLink} href={rule.href}>
-                    {rule.action}
+                    <CtaIcon name="radio" />
+                    <span>{rule.action}</span>
                   </a>
                 ) : null}
               </section>
@@ -665,7 +807,8 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
             ))}
           </ol>
           <a className={styles.mapButton} href="/july2026/meals">
-            Open Meals Guide
+            <CtaIcon name="meal" />
+            <span>Open Meals Guide</span>
           </a>
         </article>
       </section>
@@ -686,7 +829,13 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       </section>
 
       <footer className={styles.footer}>
-        <span>Sponsored by famous.land</span>
+        <span>July 2026 sponsor: Lily Roo</span>
+        <a href={lilyRooSpotifyHref} target="_blank" rel="noreferrer">
+          Spotify debut
+        </a>
+        <a href={lilyRooSiteHref} target="_blank" rel="noreferrer">
+          Lily Roo site
+        </a>
         <a href={hostSmsHref}>Contact Host</a>
       </footer>
     </div>

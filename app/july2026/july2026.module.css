@@ -109,6 +109,80 @@
   font-weight: 900;
 }
 
+.sponsorBillboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  padding: 20px clamp(16px, 4vw, 42px) 0;
+}
+
+.sponsorBillboard > div:first-child {
+  min-height: 150px;
+  flex: 1 1 auto;
+  padding: 22px;
+  color: #fffdf7;
+  border: 1px solid rgba(255, 253, 247, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(120deg, rgba(8, 33, 65, 0.96), rgba(190, 29, 39, 0.82)),
+    url("./assets/july-4-hero.png") center / cover;
+  box-shadow: 0 18px 42px rgba(8, 19, 38, 0.14);
+}
+
+.sponsorBillboard span {
+  color: var(--july-gold);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.sponsorBillboard h2 {
+  max-width: 760px;
+  margin: 8px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.9rem, 3.4vw, 3.25rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.sponsorBillboard p {
+  max-width: 760px;
+  margin: 10px 0 0;
+  color: rgba(255, 253, 247, 0.82);
+  line-height: 1.42;
+}
+
+.sponsorActions {
+  flex: 0 0 min(320px, 100%);
+  display: grid;
+  gap: 10px;
+}
+
+.sponsorActions a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  color: var(--july-blue);
+  border: 1px solid rgba(8, 33, 65, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.9);
+  box-shadow: 0 12px 28px rgba(8, 19, 38, 0.08);
+  font-size: 0.94rem;
+  font-weight: 950;
+  text-decoration: none;
+}
+
+.sponsorActions a:first-child {
+  color: #fffdf7;
+  border-color: rgba(190, 29, 39, 0.42);
+  background: var(--july-red);
+}
+
 .lede {
   max-width: 580px;
   margin: 18px 0 0;
@@ -117,14 +191,24 @@
 }
 
 .primaryButton,
-.mapButton {
-  min-height: 52px;
+.mapButton,
+.ruleLink,
+.houseMapLink {
+  min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 24px;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 6px 18px 6px 8px;
+  color: #164f9f;
+  border: 1px solid rgba(22, 79, 159, 0.42);
   border-radius: 8px;
-  font-weight: 900;
+  background: rgba(255, 253, 247, 0.88);
+  box-shadow: 0 8px 18px rgba(8, 19, 38, 0.06);
+  font-size: 0.98rem;
+  font-weight: 950;
+  line-height: 1;
   text-decoration: none;
 }
 
@@ -774,9 +858,13 @@
 
 .contentGrid {
   display: grid;
-  grid-template-columns: minmax(280px, 1.05fr) minmax(320px, 1.05fr) minmax(280px, 0.9fr);
+  grid-template-columns:
+    minmax(280px, 1.05fr)
+    minmax(320px, 1fr)
+    minmax(260px, 0.86fr)
+    minmax(260px, 0.86fr);
   gap: 24px;
-  width: min(100%, 1320px);
+  width: min(100%, 1680px);
   margin: 0 auto;
   padding: 28px clamp(16px, 4vw, 42px) 20px;
 }
@@ -880,6 +968,35 @@
   height: 26px;
   flex: 0 0 auto;
   fill: var(--july-blue);
+}
+
+.actionIconBadge {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  border: 1px solid rgba(22, 79, 159, 0.28);
+  border-radius: 999px;
+  background: rgba(22, 79, 159, 0.08);
+}
+
+.actionIcon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.actionIconBadge .icon {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
 }
 
 .scheduleList {
@@ -1056,15 +1173,12 @@
 
 .mapButton {
   width: fit-content;
-  min-height: 42px;
   margin: 0 22px 20px;
-  color: #164f9f;
-  border: 1px solid rgba(22, 79, 159, 0.45);
-  background: rgba(255, 255, 255, 0.5);
 }
 
 .middleStack,
-.sideStack {
+.sideStack,
+.fourthStack {
   display: grid;
   align-content: start;
   gap: 18px;
@@ -1169,6 +1283,95 @@
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #fffdf7 0 22%, transparent 24%), var(--july-red);
   box-shadow: 0 0 0 3px rgba(198, 30, 45, 0.1);
+}
+
+.nonMotorizedList {
+  display: grid;
+  gap: 14px;
+  margin: 16px 22px 20px;
+}
+
+.nonMotorizedCard {
+  display: grid;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--july-line);
+}
+
+.nonMotorizedCard:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.nonMotorizedImage {
+  width: 100%;
+  height: 138px;
+  object-fit: contain;
+  border: 1px solid rgba(8, 19, 38, 0.08);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(22, 79, 159, 0.06), rgba(255, 253, 247, 0.76)),
+    #f8faf6;
+}
+
+.nonMotorizedGallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.nonMotorizedThumb {
+  width: 100%;
+  height: 66px;
+  object-fit: contain;
+  border: 1px solid rgba(8, 19, 38, 0.08);
+  border-radius: 6px;
+  background: rgba(8, 33, 65, 0.03);
+}
+
+.nonMotorizedCard strong {
+  display: block;
+  color: var(--july-blue);
+  line-height: 1.12;
+}
+
+.nonMotorizedCard p {
+  margin: 4px 0 0;
+  color: var(--july-muted);
+  font-size: 0.88rem;
+  line-height: 1.28;
+}
+
+.nonMotorizedMeta {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 0;
+}
+
+.nonMotorizedMeta div {
+  padding: 7px;
+  border: 1px solid rgba(8, 33, 65, 0.1);
+  border-radius: 6px;
+  background: rgba(8, 33, 65, 0.03);
+}
+
+.nonMotorizedMeta dt,
+.nonMotorizedMeta dd {
+  margin: 0;
+}
+
+.nonMotorizedMeta dt {
+  color: var(--july-muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.nonMotorizedMeta dd {
+  color: var(--july-blue);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.22;
 }
 
 .bringList {
@@ -1326,25 +1529,25 @@
 .houseMapPending {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
   margin: 0 12px 12px;
-  padding: 0 10px;
   border-radius: 8px;
-  font-size: 0.78rem;
   font-weight: 900;
 }
 
 .houseMapLink {
-  color: #164f9f;
-  border: 1px solid rgba(22, 79, 159, 0.28);
-  background: rgba(22, 79, 159, 0.06);
-  text-decoration: none;
+  min-height: 38px;
+  gap: 7px;
+  padding: 4px 12px 4px 5px;
+  font-size: 0.82rem;
 }
 
 .houseMapPending {
+  min-height: 32px;
+  padding: 0 10px;
   color: #8a5260;
   border: 1px solid rgba(138, 82, 96, 0.2);
   background: rgba(138, 82, 96, 0.06);
+  font-size: 0.78rem;
 }
 
 .activityGrid {
@@ -1417,19 +1620,9 @@
 }
 
 .ruleLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 38px;
   margin-top: 12px;
-  padding: 0 14px;
-  color: #fffdf7;
-  background: var(--july-blue);
-  border: 1px solid rgba(8, 33, 65, 0.16);
-  border-radius: 8px;
-  font-size: 0.86rem;
-  font-weight: 900;
-  text-decoration: none;
+  min-height: 44px;
+  font-size: 0.92rem;
 }
 
 .foodList {
@@ -1511,6 +1704,7 @@
 
 .footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -1533,6 +1727,16 @@
 }
 
 @media (max-width: 1080px) {
+  .sponsorBillboard {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .sponsorActions {
+    flex-basis: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .heroContent,
   .arrivalDesk,
   .guestDesk,
@@ -1638,6 +1842,14 @@
 
   .contentGrid {
     padding-top: 18px;
+  }
+
+  .sponsorBillboard {
+    gap: 10px;
+  }
+
+  .sponsorActions {
+    grid-template-columns: 1fr;
   }
 
   .hostHelpIntro {

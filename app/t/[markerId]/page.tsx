@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
+import { GameUnavailablePage } from "@/components/GameUnavailablePage";
 import { MarkerScanClient } from "@/components/MarkerScanClient";
+import { getGameAvailability } from "@/lib/db";
 import { getMarkerByToken, markers } from "@/lib/markers";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export function generateStaticParams() {
   return markers.map((marker) => ({
@@ -13,6 +18,12 @@ export default async function MarkerByIdPage({
 }: {
   params: Promise<{ markerId: string }>;
 }) {
+  const availability = await getGameAvailability();
+
+  if (!availability.enabled) {
+    return <GameUnavailablePage />;
+  }
+
   const { markerId } = await params;
   const marker = getMarkerByToken(markerId);
 
