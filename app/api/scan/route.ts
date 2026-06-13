@@ -10,10 +10,11 @@ export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => null)) as
     | { player_id?: string; marker_id?: string; is_test?: boolean }
     | null;
+  const shouldRecordProgress = availability.enabled || body?.is_test === true;
 
-  if (!body?.marker_id || (availability.enabled && !body.player_id)) {
+  if (!body?.marker_id || (shouldRecordProgress && !body.player_id)) {
     return NextResponse.json(
-      { ok: false, error: "player_id and marker_id are required while the game is on." },
+      { ok: false, error: "player_id and marker_id are required while the game is on or in tester mode." },
       { status: 400 }
     );
   }
@@ -23,7 +24,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "Unknown marker." }, { status: 404 });
   }
 
-  if (!availability.enabled) {
+  if (!shouldRecordProgress) {
     const event = await recordGameOffScan({
       source_player_id: body.player_id,
       marker_id: marker.marker_id,

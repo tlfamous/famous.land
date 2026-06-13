@@ -12,6 +12,7 @@ import {
   hasSavedProgress,
   incrementLocalMarkerVisit
 } from "@/lib/localPlayer";
+import { TESTER_SCAN_SOURCE } from "@/lib/testerMode";
 import type { Marker } from "@/lib/types";
 
 type ScanMoment = "loading" | "first" | "new" | "repeat";
@@ -27,7 +28,7 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
     let cancelled = false;
     const playerId = getOrCreatePlayerId();
     const isTestScan =
-      new URLSearchParams(window.location.search).get("scan_source") === "tester";
+      new URLSearchParams(window.location.search).get("scan_source") === TESTER_SCAN_SOURCE;
 
     fetch("/api/scan", {
       method: "POST",

@@ -2,12 +2,13 @@
 
 import { useEffect } from "react";
 import { getExistingPlayerId } from "@/lib/localPlayer";
+import { TESTER_SCAN_SOURCE } from "@/lib/testerMode";
 
 export function GameUnavailableScanLogger({ markerId }: { markerId: string }) {
   useEffect(() => {
     const playerId = getExistingPlayerId();
     const isTestScan =
-      new URLSearchParams(window.location.search).get("scan_source") === "tester";
+      new URLSearchParams(window.location.search).get("scan_source") === TESTER_SCAN_SOURCE;
 
     fetch("/api/scan", {
       method: "POST",

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import QRCode from "qrcode";
 import { resetLocalPlayerData } from "@/lib/localPlayer";
+import { TESTER_SCAN_SOURCE } from "@/lib/testerMode";
 import type { Zone } from "@/lib/types";
 
 type TestMarker = {
@@ -21,7 +22,7 @@ type MarkerQrCode = {
 };
 
 function testPhoneSrc(path: string) {
-  return `${path}${path.includes("?") ? "&" : "?"}scan_source=tester`;
+  return `${path}${path.includes("?") ? "&" : "?"}scan_source=${TESTER_SCAN_SOURCE}`;
 }
 
 function markerButtonClass(markerId: string, activeMarkerId: string, clickedMarkerIds: Set<string>) {

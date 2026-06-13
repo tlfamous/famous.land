@@ -3,6 +3,7 @@ import { GameUnavailablePage } from "@/components/GameUnavailablePage";
 import { MarkerScanClient } from "@/components/MarkerScanClient";
 import { getGameAvailability } from "@/lib/db";
 import { getMarkerByToken, markers } from "@/lib/markers";
+import { isTesterScanSource } from "@/lib/testerMode";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -14,11 +15,14 @@ export function generateStaticParams() {
 }
 
 export default async function MarkerByCodePage({
-  params
+  params,
+  searchParams
 }: {
   params: Promise<{ code: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { code } = await params;
+  const query = (await searchParams) ?? {};
   const marker = getMarkerByToken(code);
 
   if (!marker) {
@@ -27,7 +31,7 @@ export default async function MarkerByCodePage({
 
   const availability = await getGameAvailability();
 
-  if (!availability.enabled) {
+  if (!availability.enabled && !isTesterScanSource(query.scan_source)) {
     return <GameUnavailablePage markerId={marker.marker_id} markerNumber={marker.marker_number} />;
   }
 
