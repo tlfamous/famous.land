@@ -26,6 +26,8 @@ type FamousLandMapSvgProps = {
   ariaLabel: string;
   activeMarkerId?: string;
   className?: string;
+  markerCounts?: Record<string, number>;
+  markerCountMode?: boolean;
   showWalkingTrails?: boolean;
   viewBox?: string;
   zoneSlugs?: string[];
@@ -82,6 +84,12 @@ const hilltopZonePath =
 const visualZoneOrder = ["treetop-terrace", "on-the-water", "lakeview", "monomonac-hill"];
 const fullMapViewBox = "0 0 100 100";
 const zoomedMapViewBoxSize = 38;
+const dashboardZoneViewBoxes: Record<Zone, string> = {
+  Lakeview: "42 40 60 60",
+  "No Wake": "50 4 50 50",
+  Treetop: "52 30 48 48",
+  Hillside: "18 4 82 82"
+};
 
 export const zoneMapSlugs: Record<Zone, string> = {
   Treetop: "treetop-terrace",
@@ -247,13 +255,18 @@ function SelectedMarkerRing() {
 function renderMapPoint(
   point: NonNullable<VisualZone["points"]>[number],
   pointIndex: number,
-  activeMarkerId?: string
+  activeMarkerId?: string,
+  markerCounts?: Record<string, number>,
+  markerCountMode = false
 ) {
   const isActiveMarker = point.markerId === activeMarkerId;
   const isSelectedMarker = isActiveMarker;
+  const scanCount = point.markerId ? markerCounts?.[point.markerId] : undefined;
   const accessibleLabel = isSelectedMarker
     ? `Selected marker, ${point.label}`
-    : point.label;
+    : scanCount === undefined
+      ? point.label
+      : `${point.label}, ${scanCount} ${scanCount === 1 ? "scan" : "scans"}`;
 
   if (point.style === "tag") {
     return (
@@ -273,7 +286,14 @@ function renderMapPoint(
       >
         <title>{accessibleLabel}</title>
         {isSelectedMarker ? <SelectedMarkerCallout /> : null}
-        <TagMapIcon active={isActiveMarker} selected={isSelectedMarker} />
+        {markerCountMode && scanCount !== undefined ? (
+          <MarkerScanCountBadge count={scanCount} />
+        ) : (
+          <>
+            <TagMapIcon active={isActiveMarker} selected={isSelectedMarker} />
+            {scanCount !== undefined ? <MarkerScanCountBadge count={scanCount} /> : null}
+          </>
+        )}
       </g>
     );
   }
@@ -300,6 +320,24 @@ function renderMapPoint(
       <text x="0" y="0.85">
         {pointIndex + 1}
       </text>
+      {scanCount !== undefined ? <MarkerScanCountBadge count={scanCount} /> : null}
+    </g>
+  );
+}
+
+function MarkerScanCountBadge({ count }: { count: number }) {
+  const label = count > 999 ? "999+" : String(count);
+  const width = Math.max(5.2, label.length * 2.25 + 2.4);
+
+  return (
+    <g
+      aria-hidden="true"
+      className={count ? "map-scan-count-badge" : "map-scan-count-badge zero"}
+    >
+      <rect height="4.9" rx="2.45" width={width} x={-(width / 2)} y="-2.45" />
+      <text x="0" y="0.85">
+        {label}
+      </text>
     </g>
   );
 }
@@ -309,6 +347,8 @@ function FamousLandMapSvg({
   activeMarkerId,
   ariaLabel,
   className = "square-map-svg",
+  markerCounts,
+  markerCountMode = false,
   showWalkingTrails = true,
   viewBox = fullMapViewBox,
   zoneSlugs = visualZoneOrder
@@ -340,12 +380,28 @@ function FamousLandMapSvg({
               {isActive
                 ? visual.points
                     ?.filter((point) => point.markerId !== activeMarkerId)
-                    .map((point, pointIndex) => renderMapPoint(point, pointIndex, activeMarkerId))
+                    .map((point, pointIndex) =>
+                      renderMapPoint(
+                        point,
+                        pointIndex,
+                        activeMarkerId,
+                        markerCounts,
+                        markerCountMode
+                      )
+                    )
                 : null}
               {isActive
                 ? visual.points
                     ?.filter((point) => point.markerId === activeMarkerId)
-                    .map((point, pointIndex) => renderMapPoint(point, pointIndex, activeMarkerId))
+                    .map((point, pointIndex) =>
+                      renderMapPoint(
+                        point,
+                        pointIndex,
+                        activeMarkerId,
+                        markerCounts,
+                        markerCountMode
+                      )
+                    )
                 : null}
             </g>
           );
@@ -408,6 +464,29 @@ function FamousLandMapSvg({
         </g>
       ) : null}
     </svg>
+  );
+}
+
+export function ZoneScanCountMap({
+  markerCounts,
+  zone
+}: {
+  markerCounts: Record<string, number>;
+  zone: Zone;
+}) {
+  const activeSlug = zoneMapSlugs[zone];
+
+  return (
+    <FamousLandMapSvg
+      activeSlug={activeSlug}
+      ariaLabel={`${zone} scan counts by marker location`}
+      className="report-zone-map-svg"
+      markerCountMode
+      markerCounts={markerCounts}
+      showWalkingTrails={false}
+      viewBox={dashboardZoneViewBoxes[zone]}
+      zoneSlugs={[activeSlug]}
+    />
   );
 }
 

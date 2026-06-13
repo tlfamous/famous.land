@@ -20,9 +20,10 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
     start_date: firstParam(params.start_date),
     end_date: firstParam(params.end_date),
     unit: firstParam(params.unit),
-    zone: firstParam(params.zone),
-    player_id: firstParam(params.player_id),
-    include_tests: includeTestsParam(params.include_tests)
+    zone: params.zone,
+    player_id: params.player_id,
+    include_tests: includeTestsParam(params.include_tests),
+    log_page: firstParam(params.log_page)
   };
 
   return (

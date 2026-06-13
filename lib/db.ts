@@ -125,17 +125,18 @@ export type ScanReportFilterInput = {
   start_date?: string;
   end_date?: string;
   unit?: string;
-  zone?: string;
-  player_id?: string;
+  zone?: string | string[];
+  player_id?: string | string[];
   include_tests?: boolean;
+  log_page?: string | number;
 };
 
 export type ScanReportFilters = {
   start_date: string;
   end_date: string;
   unit: ScanTimelineUnit;
-  zone: string;
-  player_id: string;
+  zones: string[];
+  player_ids: string[];
   include_tests: boolean;
 };
 
@@ -200,9 +201,16 @@ export type ScanReport = {
   timeline_label: string;
   timeline: ScanTimelineBucket[];
   zone_counts: { zone: string; count: number }[];
+  marker_counts: { marker_id: string; count: number }[];
   filters: ScanReportFilters;
   zone_options: string[];
   player_options: string[];
+  log_total: number;
+  log_page: number;
+  log_page_count: number;
+  log_page_size: number;
+  log_start: number;
+  log_end: number;
   log: ScanReportLogRow[];
 };
 
@@ -272,6 +280,7 @@ const REPORT_START_MONTH_INDEX = 4;
 const REPORT_MONTHS = 6;
 const REPORT_DAY_MS = 24 * 60 * 60 * 1000;
 const REPORT_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const SCAN_LOG_PAGE_SIZE = 1000;
 const TIMELINE_UNITS = new Set<ScanTimelineUnit>(["day", "week", "month"]);
 
 const easternDatePartsFormatter = new Intl.DateTimeFormat("en-US", {
@@ -591,12 +600,20 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
   const filteredEvents = filterScanEvents(events, filters, markerById);
   const sortedEvents = [...filteredEvents].sort((a, b) => b.scanned_at.localeCompare(a.scanned_at));
   const zoneCounts = new Map<string, number>();
+  const markerCounts = new Map(markers.map((marker) => [marker.marker_id, 0]));
   const filteredPlayerIds = new Set(filteredEvents.map((event) => event.player_id));
+  const logTotal = sortedEvents.length;
+  const logPageCount = Math.max(1, Math.ceil(logTotal / SCAN_LOG_PAGE_SIZE));
+  const requestedLogPage = normalizeLogPage(inputFilters.log_page);
+  const logPage = Math.min(requestedLogPage, logPageCount);
+  const logStartIndex = (logPage - 1) * SCAN_LOG_PAGE_SIZE;
+  const logEndIndex = Math.min(logStartIndex + SCAN_LOG_PAGE_SIZE, logTotal);
 
   for (const event of filteredEvents) {
     const marker = markerById.get(event.marker_id);
     const zone = marker?.zone ?? "Unknown";
     zoneCounts.set(zone, (zoneCounts.get(zone) ?? 0) + 1);
+    markerCounts.set(event.marker_id, (markerCounts.get(event.marker_id) ?? 0) + 1);
   }
 
   return {
@@ -613,10 +630,20 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
     zone_counts: Array.from(zoneCounts, ([zone, count]) => ({ zone, count })).sort(
       (a, b) => b.count - a.count || a.zone.localeCompare(b.zone)
     ),
+    marker_counts: markers.map((marker) => ({
+      marker_id: marker.marker_id,
+      count: markerCounts.get(marker.marker_id) ?? 0
+    })),
     filters,
     zone_options: zoneOptions(events, markerById),
     player_options: playerOptions(events),
-    log: sortedEvents.slice(0, 200).map((event) => {
+    log_total: logTotal,
+    log_page: logPage,
+    log_page_count: logPageCount,
+    log_page_size: SCAN_LOG_PAGE_SIZE,
+    log_start: logTotal ? logStartIndex + 1 : 0,
+    log_end: logEndIndex,
+    log: sortedEvents.slice(logStartIndex, logEndIndex).map((event) => {
       const marker = markerById.get(event.marker_id);
 
       return {
@@ -634,6 +661,16 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
   };
 }
 
+function normalizeLogPage(value: string | number | undefined) {
+  const parsed = Number(value ?? 1);
+
+  if (!Number.isFinite(parsed) || parsed < 1) {
+    return 1;
+  }
+
+  return Math.floor(parsed);
+}
+
 function resolveScanReportFilters(input: ScanReportFilterInput): ScanReportFilters {
   const defaults = defaultTimelineDateRange();
   const startDate = validIsoDate(input.start_date) ?? defaults.start_date;
@@ -649,10 +686,18 @@ function resolveScanReportFilters(input: ScanReportFilterInput): ScanReportFilte
     start_date: startDate,
     end_date: endDate,
     unit,
-    zone: input.zone?.trim() ?? "",
-    player_id: input.player_id?.trim() ?? "",
+    zones: normalizeFilterList(input.zone),
+    player_ids: normalizeFilterList(input.player_id),
     include_tests: input.include_tests === true
   };
+}
+
+function normalizeFilterList(value?: string | string[]) {
+  const values = Array.isArray(value) ? value : value ? [value] : [];
+
+  return Array.from(
+    new Set(values.map((item) => item.trim()).filter(Boolean))
+  );
 }
 
 function filterScanEvents(
@@ -675,11 +720,11 @@ function filterScanEvents(
       return false;
     }
 
-    if (filters.zone && (marker?.zone ?? "Unknown") !== filters.zone) {
+    if (filters.zones.length && !filters.zones.includes(marker?.zone ?? "Unknown")) {
       return false;
     }
 
-    if (filters.player_id && event.player_id !== filters.player_id) {
+    if (filters.player_ids.length && !filters.player_ids.includes(event.player_id)) {
       return false;
     }
 

@@ -1,7 +1,9 @@
 import type { CSSProperties, ReactNode } from "react";
 import { getScanReport } from "@/lib/db";
+import { zones } from "@/lib/markers";
+import { ZoneScanCountMap } from "@/components/InteractiveLandMap";
 import { ReportFilters } from "@/components/ReportFilters";
-import type { ScanReportFilterInput, ScanReportFilters, ScanTimelineUnit } from "@/lib/db";
+import type { ScanReport, ScanReportFilterInput, ScanReportFilters, ScanTimelineUnit } from "@/lib/db";
 
 const easternDateTimeFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "America/New_York",
@@ -19,6 +21,10 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
   const chartMax = niceChartMax(maxTimelineCount);
   const chartTicks = [chartMax, Math.round(chartMax / 2), 0];
   const filterSummary = formatFilterSummary(report.filters);
+  const zoneCountMap = new Map(report.zone_counts.map((zoneCount) => [zoneCount.zone, zoneCount.count]));
+  const markerCountMap = Object.fromEntries(
+    report.marker_counts.map((markerCount) => [markerCount.marker_id, markerCount.count])
+  );
 
   return (
     <div className="analytics-dashboard">
@@ -96,6 +102,24 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
             </div>
           </div>
         </div>
+        <section className="report-zone-map-grid" aria-label="Filtered scan counts by map zone">
+          {zones.map((zone) => {
+            const scanCount = zoneCountMap.get(zone) ?? 0;
+
+            return (
+              <article className="report-zone-map-card" key={zone}>
+                <div className="report-zone-map-frame">
+                  <ZoneScanCountMap markerCounts={markerCountMap} zone={zone} />
+                </div>
+                <div className="report-zone-map-total">
+                  <span>{zone}</span>
+                  <strong>{scanCount}</strong>
+                  <small>{scanCount === 1 ? "scan" : "scans"}</small>
+                </div>
+              </article>
+            );
+          })}
+        </section>
       </section>
 
       <section className="card report-log-card">
@@ -104,7 +128,7 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
             <p className="eyebrow">Log</p>
             <h2>Scan log</h2>
           </div>
-          <span>{report.log.length ? "Latest 200 scans" : "No scans yet"}</span>
+          <span>{formatLogSummary(report)}</span>
         </div>
         <div className="report-table-wrap">
           <table className="report-table">
@@ -149,8 +173,51 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
             </tbody>
           </table>
         </div>
+        {report.log_page_count > 1 ? (
+          <nav className="log-pagination" aria-label="Scan log pages">
+            <PaginationLink
+              disabled={report.log_page <= 1}
+              href={buildLogPageHref(report.filters, report.log_page - 1)}
+            >
+              Previous 1,000
+            </PaginationLink>
+            <span className="log-pagination-status">
+              Page {formatCount(report.log_page)} of {formatCount(report.log_page_count)}
+            </span>
+            <PaginationLink
+              disabled={report.log_page >= report.log_page_count}
+              href={buildLogPageHref(report.filters, report.log_page + 1)}
+            >
+              Next 1,000
+            </PaginationLink>
+          </nav>
+        ) : null}
       </section>
     </div>
+  );
+}
+
+function PaginationLink({
+  children,
+  disabled,
+  href
+}: {
+  children: ReactNode;
+  disabled: boolean;
+  href: string;
+}) {
+  if (disabled) {
+    return (
+      <span aria-disabled="true" className="button secondary compact-button pagination-link disabled">
+        {children}
+      </span>
+    );
+  }
+
+  return (
+    <a className="button secondary compact-button pagination-link" href={href}>
+      {children}
+    </a>
   );
 }
 
@@ -178,14 +245,64 @@ function formatEasternDateTime(isoDate: string) {
   return easternDateTimeFormatter.format(new Date(isoDate));
 }
 
+function formatLogSummary(report: ScanReport) {
+  if (!report.log_total) {
+    return "No scans yet";
+  }
+
+  if (report.log_page_count <= 1 || report.log_page === 1) {
+    return `Latest ${formatCount(report.log_page_size)} scans`;
+  }
+
+  return `Scans ${formatCount(report.log_start)}-${formatCount(report.log_end)} of ${formatCount(
+    report.log_total
+  )}`;
+}
+
+function buildLogPageHref(filters: ScanReportFilters, page: number) {
+  const params = new URLSearchParams();
+
+  params.set("start_date", filters.start_date);
+  params.set("end_date", filters.end_date);
+  params.set("unit", filters.unit);
+  params.set("include_tests", filters.include_tests ? "1" : "0");
+
+  for (const zone of filters.zones) {
+    params.append("zone", zone);
+  }
+
+  for (const playerId of filters.player_ids) {
+    params.append("player_id", playerId);
+  }
+
+  if (page > 1) {
+    params.set("log_page", String(page));
+  }
+
+  const query = params.toString();
+  return query ? `/admin?${query}` : "/admin";
+}
+
 function formatFilterSummary(filters: ScanReportFilters) {
   return [
     `${formatDateInput(filters.start_date)} to ${formatDateInput(filters.end_date)}`,
     timelineUnitLabel(filters.unit),
-    filters.zone || "All zones",
-    filters.player_id ? shortPhoneId(filters.player_id) : "All players",
+    selectedFilterSummary(filters.zones, "All zones", "zones"),
+    selectedFilterSummary(filters.player_ids.map(shortPhoneId), "All players", "players"),
     filters.include_tests ? "Test scans included" : "Test scans hidden"
   ].join(" · ");
+}
+
+function selectedFilterSummary(values: string[], emptyLabel: string, pluralLabel: string) {
+  if (values.length === 0) {
+    return emptyLabel;
+  }
+
+  if (values.length === 1) {
+    return values[0];
+  }
+
+  return `${values.length} ${pluralLabel}`;
 }
 
 function formatDateInput(value: string) {
@@ -229,4 +346,8 @@ function niceChartMax(value: number) {
 
 function shortPhoneId(phoneId: string) {
   return phoneId.length > 12 ? `${phoneId.slice(0, 8)}...` : phoneId;
+}
+
+function formatCount(value: number) {
+  return new Intl.NumberFormat("en-US").format(value);
 }

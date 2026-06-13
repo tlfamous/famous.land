@@ -29,20 +29,22 @@ export function GameAvailabilityToggle({
           <input name="enabled" type="hidden" value={String(nextEnabled)} />
           <button
             aria-pressed={isEnabled}
+            aria-label={isEnabled ? "Turn game off" : "Turn game on"}
             className="game-power-switch"
             type="submit"
           >
-            <span className="game-power-switch-track" aria-hidden="true">
-              <span className="game-power-switch-knob" />
-            </span>
-            <span>{isEnabled ? "On" : "Off"}</span>
+            <span className="game-power-switch-label off-label">Off</span>
+            <span className="game-power-switch-label on-label">On</span>
           </button>
         </form>
-        {!isEnabled ? (
-          <a className="button secondary game-off-preview-link" href="/">
-            View off page
-          </a>
-        ) : null}
+        <a
+          aria-hidden={isEnabled}
+          className="button secondary game-off-preview-link"
+          href="/"
+          tabIndex={isEnabled ? -1 : undefined}
+        >
+          View off page
+        </a>
       </div>
     </section>
   );

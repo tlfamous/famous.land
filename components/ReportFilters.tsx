@@ -20,10 +20,12 @@ export function ReportFilters({
   const summaryItems = [
     { label: "Date range", value: `${formatDateInput(filters.start_date)} to ${formatDateInput(filters.end_date)}` },
     { label: "Grouping", value: timelineUnitLabel(filters.unit) },
-    { label: "Zone", value: filters.zone || "All zones" },
-    { label: "Player", value: filters.player_id ? shortPhoneId(filters.player_id) : "All players" },
+    { label: "Zone", value: selectedSummary(filters.zones, "All zones", "zones") },
+    { label: "Player", value: selectedSummary(filters.player_ids.map(shortPhoneId), "All players", "players") },
     { label: "Scan type", value: filters.include_tests ? "Test scans included" : "Test scans hidden" }
   ];
+  const selectedZones = new Set(filters.zones);
+  const selectedPlayers = new Set(filters.player_ids);
 
   function handleTimelineUnitChange(event: ChangeEvent<HTMLSelectElement>) {
     event.currentTarget.form?.requestSubmit();
@@ -75,28 +77,24 @@ export function ReportFilters({
               ))}
             </select>
           </label>
-          <label>
-            <span>Zone</span>
-            <select name="zone" defaultValue={filters.zone}>
-              <option value="">All zones</option>
-              {zoneOptions.map((zone) => (
-                <option key={zone} value={zone}>
-                  {zone}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            <span>Player</span>
-            <select name="player_id" defaultValue={filters.player_id}>
-              <option value="">All players</option>
-              {playerOptions.map((playerId) => (
-                <option key={playerId} value={playerId}>
-                  {shortPhoneId(playerId)}
-                </option>
-              ))}
-            </select>
-          </label>
+          <MultiSelectFilter
+            emptyLabel="All zones"
+            label="Zone"
+            name="zone"
+            options={zoneOptions.map((zone) => ({ label: zone, value: zone }))}
+            selectedValues={selectedZones}
+          />
+          <MultiSelectFilter
+            emptyLabel="All players"
+            label="Player"
+            name="player_id"
+            options={playerOptions.map((playerId) => ({
+              label: shortPhoneId(playerId),
+              title: playerId,
+              value: playerId
+            }))}
+            selectedValues={selectedPlayers}
+          />
           <label className="report-filter-checkbox">
             <input name="include_tests" type="hidden" value="0" />
             <input
@@ -119,6 +117,62 @@ export function ReportFilters({
       ) : null}
     </section>
   );
+}
+
+function MultiSelectFilter({
+  emptyLabel,
+  label,
+  name,
+  options,
+  selectedValues
+}: {
+  emptyLabel: string;
+  label: string;
+  name: string;
+  options: { label: string; title?: string; value: string }[];
+  selectedValues: Set<string>;
+}) {
+  const selectedCount = selectedValues.size;
+  const summary = selectedCount === 0 ? emptyLabel : `${selectedCount} selected`;
+
+  return (
+    <fieldset className="report-filter-multiselect">
+      <legend>{label}</legend>
+      <details>
+        <summary>
+          <span>{summary}</span>
+        </summary>
+        <div className="report-filter-option-panel">
+          <p>{selectedCount === 0 ? emptyLabel : `${selectedCount} selected. Uncheck any item to remove it.`}</p>
+          <div className="report-filter-option-list">
+            {options.map((option) => (
+              <label key={option.value} title={option.title}>
+                <input
+                  defaultChecked={selectedValues.has(option.value)}
+                  name={name}
+                  type="checkbox"
+                  value={option.value}
+                />
+                <span>{option.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </details>
+    </fieldset>
+  );
+}
+
+function selectedSummary(values: string[], emptyLabel: string, pluralLabel: string) {
+  if (values.length === 0) {
+    return emptyLabel;
+  }
+
+  if (values.length === 1) {
+    return values[0];
+  }
+
+  return `${values.length} ${pluralLabel}`;
 }
 
 function shortPhoneId(phoneId: string) {
