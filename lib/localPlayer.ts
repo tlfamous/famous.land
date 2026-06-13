@@ -54,6 +54,11 @@ export function getOrCreatePlayerId(): string {
   return playerId;
 }
 
+export function getExistingPlayerId(): string {
+  if (!canUseStorage()) return "";
+  return window.localStorage.getItem(PLAYER_ID_KEY) ?? "";
+}
+
 export function setLocalPlayerId(playerId: string) {
   if (!canUseStorage()) return;
   window.localStorage.setItem(PLAYER_ID_KEY, playerId);

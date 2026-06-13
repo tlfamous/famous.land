@@ -24,20 +24,10 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
   const [scanMoment, setScanMoment] = useState<ScanMoment>("loading");
 
   useEffect(() => {
+    let cancelled = false;
     const playerId = getOrCreatePlayerId();
-    const markerVisitCount = incrementLocalMarkerVisit(marker.marker_id);
-    const localResult = addLocalScannedMarker(marker.marker_id);
-    const nextScanMoment: ScanMoment = localResult.alreadyFound
-      ? "repeat"
-      : localResult.markerIds.length === 1
-        ? "first"
-        : "new";
     const isTestScan =
       new URLSearchParams(window.location.search).get("scan_source") === "tester";
-    setScanMoment(nextScanMoment);
-    setVisitCount(markerVisitCount);
-    setFoundIds(localResult.markerIds);
-    setSaved(hasSavedProgress());
 
     fetch("/api/scan", {
       method: "POST",
@@ -52,13 +42,34 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
     })
       .then((response) => response.json())
       .then((data: { ok?: boolean; is_new?: boolean; error?: string }) => {
+        if (cancelled) return;
+
         if (!data.ok) {
-          setServerMessage(data.error ?? "This find is saved on this phone.");
+          setServerMessage(data.error ?? "This scan was not added to your quest yet.");
+          return;
         }
+
+        const markerVisitCount = incrementLocalMarkerVisit(marker.marker_id);
+        const localResult = addLocalScannedMarker(marker.marker_id);
+        const nextScanMoment: ScanMoment = localResult.alreadyFound
+          ? "repeat"
+          : localResult.markerIds.length === 1
+            ? "first"
+            : "new";
+
+        setScanMoment(nextScanMoment);
+        setVisitCount(markerVisitCount);
+        setFoundIds(localResult.markerIds);
+        setSaved(hasSavedProgress());
       })
       .catch(() => {
-        setServerMessage("This find is saved on this phone. Server sync can catch up later.");
+        if (cancelled) return;
+        setServerMessage("This scan was not added to your quest yet. Try again in a moment.");
       });
+
+    return () => {
+      cancelled = true;
+    };
   }, [marker.marker_id]);
 
   const foundCount = uniqueFoundIds(foundIds).length;

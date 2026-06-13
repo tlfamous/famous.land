@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getGameAvailability, recordScan } from "@/lib/db";
+import { getGameAvailability, recordGameOffScan, recordScan } from "@/lib/db";
 import { getMarkerById } from "@/lib/markers";
 
 export const runtime = "nodejs";
@@ -7,20 +7,13 @@ export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   const availability = await getGameAvailability();
 
-  if (!availability.enabled) {
-    return NextResponse.json(
-      { ok: false, error: "The Famous Land game is currently off." },
-      { status: 503 }
-    );
-  }
-
   const body = (await request.json().catch(() => null)) as
     | { player_id?: string; marker_id?: string; is_test?: boolean }
     | null;
 
-  if (!body?.player_id || !body.marker_id) {
+  if (!body?.marker_id || (availability.enabled && !body.player_id)) {
     return NextResponse.json(
-      { ok: false, error: "player_id and marker_id are required." },
+      { ok: false, error: "player_id and marker_id are required while the game is on." },
       { status: 400 }
     );
   }
@@ -30,8 +23,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "Unknown marker." }, { status: 404 });
   }
 
+  if (!availability.enabled) {
+    const event = await recordGameOffScan({
+      source_player_id: body.player_id,
+      marker_id: marker.marker_id,
+      user_agent: request.headers.get("user-agent") ?? undefined,
+      is_test: body.is_test === true
+    });
+
+    return NextResponse.json({
+      ok: false,
+      logged: true,
+      event_id: event.id,
+      game_off: true,
+      error: "The Famous Land game is currently off."
+    });
+  }
+
   const result = await recordScan({
-    player_id: body.player_id,
+    player_id: body.player_id!,
     marker_id: marker.marker_id,
     user_agent: request.headers.get("user-agent") ?? undefined,
     is_test: body.is_test === true

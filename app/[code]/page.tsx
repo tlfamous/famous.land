@@ -18,17 +18,17 @@ export default async function MarkerByCodePage({
 }: {
   params: Promise<{ code: string }>;
 }) {
-  const availability = await getGameAvailability();
-
-  if (!availability.enabled) {
-    return <GameUnavailablePage />;
-  }
-
   const { code } = await params;
   const marker = getMarkerByToken(code);
 
   if (!marker) {
     notFound();
+  }
+
+  const availability = await getGameAvailability();
+
+  if (!availability.enabled) {
+    return <GameUnavailablePage markerId={marker.marker_id} />;
   }
 
   return <MarkerScanClient marker={marker} />;

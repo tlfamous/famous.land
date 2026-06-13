@@ -1,8 +1,11 @@
+import { GameUnavailableScanLogger } from "@/components/GameUnavailableScanLogger";
+
 const contactHref = "sms:+19784310135";
 
-export function GameUnavailablePage() {
+export function GameUnavailablePage({ markerId }: { markerId?: string }) {
   return (
     <div className="game-off-page" aria-label="Famous Land">
+      {markerId ? <GameUnavailableScanLogger markerId={markerId} /> : null}
       <section className="game-off-hero" aria-labelledby="game-off-title">
         <div className="game-off-brand">
           <span className="game-off-mark" aria-hidden="true">

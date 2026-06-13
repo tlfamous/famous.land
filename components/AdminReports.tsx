@@ -42,7 +42,7 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
         <ReportStat
           label="Identified players"
           value={report.identified_players}
-          detail="Players with saved email"
+          detail="Players with email or phone"
         />
         <ReportStat
           compact
