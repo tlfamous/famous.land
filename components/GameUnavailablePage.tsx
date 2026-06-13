@@ -8,9 +8,9 @@ export function GameUnavailablePage() {
           <span className="game-off-mark" aria-hidden="true">
             🐄
           </span>
-          <span>FAMOUS LAND</span>
         </div>
         <h1 id="game-off-title">Famous Land</h1>
+        <p>Welcome to Famous Land. Contact us if you have any questions about this property</p>
         <div className="game-off-actions">
           <a className="button primary game-off-contact-button" href={contactHref}>
             Contact
