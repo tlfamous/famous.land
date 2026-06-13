@@ -6,7 +6,7 @@ export function GameUnavailablePage() {
       <section className="game-off-hero" aria-labelledby="game-off-title">
         <div className="game-off-brand">
           <span className="game-off-mark" aria-hidden="true">
-            F
+            🐄
           </span>
           <span>FAMOUS LAND</span>
         </div>

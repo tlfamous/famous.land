@@ -221,14 +221,14 @@ main:has(.game-off-page) {
 }
 
 .game-off-mark {
-  width: 42px;
-  height: 42px;
+  width: 56px;
+  height: 56px;
   display: grid;
   place-items: center;
   color: var(--ink);
   border-radius: 999px;
   background: var(--paper-strong);
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
 
 .game-off-page h1 {
@@ -254,14 +254,44 @@ main:has(.game-off-page) {
   gap: 12px 16px;
 }
 
-.game-off-contact-button {
-  min-width: 150px;
-  min-height: 58px;
-  padding-right: 24px;
-  padding-left: 24px;
+.game-off-page .button.game-off-contact-button {
+  min-width: 184px;
+  min-height: 68px;
+  gap: 12px;
+  padding-right: 26px;
+  padding-left: 28px;
   color: var(--ink);
+  border: 2px solid rgba(255, 250, 240, 0.84);
   background: var(--paper-strong);
-  font-size: 1.05rem;
+  box-shadow:
+    0 0 0 5px rgba(255, 250, 240, 0.12),
+    0 18px 42px rgba(0, 0, 0, 0.34);
+  font-size: 1.12rem;
+}
+
+.game-off-page .button.game-off-contact-button::after {
+  content: "->";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--paper-strong);
+  border-radius: 999px;
+  background: var(--ink);
+  font-size: 0.88rem;
+  line-height: 1;
+}
+
+.game-off-page .button.game-off-contact-button:hover {
+  border-color: var(--paper-strong);
+  background: #ffffff;
+  transform: translateY(-1px);
+}
+
+.game-off-page .button.game-off-contact-button:focus-visible {
+  outline: 4px solid rgba(255, 250, 240, 0.46);
+  outline-offset: 4px;
 }
 
 .game-off-actions span {
