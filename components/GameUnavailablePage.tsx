@@ -11,7 +11,6 @@ export function GameUnavailablePage() {
           <span>FAMOUS LAND</span>
         </div>
         <h1 id="game-off-title">Famous Land</h1>
-        <p>The game is not open right now. Contact us if you need help.</p>
         <div className="game-off-actions">
           <a className="button primary game-off-contact-button" href={contactHref}>
             Contact
