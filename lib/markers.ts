@@ -148,118 +148,118 @@ export const markers: Marker[] = [
     marker_id: "FF-TREE-016",
     short_code: "EWNJC",
     url: "https://famous.land/EWNJC",
-    marker_number: 13,
+    marker_number: 12,
     marker_name: "Boat Launch",
     zone: "Treetop",
     field_note: "This Treetop marker starts near the upper-left edge of the zone, close to the boat-launch side of the story.",
     challenge: "Look for the easiest safe line between land, road, and water.",
     clue: "Next, look for the place that looks like a driveway but is not one.",
     is_island: false,
-    order: 13
+    order: 12
   },
   {
     marker_id: "FF-TREE-017",
     short_code: "PUQZA",
     url: "https://famous.land/PUQZA",
-    marker_number: 14,
+    marker_number: 13,
     marker_name: "Not a Driveway",
     zone: "Treetop",
     field_note: "This spot has the shape of access, but the land is asking for a slower look.",
     challenge: "Find one sign that tells you whether a route is meant for walking, driving, or neither.",
     clue: "Continue toward the stone clue.",
     is_island: false,
-    order: 14
+    order: 13
   },
   {
     marker_id: "FF-TREE-018",
     short_code: "ETET2",
     url: "https://famous.land/ETET2",
-    marker_number: 16,
+    marker_number: 15,
     marker_name: "Not much of a Dam View",
     zone: "Treetop",
     field_note: "This view hints at the dam more than it shows it, which counts if you are feeling generous.",
     challenge: "Find the view, then name what blocks it.",
     clue: "Next, continue toward the stone clue.",
     is_island: false,
-    order: 16
+    order: 15
   },
   {
     marker_id: "FF-TREE-019",
     short_code: "TAKVU",
     url: "https://famous.land/TAKVU",
-    marker_number: 15,
+    marker_number: 14,
     marker_name: "Granite Marker",
     zone: "Treetop",
     field_note: "Granite has a way of making boundaries feel older than the map.",
     challenge: "Notice one natural edge and one human-made edge nearby.",
     clue: "This completes the Treetop run. Famous came this way.",
     is_island: false,
-    order: 15
+    order: 14
   },
   {
     marker_id: "FF-TREE-026",
     short_code: "SH7GP",
     url: "https://famous.land/SH7GP",
-    marker_number: 17,
+    marker_number: 16,
     marker_name: "Lake View",
     zone: "No Wake",
     field_note: "The lake changes the whole pace of the land.",
     challenge: "Watch the water surface for 20 seconds and name the pattern you see.",
     clue: "Another water marker waits where the shore grows quieter.",
     is_island: false,
-    order: 17
+    order: 16
   },
   {
     marker_id: "FF-TREE-027",
     short_code: "D7BZG",
     url: "https://famous.land/D7BZG",
-    marker_number: 18,
+    marker_number: 17,
     marker_name: "Quiet Cove",
     zone: "No Wake",
     field_note: "Coves collect stillness, shade, and small sounds.",
     challenge: "Find one reflection and one shadow.",
     clue: "Look for a shoreline tree that seems to lean toward the lake.",
     is_island: false,
-    order: 18
+    order: 17
   },
   {
     marker_id: "FF-TREE-028",
     short_code: "VHF99",
     url: "https://famous.land/VHF99",
-    marker_number: 19,
+    marker_number: 18,
     marker_name: "Shoreline Pine",
     zone: "No Wake",
     field_note: "Shoreline trees live with wet feet nearby and wind in their branches.",
     challenge: "Listen for water, wind, birds, or insects before you leave.",
     clue: "A marker waits closer to a turn by the water.",
     is_island: false,
-    order: 19
+    order: 18
   },
   {
     marker_id: "FF-TREE-029",
     short_code: "Z6QRQ",
     url: "https://famous.land/Z6QRQ",
-    marker_number: 20,
+    marker_number: 19,
     marker_name: "Dockside Turn",
     zone: "No Wake",
     field_note: "Edges near docks and shore paths ask for slower steps and better attention.",
     challenge: "Point out the safest path back from the water before you move on.",
     clue: "The island marker is special. Only go there with permission and safe conditions.",
     is_island: false,
-    order: 20
+    order: 19
   },
   {
     marker_id: "FF-TREE-030",
     short_code: "A66DJ",
     url: "https://famous.land/A66DJ",
-    marker_number: 21,
+    marker_number: 20,
     marker_name: "Island Landing",
     zone: "No Wake",
     field_note: "The island marker is a bonus find for supervised, safe conditions only.",
     challenge: "Before celebrating, name the safest way back to shore.",
     clue: "Island landing found. Famous definitely came this way.",
     is_island: false,
-    order: 21
+    order: 20
   }
 ];
 
