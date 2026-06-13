@@ -102,7 +102,7 @@ const publicFeatures = [
   "First-scan onboarding state that introduces the quest before the normal marker flow.",
   "Anonymous browser player ID and local progress tracking with no login required.",
   "Lakeview Quest, No Wake Quest, Treetop Quest, and Hillside Quest progress.",
-  "Hidden grand-prize reveal after all 21 markers are found in any order.",
+  "Hidden grand-prize reveal after all 20 markers are found in any order.",
   "Famous Land Quest dashboard at /quest with marker progress, zone quests, found marker list, save, and recovery help.",
   "Save-progress prompt after 5 markers, with optional email recovery.",
   "Brevo-powered one-tap recovery email for restoring saved marker progress on a new or cleared phone.",

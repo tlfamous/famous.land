@@ -98,8 +98,7 @@ const visualZones: Record<string, VisualZone> = {
       { x: 35.3, y: 52.6, label: "Warblers Way / U8U35", markerId: "FF-TREE-008", style: "tag" },
       { x: 54.4, y: 26.5, label: "Cattle Crossroads / XJYYQ", markerId: "FF-TREE-009", style: "tag" },
       { x: 72.8, y: 24.1, label: "Hillside Greenway / CN5UP", markerId: "FF-TREE-010", style: "tag" },
-      { x: 76.5, y: 54.4, label: "Lakeview Notch / XRZ8J", markerId: "FF-TREE-011", style: "tag" },
-      { x: 73.6, y: 68.8, label: "Mirror Pond Landing / AB2MJ", markerId: "FF-TREE-012", style: "tag" }
+      { x: 76.5, y: 54.4, label: "Lakeview Notch / XRZ8J", markerId: "FF-TREE-011", style: "tag" }
     ],
     tone: "#536b35"
   },

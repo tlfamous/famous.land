@@ -2,7 +2,7 @@
 
 Mobile-first Next.js game site for `famous.land`.
 
-Thirty physical tree markers across Famous Land each have a unique QR code. A scan opens that marker URL, records the find in the browser, syncs it to the server fallback store, and unlocks progress through the four zone quests inside the overall Famous Land Quest.
+Twenty active tree markers across Famous Land each have a unique QR code. A scan opens that marker URL, records the find in the browser, syncs it to the server fallback store, and unlocks progress through the four zone quests inside the overall Famous Land Quest.
 
 ## What Is Built
 

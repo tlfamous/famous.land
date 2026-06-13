@@ -145,19 +145,6 @@ export const markers: Marker[] = [
     order: 11
   },
   {
-    marker_id: "FF-TREE-012",
-    short_code: "AB2MJ",
-    url: "https://famous.land/AB2MJ",
-    marker_number: 12,
-    marker_name: "Mirror Pond Landing",
-    zone: "Hillside",
-    field_note: "The upper trail rewards patience more than speed.",
-    challenge: "Find one small plant growing where you did not expect it.",
-    clue: "A marker waits near a place where the hill begins to soften.",
-    is_island: false,
-    order: 12
-  },
-  {
     marker_id: "FF-TREE-016",
     short_code: "EWNJC",
     url: "https://famous.land/EWNJC",

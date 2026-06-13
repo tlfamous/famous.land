@@ -126,10 +126,10 @@ export const landMapZones: LandMapZone[] = [
     name: "Hillside",
     slug: "monomonac-hill",
     parcels: ["M14-0-27.2", "M9-0-51", "M9-0-52", "M9-0-53", "M9-0-54"],
-    tagCount: 5,
+    tagCount: 4,
     acres: 59.627,
     note:
-      "Includes the survey-corrected Monomonac parcel plus the four Hillside Dr parcels. Five Hillside QR tag locations are mapped."
+      "Includes the survey-corrected Monomonac parcel plus the four Hillside Dr parcels. Four Hillside QR tag locations are mapped."
   }
 ];
 
