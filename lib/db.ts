@@ -96,6 +96,7 @@ type D1ScanEventRow = Omit<ScanEventRecord, "user_agent" | "is_test"> & {
 type ScanReportLogRow = {
   id: string;
   scanned_at: string;
+  email_id?: string;
   player_id: string;
   marker_id: string;
   short_code: string;
@@ -541,9 +542,9 @@ export async function backfillScans(input: {
 
 export async function getScanReport(inputFilters: ScanReportFilterInput = {}): Promise<ScanReport> {
   const filters = resolveScanReportFilters(inputFilters);
-  const [events, identifiedPlayerIds] = await Promise.all([
+  const [events, playerEmailById] = await Promise.all([
     getScanEvents(),
-    getIdentifiedPlayerIds()
+    getPlayerEmailMap()
   ]);
   const markerById = new Map(markers.map((marker) => [marker.marker_id, marker]));
   const filteredEvents = filterScanEvents(events, filters, markerById);
@@ -561,7 +562,7 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
     total_scans: filteredEvents.length,
     unique_phones: filteredPlayerIds.size,
     identified_players: Array.from(filteredPlayerIds).filter((playerId) =>
-      identifiedPlayerIds.has(playerId)
+      playerEmailById.has(playerId)
     ).length,
     unique_markers: new Set(filteredEvents.map((event) => event.marker_id)).size,
     test_scans: filteredEvents.filter((event) => event.is_test).length,
@@ -580,6 +581,7 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
       return {
         id: event.id,
         scanned_at: event.scanned_at,
+        email_id: playerEmailById.get(event.player_id),
         player_id: event.player_id,
         marker_id: event.marker_id,
         short_code: marker?.short_code ?? event.marker_id,
@@ -739,56 +741,23 @@ export async function updatePlayerContact(input: {
   return (await getPlayerReport()).players.find((player) => player.player_id === player_id);
 }
 
-async function getIdentifiedPlayerIds(): Promise<Set<string>> {
+async function getPlayerEmailMap(): Promise<Map<string, string>> {
   const d1 = await getD1();
 
   if (d1) {
-    return getD1IdentifiedPlayerIds(d1);
+    const [savedRows, contactRows] = await Promise.all([
+      getD1SavedPlayerRows(d1),
+      getD1PlayerContactRows(d1)
+    ]);
+
+    return playerEmailMapFromRows({ savedRows, contactRows });
   }
 
   const db = await readLocalDb();
-  return identifiedPlayerIdsFromRows({
+  return playerEmailMapFromRows({
     savedRows: db.saved_players,
     contactRows: db.player_contacts
   });
-}
-
-async function getD1IdentifiedPlayerIds(d1: FamousLandD1): Promise<Set<string>> {
-  try {
-    const result = await d1
-      .prepare(
-        `select player_id
-         from (
-           select player_id
-           from saved_players
-           where email is not null and trim(email) <> ''
-           union
-           select player_id
-           from player_contacts
-           where email is not null and trim(email) <> ''
-         )`
-      )
-      .all<{ player_id: string }>();
-
-    return new Set((result.results ?? []).map((row) => row.player_id));
-  } catch {
-    try {
-      const result = await d1
-        .prepare(
-          `select distinct player_id
-           from saved_players
-           where email is not null and trim(email) <> ''`
-        )
-        .all<{ player_id: string }>();
-
-      return new Set((result.results ?? []).map((row) => row.player_id));
-    } catch (error) {
-      if (!isMissingTableError(error)) {
-        console.error("Famous Land identified player query failed", error);
-      }
-      return new Set();
-    }
-  }
 }
 
 export async function savePlayerPhoneNumber(input: {
@@ -1082,15 +1051,26 @@ async function getD1PlayerScanRows(d1: FamousLandD1): Promise<PlayerScanRow[]> {
 }
 
 async function getD1SavedPlayerRows(d1: FamousLandD1): Promise<SavedPlayerEmailRow[]> {
-  const result = await d1
-    .prepare(
-      `select player_id, email, saved_at
-       from saved_players
-       order by saved_at desc`
-    )
-    .all<SavedPlayerEmailRow>();
+  try {
+    const result = await d1
+      .prepare(
+        `select player_id, email, saved_at
+         from saved_players
+         order by saved_at desc`
+      )
+      .all<SavedPlayerEmailRow>();
 
-  return result.results ?? [];
+    if (!result.success) {
+      throw new Error(result.error ?? "saved_players query failed");
+    }
+
+    return result.results ?? [];
+  } catch (error) {
+    if (!isMissingTableError(error)) {
+      console.error("Famous Land saved player query failed", error);
+    }
+    return [];
+  }
 }
 
 async function getD1PlayerContactRows(d1: FamousLandD1): Promise<PlayerContact[]> {
@@ -1186,25 +1166,27 @@ function buildPlayerRows(input: {
     });
 }
 
-function identifiedPlayerIdsFromRows(input: {
+function playerEmailMapFromRows(input: {
   savedRows: SavedPlayerEmailRow[];
   contactRows: PlayerContact[];
 }) {
-  const playerIds = new Set<string>();
+  const playerEmails = new Map<string, string>();
 
   for (const row of input.savedRows) {
-    if (row.email?.trim()) {
-      playerIds.add(row.player_id);
+    const email = row.email?.trim();
+    if (email && !playerEmails.has(row.player_id)) {
+      playerEmails.set(row.player_id, email);
     }
   }
 
   for (const row of input.contactRows) {
-    if (row.email?.trim()) {
-      playerIds.add(row.player_id);
+    const email = row.email?.trim();
+    if (email) {
+      playerEmails.set(row.player_id, email);
     }
   }
 
-  return playerIds;
+  return playerEmails;
 }
 
 function normalizePlayerScanRows(rows: D1PlayerScanRow[]): PlayerScanRow[] {

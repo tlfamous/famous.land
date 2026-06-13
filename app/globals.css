@@ -1937,7 +1937,7 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
 }
 
 .analytics-dashboard .report-table {
-  min-width: 860px;
+  min-width: 1040px;
 }
 
 .analytics-dashboard .report-table th {

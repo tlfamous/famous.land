@@ -111,6 +111,7 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
             <thead>
               <tr>
                 <th>Date/time (ET)</th>
+                <th>Email ID</th>
                 <th>Phone ID</th>
                 <th>Location</th>
                 <th>Zone</th>
@@ -122,6 +123,9 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
                 report.log.map((scan) => (
                   <tr key={scan.id}>
                     <td>{formatEasternDateTime(scan.scanned_at)}</td>
+                    <td>
+                      {scan.email_id ? <code title={scan.email_id}>{scan.email_id}</code> : "UNKNOWN"}
+                    </td>
                     <td>
                       <code title={scan.player_id}>{shortPhoneId(scan.player_id)}</code>
                     </td>
@@ -139,7 +143,7 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5}>No scan log entries yet.</td>
+                  <td colSpan={6}>No scan log entries yet.</td>
                 </tr>
               )}
             </tbody>
