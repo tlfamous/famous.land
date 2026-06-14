@@ -110,7 +110,7 @@ body:has(.image-home) .safety-footer {
 
 body:has(.game-off-page) {
   min-height: 100svh;
-  overflow: hidden;
+  overflow-x: hidden;
   background: #0c0b09;
 }
 
@@ -194,8 +194,8 @@ main:has(.game-off-page) {
 .game-off-page {
   min-height: 100svh;
   display: grid;
-  align-items: end;
-  padding: clamp(24px, 7vw, 84px);
+  align-items: start;
+  padding: clamp(28px, 6vw, 72px);
   color: var(--paper-strong);
   background:
     linear-gradient(90deg, rgba(12, 11, 9, 0.9), rgba(12, 11, 9, 0.62) 44%, rgba(12, 11, 9, 0.18)),
@@ -204,62 +204,73 @@ main:has(.game-off-page) {
 }
 
 .game-off-hero {
-  width: min(100%, 680px);
+  width: min(100%, 720px);
   display: grid;
-  gap: 20px;
+  gap: 16px;
   padding-bottom: max(18px, env(safe-area-inset-bottom));
 }
 
-.game-off-brand {
-  display: inline-flex;
+.game-off-title-lockup {
+  display: flex;
   align-items: center;
-  gap: 12px;
-  color: rgba(255, 250, 240, 0.82);
-  font-size: 0.82rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
+  gap: 18px;
+}
+
+.game-off-title-copy {
+  min-width: 0;
 }
 
 .game-off-mark {
-  width: 56px;
-  height: 56px;
+  width: 66px;
+  height: 66px;
+  flex: 0 0 auto;
   display: grid;
   place-items: center;
   color: var(--ink);
+  border: 1px solid rgba(255, 250, 240, 0.62);
   border-radius: 999px;
   background: var(--paper-strong);
+  box-shadow:
+    0 0 0 6px rgba(255, 250, 240, 0.08),
+    0 18px 42px rgba(0, 0, 0, 0.32);
   font-size: 2rem;
 }
 
 .game-off-page h1 {
-  max-width: 10ch;
   margin-bottom: 0;
-  font-size: clamp(4.2rem, 16vw, 8.8rem);
-  line-height: 0.86;
+  font-size: clamp(3.8rem, 7.4vw, 5.4rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.88;
+  text-shadow: 0 18px 34px rgba(0, 0, 0, 0.36);
+  white-space: nowrap;
 }
 
 .game-off-page p {
-  max-width: 30rem;
   margin-bottom: 0;
-  color: rgba(255, 250, 240, 0.82);
-  font-size: clamp(1.08rem, 3vw, 1.45rem);
-  font-weight: 780;
-  line-height: 1.25;
+}
+
+.game-off-note {
+  max-width: 31rem;
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 1rem;
+  font-weight: 760;
+  line-height: 1.45;
 }
 
 .game-off-page .game-off-headline {
   width: fit-content;
-  max-width: min(100%, 34rem);
+  max-width: min(100%, 42rem);
   margin-bottom: 0;
-  padding: 10px 14px;
+  padding: 11px 15px;
   color: var(--ink);
-  border: 1px solid rgba(255, 250, 240, 0.72);
-  border-radius: 999px;
-  background: rgba(255, 250, 240, 0.94);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
-  font-size: clamp(1rem, 2.2vw, 1.18rem);
-  font-weight: 900;
-  line-height: 1.15;
+  border: 1px solid rgba(255, 250, 240, 0.54);
+  border-radius: var(--radius);
+  background: rgba(255, 250, 240, 0.9);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: 850;
+  line-height: 1.2;
 }
 
 .game-off-actions {
@@ -271,10 +282,10 @@ main:has(.game-off-page) {
 
 .game-off-page .button.game-off-contact-button {
   min-width: 184px;
-  min-height: 68px;
-  gap: 12px;
-  padding-right: 26px;
-  padding-left: 28px;
+  min-height: 62px;
+  gap: 10px;
+  padding-right: 24px;
+  padding-left: 22px;
   color: var(--ink);
   border: 2px solid rgba(255, 250, 240, 0.84);
   background: var(--paper-strong);
@@ -284,18 +295,36 @@ main:has(.game-off-page) {
   font-size: 1.12rem;
 }
 
-.game-off-page .button.game-off-contact-button::after {
-  content: "->";
+.game-off-contact-icon {
+  width: 32px;
+  height: 32px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
   color: var(--paper-strong);
   border-radius: 999px;
   background: var(--ink);
-  font-size: 0.88rem;
-  line-height: 1;
+}
+
+.game-off-contact-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.game-off-contact-icon svg path:first-child {
+  fill: currentColor;
+  stroke: none;
+}
+
+.game-off-contact-icon svg path + path {
+  color: var(--ink);
+  stroke: currentColor;
 }
 
 .game-off-page .button.game-off-contact-button:hover {
@@ -309,7 +338,7 @@ main:has(.game-off-page) {
   outline-offset: 4px;
 }
 
-.game-off-actions span {
+.game-off-actions > span {
   color: rgba(255, 250, 240, 0.74);
   font-size: 0.94rem;
   font-weight: 780;
@@ -368,14 +397,42 @@ main:has(.game-off-page) {
   }
 
   .game-off-page {
-    align-items: end;
+    align-items: start;
+    padding: 28px 22px;
     background:
       linear-gradient(180deg, rgba(12, 11, 9, 0.18), rgba(12, 11, 9, 0.84)),
       url("/assets/FamousLand2.png") 12% center / cover no-repeat;
   }
 
-  .game-off-headline {
-    border-radius: var(--radius);
+  .game-off-hero {
+    gap: 16px;
+  }
+
+  .game-off-title-lockup {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .game-off-mark {
+    width: 58px;
+    height: 58px;
+    font-size: 1.8rem;
+  }
+
+  .game-off-page h1 {
+    max-width: 7ch;
+    font-size: 2.85rem;
+    line-height: 0.9;
+    white-space: normal;
+  }
+
+  .game-off-note {
+    font-size: 0.96rem;
+  }
+
+  .game-off-page .game-off-headline {
+    padding: 10px 12px;
+    font-size: 0.94rem;
   }
 }
 
