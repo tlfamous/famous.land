@@ -3,9 +3,11 @@ import { GameUnavailableScanLogger } from "@/components/GameUnavailableScanLogge
 const contactHref = "sms:+19784310135";
 
 export function GameUnavailablePage({
+  headline,
   markerId,
   markerNumber
 }: {
+  headline?: string;
   markerId?: string;
   markerNumber?: number;
 }) {
@@ -18,6 +20,7 @@ export function GameUnavailablePage({
     <div className="game-off-page" aria-label="Famous Land">
       {markerId ? <GameUnavailableScanLogger markerId={markerId} /> : null}
       <section className="game-off-hero" aria-labelledby="game-off-title">
+        {headline ? <p className="game-off-headline">{headline}</p> : null}
         <div className="game-off-brand">
           <span className="game-off-mark" aria-hidden="true">
             🐄

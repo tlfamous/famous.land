@@ -275,6 +275,7 @@ const emptyDb: DbShape = {
 
 const EASTERN_TIME_ZONE = "America/New_York";
 const GAME_ENABLED_SETTING_NAME = "game_enabled";
+const HOME_PAGE_HEADLINE_SETTING_NAME = "home_page_headline";
 const GAME_OFF_SCAN_PLAYER_ID = "GAME-OFF";
 const REPORT_DAY_MS = 24 * 60 * 60 * 1000;
 const REPORT_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
@@ -456,6 +457,79 @@ export async function setGameAvailability(enabled: boolean): Promise<GameAvailab
   return { enabled, updated_at };
 }
 
+export async function getHomePageHeadline(): Promise<string> {
+  const d1 = await getD1();
+
+  if (d1) {
+    try {
+      await ensureD1GameSettings(d1);
+      const row = await d1
+        .prepare("select value from game_settings where name = ?")
+        .bind(HOME_PAGE_HEADLINE_SETTING_NAME)
+        .first<{ value?: string | null }>();
+
+      return normalizeHomePageHeadline(row?.value);
+    } catch (error) {
+      console.error("Famous Land homepage headline query failed", error);
+      return "";
+    }
+  }
+
+  const db = await readLocalDb();
+  const setting = db.game_settings.find((row) => row.name === HOME_PAGE_HEADLINE_SETTING_NAME);
+  return normalizeHomePageHeadline(setting?.value);
+}
+
+export async function setHomePageHeadline(headline: string): Promise<string> {
+  const value = normalizeHomePageHeadline(headline);
+  const updated_at = new Date().toISOString();
+  const d1 = await getD1();
+
+  if (d1) {
+    await ensureD1GameSettings(d1);
+    const result = await d1
+      .prepare(
+        `insert into game_settings (name, value, updated_at)
+         values (?, ?, ?)
+         on conflict(name) do update set
+           value = excluded.value,
+           updated_at = excluded.updated_at`
+      )
+      .bind(HOME_PAGE_HEADLINE_SETTING_NAME, value, updated_at)
+      .run();
+
+    if (!result.success) {
+      throw new Error(result.error ?? "home page headline update failed");
+    }
+
+    await recordAdminAuditEvent({
+      action: "home.headline.update",
+      target: HOME_PAGE_HEADLINE_SETTING_NAME,
+      result: value ? "updated" : "cleared",
+      detail: value ? "Admin updated the home page headline." : "Admin cleared the home page headline."
+    });
+
+    return value;
+  }
+
+  const db = await readLocalDb();
+  db.game_settings = [
+    ...db.game_settings.filter((setting) => setting.name !== HOME_PAGE_HEADLINE_SETTING_NAME),
+    { name: HOME_PAGE_HEADLINE_SETTING_NAME, value, updated_at }
+  ];
+  db.admin_audit_events.push(
+    makeAdminAuditEvent({
+      action: "home.headline.update",
+      target: HOME_PAGE_HEADLINE_SETTING_NAME,
+      result: value ? "updated" : "cleared",
+      detail: value ? "Admin updated the home page headline." : "Admin cleared the home page headline."
+    })
+  );
+  await writeLocalDb(db);
+
+  return value;
+}
+
 async function ensureD1GameSettings(d1: FamousLandD1) {
   const result = await d1
     .prepare(
@@ -480,6 +554,10 @@ function gameAvailabilityFromSetting(
     enabled: value !== "off",
     updated_at: updated_at ?? undefined
   };
+}
+
+function normalizeHomePageHeadline(value?: string | null) {
+  return (value ?? "").replace(/\s+/g, " ").trim().slice(0, 120);
 }
 
 async function getScanEvents(): Promise<ScanEventRecord[]> {

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { setGameAvailability } from "@/lib/db";
+import { setGameAvailability, setHomePageHeadline } from "@/lib/db";
 
 const gameAvailabilityPaths = [
   "/",
@@ -20,4 +20,12 @@ export async function updateGameAvailability(formData: FormData) {
   for (const path of gameAvailabilityPaths) {
     revalidatePath(path);
   }
+}
+
+export async function updateHomePageHeadline(formData: FormData) {
+  const headline = String(formData.get("headline") ?? "");
+  await setHomePageHeadline(headline);
+
+  revalidatePath("/");
+  revalidatePath("/admin");
 }

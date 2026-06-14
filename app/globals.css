@@ -247,6 +247,21 @@ main:has(.game-off-page) {
   line-height: 1.25;
 }
 
+.game-off-page .game-off-headline {
+  width: fit-content;
+  max-width: min(100%, 34rem);
+  margin-bottom: 0;
+  padding: 10px 14px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 250, 240, 0.72);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.94);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+  font-size: clamp(1rem, 2.2vw, 1.18rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
 .game-off-actions {
   display: flex;
   align-items: center;
@@ -300,6 +315,53 @@ main:has(.game-off-page) {
   font-weight: 780;
 }
 
+.home-headline-admin-card {
+  width: 100%;
+  max-width: 1480px;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(320px, 1fr);
+  gap: 18px;
+  margin: 0 auto 18px;
+  padding: 18px;
+  border: 1px solid rgba(17, 20, 15, 0.1);
+  border-radius: var(--radius);
+  background: rgba(255, 250, 240, 0.94);
+  box-shadow: 0 14px 34px rgba(17, 20, 15, 0.08);
+}
+
+.home-headline-admin-card h2 {
+  margin-bottom: 4px;
+  font-size: 1.35rem;
+}
+
+.home-headline-admin-card p:not(.eyebrow) {
+  max-width: 34rem;
+  margin-bottom: 0;
+  color: rgba(17, 20, 15, 0.62);
+  font-weight: 750;
+}
+
+.home-headline-admin-card form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px;
+}
+
+.home-headline-admin-card label {
+  grid-column: 1 / -1;
+  color: rgba(17, 20, 15, 0.62);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-headline-admin-card textarea {
+  min-height: 58px;
+  resize: vertical;
+}
+
 @media (max-width: 700px) and (orientation: portrait) {
   .image-home img {
     object-position: 12% center;
@@ -310,6 +372,10 @@ main:has(.game-off-page) {
     background:
       linear-gradient(180deg, rgba(12, 11, 9, 0.18), rgba(12, 11, 9, 0.84)),
       url("/assets/FamousLand2.png") 12% center / cover no-repeat;
+  }
+
+  .game-off-headline {
+    border-radius: var(--radius);
   }
 }
 
@@ -4138,6 +4204,11 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
   .game-power-switch,
   .game-off-preview-link {
     width: 100%;
+  }
+
+  .home-headline-admin-card,
+  .home-headline-admin-card form {
+    grid-template-columns: 1fr;
   }
 
   .report-zone-map-grid {

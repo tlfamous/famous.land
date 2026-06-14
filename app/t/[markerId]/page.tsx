@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { GameUnavailablePage } from "@/components/GameUnavailablePage";
 import { MarkerScanClient } from "@/components/MarkerScanClient";
-import { getGameAvailability } from "@/lib/db";
+import { getGameAvailability, getHomePageHeadline } from "@/lib/db";
 import { getMarkerByToken, markers } from "@/lib/markers";
 import { isTesterScanSource } from "@/lib/testerMode";
 
@@ -29,10 +29,19 @@ export default async function MarkerByIdPage({
     notFound();
   }
 
-  const availability = await getGameAvailability();
+  const [availability, homePageHeadline] = await Promise.all([
+    getGameAvailability(),
+    getHomePageHeadline()
+  ]);
 
   if (!availability.enabled && !isTesterScanSource(query.scan_source)) {
-    return <GameUnavailablePage markerId={marker.marker_id} markerNumber={marker.marker_number} />;
+    return (
+      <GameUnavailablePage
+        headline={homePageHeadline}
+        markerId={marker.marker_id}
+        markerNumber={marker.marker_number}
+      />
+    );
   }
 
   return <MarkerScanClient marker={marker} />;

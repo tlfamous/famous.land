@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GameUnavailablePage } from "@/components/GameUnavailablePage";
 import { PrizeObjectViewer } from "@/components/PrizeObjectViewer";
-import { getGameAvailability } from "@/lib/db";
 
 export const metadata: Metadata = {
   title: "Famous Land",
@@ -16,12 +14,6 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export default async function LakeMonomonac2026PrizePage() {
-  const availability = await getGameAvailability();
-
-  if (!availability.enabled) {
-    return <GameUnavailablePage />;
-  }
-
   return (
     <div className="stack prize-page">
       <PrizeObjectViewer />

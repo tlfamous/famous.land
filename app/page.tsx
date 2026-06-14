@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { GameUnavailablePage } from "@/components/GameUnavailablePage";
-import { getGameAvailability } from "@/lib/db";
+import { getGameAvailability, getHomePageHeadline } from "@/lib/db";
 
 export const metadata: Metadata = {
   title: "famous.land",
@@ -11,10 +11,13 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export default async function HomePage() {
-  const availability = await getGameAvailability();
+  const [availability, homePageHeadline] = await Promise.all([
+    getGameAvailability(),
+    getHomePageHeadline()
+  ]);
 
   if (!availability.enabled) {
-    return <GameUnavailablePage />;
+    return <GameUnavailablePage headline={homePageHeadline} />;
   }
 
   return (
