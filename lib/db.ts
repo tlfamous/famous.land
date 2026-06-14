@@ -276,8 +276,6 @@ const emptyDb: DbShape = {
 const EASTERN_TIME_ZONE = "America/New_York";
 const GAME_ENABLED_SETTING_NAME = "game_enabled";
 const GAME_OFF_SCAN_PLAYER_ID = "GAME-OFF";
-const REPORT_START_MONTH_INDEX = 4;
-const REPORT_MONTHS = 6;
 const REPORT_DAY_MS = 24 * 60 * 60 * 1000;
 const REPORT_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const SCAN_LOG_PAGE_SIZE = 1000;
@@ -680,7 +678,7 @@ function resolveScanReportFilters(input: ScanReportFilterInput): ScanReportFilte
   const endDate = rawEndMs < startMs ? startDate : rawEndDate;
   const unit = TIMELINE_UNITS.has(input.unit as ScanTimelineUnit)
     ? (input.unit as ScanTimelineUnit)
-    : "week";
+    : "day";
 
   return {
     start_date: startDate,
@@ -2149,13 +2147,12 @@ function timelineLabel(filters: ScanReportFilters): string {
 }
 
 function defaultTimelineDateRange() {
-  const year = new Date().getFullYear();
-  const startMs = Date.UTC(year, REPORT_START_MONTH_INDEX, 1);
-  const endMs = Date.UTC(year, REPORT_START_MONTH_INDEX + REPORT_MONTHS, 1) - REPORT_DAY_MS;
+  const todayMs = easternDayMs(new Date().toISOString()) ?? dateInputMs(isoDateFromUtcMs(Date.now()));
+  const startMs = todayMs - 6 * REPORT_DAY_MS;
 
   return {
     start_date: isoDateFromUtcMs(startMs),
-    end_date: isoDateFromUtcMs(endMs)
+    end_date: isoDateFromUtcMs(todayMs)
   };
 }
 

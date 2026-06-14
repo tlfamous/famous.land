@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TOTAL_MARKERS } from "@/lib/game";
 
 export const metadata: Metadata = {
   title: "Feature Backlog | Famous Land Admin",
@@ -35,7 +36,7 @@ const backlogItems = [
       "Finish-the-quest players now get a hidden-until-complete grand-prize reveal for the 3D printed Lake Monomonac model.",
     details: [
       "The only live giveaway mechanic is one final grand prize.",
-      "Finding all 20 markers in any order unlocks a prominent grand-prize reveal.",
+      `Finding all ${TOTAL_MARKERS} markers in any order unlocks a prominent grand-prize reveal.`,
       "QR code on the back of the model should open https://famous.land/prize/lakemonomonac2026.",
       "Show completed zone quests with completion dates on each zone quest."
     ]

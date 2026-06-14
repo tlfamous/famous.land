@@ -78,7 +78,10 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
                 <span key={tick} />
               ))}
             </div>
-            <div className="scan-timeline" aria-label={`Weekly scan timeline, ${report.timeline_label}`}>
+            <div
+              className="scan-timeline"
+              aria-label={`${timelineUnitLabel(report.filters.unit)} scan timeline, ${report.timeline_label}`}
+            >
               {report.timeline.map((bucket) => {
                 const height =
                   bucket.count === 0 ? 2 : Math.max(8, (bucket.count / chartMax) * 100);

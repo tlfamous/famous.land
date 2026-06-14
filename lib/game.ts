@@ -5,6 +5,8 @@ export const TOTAL_MARKERS = markers.length;
 
 export const ZONE_QUEST_ORDER: Zone[] = ["Lakeview", "No Wake", "Treetop", "Hillside"];
 
+const activeMarkerIds = new Set(markers.map((marker) => marker.marker_id));
+
 const zoneQuestDefinitions: Record<Zone, ZoneQuest> = {
   Lakeview: {
     id: "lakeview-quest",
@@ -37,7 +39,7 @@ const zoneQuestDefinitions: Record<Zone, ZoneQuest> = {
 };
 
 export function uniqueFoundIds(foundIds: string[]): string[] {
-  return Array.from(new Set(foundIds.filter(Boolean)));
+  return Array.from(new Set(foundIds.filter((markerId) => activeMarkerIds.has(markerId))));
 }
 
 export function getFoundMarkers(foundIds: string[]): Marker[] {

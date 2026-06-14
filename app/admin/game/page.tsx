@@ -102,7 +102,7 @@ const publicFeatures = [
   "First-scan onboarding state that introduces the quest before the normal marker flow.",
   "Anonymous browser player ID and local progress tracking with no login required.",
   "Lakeview Quest, No Wake Quest, Treetop Quest, and Hillside Quest progress.",
-  "Hidden grand-prize reveal after all 20 markers are found in any order.",
+  `Hidden grand-prize reveal after all ${TOTAL_MARKERS} markers are found in any order.`,
   "Famous Land Quest dashboard at /quest with marker progress, zone quests, found marker list, save, and recovery help.",
   "Save-progress prompt after 5 markers, with optional email recovery.",
   "Brevo-powered one-tap recovery email for restoring saved marker progress on a new or cleared phone.",
@@ -111,9 +111,9 @@ const publicFeatures = [
 ];
 
 const adminFeatures = [
-  "Admin dashboard with left navigation, compact filters, KPI cards, weekly scan-volume timeline, and latest scan log.",
+  "Admin dashboard with left navigation, compact filters, KPI cards, scan-volume timeline, and latest scan log.",
   "Dashboard filters for date range, timeline unit, zone, player, and whether test scans are included.",
-  "Scan log with Eastern timestamps, phone ID, location, zone, and Scan Type showing Test or Real.",
+  "Scan log with Eastern timestamps, email ID, phone ID, location, zone, and Scan Type showing Test or Real.",
   "Player database with phone IDs, scan count, last scan, saved email, and phone contact fields.",
   "Messages admin tool with recovery candidates table and Brevo recovery-link sender.",
   "Feature Backlog page for active planning items and future game/admin work.",
@@ -132,7 +132,7 @@ const dataAndIntegrations = [
   "Brevo transactional email for branded mobile-first save-progress receipts and one-tap recovery links.",
   "Cloudflare environment variables configure EMAIL_PROVIDER, EMAIL_FROM, EMAIL_REPLY_TO, and NEXT_PUBLIC_SITE_URL.",
   "Scan events record test-vs-real source so admin reports can include or exclude tester activity.",
-  "Marker source data in assets/famous_land_tree_marker_qr_codes_30.csv.",
+  "Active marker source data curated from the original tree-marker export.",
   "Map and survey imagery in public/assets/maps.",
   "No GPS collection, no required name, no required email, and no public leaderboard."
 ];
