@@ -22,6 +22,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
     unit: firstParam(params.unit),
     zone: params.zone,
     player_id: params.player_id,
+    player_email: params.player_email,
     include_tests: includeTestsParam(params.include_tests),
     log_page: firstParam(params.log_page)
   };

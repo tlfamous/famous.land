@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getGameAvailability, getProgress } from "@/lib/db";
+import { isTesterScanSource } from "@/lib/testerMode";
 
 export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
   const availability = await getGameAvailability();
 
-  if (!availability.enabled) {
+  if (!availability.enabled && !isTesterScanSource(request.nextUrl.searchParams.get("scan_source") ?? undefined)) {
     return NextResponse.json(
       { ok: false, error: "The Famous Land game is currently off." },
       { status: 503 }

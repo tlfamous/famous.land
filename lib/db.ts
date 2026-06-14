@@ -127,6 +127,7 @@ export type ScanReportFilterInput = {
   unit?: string;
   zone?: string | string[];
   player_id?: string | string[];
+  player_email?: string | string[];
   include_tests?: boolean;
   log_page?: string | number;
 };
@@ -137,7 +138,14 @@ export type ScanReportFilters = {
   unit: ScanTimelineUnit;
   zones: string[];
   player_ids: string[];
+  player_emails: string[];
   include_tests: boolean;
+};
+
+export type ScanReportPlayerOption = {
+  label: string;
+  title?: string;
+  value: string;
 };
 
 type PlayerScanRow = {
@@ -204,7 +212,7 @@ export type ScanReport = {
   marker_counts: { marker_id: string; count: number }[];
   filters: ScanReportFilters;
   zone_options: string[];
-  player_options: string[];
+  player_options: ScanReportPlayerOption[];
   log_total: number;
   log_page: number;
   log_page_count: number;
@@ -277,6 +285,8 @@ const EASTERN_TIME_ZONE = "America/New_York";
 const GAME_ENABLED_SETTING_NAME = "game_enabled";
 const HOME_PAGE_HEADLINE_SETTING_NAME = "home_page_headline";
 const GAME_OFF_SCAN_PLAYER_ID = "GAME-OFF";
+const UNKNOWN_PLAYER_EMAIL_FILTER_VALUE = "unknown";
+const UNKNOWN_PLAYER_EMAIL_FILTER_LABEL = "Unknown";
 const REPORT_DAY_MS = 24 * 60 * 60 * 1000;
 const REPORT_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const SCAN_LOG_PAGE_SIZE = 1000;
@@ -668,12 +678,13 @@ export async function backfillScans(input: {
 
 export async function getScanReport(inputFilters: ScanReportFilterInput = {}): Promise<ScanReport> {
   const filters = resolveScanReportFilters(inputFilters);
-  const [events, playerIdentityById] = await Promise.all([
+  const [events, playerIdentityDetails] = await Promise.all([
     getScanEvents(),
-    getPlayerIdentityMap()
+    getPlayerIdentityDetails()
   ]);
+  const { emailById: playerEmailById, identityById: playerIdentityById } = playerIdentityDetails;
   const markerById = new Map(markers.map((marker) => [marker.marker_id, marker]));
-  const filteredEvents = filterScanEvents(events, filters, markerById);
+  const filteredEvents = filterScanEvents(events, filters, markerById, playerEmailById);
   const sortedEvents = [...filteredEvents].sort((a, b) => b.scanned_at.localeCompare(a.scanned_at));
   const zoneCounts = new Map<string, number>();
   const markerCounts = new Map(markers.map((marker) => [marker.marker_id, 0]));
@@ -712,7 +723,7 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
     })),
     filters,
     zone_options: zoneOptions(events, markerById),
-    player_options: playerOptions(events),
+    player_options: playerOptions(events, playerEmailById),
     log_total: logTotal,
     log_page: logPage,
     log_page_count: logPageCount,
@@ -764,6 +775,7 @@ function resolveScanReportFilters(input: ScanReportFilterInput): ScanReportFilte
     unit,
     zones: normalizeFilterList(input.zone),
     player_ids: normalizeFilterList(input.player_id),
+    player_emails: normalizeFilterList(input.player_email).map(normalizePlayerEmailFilterValue),
     include_tests: input.include_tests === true
   };
 }
@@ -776,10 +788,17 @@ function normalizeFilterList(value?: string | string[]) {
   );
 }
 
+function normalizePlayerEmailFilterValue(value: string) {
+  return value.toLowerCase() === UNKNOWN_PLAYER_EMAIL_FILTER_VALUE
+    ? UNKNOWN_PLAYER_EMAIL_FILTER_VALUE
+    : value.toLowerCase();
+}
+
 function filterScanEvents(
   events: ScanEventRecord[],
   filters: ScanReportFilters,
-  markerById: Map<string, (typeof markers)[number]>
+  markerById: Map<string, (typeof markers)[number]>,
+  playerEmailById: Map<string, string>
 ) {
   const startMs = dateInputMs(filters.start_date);
   const endMs = dateInputMs(filters.end_date) + REPORT_DAY_MS;
@@ -804,6 +823,15 @@ function filterScanEvents(
       return false;
     }
 
+    if (filters.player_emails.length) {
+      const playerEmail =
+        scanEventEmail(event, playerEmailById) ?? UNKNOWN_PLAYER_EMAIL_FILTER_VALUE;
+
+      if (!filters.player_emails.includes(playerEmail)) {
+        return false;
+      }
+    }
+
     return true;
   });
 }
@@ -818,8 +846,54 @@ function zoneOptions(events: ScanEventRecord[], markerById: Map<string, (typeof 
   return Array.from(options);
 }
 
-function playerOptions(events: ScanEventRecord[]) {
-  return Array.from(new Set(events.map((event) => event.player_id))).sort();
+function playerOptions(
+  events: ScanEventRecord[],
+  playerEmailById: Map<string, string>
+): ScanReportPlayerOption[] {
+  const emails = new Set<string>();
+  let hasUnknown = false;
+
+  for (const event of events) {
+    const email = scanEventEmail(event, playerEmailById);
+
+    if (email) {
+      emails.add(email);
+    } else {
+      hasUnknown = true;
+    }
+  }
+
+  const options: ScanReportPlayerOption[] = Array.from(emails)
+    .sort()
+    .map((email) => ({
+      label: email,
+      title: email,
+      value: email
+    }));
+
+  if (hasUnknown) {
+    options.push({
+      label: UNKNOWN_PLAYER_EMAIL_FILTER_LABEL,
+      title: "Scans from players without a saved email",
+      value: UNKNOWN_PLAYER_EMAIL_FILTER_VALUE
+    });
+  }
+
+  return options;
+}
+
+function scanEventEmail(event: ScanEventRecord, playerEmailById: Map<string, string>) {
+  return normalizeEmailIdentity(event.email_id) ?? playerEmailById.get(event.player_id);
+}
+
+function normalizeEmailIdentity(value?: string) {
+  const email = value?.trim().toLowerCase();
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return undefined;
+  }
+
+  return email;
 }
 
 export async function getPlayerReport(): Promise<PlayerReport> {
@@ -904,6 +978,13 @@ export async function updatePlayerContact(input: {
 }
 
 async function getPlayerIdentityMap(): Promise<Map<string, string>> {
+  return (await getPlayerIdentityDetails()).identityById;
+}
+
+async function getPlayerIdentityDetails(): Promise<{
+  emailById: Map<string, string>;
+  identityById: Map<string, string>;
+}> {
   const d1 = await getD1();
 
   if (d1) {
@@ -912,11 +993,11 @@ async function getPlayerIdentityMap(): Promise<Map<string, string>> {
       getD1PlayerContactRows(d1)
     ]);
 
-    return playerIdentityMapFromRows({ savedRows, contactRows });
+    return playerIdentityDetailsFromRows({ savedRows, contactRows });
   }
 
   const db = await readLocalDb();
-  return playerIdentityMapFromRows({
+  return playerIdentityDetailsFromRows({
     savedRows: db.saved_players,
     contactRows: db.player_contacts
   });
@@ -1350,14 +1431,14 @@ function playerEmailMapFromRows(input: {
   const playerEmails = new Map<string, string>();
 
   for (const row of input.savedRows) {
-    const email = row.email?.trim();
+    const email = normalizeEmailIdentity(row.email);
     if (email && !playerEmails.has(row.player_id)) {
       playerEmails.set(row.player_id, email);
     }
   }
 
   for (const row of input.contactRows) {
-    const email = row.email?.trim();
+    const email = normalizeEmailIdentity(row.email);
     if (email) {
       playerEmails.set(row.player_id, email);
     }
@@ -1380,6 +1461,16 @@ function playerIdentityMapFromRows(input: {
   }
 
   return playerIdentities;
+}
+
+function playerIdentityDetailsFromRows(input: {
+  savedRows: SavedPlayerEmailRow[];
+  contactRows: PlayerContact[];
+}) {
+  return {
+    emailById: playerEmailMapFromRows(input),
+    identityById: playerIdentityMapFromRows(input)
+  };
 }
 
 function normalizePlayerScanRows(rows: D1PlayerScanRow[]): PlayerScanRow[] {

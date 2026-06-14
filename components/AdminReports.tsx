@@ -278,6 +278,10 @@ function buildLogPageHref(filters: ScanReportFilters, page: number) {
     params.append("player_id", playerId);
   }
 
+  for (const playerEmail of filters.player_emails) {
+    params.append("player_email", playerEmail);
+  }
+
   if (page > 1) {
     params.set("log_page", String(page));
   }
@@ -291,9 +295,17 @@ function formatFilterSummary(filters: ScanReportFilters) {
     `${formatDateInput(filters.start_date)} to ${formatDateInput(filters.end_date)}`,
     timelineUnitLabel(filters.unit),
     selectedFilterSummary(filters.zones, "All zones", "zones"),
-    selectedFilterSummary(filters.player_ids.map(shortPhoneId), "All players", "players"),
+    selectedFilterSummary(playerFilterLabels(filters), "All players", "players"),
     filters.include_tests ? "Test scans included" : "Test scans hidden"
   ].join(" · ");
+}
+
+function playerFilterLabels(filters: ScanReportFilters) {
+  if (filters.player_emails.length) {
+    return filters.player_emails.map((value) => value === "unknown" ? "Unknown" : value);
+  }
+
+  return filters.player_ids.map(shortPhoneId);
 }
 
 function selectedFilterSummary(values: string[], emptyLabel: string, pluralLabel: string) {

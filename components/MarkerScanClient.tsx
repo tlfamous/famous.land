@@ -17,8 +17,13 @@ import type { Marker } from "@/lib/types";
 
 type ScanMoment = "loading" | "first" | "new" | "repeat";
 
+function testerHref(path: string) {
+  return `${path}?scan_source=${TESTER_SCAN_SOURCE}`;
+}
+
 export function MarkerScanClient({ marker }: { marker: Marker }) {
   const [foundIds, setFoundIds] = useState<string[]>([]);
+  const [isTestMode, setIsTestMode] = useState(false);
   const [visitCount, setVisitCount] = useState(0);
   const [saved, setSaved] = useState(false);
   const [serverMessage, setServerMessage] = useState("");
@@ -29,6 +34,7 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
     const playerId = getOrCreatePlayerId();
     const isTestScan =
       new URLSearchParams(window.location.search).get("scan_source") === TESTER_SCAN_SOURCE;
+    setIsTestMode(isTestScan);
 
     fetch("/api/scan", {
       method: "POST",
@@ -84,6 +90,7 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
   const activeZoneSlug = zoneMapSlugs[marker.zone];
   const foundMarkerLabel = foundCount === 1 ? "1 marker" : `${foundCount} markers`;
   const isFirstScan = scanMoment === "first";
+  const questHref = isTestMode ? testerHref("/quest") : "/quest";
   const foundMessage =
     isFirstScan
       ? "First scan saved. This phone is tracking your quest."
@@ -133,7 +140,7 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
             </div>
           </div>
           <div className="button-row">
-            <Link className="button primary" href="/quest">
+            <Link className="button primary" href={questHref}>
               View Famous Land Quest
             </Link>
             <Link className="button secondary" href="/safety">
@@ -167,7 +174,7 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
             <Link className="button primary" href="/save-progress">
               Save my progress
             </Link>
-            <Link className="button secondary" href="/quest">
+            <Link className="button secondary" href={questHref}>
               Maybe later
             </Link>
           </div>

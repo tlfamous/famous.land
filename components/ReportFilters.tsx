@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, type ChangeEvent } from "react";
-import type { ScanReportFilters, ScanTimelineUnit } from "@/lib/db";
+import type { ScanReportFilters, ScanReportPlayerOption, ScanTimelineUnit } from "@/lib/db";
 
 type ReportFiltersProps = {
   zoneOptions: string[];
   filters: ScanReportFilters;
-  playerOptions: string[];
+  playerOptions: ScanReportPlayerOption[];
   summary: string;
 };
 
@@ -21,11 +21,11 @@ export function ReportFilters({
     { label: "Date range", value: `${formatDateInput(filters.start_date)} to ${formatDateInput(filters.end_date)}` },
     { label: "Grouping", value: timelineUnitLabel(filters.unit) },
     { label: "Zone", value: selectedSummary(filters.zones, "All zones", "zones") },
-    { label: "Player", value: selectedSummary(filters.player_ids.map(shortPhoneId), "All players", "players") },
+    { label: "Player", value: selectedSummary(filters.player_emails.map(playerEmailLabel), "All players", "players") },
     { label: "Scan type", value: filters.include_tests ? "Test scans included" : "Test scans hidden" }
   ];
   const selectedZones = new Set(filters.zones);
-  const selectedPlayers = new Set(filters.player_ids);
+  const selectedPlayers = new Set(filters.player_emails);
 
   function handleTimelineUnitChange(event: ChangeEvent<HTMLSelectElement>) {
     event.currentTarget.form?.requestSubmit();
@@ -87,12 +87,8 @@ export function ReportFilters({
           <MultiSelectFilter
             emptyLabel="All players"
             label="Player"
-            name="player_id"
-            options={playerOptions.map((playerId) => ({
-              label: shortPhoneId(playerId),
-              title: playerId,
-              value: playerId
-            }))}
+            name="player_email"
+            options={playerOptions}
             selectedValues={selectedPlayers}
           />
           <label className="report-filter-checkbox">
@@ -175,8 +171,8 @@ function selectedSummary(values: string[], emptyLabel: string, pluralLabel: stri
   return `${values.length} ${pluralLabel}`;
 }
 
-function shortPhoneId(phoneId: string) {
-  return phoneId.length > 12 ? `${phoneId.slice(0, 8)}...` : phoneId;
+function playerEmailLabel(value: string) {
+  return value === "unknown" ? "Unknown" : value;
 }
 
 function timelineUnitLabel(unit: ScanTimelineUnit) {

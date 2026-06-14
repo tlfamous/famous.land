@@ -13,17 +13,33 @@ import {
   hasSavedProgress,
   mergeLocalScannedMarkers
 } from "@/lib/localPlayer";
+import { TESTER_SCAN_SOURCE } from "@/lib/testerMode";
+
+function testerHref(path: string) {
+  return `${path}?scan_source=${TESTER_SCAN_SOURCE}`;
+}
 
 export function FamousLandQuestDashboard() {
   const [foundIds, setFoundIds] = useState<string[]>([]);
+  const [isTestMode, setIsTestMode] = useState(false);
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     const playerId = getOrCreatePlayerId();
+    const isTesterMode =
+      new URLSearchParams(window.location.search).get("scan_source") === TESTER_SCAN_SOURCE;
+    const progressUrl = new URL("/api/progress", window.location.origin);
+    progressUrl.searchParams.set("player_id", playerId);
+
+    if (isTesterMode) {
+      progressUrl.searchParams.set("scan_source", TESTER_SCAN_SOURCE);
+    }
+
+    setIsTestMode(isTesterMode);
     setFoundIds(getLocalScannedMarkers());
     setSaved(hasSavedProgress());
 
-    fetch(`/api/progress?player_id=${encodeURIComponent(playerId)}`)
+    fetch(progressUrl.toString())
       .then((response) => response.json())
       .then((data: { ok?: boolean; marker_ids?: string[] }) => {
         if (data.ok && data.marker_ids?.length) {
@@ -42,6 +58,7 @@ export function FamousLandQuestDashboard() {
     .filter((marker) => foundIds.includes(marker.marker_id))
     .sort((a, b) => a.order - b.order);
   const promptSave = foundCount >= 5 && !saved;
+  const saveProgressHref = isTestMode ? testerHref("/save-progress") : "/save-progress";
 
   return (
     <div className="stack">
@@ -72,7 +89,7 @@ export function FamousLandQuestDashboard() {
             Save by email so you can recover your quest if you switch phones, clear your
             browser, or come back later.
           </p>
-          <Link className="button primary" href="/save-progress">
+          <Link className="button primary" href={saveProgressHref}>
             Save my progress
           </Link>
         </section>
@@ -107,7 +124,10 @@ export function FamousLandQuestDashboard() {
         ) : (
           <div className="marker-list">
             {foundMarkers.map((marker) => (
-              <Link href={`/${marker.short_code}`} key={marker.marker_id}>
+              <Link
+                href={isTestMode ? testerHref(`/${marker.short_code}`) : `/${marker.short_code}`}
+                key={marker.marker_id}
+              >
                 <span>{String(marker.marker_number).padStart(2, "0")}</span>
                 <strong>{marker.marker_name}</strong>
                 <small>{marker.zone}</small>
@@ -124,7 +144,7 @@ export function FamousLandQuestDashboard() {
           switch phones or clear your browser.
         </p>
         <div className="button-row">
-          <Link className="button primary" href="/save-progress">
+          <Link className="button primary" href={saveProgressHref}>
             Save progress
           </Link>
           <Link className="button secondary" href="/contact">

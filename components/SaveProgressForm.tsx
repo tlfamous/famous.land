@@ -7,6 +7,7 @@ import {
   getOrCreatePlayerId,
   markProgressSaved
 } from "@/lib/localPlayer";
+import { TESTER_SCAN_SOURCE } from "@/lib/testerMode";
 
 export function SaveProgressForm() {
   const [email, setEmail] = useState("");
@@ -14,9 +15,13 @@ export function SaveProgressForm() {
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [message, setMessage] = useState("");
   const [recoveryCode, setRecoveryCode] = useState("");
+  const [questHref, setQuestHref] = useState("/quest");
 
   useEffect(() => {
     setMarkerCount(getLocalScannedMarkers().length);
+    if (new URLSearchParams(window.location.search).get("scan_source") === TESTER_SCAN_SOURCE) {
+      setQuestHref(`/quest?scan_source=${TESTER_SCAN_SOURCE}`);
+    }
   }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -119,7 +124,7 @@ export function SaveProgressForm() {
         ) : null}
       </section>
 
-      <Link className="button secondary" href="/quest">
+      <Link className="button secondary" href={questHref}>
         Back to quest
       </Link>
     </div>
