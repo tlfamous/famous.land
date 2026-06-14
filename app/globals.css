@@ -192,10 +192,13 @@ main:has(.game-off-page) {
 }
 
 .game-off-page {
+  --game-off-edge-x: clamp(28px, 6vw, 72px);
+  --game-off-edge-y: clamp(28px, 6vw, 72px);
+  position: relative;
   min-height: 100svh;
   display: grid;
-  align-items: start;
-  padding: clamp(28px, 6vw, 72px);
+  align-items: end;
+  padding: var(--game-off-edge-y) var(--game-off-edge-x);
   color: var(--paper-strong);
   background:
     linear-gradient(90deg, rgba(12, 11, 9, 0.9), rgba(12, 11, 9, 0.62) 44%, rgba(12, 11, 9, 0.18)),
@@ -259,8 +262,12 @@ main:has(.game-off-page) {
 }
 
 .game-off-page .game-off-headline {
+  position: absolute;
+  z-index: 2;
+  top: var(--game-off-edge-y);
+  left: var(--game-off-edge-x);
   width: fit-content;
-  max-width: min(100%, 42rem);
+  max-width: min(calc(100vw - var(--game-off-edge-x) - var(--game-off-edge-x)), 42rem);
   margin-bottom: 0;
   padding: 11px 15px;
   color: var(--ink);
@@ -397,7 +404,9 @@ main:has(.game-off-page) {
   }
 
   .game-off-page {
-    align-items: start;
+    --game-off-edge-x: 22px;
+    --game-off-edge-y: 28px;
+    align-items: end;
     padding: 28px 22px;
     background:
       linear-gradient(180deg, rgba(12, 11, 9, 0.18), rgba(12, 11, 9, 0.84)),
