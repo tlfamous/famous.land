@@ -918,14 +918,25 @@ button.button,
   font-weight: 800;
 }
 
-.form input {
+.form input,
+.form textarea,
+.field textarea {
   width: 100%;
-  min-height: 52px;
   padding: 12px 14px;
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--paper-strong);
+}
+
+.form input {
+  min-height: 52px;
+}
+
+.form textarea,
+.field textarea {
+  min-height: 116px;
+  resize: vertical;
 }
 
 .notice {
@@ -2366,6 +2377,128 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
 
 .players-table {
   min-width: 980px;
+}
+
+.players-page .report-log-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.players-page .report-table-wrap {
+  width: 100%;
+  max-width: 100%;
+}
+
+.player-database-workspace {
+  display: grid;
+  gap: 14px;
+  align-items: start;
+}
+
+.player-profile-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.player-recovery-actions {
+  display: grid;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(17, 20, 15, 0.12);
+}
+
+.empty-profile-state {
+  display: grid;
+  gap: 8px;
+  min-height: 220px;
+  align-content: center;
+}
+
+.empty-profile-state h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+}
+
+.empty-profile-state p {
+  margin: 0;
+}
+
+.muted-cell {
+  color: rgba(17, 20, 15, 0.56);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.player-contact-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 6px 0 14px;
+  padding: 6px;
+  border: 1px solid rgba(17, 20, 15, 0.12);
+  border-radius: 10px;
+  background: rgba(247, 243, 232, 0.76);
+}
+
+.player-contact-tab {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 54px;
+  padding: 10px 12px;
+  color: rgba(17, 20, 15, 0.7);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.player-contact-tab:hover {
+  color: var(--ink);
+  border-color: rgba(17, 20, 15, 0.12);
+  background: rgba(255, 250, 240, 0.62);
+}
+
+.player-contact-tab.active {
+  color: var(--paper-strong);
+  border-color: rgba(17, 20, 15, 0.2);
+  background: var(--moss-dark);
+  box-shadow: 0 8px 22px rgba(17, 20, 15, 0.16);
+}
+
+.player-contact-tab span {
+  overflow: hidden;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.player-contact-tab strong {
+  flex: 0 0 auto;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+@media (max-width: 720px) {
+  .player-contact-tabs {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .player-database-workspace {
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.38fr);
+  }
+
+  .player-profile-card {
+    position: sticky;
+    top: 92px;
+  }
 }
 
 .backlog-page {

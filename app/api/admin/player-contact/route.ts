@@ -9,12 +9,14 @@ export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => null)) as
     | {
         player_id?: string;
+        name?: string;
         email?: string;
         phone_number?: string;
       }
     | null;
 
   const playerId = body?.player_id?.trim();
+  const name = body?.name?.trim();
   const email = body?.email?.trim();
   const phoneNumber = body?.phone_number?.trim();
 
@@ -28,6 +30,7 @@ export async function POST(request: NextRequest) {
 
   const player = await updatePlayerContact({
     player_id: playerId,
+    name: name || undefined,
     email: email || undefined,
     phone_number: phoneNumber || undefined
   });

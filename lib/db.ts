@@ -22,8 +22,10 @@ type RecoveryRequest = {
 
 type PlayerContact = {
   player_id: string;
+  name?: string;
   email?: string;
   phone_number?: string;
+  name_updated_at?: string;
   email_updated_at?: string;
   phone_updated_at?: string;
   created_at: string;
@@ -32,8 +34,10 @@ type PlayerContact = {
 
 type PlayerContactUpdate = {
   player_id: string;
+  name?: string;
   email?: string;
   phone_number?: string;
+  name_updated_at?: string;
   email_updated_at?: string;
   phone_updated_at?: string;
 };
@@ -168,8 +172,10 @@ type SavedPlayerEmailRow = {
 
 type D1PlayerContactRow = {
   player_id: string;
+  name?: string | null;
   email?: string | null;
   phone_number?: string | null;
+  name_updated_at?: string | null;
   email_updated_at?: string | null;
   phone_updated_at?: string | null;
   created_at: string;
@@ -226,6 +232,7 @@ export type PlayerReportRow = {
   player_id: string;
   scan_count: number;
   last_scan_at?: string;
+  name?: string;
   email?: string;
   phone_number?: string;
 };
@@ -924,10 +931,12 @@ export async function getMessageAdminReport(): Promise<MessageAdminReport> {
 
 export async function updatePlayerContact(input: {
   player_id: string;
+  name?: string;
   email?: string;
   phone_number?: string;
 }): Promise<PlayerReportRow | undefined> {
   const player_id = input.player_id.trim();
+  const name = normalizePlayerName(input.name);
   const email = input.email?.trim().toLowerCase();
   const phone_number = input.phone_number?.trim();
 
@@ -941,8 +950,10 @@ export async function updatePlayerContact(input: {
   if (d1) {
     await upsertD1PlayerContact(d1, {
       player_id,
+      name,
       email: email || undefined,
       phone_number: phone_number || undefined,
+      name_updated_at: name ? now : undefined,
       email_updated_at: email ? now : undefined,
       phone_updated_at: phone_number ? now : undefined
     });
@@ -957,8 +968,10 @@ export async function updatePlayerContact(input: {
     const db = await readLocalDb();
     upsertLocalPlayerContact(db, {
       player_id,
+      name,
       email: email || undefined,
       phone_number: phone_number || undefined,
+      name_updated_at: name ? now : undefined,
       email_updated_at: email ? now : undefined,
       phone_updated_at: phone_number ? now : undefined
     });
@@ -1331,7 +1344,7 @@ async function getD1PlayerContactRows(d1: FamousLandD1): Promise<PlayerContact[]
   try {
     const result = await d1
       .prepare(
-        `select player_id, email, phone_number, email_updated_at, phone_updated_at, created_at, updated_at
+        `select player_id, name, email, phone_number, name_updated_at, email_updated_at, phone_updated_at, created_at, updated_at
          from player_contacts`
       )
       .all<D1PlayerContactRow>();
@@ -1341,8 +1354,26 @@ async function getD1PlayerContactRows(d1: FamousLandD1): Promise<PlayerContact[]
     }
 
     return (result.results ?? []).map(normalizePlayerContactRow);
-  } catch {
-    return [];
+  } catch (error) {
+    try {
+      const result = await d1
+        .prepare(
+          `select player_id, email, phone_number, email_updated_at, phone_updated_at, created_at, updated_at
+           from player_contacts`
+        )
+        .all<D1PlayerContactRow>();
+
+      if (!result.success) {
+        throw new Error(result.error ?? "legacy player_contacts query failed");
+      }
+
+      return (result.results ?? []).map(normalizePlayerContactRow);
+    } catch {
+      if (!isMissingTableError(error)) {
+        console.error("Famous Land player contacts query failed", error);
+      }
+      return [];
+    }
   }
 }
 
@@ -1409,6 +1440,7 @@ function buildPlayerRows(input: {
         player_id: playerId,
         scan_count: scan?.scan_count ?? 0,
         last_scan_at: scan?.last_scan_at,
+        name: contact?.name,
         email: contact?.email ?? saved?.email,
         phone_number: contact?.phone_number
       };
@@ -1484,8 +1516,10 @@ function normalizePlayerScanRows(rows: D1PlayerScanRow[]): PlayerScanRow[] {
 function normalizePlayerContactRow(row: D1PlayerContactRow): PlayerContact {
   return {
     player_id: row.player_id,
+    name: row.name ?? undefined,
     email: row.email ?? undefined,
     phone_number: row.phone_number ?? undefined,
+    name_updated_at: row.name_updated_at ?? undefined,
     email_updated_at: row.email_updated_at ?? undefined,
     phone_updated_at: row.phone_updated_at ?? undefined,
     created_at: row.created_at,
@@ -1706,6 +1740,78 @@ export async function requestRecovery(input: {
     saved ? { player_id: saved.player_id, email, recovery_code: saved.recovery_code } : undefined,
     saved ? undefined : { email, mode: "not_found" }
   );
+}
+
+export async function generateRecoverySmsCopy(input: {
+  player_id: string;
+}): Promise<
+  | {
+      ok: true;
+      phone_number?: string;
+      recovery_url: string;
+      sms_text: string;
+    }
+  | {
+      ok: false;
+      error: string;
+    }
+> {
+  const player_id = input.player_id.trim();
+
+  if (!player_id) {
+    return { ok: false, error: "player_id is required." };
+  }
+
+  const d1 = await getD1();
+  let recoveryCode: string | undefined;
+  let phoneNumber: string | undefined;
+
+  if (d1) {
+    const [saved, contact] = await Promise.all([
+      d1
+        .prepare("select recovery_code from saved_players where player_id = ?")
+        .bind(player_id)
+        .first<Pick<SavedPlayer, "recovery_code">>(),
+      getD1PlayerContactRows(d1).then((rows) => rows.find((row) => row.player_id === player_id))
+    ]);
+
+    recoveryCode = saved?.recovery_code;
+    phoneNumber = contact?.phone_number;
+  } else {
+    const db = await readLocalDb();
+    recoveryCode = db.saved_players.find((player) => player.player_id === player_id)?.recovery_code;
+    phoneNumber = db.player_contacts.find((contact) => contact.player_id === player_id)?.phone_number;
+  }
+
+  if (!recoveryCode) {
+    return {
+      ok: false,
+      error: "This player does not have saved progress with a recovery link yet."
+    };
+  }
+
+  const recovery_url = recoveryUrl(await siteUrl(), recoveryCode);
+  const sms_text = [
+    "Use this link to restore your Famous Land Quest progress:",
+    recovery_url,
+    "",
+    "Open it from the phone you use for the quest."
+  ].join("\n");
+
+  await recordAdminAuditEvent({
+    action: "recovery.sms_copy",
+    player_id,
+    target: phoneNumber,
+    result: "generated",
+    detail: "Admin generated manual SMS recovery copy."
+  });
+
+  return {
+    ok: true,
+    phone_number: phoneNumber,
+    recovery_url,
+    sms_text
+  };
 }
 
 export async function recoverProgressByCode(recoveryCode: string): Promise<
@@ -2036,29 +2142,36 @@ async function upsertD1PlayerContact(d1: FamousLandD1, input: PlayerContactUpdat
   const now = new Date().toISOString();
 
   try {
+    await ensureD1PlayerContactNameColumns(d1);
     const result = await d1
       .prepare(
         `insert into player_contacts (
            player_id,
+           name,
            email,
            phone_number,
+           name_updated_at,
            email_updated_at,
            phone_updated_at,
            created_at,
            updated_at
          )
-         values (?, ?, ?, ?, ?, ?, ?)
+         values (?, ?, ?, ?, ?, ?, ?, ?, ?)
          on conflict(player_id) do update set
+           name = coalesce(excluded.name, player_contacts.name),
            email = coalesce(excluded.email, player_contacts.email),
            phone_number = coalesce(excluded.phone_number, player_contacts.phone_number),
+           name_updated_at = coalesce(excluded.name_updated_at, player_contacts.name_updated_at),
            email_updated_at = coalesce(excluded.email_updated_at, player_contacts.email_updated_at),
            phone_updated_at = coalesce(excluded.phone_updated_at, player_contacts.phone_updated_at),
            updated_at = excluded.updated_at`
       )
       .bind(
         input.player_id,
+        input.name ?? null,
         input.email ?? null,
         input.phone_number ?? null,
+        input.name_updated_at ?? null,
         input.email_updated_at ?? null,
         input.phone_updated_at ?? null,
         now,
@@ -2074,13 +2187,42 @@ async function upsertD1PlayerContact(d1: FamousLandD1, input: PlayerContactUpdat
   }
 }
 
+async function ensureD1PlayerContactNameColumns(d1: FamousLandD1) {
+  await Promise.all([
+    addD1ColumnIfMissing(d1, "player_contacts", "name", "text"),
+    addD1ColumnIfMissing(d1, "player_contacts", "name_updated_at", "text")
+  ]);
+}
+
+async function addD1ColumnIfMissing(
+  d1: FamousLandD1,
+  tableName: string,
+  columnName: string,
+  columnType: string
+) {
+  try {
+    const result = await d1.prepare(`alter table ${tableName} add column ${columnName} ${columnType}`).run();
+
+    if (!result.success && !/duplicate column/i.test(result.error ?? "")) {
+      console.error(`Famous Land ${tableName}.${columnName} migration failed`, result.error);
+    }
+  } catch (error) {
+    if (error instanceof Error && /duplicate column/i.test(error.message)) {
+      return;
+    }
+    console.error(`Famous Land ${tableName}.${columnName} migration failed`, error);
+  }
+}
+
 function upsertLocalPlayerContact(db: DbShape, input: PlayerContactUpdate) {
   const now = new Date().toISOString();
   const existing = db.player_contacts.find((contact) => contact.player_id === input.player_id);
   const nextContact: PlayerContact = {
     player_id: input.player_id,
+    name: input.name ?? existing?.name,
     email: input.email ?? existing?.email,
     phone_number: input.phone_number ?? existing?.phone_number,
+    name_updated_at: input.name_updated_at ?? existing?.name_updated_at,
     email_updated_at: input.email_updated_at ?? existing?.email_updated_at,
     phone_updated_at: input.phone_updated_at ?? existing?.phone_updated_at,
     created_at: existing?.created_at ?? now,
@@ -2396,6 +2538,25 @@ function recoveryStubResponse(): { mode: "stub"; message: string } {
     message:
       "Email is not available right now. If you saved progress locally, open /recover/YOUR-CODE on the device you want to restore."
   };
+}
+
+function normalizePlayerName(value?: string) {
+  return value?.replace(/\s+/g, " ").trim().slice(0, 80) || undefined;
+}
+
+async function siteUrl(): Promise<string> {
+  const cloudflareEnv = await getCloudflareContext({ async: true })
+    .then((context) => context.env as Record<string, unknown>)
+    .catch(() => undefined);
+  const runtimeValue = cloudflareEnv?.NEXT_PUBLIC_SITE_URL ?? cloudflareEnv?.SITE_URL;
+  const processValue = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL;
+  const value = typeof runtimeValue === "string" ? runtimeValue : processValue;
+
+  return (value?.trim() || "https://famous.land").replace(/\/+$/, "");
+}
+
+function recoveryUrl(baseUrl: string, recoveryCode: string): string {
+  return `${baseUrl}/recover/${encodeURIComponent(recoveryCode)}`;
 }
 
 function recoveryCodeNotFoundResponse(): { mode: "not_found"; message: string } {
