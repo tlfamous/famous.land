@@ -19,7 +19,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico?v=cow-emoji", sizes: "any" },
-      { url: "/icon.svg?v=cow-emoji", type: "image/svg+xml" }
+      { url: "/icon.svg?v=cow-emoji", type: "image/svg+xml" },
+      { url: "/icon-192.png?v=cow-emoji", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png?v=cow-emoji", sizes: "512x512", type: "image/png" }
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png?v=cow-emoji", sizes: "180x180", type: "image/png" }
     ],
     shortcut: "/favicon.ico?v=cow-emoji"
   }
@@ -37,6 +42,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=cow-emoji" />
       </head>
       <body>
         <Header />
