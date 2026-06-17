@@ -42,33 +42,6 @@ export default async function PlayersPage({ searchParams }: PlayersPageProps) {
 
   return (
     <div className="stack players-page">
-      <section className="hero-card players-hero">
-        <p className="eyebrow">Players</p>
-        <h1>Player Database</h1>
-        <p>
-          Each row is one phone ID, with scan activity and any contact details saved
-          for that player.
-        </p>
-      </section>
-
-      <section className="report-stat-grid" aria-label="Player rollups">
-        <article className="report-stat-card">
-          <span>Players</span>
-          <strong>{report.total_players}</strong>
-          <small>Unique phone IDs</small>
-        </article>
-        <article className="report-stat-card">
-          <span>With email</span>
-          <strong>{report.players_with_email}</strong>
-          <small>Saved progress contacts</small>
-        </article>
-        <article className="report-stat-card">
-          <span>With phone</span>
-          <strong>{report.players_with_phone}</strong>
-          <small>SMS contacts captured</small>
-        </article>
-      </section>
-
       <PlayerDatabaseTool
         activeTab={activeTab}
         auditEvents={report.audit_events}

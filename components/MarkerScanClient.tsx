@@ -125,7 +125,7 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
           <div className="first-scan-steps">
             <div>
               <span>Game</span>
-              <p>Find QR markers around Famous Land to finish the four zone quests.</p>
+              <p>Find QR markers around Famous Land to finish all four zones.</p>
             </div>
             <div>
               <span>Safety</span>
@@ -192,7 +192,7 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
       ) : null}
 
       <div className="card marker-progress-card marker-app-panel">
-        <h2>Zone quest</h2>
+        <h2>Zone progress</h2>
         <div className="quest-progress-list">
           {zoneQuests.map((quest) => (
             <div className="quest-progress-row" key={quest.id}>

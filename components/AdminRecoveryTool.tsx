@@ -14,6 +14,7 @@ export type AdminRecoveryPlayer = {
 
 type SendStatus = "idle" | "sending" | "sent" | "stub" | "error";
 type EditStatus = "idle" | "saving" | "saved" | "error";
+type SmsStatus = "idle" | "generating" | "copied" | "ready" | "error";
 
 export function AdminRecoveryTool({
   players,
@@ -33,7 +34,7 @@ export function AdminRecoveryTool({
     ? players.find((player) => player.player_id === requestedPlayerId)
     : undefined;
   const recoveryPlayers = useMemo(
-    () => players.filter((player) => Boolean(player.email)),
+    () => players.filter((player) => Boolean(player.email || player.phone_number)),
     [players]
   );
   const [query, setQuery] = useState(requestedPlayer?.email ?? requestedPlayer?.player_id ?? "");
@@ -45,6 +46,9 @@ export function AdminRecoveryTool({
   const [editPhone, setEditPhone] = useState(requestedPlayer?.phone_number ?? "");
   const [editStatus, setEditStatus] = useState<EditStatus>("idle");
   const [editMessage, setEditMessage] = useState("");
+  const [smsStatus, setSmsStatus] = useState<SmsStatus>("idle");
+  const [smsMessage, setSmsMessage] = useState("");
+  const [smsCopy, setSmsCopy] = useState("");
 
   const filteredRecoveryPlayers = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -115,6 +119,9 @@ export function AdminRecoveryTool({
     setEditMessage("");
     setStatus("idle");
     setMessage("");
+    setSmsStatus("idle");
+    setSmsMessage("");
+    setSmsCopy("");
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -196,6 +203,53 @@ export function AdminRecoveryTool({
     router.refresh();
   }
 
+  async function generateSmsCopy() {
+    if (!selectedPlayer?.phone_number) {
+      setSmsStatus("error");
+      setSmsMessage("Add a phone number before generating SMS recovery copy.");
+      return;
+    }
+
+    setSmsStatus("generating");
+    setSmsMessage("");
+    setSmsCopy("");
+
+    const response = await fetch("/api/admin/player-recovery-sms", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        player_id: selectedPlayer.player_id
+      })
+    });
+
+    const data = (await response.json().catch(() => null)) as
+      | {
+          ok?: boolean;
+          error?: string;
+          sms_text?: string;
+        }
+      | null;
+
+    if (!response.ok || !data?.ok || !data.sms_text) {
+      setSmsStatus("error");
+      setSmsMessage(data?.error ?? "SMS recovery copy could not be generated.");
+      return;
+    }
+
+    setSmsCopy(data.sms_text);
+
+    try {
+      await navigator.clipboard.writeText(data.sms_text);
+      setSmsStatus("copied");
+      setSmsMessage("SMS recovery message copied. Send it to the player from your SMS app.");
+    } catch {
+      setSmsStatus("ready");
+      setSmsMessage("SMS recovery message is ready to copy.");
+    }
+  }
+
   return (
     <>
       <section className="recovery-workspace">
@@ -208,7 +262,7 @@ export function AdminRecoveryTool({
             <span>
               {recoveryPlayers.length
                 ? `${recoveryPlayers.length} row${recoveryPlayers.length === 1 ? "" : "s"}`
-                : "No saved emails"}
+                : "No saved contacts"}
             </span>
           </div>
           <label className="field compact-search" htmlFor="recovery-candidate-search">
@@ -311,10 +365,30 @@ export function AdminRecoveryTool({
                 Sends the one-tap recovery email. The player should open it on the phone
                 they use for the quest.
               </p>
-              <button className="button primary" disabled={status === "sending"} type="submit">
+              <button
+                className="button primary"
+                disabled={!email || status === "sending"}
+                type="submit"
+              >
                 {status === "sending" ? "Sending..." : "Send recovery email"}
               </button>
             </form>
+
+            <div className="compact-form">
+              <p className="eyebrow">Recovery SMS</p>
+              <p className="form-note">
+                Copies a one-tap recovery message. When the player opens the link on
+                their quest phone, that phone is linked to this profile.
+              </p>
+              <button
+                className="button secondary"
+                disabled={!selectedPlayer?.phone_number || smsStatus === "generating"}
+                type="button"
+                onClick={generateSmsCopy}
+              >
+                {smsStatus === "generating" ? "Generating..." : "Copy recovery SMS"}
+              </button>
+            </div>
 
             {selectedPlayer ? (
               <div className="notice message-selected-player">
@@ -346,6 +420,19 @@ export function AdminRecoveryTool({
               <div className={status === "error" ? "notice error" : "notice"}>
                 <p>{message}</p>
               </div>
+            ) : null}
+
+            {smsMessage ? (
+              <div className={smsStatus === "error" ? "notice error" : "notice"}>
+                <p>{smsMessage}</p>
+              </div>
+            ) : null}
+
+            {smsCopy ? (
+              <label className="field compact-search" htmlFor="message-sms-copy">
+                <span>SMS copy</span>
+                <textarea id="message-sms-copy" readOnly rows={5} value={smsCopy} />
+              </label>
             ) : null}
           </div>
 

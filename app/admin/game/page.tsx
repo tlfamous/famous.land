@@ -11,7 +11,7 @@ const gameOverview = [
   {
     label: "Core loop",
     detail:
-      "Players walk the land, find physical QR markers, scan them with a phone, and build progress across zone quests."
+      "Players walk the land, find physical QR markers, scan them with a phone, and build progress across four zones."
   },
   {
     label: "Player identity",
@@ -21,7 +21,7 @@ const gameOverview = [
   {
     label: "Progression",
     detail:
-      "Markers roll up into zone quests, completion state, and one hidden-until-complete grand-prize reveal."
+      "Markers roll up into zone completion state and one hidden-until-complete grand-prize reveal."
   },
   {
     label: "Admin workflow",
@@ -65,7 +65,7 @@ const colorTokens = [
     name: "Moss dark",
     token: "--moss-dark",
     value: "#26361c",
-    use: "Zone quest cards, map pills, marker counters, and dark nature gradients."
+    use: "Zone cards, map pills, marker counters, and dark nature gradients."
   },
   {
     name: "Bark",
@@ -90,7 +90,7 @@ const designElements = [
   "Oversized compact headlines, uppercase eyebrow labels, and system sans typography.",
   "Pill buttons for primary, secondary, and sticky actions.",
   "Progress bars that move from moss to water, reused across marker, progress, and quest views.",
-  "Zone quest, marker, report, table, and map summary list patterns.",
+  "Zone, marker, report, table, and map summary list patterns.",
   "Responsive admin left navigation, map workspace, data tables, and iPhone-style scan tester."
 ];
 
@@ -98,12 +98,12 @@ const publicFeatures = [
   "Single-image public landing page at /.",
   "Physical QR marker routes at root short codes such as /8K4P2.",
   "Compatibility marker routes at /t/FF-TREE-001.",
-  "Marker scan pages with compact welcome state, Marker Map preview, current-zone quest progress, field note, outdoor challenge, and clue.",
+  "Marker scan pages with compact welcome state, Marker Map preview, current-zone progress, field note, outdoor challenge, and clue.",
   "First-scan onboarding state that introduces the quest before the normal marker flow.",
   "Anonymous browser player ID and local progress tracking with no login required.",
-  "Lakeview Quest, No Wake Quest, Treetop Quest, and Hillside Quest progress.",
+  "Lakeview, No Wake, Treetop, and Hillside zone progress.",
   `Hidden grand-prize reveal after all ${TOTAL_MARKERS} markers are found in any order.`,
-  "Famous Land Quest dashboard at /quest with marker progress, zone quests, found marker list, save, and recovery help.",
+  "Famous Land Quest dashboard at /quest with marker progress, zone progress, found marker list, save, and recovery help.",
   "Save-progress prompt after 5 markers, with optional email recovery.",
   "Brevo-powered one-tap recovery email for restoring saved marker progress on a new or cleared phone.",
   "Safety page with private-property recreational-use notice and prohibited-use rules.",
@@ -183,7 +183,7 @@ const routes = [
   { path: "/", purpose: "Image-first public landing page." },
   { path: "/[code]", purpose: "Root QR marker page by short code." },
   { path: "/t/[markerId]", purpose: "Compatibility marker page by full marker ID." },
-  { path: "/quest", purpose: "Famous Land Quest dashboard with marker progress, zone quests, save, and recover links." },
+  { path: "/quest", purpose: "Famous Land Quest dashboard with marker progress, zone progress, save, and recover links." },
   { path: "/quests", purpose: "Compatibility redirect to /quest." },
   { path: "/progress", purpose: "Redirects old progress links to /quest." },
   { path: "/prize/lakemonomonac2026", purpose: "Hidden grand-prize page reached from the completion reveal." },
@@ -213,9 +213,9 @@ const gameStructure = [
     detail: `Physical tree markers with unique QR short codes; Hillside has ${hillsideTagCount} tags.`
   },
   {
-    label: "Zone quests",
+    label: "Zones",
     value: "4",
-    detail: "Lakeview Quest, No Wake Quest, Treetop Quest, and Hillside Quest."
+    detail: "Lakeview, No Wake, Treetop, and Hillside."
   },
   { label: "Save unlock", value: "5", detail: "Email save prompt appears after five marker finds." }
 ];

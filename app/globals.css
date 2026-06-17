@@ -89,12 +89,31 @@ body:has(.map-document-page) .site-header {
   display: none;
 }
 
+body:has(.zone-map-screen) {
+  min-height: 100svh;
+  background:
+    linear-gradient(180deg, rgba(247, 243, 232, 0.72), rgba(247, 243, 232, 0.92)),
+    url("/assets/FamousLand2.png") center / cover no-repeat;
+}
+
+body:has(.zone-map-screen) .site-header {
+  display: none;
+}
+
 main:has(.map-document-page) {
   width: 100%;
   max-width: none;
   min-height: 100svh;
   margin: 0;
   padding: 0;
+}
+
+main:has(.zone-map-screen) {
+  width: 100%;
+  max-width: none;
+  min-height: 100svh;
+  margin: 0;
+  padding: 12px;
 }
 
 body:has(.image-home) {
@@ -355,10 +374,11 @@ main:has(.game-off-page) {
   width: 100%;
   max-width: 1480px;
   display: grid;
-  grid-template-columns: minmax(220px, 0.72fr) minmax(320px, 1fr);
-  gap: 18px;
+  grid-template-columns: minmax(240px, 0.42fr) minmax(420px, 1fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: center;
   margin: 0 auto 18px;
-  padding: 18px;
+  padding: 22px;
   border: 1px solid rgba(17, 20, 15, 0.1);
   border-radius: var(--radius);
   background: rgba(255, 250, 240, 0.94);
@@ -371,7 +391,7 @@ main:has(.game-off-page) {
 }
 
 .home-headline-admin-card p:not(.eyebrow) {
-  max-width: 34rem;
+  max-width: 31rem;
   margin-bottom: 0;
   color: rgba(17, 20, 15, 0.62);
   font-weight: 750;
@@ -379,9 +399,12 @@ main:has(.game-off-page) {
 
 .home-headline-admin-card form {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(280px, 1fr) auto;
   align-items: end;
-  gap: 10px;
+  gap: 12px;
+  max-width: 920px;
+  justify-self: end;
+  width: 100%;
 }
 
 .home-headline-admin-card label {
@@ -394,8 +417,17 @@ main:has(.game-off-page) {
 }
 
 .home-headline-admin-card textarea {
-  min-height: 58px;
+  min-height: 72px;
+  padding: 12px 14px;
+  border: 1px solid rgba(17, 20, 15, 0.2);
+  border-radius: var(--radius);
+  background: rgba(255, 250, 240, 0.78);
   resize: vertical;
+}
+
+.home-headline-admin-card .button {
+  min-height: 58px;
+  white-space: nowrap;
 }
 
 @media (max-width: 700px) and (orientation: portrait) {
@@ -874,10 +906,49 @@ button.button,
   gap: 24px;
 }
 
+.quest-progress-row {
+  width: 100%;
+  display: block;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+}
+
+.quest-progress-row:focus-visible {
+  outline: 3px solid rgba(47, 111, 119, 0.72);
+  outline-offset: 7px;
+  border-radius: 10px;
+}
+
 .quest-progress-row .split {
-  align-items: baseline;
+  align-items: center;
   gap: 16px;
   margin-bottom: 6px;
+}
+
+.zone-progress-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.zone-progress-actions > span {
+  min-width: 3ch;
+  font-size: clamp(1.2rem, 4.8vw, 1.75rem);
+  font-weight: 850;
+  line-height: 1;
+  text-align: right;
+}
+
+.zone-map-button {
+  min-height: 42px;
+  padding: 8px 16px;
+  border-color: rgba(47, 111, 119, 0.26);
+  background: rgba(216, 227, 189, 0.78);
 }
 
 .quest-progress-row strong {
@@ -902,6 +973,65 @@ button.button,
 
 .quest-progress-row .progress-bar {
   height: 14px;
+}
+
+.zone-map-screen {
+  min-height: calc(100svh - 32px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 14px;
+}
+
+.zone-map-screen-toolbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid rgba(255, 250, 240, 0.18);
+  border-radius: var(--radius);
+  color: var(--paper-strong);
+  background: rgba(17, 20, 15, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.zone-map-screen-toolbar h1,
+.zone-map-screen-toolbar p {
+  margin: 0;
+}
+
+.zone-map-screen-toolbar h1 {
+  font-size: clamp(1.45rem, 7vw, 3rem);
+  line-height: 0.95;
+}
+
+.zone-map-screen-toolbar p {
+  margin-top: 3px;
+  color: rgba(255, 250, 240, 0.72);
+  font-size: clamp(0.92rem, 3.5vw, 1.1rem);
+  font-weight: 800;
+}
+
+.zone-map-screen-canvas {
+  min-height: 0;
+  width: min(100%, 760px);
+  height: calc(100svh - 132px);
+  max-height: calc(100svh - 132px);
+  justify-self: center;
+  overflow: hidden;
+  border: 1px solid rgba(17, 20, 15, 0.24);
+  border-radius: var(--radius);
+  background: #d9e8c2;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 250, 240, 0.36),
+    0 18px 42px rgba(17, 20, 15, 0.16);
+}
+
+.quest-zone-map-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #d9e8c2;
 }
 
 .quest.complete {
@@ -4405,9 +4535,27 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
     width: 100%;
   }
 
+  .quest-progress-row .split {
+    align-items: flex-start;
+  }
+
+  .zone-progress-actions {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
   .home-headline-admin-card,
   .home-headline-admin-card form {
     grid-template-columns: 1fr;
+  }
+
+  .home-headline-admin-card form {
+    justify-self: stretch;
+  }
+
+  .home-headline-admin-card .button {
+    width: 100%;
   }
 
   .report-zone-map-grid {

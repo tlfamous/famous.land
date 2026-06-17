@@ -5,9 +5,9 @@ export function CompletedZoneQuests({ foundIds }: { foundIds: string[] }) {
 
   return (
     <section>
-      <h2>Completed zone quests</h2>
+      <h2>Completed zones</h2>
       {completed.length === 0 ? (
-        <p className="muted">No zone quests completed yet. Finish a zone to complete one.</p>
+        <p className="muted">No zones completed yet. Finish a zone to complete one.</p>
       ) : (
         <div className="zone-quest-grid">
           {completed.map((quest) => (

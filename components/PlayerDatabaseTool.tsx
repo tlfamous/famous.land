@@ -240,40 +240,32 @@ export function PlayerDatabaseTool({
             </thead>
             <tbody>
               {players.length ? (
-                players.map((player) => {
-                  const canSelect = Boolean(player.email || player.phone_number);
-
-                  return (
-                    <tr
-                      className={selectedPlayerId === player.player_id ? "selected-row" : undefined}
-                      key={player.player_id}
-                    >
-                      <td>
-                        <code title={player.player_id}>{shortPlayerId(player.player_id)}</code>
-                      </td>
-                      <td>{player.name ?? "Not saved"}</td>
-                      <td>{player.scan_count}</td>
-                      <td>
-                        {player.last_scan_at ? formatEasternDateTime(player.last_scan_at) : "No scans"}
-                      </td>
-                      <td>{player.email ?? "Not saved"}</td>
-                      <td>{player.phone_number ?? "Not captured"}</td>
-                      <td>
-                        {canSelect ? (
-                          <button
-                            className="button secondary compact-button"
-                            type="button"
-                            onClick={() => selectPlayer(player)}
-                          >
-                            Select
-                          </button>
-                        ) : (
-                          <span className="muted-cell">No contact</span>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })
+                players.map((player) => (
+                  <tr
+                    className={selectedPlayerId === player.player_id ? "selected-row" : undefined}
+                    key={player.player_id}
+                  >
+                    <td>
+                      <code title={player.player_id}>{shortPlayerId(player.player_id)}</code>
+                    </td>
+                    <td>{player.name ?? "Not saved"}</td>
+                    <td>{player.scan_count}</td>
+                    <td>
+                      {player.last_scan_at ? formatEasternDateTime(player.last_scan_at) : "No scans"}
+                    </td>
+                    <td>{player.email ?? "Not saved"}</td>
+                    <td>{player.phone_number ?? "Not captured"}</td>
+                    <td>
+                      <button
+                        className="button secondary compact-button"
+                        type="button"
+                        onClick={() => selectPlayer(player)}
+                      >
+                        Select
+                      </button>
+                    </td>
+                  </tr>
+                ))
               ) : (
                 <tr>
                   <td colSpan={7}>{getEmptyTabMessage(activeTab)}</td>
@@ -408,7 +400,7 @@ export function PlayerDatabaseTool({
           <div className="empty-profile-state">
             <p className="eyebrow">Player profile</p>
             <h2>Select a player</h2>
-            <p>Players with an email or phone number can be selected for profile edits and recovery.</p>
+            <p>Select any phone ID to add or edit name, email, and phone contact details.</p>
           </div>
         )}
       </section>

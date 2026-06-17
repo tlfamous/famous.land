@@ -8,48 +8,27 @@ export const metadata: Metadata = {
 
 const backlogItems = [
   {
-    title: "First scan experience",
-    status: "Ready for field test",
-    summary:
-      "First marker scans now get a distinct onboarding state before the normal marker flow.",
-    details: [
-      "Shows a first-scan introduction explaining the game, basic safety, and phone-based progress.",
-      "Keeps email recovery quiet on scan one and explains that it is optional later for active players.",
-      "Preserves the stronger save-progress callout for players who reach 5 marker finds."
-    ]
-  },
-  {
-    title: "Email linking experience",
+    title: "Linking experience",
     status: "Needs end-to-end test",
     summary:
-      "Verify that saved email addresses link cleanly to the right anonymous phone/player record.",
+      "Verify that saved email addresses and SMS phone numbers link cleanly to the right anonymous phone/player record.",
     details: [
       "Test the save-progress flow from marker progress through email entry.",
-      "Confirm the player row updates with the email address.",
-      "Verify recovery behavior on a fresh or reset phone state."
+      "Test phone-number capture and SMS recovery copy from the player database.",
+      "Confirm the player row updates with the saved email address and phone number.",
+      "Verify email and SMS recovery behavior on a fresh or reset phone state."
     ]
   },
   {
-    title: "Grand prize experience",
-    status: "Single hidden prize flow wired",
+    title: "Grand Prize Experience",
+    status: "Instructions needed",
     summary:
-      "Finish-the-quest players now get a hidden-until-complete grand-prize reveal for the 3D printed Lake Monomonac model.",
+      "Finish-the-quest players get a hidden-until-complete grand-prize reveal, but the claim instructions still need to be written.",
     details: [
       "The only live giveaway mechanic is one final grand prize.",
       `Finding all ${TOTAL_MARKERS} markers in any order unlocks a prominent grand-prize reveal.`,
-      "QR code on the back of the model should open https://famous.land/prize/lakemonomonac2026.",
-      "Show completed zone quests with completion dates on each zone quest."
-    ]
-  },
-  {
-    title: "Giveaway controls",
-    status: "Backlog",
-    summary:
-      "Add admin controls for pausing or ending the single grand-prize giveaway when inventory runs out.",
-    details: [
-      "Keep zone quests as progress milestones, not prize tiers.",
-      "Do not mention the grand prize in public rules, onboarding, or quest copy before completion.",
-      "Let admins turn off the reveal or replace it with a non-giveaway completion message later."
+      "Write clear instructions for how the winner claims or receives the grand prize.",
+      "QR code on the back of the model should open https://famous.land/prize/lakemonomonac2026."
     ]
   }
 ];

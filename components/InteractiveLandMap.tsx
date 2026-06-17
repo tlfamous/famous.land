@@ -28,6 +28,7 @@ type FamousLandMapSvgProps = {
   className?: string;
   markerCounts?: Record<string, number>;
   markerCountMode?: boolean;
+  preserveAspectRatio?: string;
   showWalkingTrails?: boolean;
   viewBox?: string;
   zoneSlugs?: string[];
@@ -84,11 +85,23 @@ const hilltopZonePath =
 const visualZoneOrder = ["treetop-terrace", "on-the-water", "lakeview", "monomonac-hill"];
 const fullMapViewBox = "0 0 100 100";
 const zoomedMapViewBoxSize = 38;
+const markerPreviewViewBoxOverrides: Record<string, string> = {
+  "FF-TREE-004": "39 68 32 32",
+  "FF-TREE-005": "54 64 30 30",
+  "FF-TREE-006": "61 50 30 30",
+  "FF-TREE-007": "67 34 30 30"
+};
 const dashboardZoneViewBoxes: Record<Zone, string> = {
   Lakeview: "42 40 60 60",
   "No Wake": "50 4 50 50",
   Treetop: "52 30 48 48",
   Hillside: "18 4 82 82"
+};
+const questZoneViewBoxes: Record<Zone, string> = {
+  Lakeview: "48 22 35 78",
+  "No Wake": "75 9 25 48",
+  Treetop: "76 32 24 46",
+  Hillside: "24 5 58 78"
 };
 
 export const zoneMapSlugs: Record<Zone, string> = {
@@ -176,6 +189,12 @@ function getPreviewMapViewBox(
 ) {
   if (!zoomed || !activeMarkerId) {
     return fullMapViewBox;
+  }
+
+  const customViewBox = markerPreviewViewBoxOverrides[activeMarkerId];
+
+  if (customViewBox) {
+    return customViewBox;
   }
 
   const activePoint = visualZones[activeSlug]?.points?.find(
@@ -349,12 +368,19 @@ function FamousLandMapSvg({
   className = "square-map-svg",
   markerCounts,
   markerCountMode = false,
+  preserveAspectRatio = "xMidYMid meet",
   showWalkingTrails = true,
   viewBox = fullMapViewBox,
   zoneSlugs = visualZoneOrder
 }: FamousLandMapSvgProps) {
   return (
-    <svg aria-label={ariaLabel} className={className} role="img" viewBox={viewBox}>
+    <svg
+      aria-label={ariaLabel}
+      className={className}
+      preserveAspectRatio={preserveAspectRatio}
+      role="img"
+      viewBox={viewBox}
+    >
       <image
         className="map-base-image"
         height="100"
@@ -485,6 +511,21 @@ export function ZoneScanCountMap({
       markerCounts={markerCounts}
       showWalkingTrails={false}
       viewBox={dashboardZoneViewBoxes[zone]}
+      zoneSlugs={[activeSlug]}
+    />
+  );
+}
+
+export function ZoneDashboardMap({ zone }: { zone: Zone }) {
+  const activeSlug = zoneMapSlugs[zone];
+
+  return (
+    <FamousLandMapSvg
+      activeSlug={activeSlug}
+      ariaLabel={`${zone} Zone map`}
+      className="square-map-svg quest-zone-map-svg"
+      showWalkingTrails={false}
+      viewBox={questZoneViewBoxes[zone]}
       zoneSlugs={[activeSlug]}
     />
   );

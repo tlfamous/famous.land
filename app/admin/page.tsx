@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AdminReports } from "@/components/AdminReports";
-import type { ScanReportFilterInput } from "@/lib/db";
+import { HomePageHeadlineForm } from "@/components/HomePageHeadlineForm";
+import { getHomePageHeadline, type ScanReportFilterInput } from "@/lib/db";
 
 export const metadata: Metadata = {
   title: "Famous Land Admin",
@@ -16,6 +17,7 @@ type AdminPageProps = {
 
 export default async function AdminPage({ searchParams }: AdminPageProps) {
   const params = (await searchParams) ?? {};
+  const homePageHeadline = await getHomePageHeadline();
   const filters: ScanReportFilterInput = {
     start_date: firstParam(params.start_date),
     end_date: firstParam(params.end_date),
@@ -29,6 +31,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
 
   return (
     <div className="stack admin-page">
+      <HomePageHeadlineForm headline={homePageHeadline} />
       <AdminReports filters={filters} />
     </div>
   );

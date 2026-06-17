@@ -11,28 +11,28 @@ const zoneQuestDefinitions: Record<Zone, ZoneQuest> = {
   Lakeview: {
     id: "lakeview-quest",
     zone: "Lakeview",
-    title: "Lakeview Quest",
+    title: "Lakeview",
     zoneLabel: "Lakeview Zone",
     description: "Complete every Lakeview Zone marker."
   },
   "No Wake": {
     id: "no-wake-quest",
     zone: "No Wake",
-    title: "No Wake Quest",
+    title: "No Wake",
     zoneLabel: "No Wake Zone",
     description: "Complete every No Wake Zone marker."
   },
   Treetop: {
     id: "treetop-quest",
     zone: "Treetop",
-    title: "Treetop Quest",
+    title: "Treetop",
     zoneLabel: "Treetop Zone",
     description: "Complete every Treetop Zone marker."
   },
   Hillside: {
     id: "hillside-quest",
     zone: "Hillside",
-    title: "Hillside Quest",
+    title: "Hillside",
     zoneLabel: "Hillside Zone",
     description: "Complete every Hillside Zone marker."
   }

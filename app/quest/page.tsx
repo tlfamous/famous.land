@@ -6,7 +6,7 @@ import { isTesterScanSource } from "@/lib/testerMode";
 
 export const metadata: Metadata = {
   title: "Famous Land Quest",
-  description: "Your Famous Land Quest progress, zone quests, found markers, and recovery tools."
+  description: "Your Famous Land Quest progress, zones, found markers, and recovery tools."
 };
 
 export const dynamic = "force-dynamic";
