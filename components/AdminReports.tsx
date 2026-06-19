@@ -143,6 +143,7 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
                 <th>Location</th>
                 <th>Zone</th>
                 <th>Scan Type</th>
+                <th>Contact</th>
               </tr>
             </thead>
             <tbody>
@@ -166,11 +167,23 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
                         {scan.is_test ? "Test" : "Real"}
                       </span>
                     </td>
+                    <td>
+                      {scan.contact_player_id ? (
+                        <a
+                          className="button secondary compact-button"
+                          href={buildPlayerContactHref(scan.contact_player_id)}
+                        >
+                          Edit
+                        </a>
+                      ) : (
+                        <span className="muted-cell">Unknown</span>
+                      )}
+                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6}>No scan log entries yet.</td>
+                  <td colSpan={7}>No scan log entries yet.</td>
                 </tr>
               )}
             </tbody>
@@ -198,6 +211,10 @@ export async function AdminReports({ filters }: { filters?: ScanReportFilterInpu
       </section>
     </div>
   );
+}
+
+function buildPlayerContactHref(playerId: string) {
+  return `/admin/players?player=${encodeURIComponent(playerId)}#player-profile`;
 }
 
 function PaginationLink({

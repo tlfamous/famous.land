@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
-import { getExistingPlayerId } from "@/lib/localPlayer";
+import { getOrCreatePlayerId } from "@/lib/localPlayer";
 import { TESTER_SCAN_SOURCE } from "@/lib/testerMode";
 
 export function GameUnavailableScanLogger({ markerId }: { markerId: string }) {
   useEffect(() => {
-    const playerId = getExistingPlayerId();
+    const playerId = getOrCreatePlayerId();
     const isTestScan =
       new URLSearchParams(window.location.search).get("scan_source") === TESTER_SCAN_SOURCE;
 

@@ -91,16 +91,18 @@ type ScanEventRecord = ScanRecord & {
   id: string;
   is_test: boolean;
   email_id?: string;
+  source_player_id?: string;
   progress_eligible: boolean;
 };
 
 type D1ScanEventRow = Omit<
   ScanEventRecord,
-  "user_agent" | "is_test" | "email_id" | "progress_eligible"
+  "user_agent" | "is_test" | "email_id" | "source_player_id" | "progress_eligible"
 > & {
   user_agent?: string | null;
   is_test?: boolean | number | string | null;
   email_id?: string | null;
+  source_player_id?: string | null;
   progress_eligible?: boolean | number | string | null;
 };
 
@@ -109,6 +111,7 @@ type ScanReportLogRow = {
   scanned_at: string;
   email_id?: string;
   player_id: string;
+  contact_player_id?: string;
   marker_id: string;
   short_code: string;
   location: string;
@@ -648,6 +651,7 @@ export async function recordGameOffScan(input: {
     },
     {
       email_id,
+      source_player_id: input.source_player_id,
       progress_eligible: false
     }
   );
@@ -690,12 +694,13 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
     getPlayerIdentityDetails()
   ]);
   const { emailById: playerEmailById, identityById: playerIdentityById } = playerIdentityDetails;
+  const playerIdByIdentity = reversePlayerIdentityMap(playerIdentityById);
   const markerById = new Map(markers.map((marker) => [marker.marker_id, marker]));
   const filteredEvents = filterScanEvents(events, filters, markerById, playerEmailById);
   const sortedEvents = [...filteredEvents].sort((a, b) => b.scanned_at.localeCompare(a.scanned_at));
   const zoneCounts = new Map<string, number>();
   const markerCounts = new Map(markers.map((marker) => [marker.marker_id, 0]));
-  const filteredPlayerIds = new Set(filteredEvents.map((event) => event.player_id));
+  const filteredPlayerIds = new Set(filteredEvents.map(reportPlayerId));
   const logTotal = sortedEvents.length;
   const logPageCount = Math.max(1, Math.ceil(logTotal / SCAN_LOG_PAGE_SIZE));
   const requestedLogPage = normalizeLogPage(inputFilters.log_page);
@@ -743,8 +748,9 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
       return {
         id: event.id,
         scanned_at: event.scanned_at,
-        email_id: event.email_id ?? playerIdentityById.get(event.player_id),
-        player_id: event.player_id,
+        email_id: event.email_id ?? playerIdentityById.get(reportPlayerId(event)),
+        player_id: reportPlayerId(event),
+        contact_player_id: scanContactPlayerId(event, playerIdByIdentity),
         marker_id: event.marker_id,
         short_code: marker?.short_code ?? event.marker_id,
         location: marker?.marker_name ?? event.marker_id,
@@ -753,6 +759,43 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
       };
     })
   };
+}
+
+function reversePlayerIdentityMap(playerIdentityById: Map<string, string>) {
+  const playerIdByIdentity = new Map<string, string>();
+
+  for (const [playerId, identity] of playerIdentityById) {
+    const normalizedIdentity = normalizeIdentityLookupValue(identity);
+    if (normalizedIdentity && !playerIdByIdentity.has(normalizedIdentity)) {
+      playerIdByIdentity.set(normalizedIdentity, playerId);
+    }
+  }
+
+  return playerIdByIdentity;
+}
+
+function scanContactPlayerId(
+  event: ScanEventRecord,
+  playerIdByIdentity: Map<string, string>
+) {
+  if (event.source_player_id) {
+    return event.source_player_id;
+  }
+
+  if (event.player_id !== GAME_OFF_SCAN_PLAYER_ID) {
+    return event.player_id;
+  }
+
+  const identity = normalizeIdentityLookupValue(event.email_id);
+  return identity ? playerIdByIdentity.get(identity) : undefined;
+}
+
+function normalizeIdentityLookupValue(value?: string) {
+  return value?.trim().toLowerCase();
+}
+
+function reportPlayerId(event: ScanEventRecord) {
+  return event.source_player_id ?? event.player_id;
 }
 
 function normalizeLogPage(value: string | number | undefined) {
@@ -826,7 +869,7 @@ function filterScanEvents(
       return false;
     }
 
-    if (filters.player_ids.length && !filters.player_ids.includes(event.player_id)) {
+    if (filters.player_ids.length && !filters.player_ids.includes(reportPlayerId(event))) {
       return false;
     }
 
@@ -890,7 +933,7 @@ function playerOptions(
 }
 
 function scanEventEmail(event: ScanEventRecord, playerEmailById: Map<string, string>) {
-  return normalizeEmailIdentity(event.email_id) ?? playerEmailById.get(event.player_id);
+  return normalizeEmailIdentity(event.email_id) ?? playerEmailById.get(reportPlayerId(event));
 }
 
 function normalizeEmailIdentity(value?: string) {
@@ -1273,19 +1316,21 @@ async function getLocalPlayerRows(): Promise<PlayerReportRow[]> {
 
   return buildPlayerRows({
     scanRows: summarizePlayerScans(events),
+    sourcePlayerIds: sourcePlayerIdsFromEvents(events),
     savedRows: db.saved_players,
     contactRows: db.player_contacts
   });
 }
 
 async function getD1PlayerRows(d1: FamousLandD1): Promise<PlayerReportRow[]> {
-  const [scanRows, savedRows, contactRows] = await Promise.all([
+  const [scanRows, sourcePlayerIds, savedRows, contactRows] = await Promise.all([
     getD1PlayerScanRows(d1),
+    getD1SourcePlayerIds(d1),
     getD1SavedPlayerRows(d1),
     getD1PlayerContactRows(d1)
   ]);
 
-  return buildPlayerRows({ scanRows, savedRows, contactRows });
+  return buildPlayerRows({ scanRows, sourcePlayerIds, savedRows, contactRows });
 }
 
 async function getD1PlayerScanRows(d1: FamousLandD1): Promise<PlayerScanRow[]> {
@@ -1338,6 +1383,39 @@ async function getD1SavedPlayerRows(d1: FamousLandD1): Promise<SavedPlayerEmailR
     }
     return [];
   }
+}
+
+async function getD1SourcePlayerIds(d1: FamousLandD1): Promise<string[]> {
+  try {
+    await ensureD1ScanEventSourceColumns(d1);
+    const result = await d1
+      .prepare(
+        `select distinct source_player_id
+         from scan_events
+         where source_player_id is not null
+           and source_player_id != ''`
+      )
+      .all<{ source_player_id: string | null }>();
+
+    if (!result.success) {
+      throw new Error(result.error ?? "scan_events source player query failed");
+    }
+
+    return (result.results ?? [])
+      .map((row) => normalizeOptionalPlayerId(row.source_player_id ?? undefined))
+      .filter((playerId): playerId is string => Boolean(playerId));
+  } catch (error) {
+    if (!isMissingTableError(error)) {
+      console.error("Famous Land source player query failed", error);
+    }
+    return [];
+  }
+}
+
+function sourcePlayerIdsFromEvents(events: ScanEventRecord[]) {
+  return events
+    .map((event) => normalizeOptionalPlayerId(event.source_player_id))
+    .filter((playerId): playerId is string => Boolean(playerId));
 }
 
 async function getD1PlayerContactRows(d1: FamousLandD1): Promise<PlayerContact[]> {
@@ -1407,6 +1485,7 @@ function summarizePlayerScans(events: ScanEventRecord[]): PlayerScanRow[] {
 
 function buildPlayerRows(input: {
   scanRows: PlayerScanRow[];
+  sourcePlayerIds?: string[];
   savedRows: SavedPlayerEmailRow[];
   contactRows: PlayerContact[];
 }): PlayerReportRow[] {
@@ -1417,6 +1496,10 @@ function buildPlayerRows(input: {
 
   for (const row of input.scanRows) {
     playerIds.add(row.player_id);
+  }
+
+  for (const playerId of input.sourcePlayerIds ?? []) {
+    playerIds.add(playerId);
   }
 
   for (const row of input.savedRows) {
@@ -2063,11 +2146,13 @@ async function recordD1Scan(
 
 async function recordD1ScanEvent(d1: FamousLandD1, event: ScanEventRecord) {
   try {
+    await ensureD1ScanEventSourceColumns(d1);
     const result = await d1
       .prepare(
         `insert into scan_events (
            id,
            player_id,
+           source_player_id,
            marker_id,
            scanned_at,
            user_agent,
@@ -2075,11 +2160,12 @@ async function recordD1ScanEvent(d1: FamousLandD1, event: ScanEventRecord) {
            email_id,
            progress_eligible
          )
-         values (?, ?, ?, ?, ?, ?, ?, ?)`
+         values (?, ?, ?, ?, ?, ?, ?, ?, ?)`
       )
       .bind(
         event.id,
         event.player_id,
+        event.source_player_id ?? null,
         event.marker_id,
         event.scanned_at,
         event.user_agent ?? null,
@@ -2136,6 +2222,10 @@ async function recordD1ScanEvent(d1: FamousLandD1, event: ScanEventRecord) {
       }
     }
   }
+}
+
+async function ensureD1ScanEventSourceColumns(d1: FamousLandD1) {
+  await addD1ColumnIfMissing(d1, "scan_events", "source_player_id", "text");
 }
 
 async function upsertD1PlayerContact(d1: FamousLandD1, input: PlayerContactUpdate) {
@@ -2257,10 +2347,11 @@ function contactsFromSavedPlayers(savedPlayers: SavedPlayer[] | SavedPlayerEmail
 
 async function getD1ScanEvents(d1: FamousLandD1): Promise<ScanEventRecord[]> {
   try {
+    await ensureD1ScanEventSourceColumns(d1);
     const eventResult = await d1
       .prepare(
         `select id, player_id, marker_id, scanned_at, user_agent, is_test
-              , email_id, progress_eligible
+              , email_id, source_player_id, progress_eligible
          from scan_events
          order by scanned_at desc`
       )
@@ -2311,6 +2402,7 @@ function makeScanEvent(
   scan: ScanRecord,
   options: {
     email_id?: string;
+    source_player_id?: string;
     progress_eligible?: boolean;
   } = {}
 ): ScanEventRecord {
@@ -2319,6 +2411,7 @@ function makeScanEvent(
     ...scan,
     is_test: scan.is_test === true,
     email_id: options.email_id,
+    source_player_id: normalizeOptionalPlayerId(options.source_player_id),
     progress_eligible: options.progress_eligible !== false
   };
 }
@@ -2332,6 +2425,7 @@ function normalizeD1ScanEvent(event: D1ScanEventRow): ScanEventRecord {
     user_agent: event.user_agent ?? undefined,
     is_test: normalizeBoolean(event.is_test),
     email_id: event.email_id ?? undefined,
+    source_player_id: normalizeOptionalPlayerId(event.source_player_id ?? undefined),
     progress_eligible: event.progress_eligible === undefined ? true : normalizeBoolean(event.progress_eligible)
   };
 }
@@ -2340,9 +2434,15 @@ function normalizeLocalScanEvent(event: ScanEventRecord): ScanEventRecord {
   return {
     ...event,
     email_id: event.email_id || undefined,
+    source_player_id: normalizeOptionalPlayerId(event.source_player_id),
     is_test: event.is_test === true,
     progress_eligible: event.progress_eligible !== false
   };
+}
+
+function normalizeOptionalPlayerId(value?: string) {
+  const playerId = value?.trim();
+  return playerId && playerId !== GAME_OFF_SCAN_PLAYER_ID ? playerId : undefined;
 }
 
 function scanToLegacyEvent(scan: ScanRecord): ScanEventRecord {

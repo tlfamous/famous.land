@@ -276,7 +276,7 @@ export function PlayerDatabaseTool({
         </div>
       </section>
 
-      <section className="card player-profile-card" aria-live="polite">
+      <section className="card player-profile-card" id="player-profile" aria-live="polite">
         {selectedPlayer ? (
           <>
             <div className="report-section-head">
