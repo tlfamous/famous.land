@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { julyAdminCookieName, julyAdminCookieValue } from "@/app/july2026/admin/auth";
 import { guestAssignments } from "@/app/july2026/data";
 import {
   listJulyGuestLinks,
@@ -12,7 +13,19 @@ function isKnownGuest(slug: string) {
   return guestAssignments.some((guest) => guest.slug === slug);
 }
 
-export async function GET() {
+function isAdminRequest(request: NextRequest) {
+  return request.cookies.get(julyAdminCookieName)?.value === julyAdminCookieValue;
+}
+
+function adminRequiredResponse() {
+  return NextResponse.json({ ok: false, error: "Admin sign-on required." }, { status: 401 });
+}
+
+export async function GET(request: NextRequest) {
+  if (!isAdminRequest(request)) {
+    return adminRequiredResponse();
+  }
+
   const links = await listJulyGuestLinks();
 
   return NextResponse.json({
@@ -25,6 +38,10 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  if (!isAdminRequest(request)) {
+    return adminRequiredResponse();
+  }
+
   const body = (await request.json().catch(() => null)) as
     | { action?: string; slug?: string }
     | null;

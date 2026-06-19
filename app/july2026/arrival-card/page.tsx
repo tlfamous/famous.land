@@ -10,7 +10,7 @@ import styles from "./arrival-card.module.css";
 
 export const metadata: Metadata = {
   title: "July 4th, 2026 Arrival Card",
-  description: "A print-friendly arrival card for the July 4th, 2026 lake weekend.",
+  description: "A mobile arrival card for the July 4th, 2026 lake weekend.",
   robots: {
     index: false,
     follow: false
@@ -44,10 +44,6 @@ export default function July2026ArrivalCardPage() {
               weekend decisions.
             </p>
           </div>
-          <figure className={styles.qrBlock}>
-            <img src="/july2026/qr.svg" alt="QR code for the July 2026 guest portal" />
-            <figcaption>Guest portal</figcaption>
-          </figure>
         </header>
 
         <section className={styles.essentials} aria-label="Arrival essentials">
@@ -64,7 +60,7 @@ export default function July2026ArrivalCardPage() {
           <article>
             <span>Portal</span>
             <strong>Guest portal</strong>
-            <p>Use your guest link for your assignment, directions, calendar, QR, and personal packet.</p>
+            <p>Use your invite link for your assignment, directions, calendar, and personal packet.</p>
           </article>
         </section>
 

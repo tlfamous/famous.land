@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import QRCode from "qrcode";
 import { resetLocalPlayerData } from "@/lib/localPlayer";
 import { TESTER_SCAN_SOURCE } from "@/lib/testerMode";
@@ -11,6 +11,7 @@ type TestMarker = {
   marker_number: number;
   marker_name: string;
   order: number;
+  field_note: string;
   url: string;
   zone: Zone;
   path: string;
@@ -41,10 +42,29 @@ export function TestPhone({ markers }: { markers: TestMarker[] }) {
   const [frameKey, setFrameKey] = useState(0);
   const [qrCode, setQrCode] = useState<MarkerQrCode | null>(null);
   const [clickedMarkerIds, setClickedMarkerIds] = useState<Set<string>>(() => new Set());
+  const [fieldNotes, setFieldNotes] = useState<Record<string, string>>(() =>
+    Object.fromEntries(markers.map((marker) => [marker.marker_id, marker.field_note]))
+  );
+  const [fieldNoteDraft, setFieldNoteDraft] = useState("");
+  const [fieldNoteEditing, setFieldNoteEditing] = useState(false);
+  const [fieldNoteStatus, setFieldNoteStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [fieldNoteMessage, setFieldNoteMessage] = useState("");
+
+  const markersWithFieldNotes = useMemo(
+    () =>
+      markers.map((marker) => ({
+        ...marker,
+        field_note: fieldNotes[marker.marker_id] ?? marker.field_note
+      })),
+    [fieldNotes, markers]
+  );
 
   const activeMarker = useMemo(
-    () => (phoneIsOn && activePath ? markers.find((marker) => marker.path === activePath) : undefined),
-    [activePath, markers, phoneIsOn]
+    () =>
+      phoneIsOn && activePath
+        ? markersWithFieldNotes.find((marker) => marker.path === activePath)
+        : undefined,
+    [activePath, markersWithFieldNotes, phoneIsOn]
   );
   const activeMarkerId = activeMarker?.marker_id ?? "";
   const activeQrDataUrl =
@@ -71,6 +91,66 @@ export function TestPhone({ markers }: { markers: TestMarker[] }) {
     setPhoneIsOn(false);
     setFrameKey((current) => current + 1);
   }, []);
+
+  useEffect(() => {
+    if (!activeMarker) {
+      setFieldNoteDraft("");
+      setFieldNoteEditing(false);
+      setFieldNoteStatus("idle");
+      setFieldNoteMessage("");
+      return;
+    }
+
+    setFieldNoteDraft(activeMarker.field_note);
+    setFieldNoteEditing(false);
+    setFieldNoteStatus("idle");
+    setFieldNoteMessage("");
+  }, [activeMarker?.marker_id, activeMarker?.field_note]);
+
+  async function saveFieldNote(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!activeMarker) {
+      return;
+    }
+
+    setFieldNoteStatus("saving");
+    setFieldNoteMessage("");
+
+    const response = await fetch("/api/admin/marker-field-note", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        marker_id: activeMarker.marker_id,
+        field_note: fieldNoteDraft
+      })
+    });
+
+    const data = (await response.json().catch(() => null)) as
+      | {
+          ok?: boolean;
+          error?: string;
+          marker?: TestMarker;
+        }
+      | null;
+
+    if (!response.ok || !data?.ok || !data.marker) {
+      setFieldNoteStatus("error");
+      setFieldNoteMessage(data?.error ?? "Field note could not be saved.");
+      return;
+    }
+
+    setFieldNotes((current) => ({
+      ...current,
+      [data.marker!.marker_id]: data.marker!.field_note
+    }));
+    setFieldNoteStatus("saved");
+    setFieldNoteMessage("Field note saved.");
+    setFieldNoteEditing(false);
+    setFrameKey((current) => current + 1);
+  }
 
   useEffect(() => {
     setActivePath(null);
@@ -131,7 +211,7 @@ export function TestPhone({ markers }: { markers: TestMarker[] }) {
         </div>
 
         <div className="test-marker-buttons" aria-label="Marker QR codes">
-          {markers.map((marker) => (
+          {markersWithFieldNotes.map((marker) => (
             <button
               aria-pressed={clickedMarkerIds.has(marker.marker_id)}
               className={markerButtonClass(marker.marker_id, activeMarkerId, clickedMarkerIds)}
@@ -201,6 +281,57 @@ export function TestPhone({ markers }: { markers: TestMarker[] }) {
                   <div className="test-qr-placeholder">Generating QR</div>
                 )}
               </div>
+            </div>
+            <div className="test-field-note-editor">
+              <div className="split">
+                <div>
+                  <p className="eyebrow">Field note</p>
+                  <h2>{activeMarker.marker_name}</h2>
+                </div>
+                <button
+                  className="button secondary compact-button"
+                  type="button"
+                  onClick={() => {
+                    setFieldNoteDraft(activeMarker.field_note);
+                    setFieldNoteEditing((current) => !current);
+                    setFieldNoteMessage("");
+                    setFieldNoteStatus("idle");
+                  }}
+                >
+                  {fieldNoteEditing ? "Cancel" : "Edit"}
+                </button>
+              </div>
+              {fieldNoteEditing ? (
+                <form className="form compact-form" onSubmit={saveFieldNote}>
+                  <label htmlFor="tester-field-note">Marker field note</label>
+                  <textarea
+                    id="tester-field-note"
+                    rows={5}
+                    value={fieldNoteDraft}
+                    onChange={(event) => setFieldNoteDraft(event.target.value)}
+                  />
+                  <button
+                    className="button primary"
+                    disabled={fieldNoteStatus === "saving"}
+                    type="submit"
+                  >
+                    {fieldNoteStatus === "saving" ? "Saving..." : "Save field note"}
+                  </button>
+                </form>
+              ) : (
+                <button
+                  className="test-field-note-preview"
+                  type="button"
+                  onClick={() => setFieldNoteEditing(true)}
+                >
+                  {activeMarker.field_note}
+                </button>
+              )}
+              {fieldNoteMessage ? (
+                <p className={fieldNoteStatus === "error" ? "form-note error-text" : "form-note"}>
+                  {fieldNoteMessage}
+                </p>
+              ) : null}
             </div>
           </>
         ) : (

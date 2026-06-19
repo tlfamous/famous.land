@@ -55,28 +55,6 @@
   font-size: clamp(1rem, 1.5vw, 1.18rem);
 }
 
-.qrBlock {
-  margin: 0;
-  padding: 14px;
-  color: #081326;
-  background: rgba(255, 253, 247, 0.94);
-  border: 1px solid rgba(255, 253, 247, 0.72);
-  border-radius: 8px;
-  text-align: center;
-}
-
-.qrBlock img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1;
-}
-
-.qrBlock figcaption {
-  margin-top: 8px;
-  font-size: 0.82rem;
-  font-weight: 900;
-}
-
 .promptGrid a,
 .footer a {
   min-height: 46px;
@@ -302,10 +280,6 @@
     grid-template-columns: 1fr;
   }
 
-  .qrBlock {
-    width: min(220px, 100%);
-  }
-
   .schedule li {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -314,25 +288,5 @@
   .footer {
     align-items: flex-start;
     flex-direction: column;
-  }
-}
-
-@media print {
-  .page {
-    padding: 0;
-    background: #fff;
-  }
-
-  .sheet {
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .footer a,
-  .promptGrid a {
-    color: #081326;
-    background: transparent;
-    border: 1px solid rgba(8, 19, 38, 0.2);
   }
 }

@@ -1,116 +1,195 @@
 .adminPage {
   min-height: 100svh;
+  padding: 22px clamp(16px, 3vw, 36px) 48px;
   color: #071429;
-  background:
-    linear-gradient(180deg, rgba(8, 33, 65, 0.78), rgba(247, 245, 238, 0.98) 420px),
-    url("../assets/july-4-hero.png") center top / cover no-repeat;
+  background: #f7f5ef;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.hero,
-.grid,
-.lists,
-.readinessSection,
-.assetSection,
-.vehicleInventorySection,
-.launchUrlsSection,
-.guestLinksSection,
-.proofSection {
-  width: min(100%, 1320px);
-  margin: 0 auto;
-  padding-inline: clamp(16px, 4vw, 42px);
+.adminHeader {
+  width: min(100%, 1540px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 auto 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(8, 19, 38, 0.13);
 }
 
-.hero {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 24px;
-  align-items: end;
-  padding-top: 72px;
-  padding-bottom: 34px;
-  color: #fffdf7;
-}
-
-.hero h1 {
-  max-width: 760px;
-  margin: 12px 0 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3rem, 7vw, 6.4rem);
-  line-height: 0.95;
+.adminHeader h1 {
+  margin: 0;
+  color: #071429;
+  font-size: clamp(1.35rem, 2.4vw, 2.1rem);
+  line-height: 1.1;
   letter-spacing: 0;
 }
 
-.hero p {
-  max-width: 680px;
-  margin: 18px 0 0;
-  color: rgba(255, 253, 247, 0.86);
-  font-size: 1.08rem;
-}
-
-.backLink,
-.proofButton,
-.proofHeader a,
-.localResetButton {
+.backLink {
+  min-height: 38px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 0 16px;
+  padding: 0 13px;
+  color: #082141;
+  border: 1px solid rgba(8, 33, 65, 0.18);
   border-radius: 8px;
+  background: #fffdf7;
+  font-size: 0.88rem;
   font-weight: 900;
   text-decoration: none;
 }
 
-.backLink {
-  color: #fffdf7;
-  border: 1px solid rgba(255, 253, 247, 0.32);
-  background: rgba(255, 253, 247, 0.08);
+.guestLinksSection {
+  width: min(100%, 1540px);
+  overflow: hidden;
+  margin: 0 auto;
+  border: 1px solid rgba(8, 19, 38, 0.13);
+  border-radius: 8px;
+  background: #fffdf7;
 }
 
-.proofButton,
-.proofHeader a,
-.localResetButton {
-  color: #fffdf7;
-  background: #be1d27;
-  box-shadow: 0 16px 36px rgba(190, 29, 39, 0.24);
+.guestListHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(8, 19, 38, 0.12);
+  background: #fffdf7;
 }
 
-.localResetButton {
-  border: 0;
+.guestListHeader h2 {
+  margin: 0;
+  color: #071429;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.guestListHeader span {
+  color: #596476;
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.guestStatusTableWrap {
+  overflow-x: auto;
+  background: #fffdf7;
+}
+
+.guestStatusTable {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+  color: #071429;
+}
+
+.guestStatusTable th,
+.guestStatusTable td {
+  padding: 13px 14px;
+  border-bottom: 1px solid rgba(8, 19, 38, 0.1);
+  text-align: left;
+  vertical-align: top;
+}
+
+.guestStatusTable th {
+  color: #be1d27;
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.guestStatusTable td {
+  color: #071429;
+  font-size: 0.92rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.guestStatusTable td:first-child {
+  font-weight: 950;
+}
+
+.guestStatusTable a {
+  color: #0b4d91;
+  text-decoration: none;
+}
+
+.guestStatusTable a:hover {
+  text-decoration: underline;
+}
+
+.guestInviteActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  max-width: 560px;
+}
+
+.guestInviteActions button,
+.guestInviteActions a,
+.invitePreview summary {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  color: #082141;
+  border: 1px solid rgba(8, 33, 65, 0.18);
+  border-radius: 8px;
+  background: #fff;
   font: inherit;
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.grid,
-.lists {
-  display: grid;
-  gap: 18px;
+.guestInviteActions button {
+  color: #fffdf7;
+  border-color: #be1d27;
+  background: #be1d27;
 }
 
-.grid {
-  grid-template-columns: repeat(3, 1fr);
-  padding-bottom: 18px;
+.guestInviteActions span {
+  color: #596476;
+  font-size: 0.76rem;
+  font-weight: 900;
 }
 
-.lists {
-  grid-template-columns: repeat(3, 1fr);
-  padding-bottom: 24px;
+.invitePreview {
+  display: contents;
 }
 
-.panel,
-.readinessSection,
-.assetSection,
-.vehicleInventorySection,
-.launchUrlsSection,
-.proofSection {
-  border: 1px solid rgba(8, 19, 38, 0.13);
+.invitePreview summary {
+  list-style: none;
+}
+
+.invitePreview summary::-webkit-details-marker {
+  display: none;
+}
+
+.invitePreview pre {
+  flex-basis: 100%;
+  max-width: min(680px, 78vw);
+  max-height: 260px;
+  overflow: auto;
+  margin: 2px 0 0;
+  padding: 12px;
+  color: #172033;
+  border: 1px solid rgba(8, 33, 65, 0.14);
   border-radius: 8px;
-  background: rgba(255, 253, 247, 0.95);
-  box-shadow: 0 16px 38px rgba(8, 19, 38, 0.09);
-}
-
-.panel {
-  padding: 22px;
+  background: #fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .label {
@@ -120,746 +199,88 @@
   text-transform: uppercase;
 }
 
-.panel h2,
-.proofHeader h2 {
-  margin: 8px 0 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.55rem;
-  line-height: 1.08;
-  letter-spacing: 0;
-}
-
-.panel p {
-  margin: 12px 0 0;
-  color: #596476;
-  line-height: 1.48;
-}
-
-.panel a {
-  color: #0b4d91;
-  font-weight: 900;
-}
-
-.panel ul {
+.signInPage {
+  min-height: 100svh;
   display: grid;
-  gap: 9px;
-  margin: 16px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.panel li {
-  display: grid;
-  grid-template-columns: 18px 1fr;
-  gap: 9px;
-  color: #394457;
-}
-
-.panel li::before {
-  width: 10px;
-  height: 10px;
-  margin-top: 7px;
-  content: "";
-  border-radius: 999px;
-  background: #4f7a4c;
-}
-
-.guestLinksSection,
-.readinessSection,
-.assetSection,
-.vehicleInventorySection,
-.launchUrlsSection,
-.proofSection {
-  overflow: hidden;
-  padding: 0;
-}
-
-.guestLinksSection,
-.readinessSection,
-.assetSection,
-.vehicleInventorySection,
-.launchUrlsSection {
-  margin-bottom: 24px;
-}
-
-.readinessGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(8, 19, 38, 0.13);
-}
-
-.readinessGrid article {
-  min-height: 142px;
-  display: grid;
-  align-content: space-between;
-  gap: 16px;
-  padding: 18px;
-  background: rgba(255, 253, 247, 0.98);
-}
-
-.readinessGrid article div {
-  display: grid;
-  gap: 8px;
-}
-
-.readinessGrid article span {
-  width: fit-content;
-  min-height: 26px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 9px;
-  border-radius: 999px;
-  font-size: 0.68rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.readinessGrid article strong {
-  color: #082141;
-  font-size: 1.05rem;
-  line-height: 1.14;
-}
-
-.readinessGrid article p {
-  margin: 0;
-  color: #596476;
-  line-height: 1.42;
-}
-
-.ready span {
-  color: #f9fff6;
-  background: #4f7a4c;
-}
-
-.partial span {
+  place-items: center;
+  padding: clamp(18px, 6vw, 64px);
   color: #071429;
-  background: #f3bb55;
+  background:
+    linear-gradient(180deg, rgba(8, 33, 65, 0.82), rgba(247, 245, 238, 0.94)),
+    url("../assets/july-4-hero.png") center / cover no-repeat;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.needed span {
-  color: #fffdf7;
-  background: #be1d27;
-}
-
-.assetGrid {
+.signInCard {
+  width: min(100%, 460px);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(8, 19, 38, 0.13);
-}
-
-.assetGrid article {
-  display: grid;
-  grid-template-columns: 122px 1fr;
-  gap: 14px;
-  align-items: center;
-  min-height: 146px;
-  padding: 16px;
-  background: rgba(255, 253, 247, 0.98);
-}
-
-.assetImage {
-  width: 122px;
-  height: 92px;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border: 1px solid rgba(8, 19, 38, 0.09);
-  border-radius: 8px;
-  background: #fff;
-}
-
-.assetGrid strong,
-.contentGapGrid strong {
-  display: block;
-  margin-top: 8px;
-  color: #082141;
-  font-size: 1rem;
-  line-height: 1.16;
-}
-
-.assetGrid p,
-.contentGapGrid p {
-  margin: 7px 0 0;
-  color: #596476;
-  line-height: 1.38;
-}
-
-.readyBadge,
-.neededBadge,
-.optionalBadge {
-  width: fit-content;
-  min-height: 25px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 9px;
-  border-radius: 999px;
-  font-size: 0.66rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.readyBadge {
-  color: #f9fff6;
-  background: #4f7a4c;
-}
-
-.neededBadge {
-  color: #fffdf7;
-  background: #be1d27;
-}
-
-.optionalBadge {
-  color: #071429;
-  background: #f3bb55;
-}
-
-.contentGapGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(8, 19, 38, 0.13);
-  border-top: 1px solid rgba(8, 19, 38, 0.13);
-}
-
-.contentGapGrid article {
-  min-height: 132px;
-  padding: 18px;
-  background: #fffdf7;
-}
-
-.vehicleInventoryGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(8, 19, 38, 0.13);
-}
-
-.vehicleInventoryGrid article {
-  display: grid;
-  gap: 16px;
-  padding: 18px;
-  background: rgba(255, 253, 247, 0.98);
-}
-
-.vehicleInventoryImage {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: contain;
-  border: 1px solid rgba(8, 19, 38, 0.09);
-  border-radius: 8px;
-  background: #fff;
-}
-
-.vehicleInventoryGrid strong {
-  display: block;
-  color: #082141;
-  font-size: 1.18rem;
-  line-height: 1.12;
-}
-
-.vehicleInventoryGrid span {
-  display: block;
-  margin-top: 5px;
-  color: #596476;
-  font-weight: 850;
-}
-
-.vehicleInventoryGrid dl {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 7px;
-  margin: 13px 0 0;
-}
-
-.vehicleInventoryGrid dl div:first-child,
-.vehicleInventoryGrid dl div:last-child {
-  grid-column: 1 / -1;
-}
-
-.vehicleInventoryGrid dl div {
-  padding: 8px;
-  border: 1px solid rgba(8, 33, 65, 0.1);
-  border-radius: 8px;
-  background: rgba(8, 33, 65, 0.04);
-}
-
-.vehicleInventoryGrid dt,
-.vehicleInventoryGrid dd {
-  margin: 0;
-}
-
-.vehicleInventoryGrid dt {
-  color: #596476;
-  font-size: 0.68rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.vehicleInventoryGrid dd {
-  margin-top: 3px;
-  color: #082141;
-  font-size: 0.82rem;
-  font-weight: 900;
-  line-height: 1.2;
-}
-
-.vehicleInventoryGrid p {
-  margin: 13px 0 0;
-  color: #596476;
-  line-height: 1.42;
-}
-
-.miniGallery {
-  display: flex;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.miniGalleryImage {
-  width: 118px;
-  height: 82px;
-  object-fit: cover;
-  border: 1px solid rgba(8, 19, 38, 0.12);
-  border-radius: 8px;
-  background: #fff;
-}
-
-.proofHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 18px;
-  padding: 22px;
-  border-bottom: 1px solid rgba(8, 19, 38, 0.12);
-}
-
-.proofHeader p {
-  max-width: 620px;
-  margin: 8px 0 0;
-  color: #596476;
-}
-
-.referenceText {
-  width: 100%;
-  max-height: min(76svh, 900px);
-  display: block;
-  overflow: auto;
-  margin: 0;
-  padding: 22px;
-  color: #172033;
-  background: #fff;
-  border: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  white-space: pre-wrap;
-}
-
-.bindingStatus {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 14px 22px;
-  color: #071429;
-  background: rgba(79, 122, 76, 0.1);
-  border-bottom: 1px solid rgba(8, 19, 38, 0.12);
-}
-
-.bindingStatus strong {
-  color: #082141;
-}
-
-.bindingStatus span {
-  color: #596476;
-  font-weight: 800;
-}
-
-.guestStatusTableWrap {
-  overflow-x: auto;
-  padding: 18px 22px;
-  border-bottom: 1px solid rgba(8, 19, 38, 0.12);
-  background: #fffdf7;
-}
-
-.guestStatusTable {
-  width: 100%;
-  border-collapse: collapse;
-  color: #071429;
-}
-
-.guestStatusTable th,
-.guestStatusTable td {
-  padding: 12px 10px;
-  border-bottom: 1px solid rgba(8, 19, 38, 0.1);
-  text-align: left;
-}
-
-.guestStatusTable th {
-  color: #be1d27;
-  font-size: 0.76rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.guestStatusTable td {
-  font-weight: 850;
-}
-
-.linkPacket {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 14px 18px;
-  align-items: start;
-  padding: 20px 22px 22px;
-  color: #071429;
-  background:
-    linear-gradient(135deg, rgba(255, 253, 247, 0.98), rgba(245, 249, 241, 0.88)),
-    radial-gradient(circle at 100% 0%, rgba(79, 122, 76, 0.2), transparent 30%);
-  border-bottom: 1px solid rgba(8, 19, 38, 0.12);
-}
-
-.contentRequestPacket {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 14px 18px;
-  align-items: start;
-  margin-top: 18px;
-  padding: 18px;
-  color: #071429;
-  border: 1px solid rgba(8, 19, 38, 0.12);
+  padding: clamp(24px, 5vw, 38px);
+  border: 1px solid rgba(255, 253, 247, 0.5);
   border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(255, 253, 247, 0.98), rgba(255, 243, 226, 0.72)),
-    radial-gradient(circle at 100% 0%, rgba(190, 29, 39, 0.12), transparent 30%);
+  background: rgba(255, 253, 247, 0.96);
+  box-shadow: 0 28px 80px rgba(8, 19, 38, 0.35);
 }
 
-.linkPacket h3,
-.contentRequestPacket h3 {
-  margin: 8px 0 0;
+.signInCard h1 {
+  margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.45rem;
-  line-height: 1.08;
+  font-size: clamp(3rem, 10vw, 5.6rem);
+  line-height: 0.92;
   letter-spacing: 0;
 }
 
-.linkPacket p,
-.contentRequestPacket p {
-  max-width: 700px;
-  margin: 9px 0 0;
+.signInCard p {
+  margin: 0;
   color: #596476;
-  line-height: 1.42;
+  font-size: 1rem;
+  line-height: 1.45;
 }
 
-.linkPacket button,
-.linkPacket a,
-.contentRequestPacket button,
-.contentRequestPacket a {
-  min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.signInCard label {
+  display: grid;
+  gap: 8px;
+  color: #596476;
+  font-weight: 900;
+}
+
+.signInCard input {
+  min-height: 52px;
   padding: 0 14px;
+  color: #071429;
+  border: 1px solid rgba(8, 19, 38, 0.2);
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  font-size: 1.1rem;
+}
+
+.signInCard button {
+  min-height: 52px;
   color: #fffdf7;
   border: 0;
   border-radius: 8px;
   background: #be1d27;
-  box-shadow: 0 12px 26px rgba(190, 29, 39, 0.2);
+  box-shadow: 0 16px 32px rgba(190, 29, 39, 0.24);
   font: inherit;
-  font-size: 0.88rem;
-  font-weight: 900;
-  text-decoration: none;
+  font-weight: 950;
   cursor: pointer;
 }
 
-.linkPacket a {
-  color: #082141;
-  border: 1px solid rgba(8, 33, 65, 0.18);
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: none;
+.signInCard button:disabled {
+  opacity: 0.65;
+  cursor: progress;
 }
 
-.contentRequestPacket a {
-  color: #082141;
-  border: 1px solid rgba(8, 33, 65, 0.18);
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: none;
+.signInError {
+  color: #be1d27;
+  font-size: 0.94rem;
 }
 
-.launchUrlGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(8, 19, 38, 0.13);
-}
-
-.launchUrlGrid a {
-  min-height: 152px;
-  display: grid;
-  align-content: space-between;
-  gap: 10px;
-  padding: 18px;
-  color: #071429;
-  background: rgba(255, 253, 247, 0.98);
-  text-decoration: none;
-}
-
-.launchUrlGrid a:hover {
-  background: #fff3e2;
-}
-
-.launchUrlGrid strong {
-  color: #082141;
-  font-size: 1.02rem;
-}
-
-.launchUrlGrid span {
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  color: #0b4d91;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.75rem;
-  line-height: 1.35;
-}
-
-.launchUrlGrid p {
-  margin: 0;
-  color: #596476;
-  line-height: 1.38;
-}
-
-.packetStatus {
-  grid-column: 1 / -1;
-  width: fit-content;
-  min-height: 28px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 10px;
-  color: #082141;
-  border: 1px solid rgba(8, 33, 65, 0.16);
-  border-radius: 999px;
-  background: rgba(8, 33, 65, 0.04);
-  font-size: 0.78rem;
-  font-weight: 900;
-}
-
-.linkPacket pre,
-.contentRequestPacket pre {
-  grid-column: 1 / -1;
-  max-height: 300px;
-  overflow: auto;
-  margin: 0;
-  padding: 16px;
-  color: #172033;
-  border: 1px solid rgba(8, 19, 38, 0.12);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.76);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.84rem;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.guestLinkGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(8, 19, 38, 0.13);
-}
-
-.guestLinkGrid article {
-  min-height: 154px;
-  display: grid;
-  align-content: space-between;
-  gap: 14px;
-  padding: 16px;
-  color: #071429;
-  background: rgba(255, 253, 247, 0.98);
-  text-decoration: none;
-}
-
-.guestLinkGrid article:hover {
-  background: #fff3e2;
-}
-
-.guestLinkGrid strong {
-  display: block;
-  font-size: 1.05rem;
-}
-
-.guestLinkGrid span {
-  display: block;
-  margin-top: 6px;
-  color: #596476;
-  font-size: 0.88rem;
-  font-weight: 800;
-}
-
-.guestLinkGrid code {
-  width: fit-content;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  color: #0b4d91;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.78rem;
-}
-
-.guestQrPreview {
-  display: grid;
-  grid-template-columns: 86px minmax(0, 1fr);
-  gap: 12px;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid rgba(8, 33, 65, 0.12);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.64);
-}
-
-.guestQrPreview img {
-  width: 86px;
-  height: 86px;
-  border: 1px solid rgba(8, 19, 38, 0.1);
-  border-radius: 6px;
-  background: #fffdf7;
-}
-
-.guestQrPreview strong {
-  color: #082141;
-  font-size: 0.9rem;
-  line-height: 1.14;
-}
-
-.guestQrPreview span {
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  color: #596476 !important;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.7rem !important;
-  line-height: 1.35;
-}
-
-.guestLinkActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.guestLinkActions a,
-.guestLinkActions button {
-  min-height: 34px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
-  color: #082141;
-  border: 1px solid rgba(8, 33, 65, 0.18);
-  border-radius: 8px;
-  background: rgba(8, 33, 65, 0.04);
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 900;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.guestCopyStatus {
-  width: fit-content;
-  min-height: 26px;
-  display: inline-flex !important;
-  align-items: center;
-  padding: 0 9px;
-  color: #8a5260 !important;
-  border: 1px solid rgba(138, 82, 96, 0.18);
-  border-radius: 999px;
-  background: rgba(138, 82, 96, 0.06);
-  font-size: 0.74rem !important;
-  font-weight: 900 !important;
-}
-
-.guestSmsPreview {
-  border: 1px solid rgba(8, 33, 65, 0.12);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.54);
-}
-
-.guestSmsPreview summary {
-  padding: 10px 12px;
-  color: #082141;
-  font-size: 0.8rem;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.guestSmsPreview pre {
-  max-height: 220px;
-  overflow: auto;
-  margin: 0;
-  padding: 0 12px 12px;
-  color: #172033;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.76rem;
-  line-height: 1.45;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-@media (max-width: 980px) {
-  .hero,
-  .grid,
-  .lists,
-  .readinessGrid,
-  .assetGrid,
-  .contentGapGrid,
-  .vehicleInventoryGrid,
-  .launchUrlGrid,
-  .guestLinkGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .assetGrid article {
-    grid-template-columns: 104px 1fr;
-  }
-
-  .assetImage {
-    width: 104px;
-    height: 78px;
-  }
-
-  .vehicleInventoryGrid dl {
-    grid-template-columns: 1fr;
-  }
-
-  .proofButton {
-    width: fit-content;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero {
-    padding-top: 42px;
-  }
-
-  .proofHeader {
+@media (max-width: 720px) {
+  .adminHeader,
+  .guestListHeader {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .linkPacket {
-    grid-template-columns: 1fr;
-  }
-
-  .linkPacket button {
-    width: fit-content;
-  }
-
-  .bindingStatus {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .referenceText {
-    height: 72svh;
   }
 }

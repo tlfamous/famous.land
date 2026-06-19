@@ -1,6 +1,13 @@
 import { getLaunchCompletionRequestText } from "../../data";
+import { requireJulyAdminRequest } from "../auth";
 
-export function GET() {
+export async function GET(request: Request) {
+  const deniedResponse = await requireJulyAdminRequest(request);
+
+  if (deniedResponse) {
+    return deniedResponse;
+  }
+
   return new Response(getLaunchCompletionRequestText(), {
     headers: {
       "cache-control": "public, max-age=3600",

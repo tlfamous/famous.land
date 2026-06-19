@@ -780,9 +780,6 @@ export function getLaunchCompletionRequestText(baseUrl = "https://famous.land") 
     `Home page fleet sections: ${baseUrl}/july2026#fleet`,
     `Admin reference: ${baseUrl}/july2026/admin`,
     `Launch status: ${baseUrl}/july2026/admin/status.txt`,
-    `Guest SMS packets: ${baseUrl}/july2026/admin/sms-packets`,
-    `Host text templates: ${baseUrl}/july2026/admin/host-texts`,
-    `Media shot list: ${baseUrl}/july2026/admin/media-shot-list`,
     `Download this request: ${baseUrl}/july2026/admin/missing-content.txt`,
     "",
     "Once these are confirmed, the site can replace pending room/address language and add the remaining room/detail media."
@@ -816,25 +813,18 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
     "Admin review surfaces:",
     `- Launch status: ${baseUrl}/july2026/admin/status.txt`,
     `- Missing-content request: ${baseUrl}/july2026/admin/missing-content.txt`,
-    `- Guest SMS packets: ${baseUrl}/july2026/admin/sms-packets`,
-    `- Host text templates: ${baseUrl}/july2026/admin/host-texts`,
-    `- Media shot list: ${baseUrl}/july2026/admin/media-shot-list`,
-    `- Printable guest links: ${baseUrl}/july2026/admin/guest-links`,
-    `- Host briefing sheet: ${baseUrl}/july2026/admin/briefing-sheet`,
-    `- House signs: ${baseUrl}/july2026/admin/house-signs`,
     "",
     "Ready now:",
     "- Resort-style guest portal and supporting pages",
     "- Day-Of Desk for arrival, weather pivots, lake approvals, meals, maps, and host texts",
     "- Guest registry for house rosters, room assignments, companions, pending assignments, and guest links",
-    "- Guest QR, host text, calendar, and key itinerary actions",
+    "- Guest links, host text, calendar, and key itinerary actions",
     "- Resort FAQ for arrival, directions, food, lake approvals, phone setup, and host help",
     "- Prefilled Contact Host SMS actions to 781-929-4932",
     "- Downloadable host contact card",
     "- Shared weekend calendar and personal guest calendars",
     "- Personal guest packets",
-    "- Guest-specific SMS packet review",
-    "- Printable guest-link sheet, host briefing sheet, and house signs",
+    "- Guest-specific invite preview and copy actions",
     "- LH2 and LH3 live directions",
     "- LH3 animated profile GIF and MP4 house media",
     "- Motorized fleet inventory for Laconic, Spikey Lizard, and Laika",
@@ -860,6 +850,8 @@ export function getLaunchStatusText(baseUrl = "https://famous.land") {
 export type GuestAssignment = {
   slug: string;
   name: string;
+  phoneNumber?: string;
+  email?: string;
   house: "LH1" | "LH2" | "LH3" | "Pending";
   room: string;
   companions: string[];
@@ -872,6 +864,8 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "holly",
     name: "Holly",
+    phoneNumber: "617-784-9282",
+    email: "holly@famousfamily.com",
     house: "LH3",
     room: "Primary bedroom",
     companions: ["Tod"],
@@ -882,6 +876,8 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "tod",
     name: "Tod",
+    phoneNumber: "781-929-4932",
+    email: "tod@famousfamily.com",
     house: "LH3",
     room: "Primary bedroom",
     companions: ["Holly"],
@@ -892,6 +888,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "heather",
     name: "Heather",
+    phoneNumber: "914-629-5299",
     house: "LH1",
     room: "Second floor bedroom",
     companions: ["Eric"],
@@ -902,6 +899,8 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "eric",
     name: "Eric",
+    phoneNumber: "518-598-3832",
+    email: "bebejete@gmail.com",
     house: "LH1",
     room: "Second floor bedroom",
     companions: ["Heather"],
@@ -912,6 +911,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "zack",
     name: "Zack",
+    phoneNumber: "845-542-2010",
     house: "LH1",
     room: "First floor bedroom",
     companions: ["Bee"],
@@ -922,6 +922,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "bee",
     name: "Bee",
+    phoneNumber: "518-421-8613",
     house: "LH1",
     room: "First floor bedroom",
     companions: ["Zack"],
@@ -932,6 +933,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "cin",
     name: "Cin",
+    phoneNumber: "646-414-7922",
     house: "LH2",
     room: "South bedroom",
     companions: ["Vin"],
@@ -942,6 +944,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "vin",
     name: "Vin",
+    phoneNumber: "201-376-7830",
     house: "LH2",
     room: "South bedroom",
     companions: ["Cin"],
@@ -952,6 +955,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "adam",
     name: "Adam",
+    phoneNumber: "475-266-1295",
     house: "LH2",
     room: "North bedroom",
     companions: ["Gage"],
@@ -962,6 +966,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "gage",
     name: "Gage",
+    phoneNumber: "848-260-9220",
     house: "LH2",
     room: "North bedroom",
     companions: ["Adam"],
@@ -972,6 +977,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "morgan",
     name: "Morgan",
+    phoneNumber: "978-227-6125",
     house: "LH1",
     room: "The Girls' Room",
     companions: ["Rowan", "Emma", "Austen"],
@@ -982,6 +988,8 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "rowan",
     name: "Rowan",
+    phoneNumber: "978-727-4369",
+    email: "rowan@famousfamily.com",
     house: "LH1",
     room: "The Girls' Room",
     companions: ["Morgan", "Emma", "Austen"],
@@ -992,6 +1000,8 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "emma",
     name: "Emma",
+    phoneNumber: "203-423-9210",
+    email: "emma@famousfamily.com",
     house: "LH1",
     room: "The Girls' Room",
     companions: ["Morgan", "Rowan", "Austen"],
@@ -1002,6 +1012,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "austen",
     name: "Austen",
+    phoneNumber: "848-229-5040",
     house: "LH1",
     room: "The Girls' Room",
     companions: ["Morgan", "Rowan", "Emma"],
@@ -1012,6 +1023,7 @@ export const guestAssignments: GuestAssignment[] = [
   {
     slug: "jack",
     name: "Jack",
+    phoneNumber: "914-483-2112",
     house: "LH1",
     room: "Sunroom",
     companions: [],
@@ -1135,7 +1147,6 @@ Weekend essentials:
 
 Links:
 Guest link: ${baseUrl}/july2026/guest/${guest.slug}
-Guest QR code: ${baseUrl}/july2026/guest/${guest.slug}/qr.svg
 Directions: ${directionsUrl}
 Guest portal: ${baseUrl}/july2026
 Day-Of Desk: ${baseUrl}/july2026/day-of
@@ -1169,28 +1180,19 @@ export function getGuestSmsPacket(
   path = `/july2026/guest/${guest.slug}`,
   baseUrl = "https://famous.land"
 ) {
-  const qrPath = getGuestQrPath(guest, path);
   const assignment =
     guest.house === "Pending"
       ? "Your room assignment is still pending host confirmation."
       : `You are staying at ${guest.house}, ${guest.room}.`;
 
   return [
-    `Hi ${guest.name}, here is your July 4th, 2026 guest link:`,
+    `Hi ${guest.name}, we are excited to offer advance check-in for July 4th, 2026 at Lake Monomonac.`,
+    "Your custom weekend page has your house, room, schedule, maps, meals, radio rules, and host contact:",
     `${baseUrl}${path}`,
     "",
     assignment,
-    `Arrival: ${guest.arrival}`,
-    `Departure: ${guest.departure}`,
+    "Tap the link once from your phone so we can mark you checked in.",
     "",
-    `Personal guest packet: ${baseUrl}/july2026/guest/${guest.slug}/packet.txt`,
-    `Personal calendar: ${baseUrl}/july2026/guest/${guest.slug}/calendar.ics`,
-    `Guest QR code: ${baseUrl}${qrPath}`,
-    `Day-Of Desk: ${baseUrl}/july2026/day-of`,
-    `Resort FAQ: ${baseUrl}/july2026/faq`,
-    `Calendar: ${baseUrl}/july2026/calendar.ics`,
-    `Save host contact: ${baseUrl}/july2026/host-contact.vcf`,
-    "",
-    "Text 781-929-4932 for room help, dietary notes, fleet approval, or link resets."
+    "-Tod"
   ].join("\n");
 }

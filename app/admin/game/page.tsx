@@ -16,17 +16,17 @@ const gameOverview = [
   {
     label: "Player identity",
     detail:
-      "No login is required. The app uses an anonymous phone ID for progress, scan history, reports, and recovery."
+      "No login is required. The app uses an anonymous phone ID for progress, and admins can add name, email, or phone details later."
   },
   {
     label: "Progression",
     detail:
-      "Markers roll up into zone completion state and one hidden-until-complete grand-prize reveal."
+      "Fifteen markers roll up into one quest with four zones and one hidden-until-complete grand-prize reveal."
   },
   {
     label: "Admin workflow",
     detail:
-      "The admin area tracks scans and players, tests every QR route, maintains land maps, and captures future feature work."
+      "The admin area tracks scans, edits player contacts, tests every QR route, maintains maps, and updates marker field notes."
   }
 ];
 
@@ -91,48 +91,56 @@ const designElements = [
   "Pill buttons for primary, secondary, and sticky actions.",
   "Progress bars that move from moss to water, reused across marker, progress, and quest views.",
   "Zone, marker, report, table, and map summary list patterns.",
-  "Responsive admin left navigation, map workspace, data tables, and iPhone-style scan tester."
+  "Responsive admin left navigation, map workspace, data tables, and iPhone-style scan tester.",
+  "Shared game-status header appears consistently across admin pages."
 ];
 
 const publicFeatures = [
-  "Single-image public landing page at /.",
+  "Branded off-game landing page at / with a cow mark, configurable headline, welcome copy, and clear Contact button.",
+  "When the game is on, QR routes open the marker game; when it is off, scans still log but do not add player progress.",
   "Physical QR marker routes at root short codes such as /8K4P2.",
   "Compatibility marker routes at /t/FF-TREE-001.",
-  "Marker scan pages with compact welcome state, Marker Map preview, current-zone progress, field note, outdoor challenge, and clue.",
-  "First-scan onboarding state that introduces the quest before the normal marker flow.",
+  "Marker scan pages with compact welcome state, Marker Map preview, current-zone progress, and a field note.",
+  "First-scan onboarding explains the game, points players to Quest maps, and keeps the progress note.",
   "Anonymous browser player ID and local progress tracking with no login required.",
-  "Lakeview, No Wake, Treetop, and Hillside zone progress.",
+  "One quest with four zones: Lakeview, No Wake, Treetop, and Hillside.",
   `Hidden grand-prize reveal after all ${TOTAL_MARKERS} markers are found in any order.`,
-  "Famous Land Quest dashboard at /quest with marker progress, zone progress, found marker list, save, and recovery help.",
+  "Famous Land Quest dashboard at /quest with marker progress, zone progress, per-zone Map buttons, found marker list, save, and recovery help.",
   "Save-progress prompt after 5 markers, with optional email recovery.",
-  "Brevo-powered one-tap recovery email for restoring saved marker progress on a new or cleared phone.",
+  "Brevo-powered one-tap recovery email restores saved marker progress on a new or cleared phone.",
   "Safety page with private-property recreational-use notice and prohibited-use rules.",
   "Contact page with SMS support button and optional PayPal donation link."
 ];
 
 const adminFeatures = [
+  "Top game-status control turns the live game on or off and links to the off-game page when off.",
+  "Home-page headline editor controls the message above the cow icon on the off-game landing page.",
   "Admin dashboard with left navigation, compact filters, KPI cards, scan-volume timeline, and latest scan log.",
-  "Dashboard filters for date range, timeline unit, zone, player, and whether test scans are included.",
-  "Scan log with Eastern timestamps, email ID, phone ID, location, zone, and Scan Type showing Test or Real.",
-  "Player database with phone IDs, scan count, last scan, saved email, and phone contact fields.",
-  "Messages admin tool with recovery candidates table and Brevo recovery-link sender.",
-  "Feature Backlog page for active planning items and future game/admin work.",
-  "iPhone QR test lab for walking every marker route without printing or rescanning physical tags, plus printed-tag QR preview.",
+  "Dashboard filters default to Day with the past seven days selected, and test scans are hidden by default.",
+  "Dashboard filters support zone, player email, unknown-player scans, scan type, and test-scan inclusion.",
+  "Scan log shows Eastern timestamps, email ID, phone ID, location, zone, Scan Type, and contact edit links where a player is known.",
+  "Player database has All players, With email, and With phone tabs, plus inline Edit rows for name, email, phone, recovery email, and recovery SMS copy.",
+  "Messages admin tool remains available for recovery candidates and recovery-send audit history.",
+  "Feature Backlog tracks the two active future items: linking experience testing and grand-prize instructions.",
+  "iPhone QR test lab walks every marker route while behaving as game-on, even if the public game is off.",
+  "The tester shows a printed-tag QR preview and lets admins click to edit each marker field note.",
   "Land map workspace with survey-corrected parcel layers, zone highlights, acreage summary, and document viewer.",
   "Full-screen map document pages for survey and ANR reference images.",
-  "One-tap recovery links that restore progress when opened from the quest phone.",
+  "One-tap recovery links restore progress when opened from the quest phone, including links copied into manual SMS messages.",
   "Redirect from /admin/reports back to the consolidated admin dashboard."
 ];
 
 const dataAndIntegrations = [
-  "Next.js API routes for scan logging, progress lookup, save-progress, recovery, player reports, and admin reports.",
+  "Next.js API routes for scan logging, progress lookup, save-progress, recovery, player reports, admin reports, player contact editing, SMS copy, and marker field notes.",
   "Cloudflare D1 persistence through the DB binding in production.",
   "Local JSON fallback at .data/famous-land-db.json for development.",
   "LocalStorage for anonymous device progress, scan history, and saved-progress state.",
   "Brevo transactional email for branded mobile-first save-progress receipts and one-tap recovery links.",
   "Cloudflare environment variables configure EMAIL_PROVIDER, EMAIL_FROM, EMAIL_REPLY_TO, and NEXT_PUBLIC_SITE_URL.",
-  "Scan events record test-vs-real source so admin reports can include or exclude tester activity.",
+  "Scan events record test-vs-real source, source phone ID, email identity, and progress eligibility for on/off game reporting.",
+  "Off-game scans are counted in scan logs and dashboard totals but do not increment marker progress for that player.",
   "Active marker source data curated from the original tree-marker export.",
+  "Marker field-note overrides are stored in game settings and merged onto marker pages at render time.",
   "Map and survey imagery in public/assets/maps.",
   "No GPS collection, no required name, no required email, and no public leaderboard."
 ];
@@ -180,10 +188,10 @@ const operations = [
 ];
 
 const routes = [
-  { path: "/", purpose: "Image-first public landing page." },
+  { path: "/", purpose: "Branded Famous Land home page, including off-game contact state when the game is disabled." },
   { path: "/[code]", purpose: "Root QR marker page by short code." },
   { path: "/t/[markerId]", purpose: "Compatibility marker page by full marker ID." },
-  { path: "/quest", purpose: "Famous Land Quest dashboard with marker progress, zone progress, save, and recover links." },
+  { path: "/quest", purpose: "Famous Land Quest dashboard with marker progress, four-zone progress, Map buttons, save, and recover links." },
   { path: "/quests", purpose: "Compatibility redirect to /quest." },
   { path: "/progress", purpose: "Redirects old progress links to /quest." },
   { path: "/prize/lakemonomonac2026", purpose: "Hidden grand-prize page reached from the completion reveal." },
@@ -194,12 +202,12 @@ const routes = [
   { path: "/contact", purpose: "SMS support entry with optional donation link." },
   { path: "/admin", purpose: "Admin dashboard with scan reports, filters, KPI cards, timeline, and scan log." },
   { path: "/admin/backlog", purpose: "Feature Backlog and planning list." },
-  { path: "/admin/game", purpose: "This game, site, feature, and operations inventory." },
+  { path: "/admin/game", purpose: "Current game, site, feature, and operations inventory." },
   { path: "/admin/design", purpose: "Redirects to /admin/game." },
-  { path: "/admin/players", purpose: "Player/contact database report." },
-  { path: "/admin/messages", purpose: "Admin Brevo recovery-email sender and future text-message communication tools." },
+  { path: "/admin/players", purpose: "Player/contact database with tabs and inline profile editing." },
+  { path: "/admin/messages", purpose: "Recovery candidate history and recovery-message support tools." },
   { path: "/admin/recovery", purpose: "Redirects to /admin/messages." },
-  { path: "/test", purpose: "Admin iPhone route tester." },
+  { path: "/test", purpose: "Admin iPhone route tester with printed-tag preview and field-note editing." },
   { path: "/maps", purpose: "Land parcel and survey workspace." },
   { path: "/maps/documents/[documentSlug]", purpose: "Full-screen survey image viewer." }
 ];

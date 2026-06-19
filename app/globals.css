@@ -1155,12 +1155,12 @@ button.button,
 
 .game-availability-toggle {
   width: 100%;
-  max-width: 1480px;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  margin: 0 auto 18px;
+  margin: 0 0 18px;
   padding: 20px;
   color: var(--paper-strong);
   border: 1px solid rgba(255, 250, 240, 0.18);
@@ -1190,7 +1190,7 @@ button.button,
 }
 
 .game-availability-actions {
-  flex: 0 0 390px;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -2525,17 +2525,26 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
   align-items: start;
 }
 
-.player-profile-card {
-  display: grid;
-  gap: 14px;
-  padding: 16px;
-}
-
 .player-recovery-actions {
   display: grid;
   gap: 12px;
   padding-top: 14px;
   border-top: 1px solid rgba(17, 20, 15, 0.12);
+}
+
+.player-profile-row td {
+  padding: 0;
+  background: rgba(216, 227, 189, 0.18);
+}
+
+.player-profile-inline {
+  display: grid;
+  gap: 14px;
+  margin: 0 0 14px;
+  padding: 18px;
+  border-top: 1px solid rgba(17, 20, 15, 0.08);
+  border-bottom: 1px solid rgba(17, 20, 15, 0.08);
+  background: rgba(255, 250, 240, 0.82);
 }
 
 .empty-profile-state {
@@ -2617,17 +2626,6 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
 @media (max-width: 720px) {
   .player-contact-tabs {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 1100px) {
-  .player-database-workspace {
-    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.38fr);
-  }
-
-  .player-profile-card {
-    position: sticky;
-    top: 92px;
   }
 }
 
@@ -3968,6 +3966,7 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
   position: sticky;
   top: 76px;
   display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
   justify-items: center;
   gap: 12px;
   align-self: stretch;
@@ -3994,6 +3993,43 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
   height: 100%;
   display: grid;
   place-items: center;
+}
+
+.test-field-note-editor {
+  width: calc(100% - 28px);
+  display: grid;
+  gap: 12px;
+  margin: 0 14px 14px;
+  padding: 14px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 250, 240, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 250, 240, 0.94);
+}
+
+.test-field-note-editor h2 {
+  margin: 0;
+  font-size: 1.18rem;
+}
+
+.test-field-note-preview {
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  color: rgba(17, 20, 15, 0.78);
+  border: 1px dashed rgba(17, 20, 15, 0.22);
+  border-radius: var(--radius);
+  background: rgba(247, 243, 232, 0.82);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.test-field-note-preview:hover {
+  border-color: rgba(47, 111, 119, 0.46);
+  background: rgba(190, 221, 218, 0.28);
 }
 
 .test-qr-empty p {

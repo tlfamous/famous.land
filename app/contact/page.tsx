@@ -11,7 +11,7 @@ export default function ContactPage() {
       <section className="hero-card">
         <p className="eyebrow">Contact</p>
         <h1>Need help?</h1>
-        <p>Have a question or feedback? Click below to send a text.</p>
+        <p>Have a question about finding a marker, or have feedback? Click below...</p>
       </section>
 
       <section className="card contact-card" aria-label="Support form">

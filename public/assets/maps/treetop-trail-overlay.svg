@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="640" viewBox="0 0 450 640">
+  <path d="M 283.3 27.8 L 298.9 34.8 L 311.1 52.2 L 318.0 73.0 L 330.2 106.1 L 316.3 139.1 L 304.1 163.5 L 318.0 205.2 L 318.0 252.2 L 314.6 306.1 L 312.8 370.4 L 316.3 436.5 L 314.6 504.3 L 312.8 547.8 L 311.1 586.1 L 300.7 612.2 L 260.7 610.4 L 227.6 605.2 L 201.5 591.3 L 173.7 575.7 L 158.0 551.3 L 142.4 539.1 L 128.5 546.1 L 119.8 565.2 L 121.5 591.3" fill="none" stroke="#644c18" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+  <path d="M 283.3 27.8 L 298.9 34.8 L 311.1 52.2 L 318.0 73.0 L 330.2 106.1 L 316.3 139.1 L 304.1 163.5 L 318.0 205.2 L 318.0 252.2 L 314.6 306.1 L 312.8 370.4 L 316.3 436.5 L 314.6 504.3 L 312.8 547.8 L 311.1 586.1 L 300.7 612.2 L 260.7 610.4 L 227.6 605.2 L 201.5 591.3 L 173.7 575.7 L 158.0 551.3 L 142.4 539.1 L 128.5 546.1 L 119.8 565.2 L 121.5 591.3" fill="none" stroke="#a77c1d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="299.9" y="49.7" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="305.1" y="141.8" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="308.6" y="237.5" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="308.6" y="334.9" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="308.6" y="428.8" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="306.8" y="529.7" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="284.2" y="604.4" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="212.9" y="597.5" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="155.5" y="554.0" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <rect x="117.3" y="581.8" width="12" height="12" fill="#f4e718" stroke="#847709" stroke-width="1" />
+  <text x="190" y="300" transform="rotate(-90 190 300)" fill="#825217" opacity="0.92" font-family="Arial, sans-serif" font-size="24" font-weight="700">Treetop Trail</text>
+</svg>

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { GameUnavailablePage } from "@/components/GameUnavailablePage";
 import { MarkerScanClient } from "@/components/MarkerScanClient";
-import { getGameAvailability, getHomePageHeadline } from "@/lib/db";
+import { getGameAvailability, getHomePageHeadline, getMarkerWithFieldNote } from "@/lib/db";
 import { getMarkerByToken, markers } from "@/lib/markers";
 import { isTesterScanSource } from "@/lib/testerMode";
 
@@ -23,15 +23,16 @@ export default async function MarkerByCodePage({
 }) {
   const { code } = await params;
   const query = (await searchParams) ?? {};
-  const marker = getMarkerByToken(code);
+  const baseMarker = getMarkerByToken(code);
 
-  if (!marker) {
+  if (!baseMarker) {
     notFound();
   }
 
-  const [availability, homePageHeadline] = await Promise.all([
+  const [availability, homePageHeadline, marker] = await Promise.all([
     getGameAvailability(),
-    getHomePageHeadline()
+    getHomePageHeadline(),
+    getMarkerWithFieldNote(baseMarker)
   ]);
 
   if (!availability.enabled && !isTesterScanSource(query.scan_source)) {

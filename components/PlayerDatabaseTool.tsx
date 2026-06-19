@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { Fragment, FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { copyTextToClipboard } from "@/components/copyTextToClipboard";
 import type { AdminAuditEventRow, MessageEventRow, PlayerReportRow } from "@/lib/db";
 
 type PlayerContactTab = "all" | "email" | "phone";
@@ -25,7 +26,6 @@ export function PlayerDatabaseTool({
   tabs: Array<{ value: PlayerContactTab; label: string; count: number }>;
   initialPlayerId?: string;
 }) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const requestedPlayerId = initialPlayerId ?? searchParams.get("player") ?? "";
   const [selectedPlayerId, setSelectedPlayerId] = useState(requestedPlayerId);
@@ -192,14 +192,27 @@ export function PlayerDatabaseTool({
 
     setSmsCopy(data.sms_text);
 
-    try {
-      await navigator.clipboard.writeText(data.sms_text);
+    if (await copyTextToClipboard(data.sms_text)) {
       setSmsStatus("copied");
       setSmsMessage("SMS recovery copy is on your clipboard.");
-    } catch {
-      setSmsStatus("ready");
-      setSmsMessage("SMS recovery copy is ready to copy.");
+      return;
     }
+
+    setSmsStatus("ready");
+    setSmsMessage("SMS recovery copy is ready below. Select it or tap Copy message.");
+  }
+
+  async function copyPreparedSmsCopy() {
+    if (!smsCopy) return;
+
+    if (await copyTextToClipboard(smsCopy)) {
+      setSmsStatus("copied");
+      setSmsMessage("SMS recovery copy is on your clipboard.");
+      return;
+    }
+
+    setSmsStatus("ready");
+    setSmsMessage("Select the SMS copy below and copy it manually.");
   }
 
   return (
@@ -241,30 +254,173 @@ export function PlayerDatabaseTool({
             <tbody>
               {players.length ? (
                 players.map((player) => (
-                  <tr
-                    className={selectedPlayerId === player.player_id ? "selected-row" : undefined}
-                    key={player.player_id}
-                  >
-                    <td>
-                      <code title={player.player_id}>{shortPlayerId(player.player_id)}</code>
-                    </td>
-                    <td>{player.name ?? "Not saved"}</td>
-                    <td>{player.scan_count}</td>
-                    <td>
-                      {player.last_scan_at ? formatEasternDateTime(player.last_scan_at) : "No scans"}
-                    </td>
-                    <td>{player.email ?? "Not saved"}</td>
-                    <td>{player.phone_number ?? "Not captured"}</td>
-                    <td>
-                      <button
-                        className="button secondary compact-button"
-                        type="button"
-                        onClick={() => selectPlayer(player)}
-                      >
-                        Select
-                      </button>
-                    </td>
-                  </tr>
+                  <Fragment key={player.player_id}>
+                    <tr
+                      className={selectedPlayerId === player.player_id ? "selected-row" : undefined}
+                    >
+                      <td>
+                        <code title={player.player_id}>{shortPlayerId(player.player_id)}</code>
+                      </td>
+                      <td>{player.name ?? "Not saved"}</td>
+                      <td>{player.scan_count}</td>
+                      <td>
+                        {player.last_scan_at ? formatEasternDateTime(player.last_scan_at) : "No scans"}
+                      </td>
+                      <td>{player.email ?? "Not saved"}</td>
+                      <td>{player.phone_number ?? "Not captured"}</td>
+                      <td>
+                        <button
+                          className="button secondary compact-button"
+                          type="button"
+                          onClick={() => selectPlayer(player)}
+                        >
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                    {selectedPlayerId === player.player_id && selectedPlayer ? (
+                      <tr className="player-profile-row" id="player-profile">
+                        <td colSpan={7}>
+                          <div className="player-profile-inline" aria-live="polite">
+                            <div className="report-section-head">
+                              <div>
+                                <p className="eyebrow">Player profile</p>
+                                <h2>
+                                  {selectedPlayer.name ||
+                                    selectedPlayer.email ||
+                                    shortPlayerId(selectedPlayer.player_id)}
+                                </h2>
+                              </div>
+                            </div>
+                            <div className="message-selected-player">
+                              <p>
+                                <code title={selectedPlayer.player_id}>
+                                  {shortPlayerId(selectedPlayer.player_id)}
+                                </code>{" "}
+                                has {selectedPlayer.scan_count} scan
+                                {selectedPlayer.scan_count === 1 ? "" : "s"}.
+                              </p>
+                              <dl>
+                                <div>
+                                  <dt>Messages</dt>
+                                  <dd>{selectedPlayerMessageEvents.length}</dd>
+                                </div>
+                                <div>
+                                  <dt>Audit</dt>
+                                  <dd>{selectedPlayerAuditEvents.length}</dd>
+                                </div>
+                                <div>
+                                  <dt>Phone</dt>
+                                  <dd>{selectedPlayer.phone_number ? "yes" : "no"}</dd>
+                                </div>
+                              </dl>
+                            </div>
+
+                            <form className="form compact-form" onSubmit={onContactSubmit}>
+                              <label htmlFor={`profile-name-${selectedPlayer.player_id}`}>Name</label>
+                              <input
+                                id={`profile-name-${selectedPlayer.player_id}`}
+                                autoComplete="name"
+                                placeholder="Player name"
+                                value={editName}
+                                onChange={(event) => setEditName(event.target.value)}
+                              />
+                              <label htmlFor={`profile-email-${selectedPlayer.player_id}`}>Email</label>
+                              <input
+                                id={`profile-email-${selectedPlayer.player_id}`}
+                                inputMode="email"
+                                type="email"
+                                autoComplete="email"
+                                placeholder="player@example.com"
+                                value={editEmail}
+                                onChange={(event) => setEditEmail(event.target.value)}
+                              />
+                              <label htmlFor={`profile-phone-${selectedPlayer.player_id}`}>
+                                Phone number
+                              </label>
+                              <input
+                                id={`profile-phone-${selectedPlayer.player_id}`}
+                                inputMode="tel"
+                                type="tel"
+                                autoComplete="tel"
+                                placeholder="(978) 555-0100"
+                                value={editPhone}
+                                onChange={(event) => setEditPhone(event.target.value)}
+                              />
+                              <button
+                                className="button secondary"
+                                disabled={editStatus === "saving"}
+                                type="submit"
+                              >
+                                {editStatus === "saving" ? "Saving..." : "Save profile"}
+                              </button>
+                            </form>
+
+                            {editMessage ? (
+                              <div className={editStatus === "error" ? "notice error" : "notice"}>
+                                <p>{editMessage}</p>
+                              </div>
+                            ) : null}
+
+                            <div className="player-recovery-actions">
+                              <form className="form compact-form" onSubmit={onRecoveryEmailSubmit}>
+                                <p className="eyebrow">Recovery email</p>
+                                <p className="form-note">
+                                  Sends the same one-tap recovery email used by the current support tool.
+                                </p>
+                                <button
+                                  className="button primary"
+                                  disabled={!selectedPlayer.email || emailStatus === "sending"}
+                                  type="submit"
+                                >
+                                  {emailStatus === "sending" ? "Sending..." : "Send recovery email"}
+                                </button>
+                              </form>
+
+                              <div className="compact-form">
+                                <p className="eyebrow">Recovery SMS</p>
+                                <p className="form-note">
+                                  Generates text you can copy and send from your SMS app.
+                                </p>
+                                <button
+                                  className="button secondary"
+                                  disabled={!selectedPlayer.phone_number || smsStatus === "generating"}
+                                  type="button"
+                                  onClick={generateSmsCopy}
+                                >
+                                  {smsStatus === "generating" ? "Generating..." : "Copy recovery SMS"}
+                                </button>
+                              </div>
+                            </div>
+
+                            {emailMessage ? (
+                              <div className={emailStatus === "error" ? "notice error" : "notice"}>
+                                <p>{emailMessage}</p>
+                              </div>
+                            ) : null}
+
+                            {smsMessage ? (
+                              <div className={smsStatus === "error" ? "notice error" : "notice"}>
+                                <p>{smsMessage}</p>
+                              </div>
+                            ) : null}
+
+                            {smsCopy ? (
+                              <div className="compact-form">
+                                <label className="field compact-search" htmlFor="sms-copy">
+                                  <span>SMS copy</span>
+                                  <textarea id="sms-copy" readOnly rows={5} value={smsCopy} />
+                                </label>
+                                <button className="button secondary" type="button" onClick={copyPreparedSmsCopy}>
+                                  Copy message
+                                </button>
+                              </div>
+                            ) : null}
+                          </div>
+                        </td>
+                      </tr>
+                    ) : null}
+                  </Fragment>
                 ))
               ) : (
                 <tr>
@@ -276,134 +432,6 @@ export function PlayerDatabaseTool({
         </div>
       </section>
 
-      <section className="card player-profile-card" id="player-profile" aria-live="polite">
-        {selectedPlayer ? (
-          <>
-            <div className="report-section-head">
-              <div>
-                <p className="eyebrow">Player profile</p>
-                <h2>{selectedPlayer.name || selectedPlayer.email || shortPlayerId(selectedPlayer.player_id)}</h2>
-              </div>
-            </div>
-            <div className="message-selected-player">
-              <p>
-                <code title={selectedPlayer.player_id}>{shortPlayerId(selectedPlayer.player_id)}</code>{" "}
-                has {selectedPlayer.scan_count} scan{selectedPlayer.scan_count === 1 ? "" : "s"}.
-              </p>
-              <dl>
-                <div>
-                  <dt>Messages</dt>
-                  <dd>{selectedPlayerMessageEvents.length}</dd>
-                </div>
-                <div>
-                  <dt>Audit</dt>
-                  <dd>{selectedPlayerAuditEvents.length}</dd>
-                </div>
-                <div>
-                  <dt>Phone</dt>
-                  <dd>{selectedPlayer.phone_number ? "yes" : "no"}</dd>
-                </div>
-              </dl>
-            </div>
-
-            <form className="form compact-form" onSubmit={onContactSubmit}>
-              <label htmlFor="profile-name">Name</label>
-              <input
-                id="profile-name"
-                autoComplete="name"
-                placeholder="Player name"
-                value={editName}
-                onChange={(event) => setEditName(event.target.value)}
-              />
-              <label htmlFor="profile-email">Email</label>
-              <input
-                id="profile-email"
-                inputMode="email"
-                type="email"
-                autoComplete="email"
-                placeholder="player@example.com"
-                value={editEmail}
-                onChange={(event) => setEditEmail(event.target.value)}
-              />
-              <label htmlFor="profile-phone">Phone number</label>
-              <input
-                id="profile-phone"
-                inputMode="tel"
-                type="tel"
-                autoComplete="tel"
-                placeholder="(978) 555-0100"
-                value={editPhone}
-                onChange={(event) => setEditPhone(event.target.value)}
-              />
-              <button className="button secondary" disabled={editStatus === "saving"} type="submit">
-                {editStatus === "saving" ? "Saving..." : "Save profile"}
-              </button>
-            </form>
-
-            {editMessage ? (
-              <div className={editStatus === "error" ? "notice error" : "notice"}>
-                <p>{editMessage}</p>
-              </div>
-            ) : null}
-
-            <div className="player-recovery-actions">
-              <form className="form compact-form" onSubmit={onRecoveryEmailSubmit}>
-                <p className="eyebrow">Recovery email</p>
-                <p className="form-note">
-                  Sends the same one-tap recovery email used by the current support tool.
-                </p>
-                <button
-                  className="button primary"
-                  disabled={!selectedPlayer.email || emailStatus === "sending"}
-                  type="submit"
-                >
-                  {emailStatus === "sending" ? "Sending..." : "Send recovery email"}
-                </button>
-              </form>
-
-              <div className="compact-form">
-                <p className="eyebrow">Recovery SMS</p>
-                <p className="form-note">
-                  Generates text you can copy and send from your SMS app.
-                </p>
-                <button
-                  className="button secondary"
-                  disabled={!selectedPlayer.phone_number || smsStatus === "generating"}
-                  type="button"
-                  onClick={generateSmsCopy}
-                >
-                  {smsStatus === "generating" ? "Generating..." : "Copy recovery SMS"}
-                </button>
-              </div>
-            </div>
-
-            {emailMessage ? (
-              <div className={emailStatus === "error" ? "notice error" : "notice"}>
-                <p>{emailMessage}</p>
-              </div>
-            ) : null}
-
-            {smsMessage ? (
-              <div className={smsStatus === "error" ? "notice error" : "notice"}>
-                <p>{smsMessage}</p>
-              </div>
-            ) : null}
-
-            {smsCopy ? (
-              <label className="field compact-search" htmlFor="sms-copy">
-                <span>SMS copy</span>
-                <textarea id="sms-copy" readOnly rows={5} value={smsCopy} />
-              </label>
-            ) : null}
-          </>
-        ) : (
-          <div className="empty-profile-state">
-            <p className="eyebrow">Player profile</p>
-            <h2>Select a player</h2>
-            <p>Select any phone ID to add or edit name, email, and phone contact details.</p>
-          </div>
-        )}
-      </section>
     </section>
   );
 }

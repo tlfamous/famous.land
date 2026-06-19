@@ -125,7 +125,10 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
           <div className="first-scan-steps">
             <div>
               <span>Game</span>
-              <p>Find QR markers around Famous Land to finish all four zones.</p>
+              <p>
+                Find QR markers around Famous Land to finish all four zones. Click
+                &quot;Quest&quot; above to see the maps.
+              </p>
             </div>
             <div>
               <span>Safety</span>
@@ -138,14 +141,6 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
                 you become an active player.
               </p>
             </div>
-          </div>
-          <div className="button-row">
-            <Link className="button primary" href={questHref}>
-              View Famous Land Quest
-            </Link>
-            <Link className="button secondary" href="/safety">
-              Safety note
-            </Link>
           </div>
           {serverMessage ? <p className="notice">{serverMessage}</p> : null}
         </section>
@@ -212,14 +207,6 @@ export function MarkerScanClient({ marker }: { marker: Marker }) {
         <div>
           <span>Field note</span>
           <p>{marker.field_note}</p>
-        </div>
-        <div>
-          <span>Outdoor challenge</span>
-          <p>{marker.challenge}</p>
-        </div>
-        <div>
-          <span>Clue</span>
-          <p>{marker.clue}</p>
         </div>
       </div>
     </div>

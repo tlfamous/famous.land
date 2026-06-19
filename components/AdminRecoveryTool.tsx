@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { copyTextToClipboard } from "@/components/copyTextToClipboard";
 import type { AdminAuditEventRow, MessageEventRow } from "@/lib/db";
 
 export type AdminRecoveryPlayer = {
@@ -240,14 +241,27 @@ export function AdminRecoveryTool({
 
     setSmsCopy(data.sms_text);
 
-    try {
-      await navigator.clipboard.writeText(data.sms_text);
+    if (await copyTextToClipboard(data.sms_text)) {
       setSmsStatus("copied");
       setSmsMessage("SMS recovery message copied. Send it to the player from your SMS app.");
-    } catch {
-      setSmsStatus("ready");
-      setSmsMessage("SMS recovery message is ready to copy.");
+      return;
     }
+
+    setSmsStatus("ready");
+    setSmsMessage("SMS recovery message is ready below. Select it or tap Copy message.");
+  }
+
+  async function copyPreparedSmsCopy() {
+    if (!smsCopy) return;
+
+    if (await copyTextToClipboard(smsCopy)) {
+      setSmsStatus("copied");
+      setSmsMessage("SMS recovery message copied. Send it to the player from your SMS app.");
+      return;
+    }
+
+    setSmsStatus("ready");
+    setSmsMessage("Select the SMS copy below and copy it manually.");
   }
 
   return (
@@ -429,10 +443,15 @@ export function AdminRecoveryTool({
             ) : null}
 
             {smsCopy ? (
-              <label className="field compact-search" htmlFor="message-sms-copy">
-                <span>SMS copy</span>
-                <textarea id="message-sms-copy" readOnly rows={5} value={smsCopy} />
-              </label>
+              <div className="compact-form">
+                <label className="field compact-search" htmlFor="message-sms-copy">
+                  <span>SMS copy</span>
+                  <textarea id="message-sms-copy" readOnly rows={5} value={smsCopy} />
+                </label>
+                <button className="button secondary" type="button" onClick={copyPreparedSmsCopy}>
+                  Copy message
+                </button>
+              </div>
             ) : null}
           </div>
 

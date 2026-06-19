@@ -76,6 +76,25 @@ const walkingTrails: WalkingTrail[] = [
       { x: 22.7, y: 96.4 },
       { x: 20.8, y: 101.2 }
     ]
+  },
+  {
+    name: "Treetop Trail",
+    path:
+      "M94.8 37.4 C95.7 37.8 96.4 38.8 96.8 40.0 C97.5 41.9 96.7 43.8 96.0 45.2 C96.8 47.6 96.8 50.3 96.6 53.4 C96.5 57.1 96.7 60.9 96.6 64.8 C96.5 67.3 96.4 69.5 95.8 71.0 C93.5 70.9 91.6 70.6 90.1 69.8 C88.5 68.9 87.6 67.5 86.7 66.8 C85.9 67.2 85.4 68.3 85.5 69.8",
+    label: { rotate: -89, x: 94.2, y: 57.4 },
+    markerColor: "#f0d732",
+    markers: [
+      { x: 96.1, y: 39.0 },
+      { x: 96.4, y: 44.3 },
+      { x: 96.6, y: 49.8 },
+      { x: 96.6, y: 55.4 },
+      { x: 96.6, y: 60.8 },
+      { x: 96.5, y: 66.6 },
+      { x: 95.2, y: 70.9 },
+      { x: 91.1, y: 70.5 },
+      { x: 87.8, y: 68.0 },
+      { x: 85.6, y: 69.6 }
+    ]
   }
 ];
 
@@ -176,7 +195,7 @@ const visualZones: Record<string, VisualZone> = {
       { x: 89.2, y: 41.0, label: "Boat Launch / EWNJC", markerId: "FF-TREE-016", style: "tag" },
       { x: 95.3, y: 35.2, label: "Not a Driveway / PUQZA", markerId: "FF-TREE-017", style: "tag" },
       { x: 79.8, y: 70.5, label: "Not much of a Dam View / ETET2", markerId: "FF-TREE-018", style: "tag" },
-      { x: 94.9, y: 69.6, label: "Granite Marker / TAKVU", markerId: "FF-TREE-019", style: "tag" }
+      { x: 95.2, y: 70.9, label: "Granite Marker / TAKVU", markerId: "FF-TREE-019", style: "tag" }
     ],
     tone: "#3e5d2c"
   }
@@ -403,32 +422,6 @@ function FamousLandMapSvg({
           return (
             <g className={isActive ? "map-section active" : "map-section"} key={slug}>
               <path d={visual.path} style={{ "--section-color": visual.tone } as CSSProperties} />
-              {isActive
-                ? visual.points
-                    ?.filter((point) => point.markerId !== activeMarkerId)
-                    .map((point, pointIndex) =>
-                      renderMapPoint(
-                        point,
-                        pointIndex,
-                        activeMarkerId,
-                        markerCounts,
-                        markerCountMode
-                      )
-                    )
-                : null}
-              {isActive
-                ? visual.points
-                    ?.filter((point) => point.markerId === activeMarkerId)
-                    .map((point, pointIndex) =>
-                      renderMapPoint(
-                        point,
-                        pointIndex,
-                        activeMarkerId,
-                        markerCounts,
-                        markerCountMode
-                      )
-                    )
-                : null}
             </g>
           );
         })}
@@ -489,6 +482,19 @@ function FamousLandMapSvg({
           ))}
         </g>
       ) : null}
+
+      <g className="map-marker-layer">
+        {visualZones[activeSlug]?.points
+          ?.filter((point) => point.markerId !== activeMarkerId)
+          .map((point, pointIndex) =>
+            renderMapPoint(point, pointIndex, activeMarkerId, markerCounts, markerCountMode)
+          )}
+        {visualZones[activeSlug]?.points
+          ?.filter((point) => point.markerId === activeMarkerId)
+          .map((point, pointIndex) =>
+            renderMapPoint(point, pointIndex, activeMarkerId, markerCounts, markerCountMode)
+          )}
+      </g>
     </svg>
   );
 }
@@ -524,7 +530,6 @@ export function ZoneDashboardMap({ zone }: { zone: Zone }) {
       activeSlug={activeSlug}
       ariaLabel={`${zone} Zone map`}
       className="square-map-svg quest-zone-map-svg"
-      showWalkingTrails={false}
       viewBox={questZoneViewBoxes[zone]}
       zoneSlugs={[activeSlug]}
     />

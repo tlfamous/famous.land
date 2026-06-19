@@ -5,7 +5,7 @@ import {
   sendRecoveryEmail
 } from "@/lib/email";
 import { markers, zones } from "@/lib/markers";
-import type { ScanRecord } from "@/lib/types";
+import type { Marker, ScanRecord } from "@/lib/types";
 
 type SavedPlayer = {
   player_id: string;
@@ -294,6 +294,7 @@ const emptyDb: DbShape = {
 const EASTERN_TIME_ZONE = "America/New_York";
 const GAME_ENABLED_SETTING_NAME = "game_enabled";
 const HOME_PAGE_HEADLINE_SETTING_NAME = "home_page_headline";
+const MARKER_FIELD_NOTE_SETTING_PREFIX = "marker_field_note:";
 const GAME_OFF_SCAN_PLAYER_ID = "GAME-OFF";
 const UNKNOWN_PLAYER_EMAIL_FILTER_VALUE = "unknown";
 const UNKNOWN_PLAYER_EMAIL_FILTER_LABEL = "Unknown";
@@ -550,6 +551,106 @@ export async function setHomePageHeadline(headline: string): Promise<string> {
   return value;
 }
 
+export async function getMarkersWithFieldNotes(markerList: Marker[] = markers): Promise<Marker[]> {
+  const overrides = await getMarkerFieldNoteOverrides();
+
+  if (!overrides.size) {
+    return markerList;
+  }
+
+  return markerList.map((marker) => ({
+    ...marker,
+    field_note: overrides.get(marker.marker_id) ?? marker.field_note
+  }));
+}
+
+export async function getMarkerWithFieldNote(marker: Marker): Promise<Marker> {
+  const [markerWithNote] = await getMarkersWithFieldNotes([marker]);
+  return markerWithNote;
+}
+
+export async function updateMarkerFieldNote(
+  markerId: string,
+  fieldNote: string
+): Promise<Marker> {
+  const marker = markers.find((item) => item.marker_id === markerId);
+
+  if (!marker) {
+    throw new Error("Unknown marker.");
+  }
+
+  const value = normalizeMarkerFieldNote(fieldNote);
+  const updated_at = new Date().toISOString();
+  const settingName = markerFieldNoteSettingName(markerId);
+  const d1 = await getD1();
+
+  if (d1) {
+    await ensureD1GameSettings(d1);
+    const result = await d1
+      .prepare(
+        `insert into game_settings (name, value, updated_at)
+         values (?, ?, ?)
+         on conflict(name) do update set
+           value = excluded.value,
+           updated_at = excluded.updated_at`
+      )
+      .bind(settingName, value, updated_at)
+      .run();
+
+    if (!result.success) {
+      throw new Error(result.error ?? "marker field note update failed");
+    }
+
+    await recordAdminAuditEvent({
+      action: "marker.field_note.update",
+      target: markerId,
+      result: "updated",
+      detail: `Admin updated the field note for ${marker.marker_name}.`
+    });
+
+    return { ...marker, field_note: value };
+  }
+
+  const db = await readLocalDb();
+  db.game_settings = [
+    ...db.game_settings.filter((setting) => setting.name !== settingName),
+    { name: settingName, value, updated_at }
+  ];
+  db.admin_audit_events.push(
+    makeAdminAuditEvent({
+      action: "marker.field_note.update",
+      target: markerId,
+      result: "updated",
+      detail: `Admin updated the field note for ${marker.marker_name}.`
+    })
+  );
+  await writeLocalDb(db);
+
+  return { ...marker, field_note: value };
+}
+
+async function getMarkerFieldNoteOverrides(): Promise<Map<string, string>> {
+  const d1 = await getD1();
+
+  if (d1) {
+    try {
+      await ensureD1GameSettings(d1);
+      const rows = await d1
+        .prepare("select name, value from game_settings where name like ?")
+        .bind(`${MARKER_FIELD_NOTE_SETTING_PREFIX}%`)
+        .all<{ name: string; value?: string | null }>();
+
+      return markerFieldNoteOverridesFromSettings(rows.results ?? []);
+    } catch (error) {
+      console.error("Famous Land marker field note query failed", error);
+      return new Map();
+    }
+  }
+
+  const db = await readLocalDb();
+  return markerFieldNoteOverridesFromSettings(db.game_settings);
+}
+
 async function ensureD1GameSettings(d1: FamousLandD1) {
   const result = await d1
     .prepare(
@@ -578,6 +679,32 @@ function gameAvailabilityFromSetting(
 
 function normalizeHomePageHeadline(value?: string | null) {
   return (value ?? "").replace(/\s+/g, " ").trim().slice(0, 120);
+}
+
+function normalizeMarkerFieldNote(value?: string | null) {
+  return (value ?? "").replace(/\s+/g, " ").trim().slice(0, 360);
+}
+
+function markerFieldNoteSettingName(markerId: string) {
+  return `${MARKER_FIELD_NOTE_SETTING_PREFIX}${markerId}`;
+}
+
+function markerFieldNoteOverridesFromSettings(
+  settings: Array<{ name: string; value?: string | null }>
+) {
+  const overrides = new Map<string, string>();
+
+  for (const setting of settings) {
+    if (!setting.name.startsWith(MARKER_FIELD_NOTE_SETTING_PREFIX)) continue;
+    const markerId = setting.name.slice(MARKER_FIELD_NOTE_SETTING_PREFIX.length);
+    const value = normalizeMarkerFieldNote(setting.value);
+
+    if (markerId && value) {
+      overrides.set(markerId, value);
+    }
+  }
+
+  return overrides;
 }
 
 async function getScanEvents(): Promise<ScanEventRecord[]> {
@@ -1852,25 +1979,52 @@ export async function generateRecoverySmsCopy(input: {
   if (d1) {
     const [saved, contact] = await Promise.all([
       d1
-        .prepare("select recovery_code from saved_players where player_id = ?")
+        .prepare("select email, recovery_code from saved_players where player_id = ?")
         .bind(player_id)
-        .first<Pick<SavedPlayer, "recovery_code">>(),
+        .first<Pick<SavedPlayer, "email" | "recovery_code">>(),
       getD1PlayerContactRows(d1).then((rows) => rows.find((row) => row.player_id === player_id))
     ]);
 
-    recoveryCode = saved?.recovery_code;
     phoneNumber = contact?.phone_number;
+
+    if (!phoneNumber) {
+      return { ok: false, error: "Add a phone number before generating SMS recovery copy." };
+    }
+
+    recoveryCode = saved?.recovery_code ?? makeRecoveryCode();
+
+    if (!saved) {
+      await d1
+        .prepare(
+          `insert into saved_players (player_id, email, saved_at, recovery_code)
+           values (?, ?, ?, ?)`
+        )
+        .bind(player_id, contact?.email?.trim().toLowerCase() ?? "", new Date().toISOString(), recoveryCode)
+        .run();
+    }
   } else {
     const db = await readLocalDb();
-    recoveryCode = db.saved_players.find((player) => player.player_id === player_id)?.recovery_code;
-    phoneNumber = db.player_contacts.find((contact) => contact.player_id === player_id)?.phone_number;
-  }
+    const saved = db.saved_players.find((player) => player.player_id === player_id);
+    const contact = db.player_contacts.find((contact) => contact.player_id === player_id);
 
-  if (!recoveryCode) {
-    return {
-      ok: false,
-      error: "This player does not have saved progress with a recovery link yet."
-    };
+    phoneNumber = contact?.phone_number;
+
+    if (!phoneNumber) {
+      return { ok: false, error: "Add a phone number before generating SMS recovery copy." };
+    }
+
+    recoveryCode = saved?.recovery_code ?? makeRecoveryCode();
+
+    if (!saved) {
+      db.saved_players.push({
+        player_id,
+        email: contact?.email?.trim().toLowerCase() ?? "",
+        saved_at: new Date().toISOString(),
+        recovery_code: recoveryCode
+      });
+
+      await writeLocalDb(db);
+    }
   }
 
   const recovery_url = recoveryUrl(await siteUrl(), recoveryCode);

@@ -9,6 +9,9 @@ import lakeHouse2ExteriorSideImage from "./assets/lake-house-2-exterior-side.jpe
 import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
+import echoThreadPodcastImage from "./assets/echo-thread-podcast.jpg";
+import lilyRooCoverImage from "./assets/lily-roo-i-learned-cover.jpg";
+import lmptfyCowBannerImage from "./assets/lmptfy-cow-banner.png";
 import kayakOneImage from "./assets/non-motor-kayaks-1.png";
 import kayakTwoImage from "./assets/non-motor-kayaks-2.png";
 import pedalBoatsImage from "./assets/non-motor-pedal-boats.png";
@@ -39,6 +42,71 @@ const sunnyCoveEmbedHref =
   "https://www.google.com/maps?q=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA&output=embed";
 const lilyRooSiteHref = "https://www.lilyroo.com/";
 const lilyRooSpotifyHref = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
+const lmptfySiteHref = "https://letmepromptthatforyou.net/";
+const echoThreadYouTubeHref = "https://www.youtube.com/watch?v=f6Vf0YJLzyo";
+
+const sponsorAds = [
+  {
+    actions: [
+      {
+        href: lilyRooSpotifyHref,
+        label: "Open Album on Spotify"
+      },
+      {
+        href: lilyRooSiteHref,
+        label: "Visit LilyRoo.com"
+      }
+    ],
+    alt: "Remastered cover art for I Learned It All in 25 Seconds by Lily Roo.",
+    ariaLabel: "Lily Roo sponsor announcement",
+    body: "Stream the remastered release of her first album, with refreshed artwork and lake-weekend energy.",
+    headline: "Lily Roo: I Learned It All in 25 Seconds",
+    image: lilyRooCoverImage,
+    imageClassName: styles.sponsorArtwork,
+    imageSizes: "(max-width: 720px) 72px, 88px",
+    label: "Paid Sponsor",
+    tag: "Hot new music link!!!",
+    variant: "music"
+  },
+  {
+    actions: [
+      {
+        href: lmptfySiteHref,
+        label: "Try LMPTFY"
+      }
+    ],
+    alt: "Cartoon cow asking, Do you have relatives still Googling? Try LetMePromptThatForYou.net.",
+    ariaLabel: "LetMePromptThatForYou.net sponsor announcement",
+    body: "Try LetMePromptThatForYou.net.",
+    headline: "Do you have relatives still Googling?",
+    image: lmptfyCowBannerImage,
+    imageClassName: `${styles.sponsorArtwork} ${styles.sponsorArtworkWide}`,
+    imageSizes: "(max-width: 720px) 86px, 112px",
+    label: "Wifi Sponsor",
+    tag: "Ask a better question!!!",
+    variant: "prompt"
+  },
+  {
+    actions: [
+      {
+        href: echoThreadYouTubeHref,
+        label: "Watch on YouTube"
+      }
+    ],
+    alt: "Echo Thread podcast art for Jasper Fields with headphones and microphone.",
+    ariaLabel: "Echo Thread Podcast sponsor announcement",
+    body: "Echo Thread Podcast from Jasper Fields.",
+    headline: "Echo Thread Podcast",
+    image: echoThreadPodcastImage,
+    imageClassName: `${styles.sponsorArtwork} ${styles.sponsorArtworkPodcast}`,
+    imageSizes: "(max-width: 720px) 86px, 112px",
+    label: "Podcast Sponsor",
+    tag: "Now transmitting!!!",
+    variant: "podcast"
+  }
+] as const;
+
+type SponsorAd = (typeof sponsorAds)[number];
 
 function Icon({ path }: { path: string }) {
   return (
@@ -168,6 +236,7 @@ type BoundGuest = {
 
 type ServerBindingStatus =
   | "idle"
+  | "admin-preview"
   | "local-only"
   | "server-bound"
   | "already-bound"
@@ -179,6 +248,8 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
   const [lh3VideoReady, setLh3VideoReady] = useState(false);
   const [serverBindingStatus, setServerBindingStatus] = useState<ServerBindingStatus>("idle");
+  const [sponsorAdDismissed, setSponsorAdDismissed] = useState(false);
+  const [selectedSponsorIndex, setSelectedSponsorIndex] = useState(0);
   const selectedGuest = guestAssignments.find((guest) => guest.slug === selectedGuestSlug);
   const selectedGuestHouse =
     selectedGuest?.house && selectedGuest.house !== "Pending"
@@ -197,6 +268,36 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   );
   const isViewingBoundGuest = Boolean(selectedGuest && boundGuest?.slug === selectedGuest.slug);
   const selectedGuestNeedsHostAssignment = selectedGuest?.house === "Pending";
+  const isAdminPreview = serverBindingStatus === "admin-preview";
+  const selectedSponsorAd: SponsorAd = sponsorAds[selectedSponsorIndex];
+  const sponsorFeatureVariantClass =
+    selectedSponsorAd?.variant === "prompt"
+      ? styles.sponsorFeaturePrompt
+      : selectedSponsorAd?.variant === "podcast"
+        ? styles.sponsorFeaturePodcast
+        : "";
+  const sponsorCopyVariantClass =
+    selectedSponsorAd?.variant === "prompt"
+      ? styles.sponsorPromptBubble
+      : selectedSponsorAd?.variant === "podcast"
+        ? styles.sponsorPodcastCopy
+        : "";
+
+  useEffect(() => {
+    if (sponsorAdDismissed) {
+      return;
+    }
+
+    const cycleTimer = window.setInterval(() => {
+      setSelectedSponsorIndex((currentIndex) =>
+        (currentIndex + 1) % sponsorAds.length
+      );
+    }, 6000);
+
+    return () => {
+      window.clearInterval(cycleTimer);
+    };
+  }, [sponsorAdDismissed]);
 
   useEffect(() => {
     let cancelled = false;
@@ -222,6 +323,15 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
     }
 
     try {
+      const searchParams = new URLSearchParams(window.location.search);
+      const isAdminPreviewLink = selectedGuest && searchParams.get("preview") === "admin";
+
+      if (isAdminPreviewLink) {
+        setBoundGuest(null);
+        setServerBindingStatus("admin-preview");
+        return;
+      }
+
       const storedBinding = window.localStorage.getItem(bindingStorageKey);
       const parsedBinding = storedBinding ? (JSON.parse(storedBinding) as BoundGuest) : null;
 
@@ -230,7 +340,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       }
 
       if (selectedGuest) {
-        const searchParams = new URLSearchParams(window.location.search);
         const token = searchParams.get("t") ?? undefined;
 
         if (parsedBinding && parsedBinding.slug !== selectedGuest.slug) {
@@ -328,10 +437,53 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <a href="#schedule">Schedule</a>
           <a href="/july2026/houses">Houses</a>
           <a href="/july2026/meals">Meals</a>
-          <a href="#sponsor">Sponsor</a>
           <a href={hostSmsHref}>Contact Host</a>
         </div>
       </nav>
+
+      {!sponsorAdDismissed ? (
+        <section
+          className={`${styles.sponsorBillboard} ${styles.sponsorBillboardOpen}`}
+          aria-label={selectedSponsorAd.ariaLabel}
+          style={{
+            opacity: 1,
+            transform: "translate(-50%, 0)",
+            transition: "none"
+          }}
+        >
+          <div className={`${styles.sponsorFeature} ${sponsorFeatureVariantClass}`}>
+            <span className={styles.adLabel}>{selectedSponsorAd.label}</span>
+            <Image
+              src={selectedSponsorAd.image}
+              alt={selectedSponsorAd.alt}
+              className={selectedSponsorAd.imageClassName}
+              sizes={selectedSponsorAd.imageSizes}
+            />
+            <div className={`${styles.sponsorCopy} ${sponsorCopyVariantClass}`}>
+              <span>{selectedSponsorAd.tag}</span>
+              <h2>{selectedSponsorAd.headline}</h2>
+              <p>{selectedSponsorAd.body}</p>
+              <div className={styles.sponsorCtas}>
+                {selectedSponsorAd.actions.map((action) => (
+                  <a href={action.href} key={action.href} target="_blank" rel="noreferrer">
+                    {action.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+          <button
+            aria-label={`Dismiss ${selectedSponsorAd.ariaLabel}`}
+            className={styles.sponsorDismiss}
+            type="button"
+            onClick={() => {
+              setSponsorAdDismissed(true);
+            }}
+          >
+            x
+          </button>
+        </section>
+      ) : null}
 
       <section className={styles.hero} id="top">
         <Image
@@ -346,7 +498,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
           <div className={styles.heroCopy}>
             <h1>July 4th, 2026</h1>
             <p className={styles.date}>Lake weekend</p>
-            <p className={styles.sponsor}>Sponsored by Lily Roo</p>
             <p className={styles.lede}>
               {selectedGuest
                 ? `Welcome, ${selectedGuest.name}. Your private lake-weekend check-in is ready with your room, house, schedule, and Contact Host button.`
@@ -365,25 +516,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
         </div>
       </section>
 
-      <section className={styles.sponsorBillboard} id="sponsor" aria-label="Lily Roo sponsor announcement">
-        <div>
-          <span>Event sponsor</span>
-          <h2>Lily Roo debut single is live on Spotify</h2>
-          <p>
-            July 2026 is sponsored by Lily Roo. Stream "I Learned It All in Fifteen Seconds" now, featuring the
-            newly remastered album art.
-          </p>
-        </div>
-        <div className={styles.sponsorActions}>
-          <a href={lilyRooSpotifyHref} target="_blank" rel="noreferrer">
-            Play on Spotify
-          </a>
-          <a href={lilyRooSiteHref} target="_blank" rel="noreferrer">
-            Visit Lily Roo
-          </a>
-        </div>
-      </section>
-
       {selectedGuest ? (
         <section className={styles.guestDesk} id="stay" aria-label="Guest stay details">
           <article className={styles.guestCard}>
@@ -393,17 +525,27 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
               <p>A concise guest view for arrival, room assignment, house context, and host help.</p>
             </div>
 
-              <div className={isViewingBoundGuest && !bindingIsClaimed ? styles.bindingNotice : styles.bindingWarning}>
+              <div
+                className={
+                  (isViewingBoundGuest && !bindingIsClaimed) || isAdminPreview
+                    ? styles.bindingNotice
+                    : styles.bindingWarning
+                }
+              >
                 <div>
                   <strong>
-                    {bindingIsClaimed
+                    {isAdminPreview
+                      ? "Admin preview mode"
+                      : bindingIsClaimed
                       ? "Guest link needs host reset"
                       : isViewingBoundGuest
                         ? "Device check-in active"
                         : "Viewing without rebinding"}
                   </strong>
                   <p>
-                    {bindingIsClaimed
+                    {isAdminPreview
+                      ? "This admin preview does not check in the guest, bind this browser, or update the guest link status."
+                      : bindingIsClaimed
                       ? "This link is already bound or no longer matches the current guest token. Text the host for a fresh link."
                       : isViewingBoundGuest
                       ? `This device is checked in as ${selectedGuest.name}.`
@@ -470,7 +612,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
                     ? `Directions to ${selectedGuestHouse.name}`
                     : "Open Lake Area Map"}
                 </a>
-                <a href={`/july2026/guest/${selectedGuest.slug}/qr.svg`}>Show My QR</a>
               </div>
               <div className={styles.personalItinerary}>
                 <div className={styles.personalItineraryHeader}>
@@ -829,13 +970,7 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       </section>
 
       <footer className={styles.footer}>
-        <span>July 2026 sponsor: Lily Roo</span>
-        <a href={lilyRooSpotifyHref} target="_blank" rel="noreferrer">
-          Spotify debut
-        </a>
-        <a href={lilyRooSiteHref} target="_blank" rel="noreferrer">
-          Lily Roo site
-        </a>
+        <span>Sponsored by famous.land</span>
         <a href={hostSmsHref}>Contact Host</a>
       </footer>
     </div>

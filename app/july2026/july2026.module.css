@@ -110,77 +110,258 @@
 }
 
 .sponsorBillboard {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  width: min(100%, 1320px);
-  margin: 0 auto;
-  padding: 20px clamp(16px, 4vw, 42px) 0;
+  position: fixed;
+  top: 72px;
+  left: 50%;
+  z-index: 9;
+  display: grid;
+  grid-template-columns: minmax(0, 728px) auto;
+  gap: 6px;
+  width: min(calc(100% - 24px), 790px);
+  opacity: 0;
+  transform: translate(-50%, -130%);
+  transition:
+    opacity 180ms ease,
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.sponsorBillboard > div:first-child {
-  min-height: 150px;
-  flex: 1 1 auto;
-  padding: 22px;
-  color: #fffdf7;
-  border: 1px solid rgba(255, 253, 247, 0.16);
-  border-radius: 8px;
+.sponsorBillboardOpen {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.sponsorFeature {
+  min-height: 106px;
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  grid-template-areas:
+    "label copy"
+    "art copy";
+  gap: 6px 12px;
+  position: relative;
+  overflow: hidden;
+  padding: 7px 12px 7px 7px;
+  color: #000;
+  border: 3px ridge #fff;
+  border-radius: 0;
   background:
-    linear-gradient(120deg, rgba(8, 33, 65, 0.96), rgba(190, 29, 39, 0.82)),
-    url("./assets/july-4-hero.png") center / cover;
-  box-shadow: 0 18px 42px rgba(8, 19, 38, 0.14);
+    linear-gradient(90deg, rgba(255, 240, 0, 0.94), rgba(255, 107, 0, 0.92) 48%, rgba(0, 223, 255, 0.88)),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.22) 0 8px, rgba(255, 255, 255, 0) 8px 16px);
+  box-shadow:
+    0 10px 0 #081326,
+    0 18px 38px rgba(8, 19, 38, 0.32);
 }
 
-.sponsorBillboard span {
-  color: var(--july-gold);
-  font-size: 0.78rem;
+.sponsorFeature::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18px 18px, rgba(255, 0, 153, 0.7) 0 4px, transparent 5px),
+    radial-gradient(circle at calc(100% - 22px) calc(100% - 16px), rgba(255, 255, 255, 0.82) 0 3px, transparent 4px);
+  content: "";
+}
+
+.sponsorFeature::after {
+  position: absolute;
+  right: 10px;
+  bottom: 4px;
+  color: rgba(8, 33, 65, 0.18);
+  content: "CLICK!";
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
   font-weight: 950;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  transform: rotate(-7deg);
 }
 
-.sponsorBillboard h2 {
-  max-width: 760px;
-  margin: 8px 0 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.9rem, 3.4vw, 3.25rem);
-  line-height: 0.98;
+.adLabel {
+  grid-area: label;
+  width: fit-content;
+  align-self: start;
+  padding: 3px 6px;
+  color: #fff;
+  border: 2px outset #fefefe;
+  border-radius: 0;
+  background: #d8006d;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.64rem;
+  font-weight: 950;
   letter-spacing: 0;
 }
 
-.sponsorBillboard p {
-  max-width: 760px;
-  margin: 10px 0 0;
-  color: rgba(255, 253, 247, 0.82);
-  line-height: 1.42;
+.sponsorArtwork {
+  grid-area: art;
+  width: 88px;
+  height: 64px;
+  align-self: end;
+  object-fit: cover;
+  border: 3px inset #fff;
+  border-radius: 0;
+  box-shadow: 5px 5px 0 rgba(8, 19, 38, 0.42);
 }
 
-.sponsorActions {
-  flex: 0 0 min(320px, 100%);
-  display: grid;
-  gap: 10px;
+.sponsorArtworkWide,
+.sponsorArtworkPodcast {
+  width: 112px;
+  height: 72px;
 }
 
-.sponsorActions a {
-  min-height: 48px;
+.sponsorArtworkWide {
+  object-position: left center;
+}
+
+.sponsorArtworkPodcast {
+  object-position: center;
+}
+
+.sponsorCopy {
+  grid-area: copy;
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  min-width: 0;
+}
+
+.sponsorCopy > span {
+  display: inline-block;
+  margin-bottom: 2px;
+  padding: 2px 5px;
+  color: #fff;
+  background: #082141;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.sponsorCopy h2 {
+  max-width: 560px;
+  margin: 0;
+  color: #081326;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(1.25rem, 2.8vw, 2.1rem);
+  line-height: 0.94;
+  letter-spacing: 0;
+  text-shadow:
+    2px 2px 0 #fff,
+    3px 3px 0 #ff3b00;
+  text-transform: uppercase;
+}
+
+.sponsorCopy p {
+  max-width: 560px;
+  margin: 4px 0 0;
+  color: #081326;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.sponsorCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.sponsorCtas a {
+  min-height: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 16px;
-  color: var(--july-blue);
-  border: 1px solid rgba(8, 33, 65, 0.16);
-  border-radius: 8px;
-  background: rgba(255, 253, 247, 0.9);
-  box-shadow: 0 12px 28px rgba(8, 19, 38, 0.08);
-  font-size: 0.94rem;
+  padding: 4px 9px;
+  color: #fffdf7;
+  border: 2px outset #fff;
+  border-radius: 0;
+  background: #164f9f;
+  box-shadow: 3px 3px 0 rgba(8, 19, 38, 0.55);
+  font-size: 0.74rem;
   font-weight: 950;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
-.sponsorActions a:first-child {
-  color: #fffdf7;
-  border-color: rgba(190, 29, 39, 0.42);
-  background: var(--july-red);
+.sponsorCtas a:first-child {
+  background: #1db954;
+}
+
+.sponsorFeaturePrompt {
+  grid-template-columns: 112px minmax(0, 1fr);
+  background:
+    linear-gradient(90deg, rgba(0, 223, 255, 0.94), rgba(255, 240, 0, 0.9) 44%, rgba(255, 0, 153, 0.86)),
+    repeating-linear-gradient(135deg, rgba(8, 19, 38, 0.13) 0 6px, rgba(255, 255, 255, 0.16) 6px 12px);
+}
+
+.sponsorFeaturePrompt::after {
+  content: "AI!";
+}
+
+.sponsorPromptBubble {
+  padding: 7px 10px;
+  border: 3px solid #081326;
+  border-radius: 20px 20px 20px 5px;
+  background: rgba(255, 253, 247, 0.95);
+  box-shadow:
+    4px 4px 0 #d8006d,
+    inset 0 -8px 0 rgba(0, 223, 255, 0.12);
+}
+
+.sponsorPromptBubble > span {
+  background: #d8006d;
+}
+
+.sponsorPromptBubble h2 {
+  font-size: clamp(1.12rem, 2.4vw, 1.75rem);
+}
+
+.sponsorPromptBubble p {
+  color: #d8006d;
+  font-size: 0.92rem;
+}
+
+.sponsorFeaturePodcast {
+  grid-template-columns: 112px minmax(0, 1fr);
+  background:
+    linear-gradient(90deg, rgba(34, 84, 81, 0.96), rgba(239, 159, 51, 0.9) 54%, rgba(255, 244, 208, 0.88)),
+    repeating-linear-gradient(90deg, rgba(8, 19, 38, 0.18) 0 4px, rgba(255, 255, 255, 0.13) 4px 8px);
+}
+
+.sponsorFeaturePodcast::after {
+  color: rgba(255, 244, 208, 0.32);
+  content: "LISTEN!";
+}
+
+.sponsorPodcastCopy > span {
+  background: #225451;
+}
+
+.sponsorPodcastCopy h2 {
+  color: #fff4d0;
+  font-size: clamp(1.32rem, 2.8vw, 2rem);
+  text-shadow:
+    2px 2px 0 #081326,
+    3px 3px 0 #a45324;
+}
+
+.sponsorPodcastCopy p {
+  color: #081326;
+}
+
+.sponsorDismiss {
+  width: 32px;
+  height: 30px;
+  color: #081326;
+  border: 2px outset #fff;
+  border-radius: 0;
+  background: #efefef;
+  box-shadow: 0 5px 0 #081326;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 950;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .lede {
@@ -1728,13 +1909,7 @@
 
 @media (max-width: 1080px) {
   .sponsorBillboard {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .sponsorActions {
-    flex-basis: auto;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    top: 66px;
   }
 
   .heroContent,
@@ -1848,8 +2023,10 @@
     gap: 10px;
   }
 
-  .sponsorActions {
-    grid-template-columns: 1fr;
+  .sponsorFeature,
+  .sponsorFeaturePrompt,
+  .sponsorFeaturePodcast {
+    grid-template-columns: 86px minmax(0, 1fr);
   }
 
   .hostHelpIntro {
