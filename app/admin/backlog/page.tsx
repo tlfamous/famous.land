@@ -21,13 +21,13 @@ const backlogItems = [
   },
   {
     title: "Grand Prize Experience",
-    status: "Instructions needed",
+    status: "Ready for field setup",
     summary:
-      "Finish-the-quest players get a hidden-until-complete grand-prize reveal, but the claim instructions still need to be written.",
+      "Finish-the-quest players get a hidden-until-complete grand-prize reveal with Boat Launch pickup instructions.",
     details: [
       "The only live giveaway mechanic is one final grand prize.",
       `Finding all ${TOTAL_MARKERS} markers in any order unlocks a prominent grand-prize reveal.`,
-      "Write clear instructions for how the winner claims or receives the grand prize.",
+      "Winner is directed to the Boat Launch bin and told to open the lock box with combination 1234.",
       "QR code on the back of the model should open https://famous.land/prize/lakemonomonac2026."
     ]
   }

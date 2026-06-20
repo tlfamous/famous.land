@@ -69,7 +69,26 @@ export function PlayerDatabaseTool({
   }, [selectedPlayer]);
 
   function selectPlayer(player: PlayerReportRow) {
+    if (selectedPlayerId === player.player_id) {
+      closeProfile();
+      return;
+    }
+
     setSelectedPlayerId(player.player_id);
+  }
+
+  function closeProfile() {
+    setSelectedPlayerId("");
+    setEditName("");
+    setEditEmail("");
+    setEditPhone("");
+    setEditStatus("idle");
+    setEditMessage("");
+    setEmailStatus("idle");
+    setEmailMessage("");
+    setSmsStatus("idle");
+    setSmsMessage("");
+    setSmsCopy("");
   }
 
   async function onContactSubmit(event: FormEvent<HTMLFormElement>) {
@@ -274,7 +293,7 @@ export function PlayerDatabaseTool({
                           type="button"
                           onClick={() => selectPlayer(player)}
                         >
-                          Edit
+                          {selectedPlayerId === player.player_id ? "Close" : "Edit"}
                         </button>
                       </td>
                     </tr>
@@ -282,7 +301,7 @@ export function PlayerDatabaseTool({
                       <tr className="player-profile-row" id="player-profile">
                         <td colSpan={7}>
                           <div className="player-profile-inline" aria-live="polite">
-                            <div className="report-section-head">
+                            <div className="split player-profile-inline-head">
                               <div>
                                 <p className="eyebrow">Player profile</p>
                                 <h2>
@@ -291,6 +310,13 @@ export function PlayerDatabaseTool({
                                     shortPlayerId(selectedPlayer.player_id)}
                                 </h2>
                               </div>
+                              <button
+                                className="button secondary compact-button"
+                                type="button"
+                                onClick={closeProfile}
+                              >
+                                Close
+                              </button>
                             </div>
                             <div className="message-selected-player">
                               <p>

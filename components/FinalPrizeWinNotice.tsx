@@ -17,7 +17,7 @@ export function FinalPrizeWinNotice({ className = "" }: { className?: string }) 
         </p>
       </div>
       <Link className="button primary final-prize-win-button" href={FINAL_PRIZE.href}>
-        Open grand prize page
+        Open grand prize instructions
       </Link>
     </section>
   );

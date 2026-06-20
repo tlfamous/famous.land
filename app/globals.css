@@ -2547,6 +2547,14 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
   background: rgba(255, 250, 240, 0.82);
 }
 
+.player-profile-inline-head {
+  align-items: start;
+}
+
+.player-profile-inline-head h2 {
+  margin: 0;
+}
+
 .empty-profile-state {
   display: grid;
   gap: 8px;
@@ -2993,6 +3001,100 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
 
 .prize-page .report-stat-card strong {
   font-size: clamp(1.35rem, 4vw, 2.15rem);
+}
+
+.prize-claim-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(300px, 1.08fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: stretch;
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.prize-claim-copy {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+
+.prize-claim-copy h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 0.95;
+}
+
+.prize-claim-copy p:not(.eyebrow) {
+  max-width: 40rem;
+  margin: 0;
+  color: rgba(17, 20, 15, 0.7);
+  font-size: clamp(1.05rem, 2.3vw, 1.35rem);
+  font-weight: 780;
+}
+
+.prize-lock-code {
+  width: min(100%, 390px);
+  display: grid;
+  gap: 6px;
+  padding: 18px;
+  color: var(--paper-strong);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(17, 20, 15, 0.98), rgba(38, 54, 28, 0.92)),
+    var(--ink);
+  box-shadow: 0 16px 34px rgba(17, 20, 15, 0.18);
+}
+
+.prize-lock-code span {
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prize-lock-code strong {
+  color: var(--paper-strong);
+  font-size: clamp(3rem, 11vw, 5.6rem);
+  line-height: 0.9;
+}
+
+.prize-claim-map {
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.prize-claim-map .square-map {
+  min-height: 360px;
+  border-color: rgba(47, 111, 119, 0.3);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 250, 240, 0.36),
+    0 18px 42px rgba(17, 20, 15, 0.14);
+}
+
+.prize-claim-map p {
+  margin: 0;
+  color: rgba(17, 20, 15, 0.62);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.prize-claim-steps .report-stat-card {
+  min-height: 170px;
+}
+
+@media (max-width: 760px) {
+  .prize-claim-card {
+    grid-template-columns: 1fr;
+  }
+
+  .prize-claim-map .square-map {
+    min-height: 280px;
+  }
 }
 
 .hero-card.design-reference-hero {
