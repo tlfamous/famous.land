@@ -2994,9 +2994,24 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
 }
 
 .prize-intro {
+  color: var(--ink);
   background:
     linear-gradient(135deg, rgba(255, 250, 238, 0.96), rgba(242, 234, 212, 0.92)),
     var(--paper);
+}
+
+.prize-intro h1 {
+  color: var(--ink);
+}
+
+.prize-intro p:not(.eyebrow) {
+  max-width: 44rem;
+  color: rgba(17, 20, 15, 0.72);
+  font-weight: 820;
+}
+
+.prize-intro .eyebrow {
+  color: rgba(17, 20, 15, 0.62);
 }
 
 .prize-page .report-stat-card strong {
