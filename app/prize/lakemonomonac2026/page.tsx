@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ZonePreviewMap } from "@/components/InteractiveLandMap";
 import { PrizeObjectViewer } from "@/components/PrizeObjectViewer";
 import { FINAL_PRIZE } from "@/lib/prizes";
@@ -27,11 +26,6 @@ export default async function LakeMonomonac2026PrizePage() {
           Surprise. You found every marker and completed the Famous Land Quest.
           Your prize is waiting at Boat Launch.
         </p>
-        <div className="button-row">
-          <Link className="button primary" href="/quest">
-            View quest progress
-          </Link>
-        </div>
       </section>
 
       <section className="card prize-claim-card">
