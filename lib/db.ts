@@ -1467,6 +1467,7 @@ async function getD1PlayerScanRows(d1: FamousLandD1): Promise<PlayerScanRow[]> {
         `select player_id, count(*) as scan_count, max(scanned_at) as last_scan_at
          from scan_events
          where coalesce(progress_eligible, 1) = 1
+           and coalesce(is_test, 0) = 0
          group by player_id`
       )
       .all<D1PlayerScanRow>();
@@ -1520,7 +1521,8 @@ async function getD1SourcePlayerIds(d1: FamousLandD1): Promise<string[]> {
         `select distinct source_player_id
          from scan_events
          where source_player_id is not null
-           and source_player_id != ''`
+           and source_player_id != ''
+           and coalesce(is_test, 0) = 0`
       )
       .all<{ source_player_id: string | null }>();
 
@@ -1541,6 +1543,7 @@ async function getD1SourcePlayerIds(d1: FamousLandD1): Promise<string[]> {
 
 function sourcePlayerIdsFromEvents(events: ScanEventRecord[]) {
   return events
+    .filter((event) => !event.is_test)
     .map((event) => normalizeOptionalPlayerId(event.source_player_id))
     .filter((playerId): playerId is string => Boolean(playerId));
 }
@@ -1586,6 +1589,10 @@ function summarizePlayerScans(events: ScanEventRecord[]): PlayerScanRow[] {
   const byPlayer = new Map<string, PlayerScanRow>();
 
   for (const event of events) {
+    if (event.is_test) {
+      continue;
+    }
+
     if (!event.progress_eligible) {
       continue;
     }

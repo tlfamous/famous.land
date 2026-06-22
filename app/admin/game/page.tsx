@@ -119,7 +119,7 @@ const adminFeatures = [
   "Dashboard filters default to Day with the past seven days selected, and test scans are hidden by default.",
   "Dashboard filters support zone, player email, unknown-player scans, scan type, and test-scan inclusion.",
   "Scan log shows Eastern timestamps, email ID, phone ID, location, zone, Scan Type, and contact edit links where a player is known.",
-  "Player database has All players, With email, and With phone tabs, plus inline Edit rows for name, email, phone, recovery email, and recovery SMS copy.",
+  "Player database has All players, With email, and With phone tabs, using real non-test player scan counts plus inline Edit rows for name, email, phone, recovery email, and recovery SMS copy.",
   "Messages admin tool remains available for recovery candidates and recovery-send audit history.",
   "Feature Backlog tracks linking experience testing and grand-prize field setup.",
   "iPhone QR test lab walks every marker route while behaving as game-on, even if the public game is off.",
