@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { TOTAL_MARKERS } from "@/lib/game";
 
 export const metadata: Metadata = {
   title: "Feature Backlog | Famous Land Admin",
@@ -17,18 +16,6 @@ const backlogItems = [
       "Test phone-number capture and SMS recovery copy from the player database.",
       "Confirm the player row updates with the saved email address and phone number.",
       "Verify email and SMS recovery behavior on a fresh or reset phone state."
-    ]
-  },
-  {
-    title: "Grand Prize Experience",
-    status: "Ready for field setup",
-    summary:
-      "Finish-the-quest players get a hidden-until-complete grand-prize reveal with Boat Launch pickup instructions.",
-    details: [
-      "The only live giveaway mechanic is one final grand prize.",
-      `Finding all ${TOTAL_MARKERS} markers in any order unlocks a prominent grand-prize reveal.`,
-      "Winner is directed to the Boat Launch bin and told to open the lock box with combination 1234.",
-      "QR code on the back of the model should open https://famous.land/prize/lakemonomonac2026."
     ]
   }
 ];

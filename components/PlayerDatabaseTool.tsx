@@ -2,7 +2,7 @@
 
 import { Fragment, FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { copyTextToClipboard } from "@/components/copyTextToClipboard";
 import type { AdminAuditEventRow, MessageEventRow, PlayerReportRow } from "@/lib/db";
 
@@ -26,6 +26,7 @@ export function PlayerDatabaseTool({
   tabs: Array<{ value: PlayerContactTab; label: string; count: number }>;
   initialPlayerId?: string;
 }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const requestedPlayerId = initialPlayerId ?? searchParams.get("player") ?? "";
   const [selectedPlayerId, setSelectedPlayerId] = useState(requestedPlayerId);
@@ -43,6 +44,8 @@ export function PlayerDatabaseTool({
   const [smsStatus, setSmsStatus] = useState<SmsStatus>("idle");
   const [smsMessage, setSmsMessage] = useState("");
   const [smsCopy, setSmsCopy] = useState("");
+  const savedEmail = editStatus === "saved" ? editEmail.trim() : selectedPlayer?.email;
+  const savedPhone = editStatus === "saved" ? editPhone.trim() : selectedPlayer?.phone_number;
 
   const selectedPlayerMessageEvents = useMemo(() => {
     if (!selectedPlayer) return [];
@@ -131,12 +134,13 @@ export function PlayerDatabaseTool({
 
     setEditStatus("saved");
     setEditMessage("Player profile saved.");
+    router.refresh();
   }
 
   async function onRecoveryEmailSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!selectedPlayer?.email) {
+    if (!selectedPlayer || !savedEmail) {
       setEmailStatus("error");
       setEmailMessage("Add an email before sending recovery.");
       return;
@@ -151,7 +155,7 @@ export function PlayerDatabaseTool({
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: selectedPlayer.email
+        email: savedEmail
       })
     });
 
@@ -175,7 +179,7 @@ export function PlayerDatabaseTool({
   }
 
   async function generateSmsCopy() {
-    if (!selectedPlayer?.phone_number) {
+    if (!selectedPlayer || !savedPhone) {
       setSmsStatus("error");
       setSmsMessage("Add a phone number before generating SMS copy.");
       return;
@@ -396,7 +400,7 @@ export function PlayerDatabaseTool({
                                 </p>
                                 <button
                                   className="button primary"
-                                  disabled={!selectedPlayer.email || emailStatus === "sending"}
+                                  disabled={!savedEmail || emailStatus === "sending"}
                                   type="submit"
                                 >
                                   {emailStatus === "sending" ? "Sending..." : "Send recovery email"}
@@ -410,7 +414,7 @@ export function PlayerDatabaseTool({
                                 </p>
                                 <button
                                   className="button secondary"
-                                  disabled={!selectedPlayer.phone_number || smsStatus === "generating"}
+                                  disabled={!savedPhone || smsStatus === "generating"}
                                   type="button"
                                   onClick={generateSmsCopy}
                                 >

@@ -1275,7 +1275,7 @@ button.button,
 }
 
 .game-off-preview-link[aria-hidden="true"] {
-  visibility: hidden;
+  display: none;
   pointer-events: none;
 }
 
@@ -4672,20 +4672,32 @@ body:has(.analytics-dashboard) .admin-side-nav a[aria-current="page"] {
 
 @media (max-width: 700px) {
   .game-availability-toggle {
+    grid-template-columns: 1fr;
     align-items: stretch;
-    flex-direction: column;
+    gap: 16px;
+    padding: 18px;
   }
 
   .game-availability-actions {
-    flex-basis: auto;
-    flex-wrap: wrap;
-    justify-content: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .game-availability-actions form,
   .game-power-switch,
   .game-off-preview-link {
+    min-width: 0;
     width: 100%;
+  }
+
+  .game-power-switch {
+    min-height: 64px;
+    font-size: 1.12rem;
+  }
+
+  .game-off-preview-link {
+    min-height: 54px;
   }
 
   .quest-progress-row .split {
