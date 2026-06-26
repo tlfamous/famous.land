@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build --webpack",
     "cf:build": "next build --webpack && opennextjs-cloudflare build --skipNextBuild",
     "cf:preview": "npm run cf:build && wrangler dev",

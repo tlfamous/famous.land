@@ -25,9 +25,11 @@ type FamousLandMapSvgProps = {
   activeSlug: string;
   ariaLabel: string;
   activeMarkerId?: string;
+  activeSlugs?: string[];
   className?: string;
   markerCounts?: Record<string, number>;
   markerCountMode?: boolean;
+  markerZoneSlugs?: string[];
   preserveAspectRatio?: string;
   showWalkingTrails?: boolean;
   viewBox?: string;
@@ -95,6 +97,25 @@ const walkingTrails: WalkingTrail[] = [
       { x: 87.8, y: 68.0 },
       { x: 85.6, y: 69.6 }
     ]
+  },
+  {
+    name: "Warblers Way",
+    path:
+      "M46.0 57.8 C46.6 52.2 48.8 47.4 50.3 42.2 C52.0 36.5 53.8 31.5 58.0 28.8 C61.8 26.4 66.5 26.1 72.4 26.0 C74.5 25.9 75.6 25.1 75.9 23.0 C76.2 21.0 76.2 19.3 76.1 17.8",
+    label: { rotate: -58, x: 52.6, y: 41.6 },
+    markerColor: "#f0d732",
+    markers: [
+      { x: 46.0, y: 57.8 },
+      { x: 47.4, y: 52.0 },
+      { x: 49.4, y: 46.0 },
+      { x: 51.2, y: 39.6 },
+      { x: 54.2, y: 32.8 },
+      { x: 59.2, y: 28.2 },
+      { x: 65.6, y: 26.6 },
+      { x: 72.4, y: 26.0 },
+      { x: 75.8, y: 23.0 },
+      { x: 76.1, y: 18.4 }
+    ]
   }
 ];
 
@@ -130,12 +151,19 @@ export const zoneMapSlugs: Record<Zone, string> = {
   Hillside: "monomonac-hill"
 };
 
+const promoZoneLabels = [
+  { slug: "monomonac-hill", label: "Hillside", x: 55, y: 39 },
+  { slug: "on-the-water", label: "No Wake", x: 90, y: 15 },
+  { slug: "lakeview", label: "Lakeview", x: 73, y: 88 },
+  { slug: "treetop-terrace", label: "Treetop", x: 91, y: 65 }
+];
+
 const visualZones: Record<string, VisualZone> = {
   "monomonac-hill": {
     path:
       "M59.8 7.8 L63.0 12.0 L73.0 12.3 L72.8 28.8 L70.2 34.2 L62.9 34.2 L63.3 46.0 L69.0 46.7 L77.2 54.2 L68.0 55.8 L70.1 57.0 L69.6 66.5 L73.8 67.2 L72.6 70.8 L69.0 73.7 L66.0 78.0 L61.2 80.0 L55.4 80.6 L54.0 75.4 L49.6 64.4 L44.4 56.0 L36.4 52.0 L28.0 44.3 L36.5 31.8 L46.8 21.4 L55.0 10.2 L59.8 7.8 Z",
     points: [
-      { x: 35.3, y: 52.6, label: "Warblers Way / U8U35", markerId: "FF-TREE-008", style: "tag" },
+      { x: 46.0, y: 57.8, label: "Warblers Way / U8U35", markerId: "FF-TREE-008", style: "tag" },
       { x: 54.4, y: 26.5, label: "Cattle Crossroads / XJYYQ", markerId: "FF-TREE-009", style: "tag" },
       { x: 72.8, y: 24.1, label: "Hillside Greenway / CN5UP", markerId: "FF-TREE-010", style: "tag" },
       { x: 76.5, y: 54.4, label: "Lakeview Notch / XRZ8J", markerId: "FF-TREE-011", style: "tag" }
@@ -383,10 +411,12 @@ function MarkerScanCountBadge({ count }: { count: number }) {
 function FamousLandMapSvg({
   activeSlug,
   activeMarkerId,
+  activeSlugs,
   ariaLabel,
   className = "square-map-svg",
   markerCounts,
   markerCountMode = false,
+  markerZoneSlugs,
   preserveAspectRatio = "xMidYMid meet",
   showWalkingTrails = true,
   viewBox = fullMapViewBox,
@@ -413,7 +443,7 @@ function FamousLandMapSvg({
       <g className="map-zone-layer">
         {zoneSlugs.map((slug) => {
           const visual = visualZones[slug];
-          const isActive = slug === activeSlug;
+          const isActive = activeSlugs ? activeSlugs.includes(slug) : slug === activeSlug;
 
           if (!visual) {
             return null;
@@ -483,19 +513,73 @@ function FamousLandMapSvg({
         </g>
       ) : null}
 
+      {activeSlugs?.length ? (
+        <g className="promo-map-label-layer" aria-hidden="true">
+          {promoZoneLabels
+            .filter((zone) => activeSlugs.includes(zone.slug))
+            .map((zone) => (
+              <g className="promo-map-zone-label" key={zone.slug}>
+                <rect height="4.9" rx="2.45" width={zone.label.length * 2.1 + 4} x={zone.x - (zone.label.length * 2.1 + 4) / 2} y={zone.y - 3.35} />
+                <text x={zone.x} y={zone.y}>
+                  {zone.label}
+                </text>
+              </g>
+            ))}
+        </g>
+      ) : null}
+
       <g className="map-marker-layer">
-        {visualZones[activeSlug]?.points
-          ?.filter((point) => point.markerId !== activeMarkerId)
-          .map((point, pointIndex) =>
-            renderMapPoint(point, pointIndex, activeMarkerId, markerCounts, markerCountMode)
-          )}
-        {visualZones[activeSlug]?.points
-          ?.filter((point) => point.markerId === activeMarkerId)
-          .map((point, pointIndex) =>
-            renderMapPoint(point, pointIndex, activeMarkerId, markerCounts, markerCountMode)
-          )}
+        {(markerZoneSlugs ?? [activeSlug]).flatMap((slug) =>
+          (visualZones[slug]?.points ?? [])
+            .filter((point) => point.markerId !== activeMarkerId)
+            .map((point, pointIndex) =>
+              renderMapPoint(point, pointIndex, activeMarkerId, markerCounts, markerCountMode)
+            )
+        )}
+        {(markerZoneSlugs ?? [activeSlug]).flatMap((slug) =>
+          (visualZones[slug]?.points ?? [])
+            .filter((point) => point.markerId === activeMarkerId)
+            .map((point, pointIndex) =>
+              renderMapPoint(point, pointIndex, activeMarkerId, markerCounts, markerCountMode)
+            )
+        )}
       </g>
     </svg>
+  );
+}
+
+export function PromoZoneCompositeMap() {
+  return (
+    <div className="promo-zone-map-wrap" aria-label="Famous Land four-zone map">
+      <div className="promo-zone-map-picture">
+        <FamousLandMapSvg
+          activeSlug=""
+          activeSlugs={visualZoneOrder}
+          ariaLabel="Famous Land map highlighting the Treetop, No Wake, Lakeview, and Hillside zones"
+          className="square-map-svg promo-zone-composite-map"
+          markerZoneSlugs={visualZoneOrder}
+          zoneSlugs={visualZoneOrder}
+        />
+      </div>
+      <ul className="promo-zone-map-legend" aria-label="Quest zones">
+        <li>
+          <span className="promo-zone-swatch treetop" aria-hidden="true" />
+          Treetop
+        </li>
+        <li>
+          <span className="promo-zone-swatch no-wake" aria-hidden="true" />
+          No Wake
+        </li>
+        <li>
+          <span className="promo-zone-swatch lakeview" aria-hidden="true" />
+          Lakeview
+        </li>
+        <li>
+          <span className="promo-zone-swatch hillside" aria-hidden="true" />
+          Hillside
+        </li>
+      </ul>
+    </div>
   );
 }
 

@@ -432,15 +432,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
 
   return (
     <div className={`${styles.app} july-2026-app`}>
-      <nav className={styles.topbar} aria-label="July 2026 event navigation">
-        <div className={styles.navLinks}>
-          <a href="#schedule">Schedule</a>
-          <a href="/july2026/houses">Houses</a>
-          <a href="/july2026/meals">Meals</a>
-          <a href={hostSmsHref}>Contact Host</a>
-        </div>
-      </nav>
-
       {!sponsorAdDismissed ? (
         <section
           className={`${styles.sponsorBillboard} ${styles.sponsorBillboardOpen}`}

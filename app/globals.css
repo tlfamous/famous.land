@@ -207,7 +207,357 @@ main:has(.game-off-page) {
   font-weight: 900;
   line-height: 1;
   backdrop-filter: blur(12px);
-  cursor: default;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.home-launch-teaser:hover {
+  border-color: rgba(255, 250, 240, 0.74);
+  background: rgba(17, 20, 15, 0.94);
+  transform: translateY(-1px);
+}
+
+.home-launch-teaser:focus-visible {
+  outline: 4px solid rgba(255, 250, 240, 0.42);
+  outline-offset: 4px;
+}
+
+.home-launch-teaser span:last-child {
+  margin-left: 10px;
+  font-weight: 950;
+}
+
+body:has(.quest-promo-page) {
+  min-height: 100svh;
+  background:
+    linear-gradient(180deg, rgba(247, 243, 232, 0.86), rgba(247, 243, 232, 0.98)),
+    url("/assets/FamousLand2.png") center / cover fixed no-repeat;
+}
+
+main:has(.quest-promo-page) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.quest-promo-page {
+  color: var(--ink);
+  background: rgba(247, 243, 232, 0.94);
+}
+
+.quest-promo-hero {
+  min-height: calc(100svh - 63px);
+  display: grid;
+  align-items: end;
+  padding: clamp(28px, 6vw, 76px);
+  color: var(--paper-strong);
+  background:
+    linear-gradient(90deg, rgba(12, 11, 9, 0.9), rgba(12, 11, 9, 0.5) 50%, rgba(12, 11, 9, 0.12)),
+    linear-gradient(180deg, rgba(12, 11, 9, 0.08), rgba(12, 11, 9, 0.74)),
+    url("/assets/FamousLand2.png") center / cover no-repeat;
+}
+
+.quest-promo-hero-copy {
+  width: min(100%, 760px);
+  display: grid;
+  gap: 18px;
+}
+
+.quest-promo-hero h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 950;
+  line-height: 0.86;
+  text-shadow: 0 20px 46px rgba(0, 0, 0, 0.36);
+}
+
+.quest-promo-hero p {
+  max-width: 39rem;
+  margin: 0;
+  color: rgba(255, 250, 240, 0.84);
+  font-size: clamp(1.16rem, 2.8vw, 1.65rem);
+  font-weight: 790;
+  line-height: 1.22;
+}
+
+.quest-promo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.quest-promo-primary {
+  min-height: 58px;
+  gap: 10px;
+  padding: 14px 22px;
+  font-size: 1.02rem;
+}
+
+.quest-promo-hero .quest-promo-primary,
+.quest-final-cta .quest-promo-primary {
+  color: var(--ink);
+  background: var(--paper-strong);
+}
+
+.quest-promo-text-link {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 250, 240, 0.86);
+  font-weight: 850;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.quest-promo-text-link.dark {
+  color: var(--moss-dark);
+}
+
+.quest-promo-section,
+.quest-zone-band,
+.quest-final-cta {
+  width: min(100% - 32px, 1120px);
+  margin: 0 auto;
+}
+
+.quest-promo-section {
+  display: grid;
+  gap: clamp(22px, 4vw, 34px);
+  padding: clamp(48px, 8vw, 92px) 0;
+}
+
+.quest-promo-section-heading {
+  max-width: 680px;
+}
+
+.quest-promo-section h2,
+.quest-zone-band h2,
+.quest-final-cta h2 {
+  max-width: 12ch;
+  margin: 0 0 12px;
+  font-size: clamp(2.4rem, 6.8vw, 4.8rem);
+  font-weight: 950;
+  line-height: 0.9;
+}
+
+.quest-promo-section-heading p,
+.quest-zone-copy p,
+.quest-final-cta p {
+  max-width: 43rem;
+  margin: 0;
+  color: rgba(17, 20, 15, 0.68);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  font-weight: 730;
+  line-height: 1.45;
+}
+
+.quest-step-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quest-step {
+  min-height: 260px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid rgba(17, 20, 15, 0.12);
+  border-radius: var(--radius);
+  background: rgba(255, 250, 240, 0.92);
+  box-shadow: 0 14px 34px rgba(17, 20, 15, 0.08);
+}
+
+.quest-step-number {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--paper-strong);
+  border-radius: 999px;
+  background: var(--moss-dark);
+  font-weight: 950;
+}
+
+.quest-step h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  line-height: 1.05;
+}
+
+.quest-step p {
+  margin: 0;
+  color: rgba(17, 20, 15, 0.66);
+  font-weight: 690;
+}
+
+.quest-zone-band {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.72fr);
+  gap: clamp(24px, 6vw, 68px);
+  align-items: center;
+  padding: clamp(28px, 5vw, 56px);
+  color: var(--ink);
+  border: 1px solid rgba(17, 20, 15, 0.12);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(216, 227, 189, 0.9), rgba(247, 243, 232, 0.94) 56%, rgba(47, 111, 119, 0.16)),
+    var(--paper-strong);
+  box-shadow: 0 18px 48px rgba(17, 20, 15, 0.12);
+}
+
+.quest-zone-copy {
+  display: grid;
+  gap: 18px;
+}
+
+.quest-zone-map {
+  overflow: hidden;
+  border: 1px solid rgba(17, 20, 15, 0.18);
+  border-radius: var(--radius);
+  background: #d9e8c2;
+  box-shadow: 0 16px 36px rgba(17, 20, 15, 0.14);
+}
+
+.promo-zone-map-wrap {
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  background: #d9e8c2;
+}
+
+.promo-zone-map-picture {
+  aspect-ratio: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #d9e8c2;
+}
+
+.promo-zone-composite-map {
+  width: 100%;
+  height: 100%;
+}
+
+.promo-zone-composite-map .map-section path {
+  fill-opacity: 0.24;
+  opacity: 1;
+  stroke-width: 0.5;
+  filter: drop-shadow(0 0.5px 1px rgba(17, 20, 15, 0.16));
+}
+
+.promo-zone-composite-map .map-tag-icon {
+  transform: scale(0.9);
+}
+
+.promo-zone-composite-map .walking-trail-route {
+  stroke-width: 0.52;
+}
+
+.promo-map-zone-label rect {
+  fill: rgba(255, 250, 240, 0.9);
+  stroke: rgba(17, 20, 15, 0.18);
+  stroke-width: 0.18;
+}
+
+.promo-map-zone-label text {
+  fill: var(--ink);
+  font-size: 2.45px;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-anchor: middle;
+}
+
+.promo-zone-map-legend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 10px 12px 12px;
+  border-top: 1px solid rgba(17, 20, 15, 0.14);
+  background: rgba(255, 250, 240, 0.96);
+  list-style: none;
+}
+
+.promo-zone-map-legend li {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.promo-zone-swatch {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(17, 20, 15, 0.2);
+  border-radius: 999px;
+  background: var(--moss);
+}
+
+.promo-zone-swatch.treetop {
+  background: #3e5d2c;
+}
+
+.promo-zone-swatch.no-wake {
+  background: #0f6d8a;
+}
+
+.promo-zone-swatch.lakeview {
+  background: #2f6f77;
+}
+
+.promo-zone-swatch.hillside {
+  background: #536b35;
+}
+
+.quest-safety-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quest-safety-list li {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid rgba(83, 107, 53, 0.24);
+  border-radius: var(--radius);
+  background: rgba(216, 227, 189, 0.46);
+  font-weight: 850;
+}
+
+.quest-final-cta {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+  margin-bottom: clamp(42px, 7vw, 78px);
+  padding: clamp(30px, 6vw, 56px);
+  color: var(--paper-strong);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(17, 20, 15, 0.96), rgba(47, 111, 119, 0.84)),
+    url("/assets/famous-marker-tree-background.png") center / cover no-repeat;
+  box-shadow: 0 20px 54px rgba(17, 20, 15, 0.18);
+}
+
+.quest-final-cta p {
+  color: rgba(255, 250, 240, 0.78);
 }
 
 .game-off-page {
@@ -433,6 +783,62 @@ main:has(.game-off-page) {
 @media (max-width: 700px) and (orientation: portrait) {
   .image-home img {
     object-position: 12% center;
+  }
+
+  .home-launch-teaser {
+    right: 16px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    left: 16px;
+    min-height: 58px;
+    padding: 15px 18px;
+    font-size: 1rem;
+  }
+
+  .quest-promo-hero {
+    min-height: calc(100svh - 63px);
+    align-items: end;
+    padding: 34px 22px;
+    background:
+      linear-gradient(180deg, rgba(12, 11, 9, 0.14), rgba(12, 11, 9, 0.84)),
+      url("/assets/FamousLand2.png") 12% center / cover no-repeat;
+  }
+
+  .quest-promo-hero h1 {
+    max-width: 7ch;
+    font-size: clamp(3.2rem, 18vw, 4.8rem);
+  }
+
+  .quest-promo-actions,
+  .quest-promo-primary,
+  .quest-promo-text-link {
+    width: 100%;
+  }
+
+  .quest-promo-text-link {
+    justify-content: center;
+  }
+
+  .quest-step-grid,
+  .quest-safety-list {
+    grid-template-columns: 1fr;
+  }
+
+  .quest-step {
+    min-height: 0;
+  }
+
+  .quest-zone-band {
+    width: min(100% - 24px, 1120px);
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .quest-zone-map {
+    order: -1;
+  }
+
+  .quest-final-cta {
+    width: min(100% - 24px, 1120px);
   }
 
   .game-off-page {

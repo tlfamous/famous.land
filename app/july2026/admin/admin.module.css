@@ -149,7 +149,8 @@
   cursor: pointer;
 }
 
-.guestInviteActions button {
+.guestInviteActions button,
+.guestInviteActions .primaryInviteAction {
   color: #fffdf7;
   border-color: #be1d27;
   background: #be1d27;

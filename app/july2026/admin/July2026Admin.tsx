@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import styles from "./admin.module.css";
 import { getGuestSmsPacket, guestAssignments } from "../data";
-import { copyTextToClipboard } from "@/components/copyTextToClipboard";
 
 const bindingStorageKey = "famous.land.july2026.boundGuest";
 
@@ -19,10 +18,18 @@ function getAdminGuestPreviewPath(path: string) {
   return path.includes("?") ? `${path}&preview=admin` : `${path}?preview=admin`;
 }
 
+function getGuestSmsHref(phoneNumber: string | undefined, inviteText: string) {
+  if (!phoneNumber) {
+    return undefined;
+  }
+
+  const digits = phoneNumber.replace(/\D/g, "");
+  return `sms:${digits}?&body=${encodeURIComponent(inviteText)}`;
+}
+
 export function July2026Admin() {
   const [guestLinks, setGuestLinks] = useState<Record<string, GuestLinkRecord>>({});
   const [linkStatus, setLinkStatus] = useState("Loading guest links");
-  const [guestCopyStatus, setGuestCopyStatus] = useState<Record<string, string>>({});
   const [origin, setOrigin] = useState("https://famous.land");
 
   useEffect(() => {
@@ -52,21 +59,6 @@ export function July2026Admin() {
     } catch {
       setLinkStatus("Guest-link service unavailable");
     }
-  }
-
-  async function copyGuestSmsPacket(guest: (typeof guestAssignments)[number], path: string) {
-    if (await copyTextToClipboard(getGuestSmsPacket(guest, path, origin || "https://famous.land"))) {
-      setGuestCopyStatus((statuses) => ({
-        ...statuses,
-        [guest.slug]: "Copied SMS packet"
-      }));
-      return;
-    }
-
-    setGuestCopyStatus((statuses) => ({
-      ...statuses,
-      [guest.slug]: "Copy blocked"
-    }));
   }
 
   return (
@@ -103,6 +95,7 @@ export function July2026Admin() {
                   const path = `/july2026/guest/${guest.slug}${token ? `?t=${token}` : ""}`;
                   const previewPath = getAdminGuestPreviewPath(path);
                   const inviteText = getGuestSmsPacket(guest, path, origin || "https://famous.land");
+                  const smsHref = getGuestSmsHref(guest.phoneNumber, inviteText);
 
                   return (
                     <tr key={guest.slug}>
@@ -113,9 +106,13 @@ export function July2026Admin() {
                       <td>{guest.email ? <a href={`mailto:${guest.email}`}>{guest.email}</a> : "TBD"}</td>
                       <td>
                         <div className={styles.guestInviteActions}>
-                          <button type="button" onClick={() => copyGuestSmsPacket(guest, path)}>
-                            Copy invite
-                          </button>
+                          {smsHref ? (
+                            <a className={styles.primaryInviteAction} href={smsHref}>
+                              Send SMS
+                            </a>
+                          ) : (
+                            <span>No phone</span>
+                          )}
                           <details className={styles.invitePreview}>
                             <summary>Preview invite</summary>
                             <pre>{inviteText}</pre>
@@ -123,7 +120,7 @@ export function July2026Admin() {
                           <a href={previewPath} target="_blank" rel="noreferrer">
                             Guest page
                           </a>
-                          <span>{guestCopyStatus[guest.slug] ?? "Ready"}</span>
+                          <span>Ready</span>
                         </div>
                       </td>
                       <td>{token ? "Link ready" : "Not linked"}</td>

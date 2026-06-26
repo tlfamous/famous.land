@@ -980,7 +980,7 @@ export const guestAssignments: GuestAssignment[] = [
     phoneNumber: "978-227-6125",
     house: "LH1",
     room: "The Girls' Room",
-    companions: ["Rowan", "Emma", "Austen"],
+    companions: ["Rowan", "Emma", "Austen", "Erin"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
     note: "The Girls' Room is the third floor bedroom at LH1."
@@ -992,7 +992,7 @@ export const guestAssignments: GuestAssignment[] = [
     email: "rowan@famousfamily.com",
     house: "LH1",
     room: "The Girls' Room",
-    companions: ["Morgan", "Emma", "Austen"],
+    companions: ["Morgan", "Emma", "Austen", "Erin"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
     note: "The Girls' Room is the third floor bedroom at LH1."
@@ -1004,7 +1004,7 @@ export const guestAssignments: GuestAssignment[] = [
     email: "emma@famousfamily.com",
     house: "LH1",
     room: "The Girls' Room",
-    companions: ["Morgan", "Rowan", "Austen"],
+    companions: ["Morgan", "Rowan", "Austen", "Erin"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
     note: "The Girls' Room is the third floor bedroom at LH1."
@@ -1015,7 +1015,19 @@ export const guestAssignments: GuestAssignment[] = [
     phoneNumber: "848-229-5040",
     house: "LH1",
     room: "The Girls' Room",
-    companions: ["Morgan", "Rowan", "Emma"],
+    companions: ["Morgan", "Rowan", "Emma", "Erin"],
+    arrival: "Friday, July 3, 3-6 PM",
+    departure: "Sunday afternoon",
+    note: "The Girls' Room is the third floor bedroom at LH1."
+  },
+  {
+    slug: "erin",
+    name: "Erin",
+    phoneNumber: "475-266-0177",
+    email: "erin@famousfamily.com",
+    house: "LH1",
+    room: "The Girls' Room",
+    companions: ["Morgan", "Rowan", "Emma", "Austen"],
     arrival: "Friday, July 3, 3-6 PM",
     departure: "Sunday afternoon",
     note: "The Girls' Room is the third floor bedroom at LH1."
@@ -1048,6 +1060,7 @@ const guestRadioHandles: Record<string, string> = {
   rowan: "TBD",
   emma: "TBD",
   austen: "Crazy Baby",
+  erin: "TBD",
   jack: "TBD"
 };
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { GameUnavailablePage } from "@/components/GameUnavailablePage";
 import { getGameAvailability, getHomePageHeadline } from "@/lib/db";
 
@@ -23,7 +24,9 @@ export default async function HomePage() {
   return (
     <div className="image-home" aria-label="Famous Land">
       <img src="/assets/FamousLand2.png" alt="Famous Land" />
-      <p className="home-launch-teaser">Coming July 2026</p>
+      <Link className="home-launch-teaser" href="/how-to-play">
+        <span>Click here to start the quest</span>
+      </Link>
     </div>
   );
 }
