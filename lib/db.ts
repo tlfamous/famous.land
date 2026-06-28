@@ -158,12 +158,14 @@ export type ScanReportPlayerOption = {
 type PlayerScanRow = {
   player_id: string;
   scan_count: number;
+  marker_count: number;
   last_scan_at?: string;
 };
 
 type D1PlayerScanRow = {
   player_id: string;
   scan_count: number | string;
+  marker_count?: number | string;
   last_scan_at?: string | null;
 };
 
@@ -234,6 +236,7 @@ export type ScanReport = {
 export type PlayerReportRow = {
   player_id: string;
   scan_count: number;
+  marker_count: number;
   last_scan_at?: string;
   name?: string;
   email?: string;
@@ -1465,6 +1468,7 @@ async function getD1PlayerScanRows(d1: FamousLandD1): Promise<PlayerScanRow[]> {
     const result = await d1
       .prepare(
         `select player_id, count(*) as scan_count, max(scanned_at) as last_scan_at
+              , count(distinct marker_id) as marker_count
          from scan_events
          where coalesce(progress_eligible, 1) = 1
            and coalesce(is_test, 0) = 0
@@ -1481,6 +1485,7 @@ async function getD1PlayerScanRows(d1: FamousLandD1): Promise<PlayerScanRow[]> {
     const fallback = await d1
       .prepare(
         `select player_id, count(*) as scan_count, max(scanned_at) as last_scan_at
+              , count(distinct marker_id) as marker_count
          from marker_scans
          group by player_id`
       )
@@ -1587,6 +1592,7 @@ async function getD1PlayerContactRows(d1: FamousLandD1): Promise<PlayerContact[]
 
 function summarizePlayerScans(events: ScanEventRecord[]): PlayerScanRow[] {
   const byPlayer = new Map<string, PlayerScanRow>();
+  const markerIdsByPlayer = new Map<string, Set<string>>();
 
   for (const event of events) {
     if (event.is_test) {
@@ -1597,18 +1603,24 @@ function summarizePlayerScans(events: ScanEventRecord[]): PlayerScanRow[] {
       continue;
     }
 
+    const markerIds = markerIdsByPlayer.get(event.player_id) ?? new Set<string>();
+    markerIds.add(event.marker_id);
+    markerIdsByPlayer.set(event.player_id, markerIds);
+
     const current = byPlayer.get(event.player_id);
 
     if (!current) {
       byPlayer.set(event.player_id, {
         player_id: event.player_id,
         scan_count: 1,
+        marker_count: markerIds.size,
         last_scan_at: event.scanned_at
       });
       continue;
     }
 
     current.scan_count += 1;
+    current.marker_count = markerIds.size;
     if (!current.last_scan_at || event.scanned_at > current.last_scan_at) {
       current.last_scan_at = event.scanned_at;
     }
@@ -1656,6 +1668,7 @@ function buildPlayerRows(input: {
       return {
         player_id: playerId,
         scan_count: scan?.scan_count ?? 0,
+        marker_count: scan?.marker_count ?? 0,
         last_scan_at: scan?.last_scan_at,
         name: contact?.name,
         email: contact?.email ?? saved?.email,
@@ -1726,6 +1739,7 @@ function normalizePlayerScanRows(rows: D1PlayerScanRow[]): PlayerScanRow[] {
   return rows.map((row) => ({
     player_id: row.player_id,
     scan_count: Number(row.scan_count) || 0,
+    marker_count: Number(row.marker_count) || 0,
     last_scan_at: row.last_scan_at ?? undefined
   }));
 }

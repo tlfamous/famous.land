@@ -268,6 +268,7 @@ export function PlayerDatabaseTool({
                 <th>Phone ID</th>
                 <th>Name</th>
                 <th>Scans</th>
+                <th>Markers</th>
                 <th>Last scan</th>
                 <th>Email</th>
                 <th>Phone number</th>
@@ -286,6 +287,7 @@ export function PlayerDatabaseTool({
                       </td>
                       <td>{player.name ?? "Not saved"}</td>
                       <td>{player.scan_count}</td>
+                      <td>{player.marker_count}</td>
                       <td>
                         {player.last_scan_at ? formatEasternDateTime(player.last_scan_at) : "No scans"}
                       </td>
@@ -303,7 +305,7 @@ export function PlayerDatabaseTool({
                     </tr>
                     {selectedPlayerId === player.player_id && selectedPlayer ? (
                       <tr className="player-profile-row" id="player-profile">
-                        <td colSpan={7}>
+                        <td colSpan={8}>
                           <div className="player-profile-inline" aria-live="polite">
                             <div className="split player-profile-inline-head">
                               <div>
