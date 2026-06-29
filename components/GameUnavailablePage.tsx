@@ -1,4 +1,5 @@
 import { GameUnavailableScanLogger } from "@/components/GameUnavailableScanLogger";
+import { GameStatusPill } from "@/components/GameStatusPill";
 
 const contactHref = "sms:+19784310135";
 
@@ -19,6 +20,7 @@ export function GameUnavailablePage({
   return (
     <div className="game-off-page" aria-label="Famous Land">
       {markerId ? <GameUnavailableScanLogger markerId={markerId} /> : null}
+      <GameStatusPill isOn={false} />
       <section className="game-off-hero" aria-labelledby="game-off-title">
         {headline ? <p className="game-off-headline">{headline}</p> : null}
         <div className="game-off-title-lockup">

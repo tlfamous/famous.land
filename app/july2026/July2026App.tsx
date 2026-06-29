@@ -9,9 +9,6 @@ import lakeHouse2ExteriorSideImage from "./assets/lake-house-2-exterior-side.jpe
 import lakeHouse2KitchenImage from "./assets/lake-house-2-kitchen.jpeg";
 import lakeHouse2LivingRoomImage from "./assets/lake-house-2-living-room.jpeg";
 import lakeHouse3Image from "./assets/lake-house-3.jpeg";
-import echoThreadPodcastImage from "./assets/echo-thread-podcast.jpg";
-import lilyRooCoverImage from "./assets/lily-roo-i-learned-cover.jpg";
-import lmptfyCowBannerImage from "./assets/lmptfy-cow-banner.png";
 import kayakOneImage from "./assets/non-motor-kayaks-1.png";
 import kayakTwoImage from "./assets/non-motor-kayaks-2.png";
 import pedalBoatsImage from "./assets/non-motor-pedal-boats.png";
@@ -40,69 +37,21 @@ const sunnyCoveMapsHref =
   "https://www.google.com/maps/search/?api=1&query=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA";
 const sunnyCoveEmbedHref =
   "https://www.google.com/maps?q=26%20Sunny%20Cove%20Road%2C%20Winchendon%2C%20MA&output=embed";
-const lilyRooSiteHref = "https://www.lilyroo.com/";
-const lilyRooSpotifyHref = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
-const lmptfySiteHref = "https://letmepromptthatforyou.net/";
-const echoThreadYouTubeHref = "https://www.youtube.com/watch?v=f6Vf0YJLzyo";
 
 const sponsorAds = [
   {
     actions: [
       {
-        href: lilyRooSpotifyHref,
-        label: "Open Album on Spotify"
-      },
-      {
-        href: lilyRooSiteHref,
-        label: "Visit LilyRoo.com"
+        href: "/",
+        label: "Play the Quest"
       }
     ],
-    alt: "Remastered cover art for I Learned It All in 25 Seconds by Lily Roo.",
-    ariaLabel: "Lily Roo sponsor announcement",
-    body: "Stream the remastered release of her first album, with refreshed artwork and lake-weekend energy.",
-    headline: "Lily Roo: I Learned It All in 25 Seconds",
-    image: lilyRooCoverImage,
-    imageClassName: styles.sponsorArtwork,
-    imageSizes: "(max-width: 720px) 72px, 88px",
-    label: "Paid Sponsor",
-    tag: "Hot new music link!!!",
-    variant: "music"
-  },
-  {
-    actions: [
-      {
-        href: lmptfySiteHref,
-        label: "Try LMPTFY"
-      }
-    ],
-    alt: "Cartoon cow asking, Do you have relatives still Googling? Try LetMePromptThatForYou.net.",
-    ariaLabel: "LetMePromptThatForYou.net sponsor announcement",
-    body: "Try LetMePromptThatForYou.net.",
-    headline: "Do you have relatives still Googling?",
-    image: lmptfyCowBannerImage,
-    imageClassName: `${styles.sponsorArtwork} ${styles.sponsorArtworkWide}`,
-    imageSizes: "(max-width: 720px) 86px, 112px",
-    label: "Wifi Sponsor",
-    tag: "Ask a better question!!!",
-    variant: "prompt"
-  },
-  {
-    actions: [
-      {
-        href: echoThreadYouTubeHref,
-        label: "Watch on YouTube"
-      }
-    ],
-    alt: "Echo Thread podcast art for Jasper Fields with headphones and microphone.",
-    ariaLabel: "Echo Thread Podcast sponsor announcement",
-    body: "Echo Thread Podcast from Jasper Fields.",
-    headline: "Echo Thread Podcast",
-    image: echoThreadPodcastImage,
-    imageClassName: `${styles.sponsorArtwork} ${styles.sponsorArtworkPodcast}`,
-    imageSizes: "(max-width: 720px) 86px, 112px",
-    label: "Podcast Sponsor",
-    tag: "Now transmitting!!!",
-    variant: "podcast"
+    ariaLabel: "Famous Land Quest game on announcement",
+    body: "Scan the trail markers, track your progress, and unlock the Famous Land summer challenge.",
+    headline: "Famous.land Quest",
+    label: "Land Quest",
+    tag: "Quest active",
+    variant: "game-on"
   }
 ] as const;
 
@@ -248,8 +197,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const [boundGuest, setBoundGuest] = useState<BoundGuest | null>(null);
   const [lh3VideoReady, setLh3VideoReady] = useState(false);
   const [serverBindingStatus, setServerBindingStatus] = useState<ServerBindingStatus>("idle");
-  const [sponsorAdDismissed, setSponsorAdDismissed] = useState(false);
-  const [selectedSponsorIndex, setSelectedSponsorIndex] = useState(0);
   const selectedGuest = guestAssignments.find((guest) => guest.slug === selectedGuestSlug);
   const selectedGuestHouse =
     selectedGuest?.house && selectedGuest.house !== "Pending"
@@ -269,35 +216,9 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
   const isViewingBoundGuest = Boolean(selectedGuest && boundGuest?.slug === selectedGuest.slug);
   const selectedGuestNeedsHostAssignment = selectedGuest?.house === "Pending";
   const isAdminPreview = serverBindingStatus === "admin-preview";
-  const selectedSponsorAd: SponsorAd = sponsorAds[selectedSponsorIndex];
-  const sponsorFeatureVariantClass =
-    selectedSponsorAd?.variant === "prompt"
-      ? styles.sponsorFeaturePrompt
-      : selectedSponsorAd?.variant === "podcast"
-        ? styles.sponsorFeaturePodcast
-        : "";
-  const sponsorCopyVariantClass =
-    selectedSponsorAd?.variant === "prompt"
-      ? styles.sponsorPromptBubble
-      : selectedSponsorAd?.variant === "podcast"
-        ? styles.sponsorPodcastCopy
-        : "";
-
-  useEffect(() => {
-    if (sponsorAdDismissed) {
-      return;
-    }
-
-    const cycleTimer = window.setInterval(() => {
-      setSelectedSponsorIndex((currentIndex) =>
-        (currentIndex + 1) % sponsorAds.length
-      );
-    }, 6000);
-
-    return () => {
-      window.clearInterval(cycleTimer);
-    };
-  }, [sponsorAdDismissed]);
+  const selectedSponsorAd: SponsorAd = sponsorAds[0];
+  const sponsorFeatureVariantClass = styles.sponsorFeatureGameOn;
+  const sponsorCopyVariantClass = styles.sponsorGameOnCopy;
 
   useEffect(() => {
     let cancelled = false;
@@ -432,49 +353,43 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
 
   return (
     <div className={`${styles.app} july-2026-app`}>
-      {!sponsorAdDismissed ? (
-        <section
-          className={`${styles.sponsorBillboard} ${styles.sponsorBillboardOpen}`}
-          aria-label={selectedSponsorAd.ariaLabel}
-          style={{
-            opacity: 1,
-            transform: "translate(-50%, 0)",
-            transition: "none"
-          }}
-        >
-          <div className={`${styles.sponsorFeature} ${sponsorFeatureVariantClass}`}>
-            <span className={styles.adLabel}>{selectedSponsorAd.label}</span>
-            <Image
-              src={selectedSponsorAd.image}
-              alt={selectedSponsorAd.alt}
-              className={selectedSponsorAd.imageClassName}
-              sizes={selectedSponsorAd.imageSizes}
-            />
-            <div className={`${styles.sponsorCopy} ${sponsorCopyVariantClass}`}>
-              <span>{selectedSponsorAd.tag}</span>
-              <h2>{selectedSponsorAd.headline}</h2>
-              <p>{selectedSponsorAd.body}</p>
-              <div className={styles.sponsorCtas}>
-                {selectedSponsorAd.actions.map((action) => (
-                  <a href={action.href} key={action.href} target="_blank" rel="noreferrer">
-                    {action.label}
-                  </a>
-                ))}
-              </div>
+      <section
+        className={`${styles.sponsorBillboard} ${styles.sponsorBillboardOpen}`}
+        aria-label={selectedSponsorAd.ariaLabel}
+        style={{
+          opacity: 1,
+          transform: "translate(-50%, 0)",
+          transition: "none"
+        }}
+      >
+        <div className={`${styles.sponsorFeature} ${sponsorFeatureVariantClass}`}>
+          <span className={styles.adLabel}>{selectedSponsorAd.label}</span>
+          <div className={styles.sponsorQuestArtwork} aria-hidden="true">
+            <span className={styles.sponsorQuestSun} />
+            <span className={styles.sponsorQuestTrail} />
+            <span className={`${styles.sponsorQuestMarker} ${styles.sponsorQuestMarkerOne}`} />
+            <span className={`${styles.sponsorQuestMarker} ${styles.sponsorQuestMarkerTwo}`} />
+            <span className={`${styles.sponsorQuestMarker} ${styles.sponsorQuestMarkerThree}`} />
+          </div>
+          <div className={`${styles.sponsorCopy} ${sponsorCopyVariantClass}`}>
+            <span>{selectedSponsorAd.tag}</span>
+            <h2>{selectedSponsorAd.headline}</h2>
+            <p>{selectedSponsorAd.body}</p>
+            <div className={styles.sponsorCtas}>
+              {selectedSponsorAd.actions.map((action) => (
+                <a
+                  href={action.href}
+                  key={action.href}
+                  target={action.href.startsWith("/") ? undefined : "_blank"}
+                  rel={action.href.startsWith("/") ? undefined : "noreferrer"}
+                >
+                  {action.label}
+                </a>
+              ))}
             </div>
           </div>
-          <button
-            aria-label={`Dismiss ${selectedSponsorAd.ariaLabel}`}
-            className={styles.sponsorDismiss}
-            type="button"
-            onClick={() => {
-              setSponsorAdDismissed(true);
-            }}
-          >
-            x
-          </button>
-        </section>
-      ) : null}
+        </div>
+      </section>
 
       <section className={styles.hero} id="top">
         <Image
@@ -961,7 +876,6 @@ export function July2026App({ selectedGuestSlug }: July2026AppProps) {
       </section>
 
       <footer className={styles.footer}>
-        <span>Sponsored by famous.land</span>
         <a href={hostSmsHref}>Contact Host</a>
       </footer>
     </div>

@@ -85,10 +85,7 @@
   top: 72px;
   left: 50%;
   z-index: 9;
-  display: grid;
-  grid-template-columns: minmax(0, 728px) auto;
-  gap: 6px;
-  width: min(calc(100% - 24px), 790px);
+  width: min(calc(100% - 24px), 728px);
   opacity: 0;
   transform: translate(-50%, -130%);
   transition:
@@ -258,6 +255,14 @@
   background: #1db954;
 }
 
+.sponsorGameOnCopy .sponsorCtas a {
+  color: #fffaf0;
+  border: 1px solid rgba(255, 250, 240, 0.46);
+  border-radius: 999px;
+  background: #11140f;
+  box-shadow: 0 8px 18px rgba(17, 20, 15, 0.18);
+}
+
 .sponsorFeaturePrompt {
   grid-template-columns: 112px minmax(0, 1fr);
   background:
@@ -320,19 +325,188 @@
   color: #081326;
 }
 
-.sponsorDismiss {
-  width: 32px;
-  height: 30px;
-  color: #081326;
-  border: 2px outset #fff;
-  border-radius: 0;
-  background: #efefef;
-  box-shadow: 0 5px 0 #081326;
-  cursor: pointer;
-  font-size: 1rem;
+.sponsorFeatureGameOn {
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 8px 14px;
+  min-height: 118px;
+  padding: 9px 13px 9px 9px;
+  color: #11140f;
+  border: 1px solid rgba(17, 20, 15, 0.22);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(216, 227, 189, 0.96), rgba(255, 250, 240, 0.96) 48%, rgba(47, 111, 119, 0.22)),
+    #fffaf0;
+  box-shadow:
+    0 10px 0 #26361c,
+    0 18px 38px rgba(17, 20, 15, 0.28);
+}
+
+.sponsorFeatureGameOn::before {
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 24%, rgba(255, 250, 240, 0.78) 0 5px, transparent 6px),
+    radial-gradient(circle at 86% 18%, rgba(83, 107, 53, 0.16) 0 34px, transparent 36px),
+    repeating-linear-gradient(135deg, rgba(83, 107, 53, 0.12) 0 1px, transparent 1px 14px);
+}
+
+.sponsorFeatureGameOn::after {
+  right: 12px;
+  bottom: 6px;
+  color: rgba(38, 54, 28, 0.1);
+  content: "QUEST";
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  transform: rotate(-4deg);
+}
+
+.sponsorFeatureGameOn .adLabel {
+  color: #fffaf0;
+  border: 1px solid rgba(255, 250, 240, 0.5);
+  border-radius: 999px;
+  background: #26361c;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0;
+}
+
+.sponsorQuestArtwork {
+  grid-area: art;
+  position: relative;
+  width: 118px;
+  height: 78px;
+  align-self: end;
+  overflow: hidden;
+  border: 1px solid rgba(17, 20, 15, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(160deg, rgba(255, 250, 240, 0.92), rgba(216, 227, 189, 0.94) 54%, rgba(83, 107, 53, 0.34)),
+    #d8e3bd;
+  box-shadow:
+    4px 4px 0 rgba(38, 54, 28, 0.26),
+    inset 0 0 0 5px rgba(255, 250, 240, 0.44);
+}
+
+.sponsorQuestArtwork::before,
+.sponsorQuestArtwork::after {
+  position: absolute;
+  content: "";
+}
+
+.sponsorQuestArtwork::before {
+  left: 10px;
+  right: 10px;
+  bottom: 12px;
+  height: 16px;
+  border-radius: 999px 999px 0 0;
+  background:
+    linear-gradient(90deg, rgba(83, 107, 53, 0.42), rgba(47, 111, 119, 0.42)),
+    rgba(83, 107, 53, 0.3);
+}
+
+.sponsorQuestArtwork::after {
+  left: 17px;
+  right: 13px;
+  bottom: 13px;
+  height: 35px;
+  border-bottom: 4px dotted rgba(38, 54, 28, 0.72);
+  border-left: 4px dotted rgba(38, 54, 28, 0.72);
+  border-radius: 4px 0 0 20px;
+  transform: rotate(-9deg);
+  transform-origin: left bottom;
+}
+
+.sponsorQuestSun {
+  position: absolute;
+  top: 11px;
+  right: 13px;
+  width: 19px;
+  height: 19px;
+  border-radius: 999px;
+  background: #fffaf0;
+  box-shadow: 0 0 0 6px rgba(255, 250, 240, 0.38);
+}
+
+.sponsorQuestTrail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 32px;
+  background:
+    linear-gradient(135deg, transparent 0 44%, rgba(109, 84, 60, 0.5) 44% 56%, transparent 56%),
+    linear-gradient(45deg, transparent 0 48%, rgba(109, 84, 60, 0.3) 48% 54%, transparent 54%);
+}
+
+.sponsorQuestMarker {
+  position: absolute;
+  z-index: 1;
+  width: 17px;
+  height: 17px;
+  border: 2px solid #fffaf0;
+  border-radius: 999px;
+  background: #536b35;
+  box-shadow: 0 2px 0 rgba(17, 20, 15, 0.28);
+}
+
+.sponsorQuestMarker::after {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: #fffaf0;
+  content: "";
+}
+
+.sponsorQuestMarkerOne {
+  left: 16px;
+  bottom: 22px;
+}
+
+.sponsorQuestMarkerTwo {
+  left: 48px;
+  top: 25px;
+  background: #2f6f77;
+}
+
+.sponsorQuestMarkerThree {
+  right: 18px;
+  bottom: 27px;
+  background: #26361c;
+}
+
+.sponsorGameOnCopy {
+  padding: 9px 12px;
+  border: 1px solid rgba(17, 20, 15, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 250, 240, 0.92);
+  box-shadow:
+    4px 4px 0 rgba(83, 107, 53, 0.28),
+    inset 0 -8px 0 rgba(216, 227, 189, 0.34);
+}
+
+.sponsorGameOnCopy > span {
+  color: #fffaf0;
+  background: #536b35;
+}
+
+.sponsorGameOnCopy h2 {
+  color: #11140f;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.65rem);
   font-weight: 950;
-  line-height: 1;
-  text-transform: uppercase;
+  line-height: 0.88;
+  text-shadow: none;
+  text-transform: none;
+}
+
+.sponsorGameOnCopy p {
+  color: rgba(17, 20, 15, 0.72);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 780;
+  line-height: 1.16;
 }
 
 .lede {
@@ -1980,8 +2154,40 @@
 
   .sponsorFeature,
   .sponsorFeaturePrompt,
-  .sponsorFeaturePodcast {
+  .sponsorFeaturePodcast,
+  .sponsorFeatureGameOn {
     grid-template-columns: 86px minmax(0, 1fr);
+  }
+
+  .sponsorFeatureGameOn {
+    min-height: 110px;
+    gap: 7px 10px;
+    padding: 8px 10px 8px 8px;
+  }
+
+  .sponsorQuestArtwork {
+    width: 86px;
+    height: 66px;
+  }
+
+  .sponsorQuestMarkerTwo {
+    left: 38px;
+  }
+
+  .sponsorQuestMarkerThree {
+    right: 11px;
+  }
+
+  .sponsorGameOnCopy {
+    padding: 8px 9px;
+  }
+
+  .sponsorGameOnCopy h2 {
+    font-size: clamp(1.55rem, 8.5vw, 2rem);
+  }
+
+  .sponsorGameOnCopy p {
+    font-size: 0.76rem;
   }
 
   .hostHelpIntro {

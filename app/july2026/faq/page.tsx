@@ -85,7 +85,6 @@ export default function July2026FaqPage() {
         </section>
 
         <footer className={styles.footer}>
-          <span>Sponsored by famous.land</span>
           <a href="/july2026/concierge">Concierge</a>
         </footer>
       </section>

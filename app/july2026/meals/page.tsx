@@ -115,7 +115,6 @@ export default function July2026MealsPage() {
         </section>
 
         <footer className={styles.footer}>
-          <span>Sponsored by famous.land</span>
           <a href={hostSmsHref}>Contact Host</a>
         </footer>
       </section>
