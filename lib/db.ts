@@ -5,6 +5,7 @@ import {
   sendRecoveryEmail
 } from "@/lib/email";
 import { markers, zones } from "@/lib/markers";
+import { getPromoMarkerById, promoMarkers } from "@/lib/promoMarkers";
 import type { Marker, ScanRecord } from "@/lib/types";
 
 type SavedPlayer = {
@@ -90,6 +91,7 @@ type DbShape = {
 type ScanEventRecord = ScanRecord & {
   id: string;
   is_test: boolean;
+  device_id?: string;
   email_id?: string;
   source_player_id?: string;
   progress_eligible: boolean;
@@ -102,6 +104,7 @@ type D1ScanEventRow = Omit<
   user_agent?: string | null;
   is_test?: boolean | number | string | null;
   email_id?: string | null;
+  device_id?: string | null;
   source_player_id?: string | null;
   progress_eligible?: boolean | number | string | null;
 };
@@ -117,6 +120,14 @@ type ScanReportLogRow = {
   location: string;
   zone: string;
   is_test: boolean;
+  is_promo: boolean;
+};
+
+type ScanReportLeaderboardRow = {
+  player_id: string;
+  email_id?: string;
+  contact_player_id?: string;
+  scan_count: number;
 };
 
 type ScanTimelineBucket = {
@@ -221,9 +232,17 @@ export type ScanReport = {
   timeline: ScanTimelineBucket[];
   zone_counts: { zone: string; count: number }[];
   marker_counts: { marker_id: string; count: number }[];
+  promotion_counts: {
+    promo_id: string;
+    promo_code: string;
+    label: string;
+    scan_count: number;
+    unique_players: number;
+  }[];
   filters: ScanReportFilters;
   zone_options: string[];
   player_options: ScanReportPlayerOption[];
+  leaderboard: ScanReportLeaderboardRow[];
   log_total: number;
   log_page: number;
   log_page_count: number;
@@ -723,11 +742,12 @@ async function getScanEvents(): Promise<ScanEventRecord[]> {
 
 export async function recordScan(input: {
   player_id: string;
+  device_id?: string;
   marker_id: string;
   user_agent?: string;
   is_test?: boolean;
   track_event?: boolean;
-}): Promise<{ is_new: boolean; scan: ScanRecord }> {
+}): Promise<{ is_new: boolean; scan: ScanRecord; event_id?: string; event_at?: string }> {
   const d1 = await getD1();
 
   if (d1) {
@@ -744,9 +764,11 @@ export async function recordScan(input: {
     is_test: input.is_test === true
   };
 
-  if (input.track_event !== false) {
-    db.scan_events.push(makeScanEvent(scan, { progress_eligible: true }));
-  }
+  const scanEvent =
+    input.track_event !== false
+      ? makeScanEvent(scan, { device_id: input.device_id, progress_eligible: true })
+      : undefined;
+  if (scanEvent) db.scan_events.push(scanEvent);
 
   const existing = db.scans.find(
     (scan) => scan.player_id === input.player_id && scan.marker_id === input.marker_id
@@ -756,16 +778,27 @@ export async function recordScan(input: {
     if (input.track_event !== false) {
       await writeLocalDb(db);
     }
-    return { is_new: false, scan: existing };
+    return {
+      is_new: false,
+      scan: existing,
+      event_id: scanEvent?.id,
+      event_at: scanEvent?.scanned_at
+    };
   }
 
   db.scans.push(scan);
   await writeLocalDb(db);
-  return { is_new: true, scan };
+  return {
+    is_new: true,
+    scan,
+    event_id: scanEvent?.id,
+    event_at: scanEvent?.scanned_at
+  };
 }
 
 export async function recordGameOffScan(input: {
   source_player_id?: string;
+  device_id?: string;
   marker_id: string;
   user_agent?: string;
   is_test?: boolean;
@@ -781,7 +814,40 @@ export async function recordGameOffScan(input: {
     },
     {
       email_id,
+      device_id: input.device_id,
       source_player_id: input.source_player_id,
+      progress_eligible: false
+    }
+  );
+  const d1 = await getD1();
+
+  if (d1) {
+    await recordD1ScanEvent(d1, event);
+    return event;
+  }
+
+  const db = await readLocalDb();
+  db.scan_events.push(event);
+  await writeLocalDb(db);
+  return event;
+}
+
+export async function recordPromoScan(input: {
+  player_id: string;
+  device_id?: string;
+  promo_id: string;
+  user_agent?: string;
+}): Promise<ScanEventRecord> {
+  const event = makeScanEvent(
+    {
+      player_id: input.player_id,
+      marker_id: input.promo_id,
+      scanned_at: new Date().toISOString(),
+      user_agent: input.user_agent,
+      is_test: false
+    },
+    {
+      device_id: input.device_id,
       progress_eligible: false
     }
   );
@@ -830,6 +896,8 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
   const sortedEvents = [...filteredEvents].sort((a, b) => b.scanned_at.localeCompare(a.scanned_at));
   const zoneCounts = new Map<string, number>();
   const markerCounts = new Map(markers.map((marker) => [marker.marker_id, 0]));
+  const promoPlayerIds = new Map<string, Set<string>>();
+  const promoCounts = new Map(promoMarkers.map((promo) => [promo.promo_id, 0]));
   const filteredPlayerIds = new Set(filteredEvents.map(reportPlayerId));
   const logTotal = sortedEvents.length;
   const logPageCount = Math.max(1, Math.ceil(logTotal / SCAN_LOG_PAGE_SIZE));
@@ -840,9 +908,18 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
 
   for (const event of filteredEvents) {
     const marker = markerById.get(event.marker_id);
-    const zone = marker?.zone ?? "Unknown";
+    const promo = getPromoMarkerById(event.marker_id);
+    const zone = marker?.zone ?? (promo ? "Promotion" : "Unknown");
     zoneCounts.set(zone, (zoneCounts.get(zone) ?? 0) + 1);
-    markerCounts.set(event.marker_id, (markerCounts.get(event.marker_id) ?? 0) + 1);
+    if (marker) {
+      markerCounts.set(event.marker_id, (markerCounts.get(event.marker_id) ?? 0) + 1);
+    }
+    if (promo) {
+      promoCounts.set(promo.promo_id, (promoCounts.get(promo.promo_id) ?? 0) + 1);
+      const playerIds = promoPlayerIds.get(promo.promo_id) ?? new Set<string>();
+      playerIds.add(reportPlayerId(event));
+      promoPlayerIds.set(promo.promo_id, playerIds);
+    }
   }
 
   return {
@@ -851,7 +928,11 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
     identified_players: Array.from(filteredPlayerIds).filter((playerId) =>
       playerIdentityById.has(playerId)
     ).length,
-    unique_markers: new Set(filteredEvents.map((event) => event.marker_id)).size,
+    unique_markers: new Set(
+      filteredEvents
+        .filter((event) => markerById.has(event.marker_id))
+        .map((event) => event.marker_id)
+    ).size,
     test_scans: filteredEvents.filter((event) => event.is_test).length,
     latest_scan_at: sortedEvents[0]?.scanned_at,
     timeline_label: timelineLabel(filters),
@@ -863,9 +944,21 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
       marker_id: marker.marker_id,
       count: markerCounts.get(marker.marker_id) ?? 0
     })),
+    promotion_counts: promoMarkers.map((promo) => ({
+      promo_id: promo.promo_id,
+      promo_code: promo.promo_code,
+      label: promo.label,
+      scan_count: promoCounts.get(promo.promo_id) ?? 0,
+      unique_players: promoPlayerIds.get(promo.promo_id)?.size ?? 0
+    })),
     filters,
     zone_options: zoneOptions(events, markerById),
     player_options: playerOptions(events, playerEmailById),
+    leaderboard: buildScanLeaderboard(
+      filteredEvents,
+      playerEmailById,
+      playerIdByIdentity
+    ),
     log_total: logTotal,
     log_page: logPage,
     log_page_count: logPageCount,
@@ -874,6 +967,7 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
     log_end: logEndIndex,
     log: sortedEvents.slice(logStartIndex, logEndIndex).map((event) => {
       const marker = markerById.get(event.marker_id);
+      const promo = getPromoMarkerById(event.marker_id);
 
       return {
         id: event.id,
@@ -882,13 +976,49 @@ export async function getScanReport(inputFilters: ScanReportFilterInput = {}): P
         player_id: reportPlayerId(event),
         contact_player_id: scanContactPlayerId(event, playerIdByIdentity),
         marker_id: event.marker_id,
-        short_code: marker?.short_code ?? event.marker_id,
-        location: marker?.marker_name ?? event.marker_id,
-        zone: marker?.zone ?? "Unknown",
-        is_test: event.is_test
+        short_code: marker?.short_code ?? promo?.short_code ?? event.marker_id,
+        location: marker?.marker_name ?? promo?.label ?? event.marker_id,
+        zone: marker?.zone ?? (promo ? "Promotion" : "Unknown"),
+        is_test: event.is_test,
+        is_promo: Boolean(promo)
       };
     })
   };
+}
+
+function buildScanLeaderboard(
+  events: ScanEventRecord[],
+  playerEmailById: Map<string, string>,
+  playerIdByIdentity: Map<string, string>
+) {
+  const players = new Map<string, ScanReportLeaderboardRow>();
+
+  for (const event of events) {
+    const playerId = reportPlayerId(event);
+    const current = players.get(playerId);
+    const emailId = scanEventEmail(event, playerEmailById);
+    const contactPlayerId = scanContactPlayerId(event, playerIdByIdentity);
+
+    if (current) {
+      current.scan_count += 1;
+      current.email_id ||= emailId;
+      current.contact_player_id ||= contactPlayerId;
+      continue;
+    }
+
+    players.set(playerId, {
+      player_id: playerId,
+      email_id: emailId,
+      contact_player_id: contactPlayerId,
+      scan_count: 1
+    });
+  }
+
+  return Array.from(players.values()).sort(
+    (a, b) =>
+      b.scan_count - a.scan_count ||
+      (a.email_id ?? a.player_id).localeCompare(b.email_id ?? b.player_id)
+  );
 }
 
 function reversePlayerIdentityMap(playerIdentityById: Map<string, string>) {
@@ -947,7 +1077,7 @@ function resolveScanReportFilters(input: ScanReportFilterInput): ScanReportFilte
   const endDate = rawEndMs < startMs ? startDate : rawEndDate;
   const unit = TIMELINE_UNITS.has(input.unit as ScanTimelineUnit)
     ? (input.unit as ScanTimelineUnit)
-    : "day";
+    : "week";
 
   return {
     start_date: startDate,
@@ -986,6 +1116,7 @@ function filterScanEvents(
   return events.filter((event) => {
     const eventDayMs = easternDayMs(event.scanned_at);
     const marker = markerById.get(event.marker_id);
+    const promo = getPromoMarkerById(event.marker_id);
 
     if (eventDayMs === undefined || eventDayMs < startMs || eventDayMs >= endMs) {
       return false;
@@ -995,7 +1126,7 @@ function filterScanEvents(
       return false;
     }
 
-    if (filters.zones.length && !filters.zones.includes(marker?.zone ?? "Unknown")) {
+    if (filters.zones.length && !filters.zones.includes(marker?.zone ?? (promo ? "Promotion" : "Unknown"))) {
       return false;
     }
 
@@ -1020,7 +1151,8 @@ function zoneOptions(events: ScanEventRecord[], markerById: Map<string, (typeof 
   const options = new Set<string>(zones);
 
   for (const event of events) {
-    options.add(markerById.get(event.marker_id)?.zone ?? "Unknown");
+    const promo = getPromoMarkerById(event.marker_id);
+    options.add(markerById.get(event.marker_id)?.zone ?? (promo ? "Promotion" : "Unknown"));
   }
 
   return Array.from(options);
@@ -1468,9 +1600,9 @@ async function getD1PlayerScanRows(d1: FamousLandD1): Promise<PlayerScanRow[]> {
     const result = await d1
       .prepare(
         `select player_id, count(*) as scan_count, max(scanned_at) as last_scan_at
-              , count(distinct marker_id) as marker_count
+              , count(distinct case when coalesce(progress_eligible, 1) = 1 then marker_id end) as marker_count
          from scan_events
-         where coalesce(progress_eligible, 1) = 1
+         where (coalesce(progress_eligible, 1) = 1 or marker_id like 'PROMO-%')
            and coalesce(is_test, 0) = 0
          group by player_id`
       )
@@ -1599,13 +1731,16 @@ function summarizePlayerScans(events: ScanEventRecord[]): PlayerScanRow[] {
       continue;
     }
 
-    if (!event.progress_eligible) {
+    const isPromoScan = Boolean(getPromoMarkerById(event.marker_id));
+    if (!event.progress_eligible && !isPromoScan) {
       continue;
     }
 
     const markerIds = markerIdsByPlayer.get(event.player_id) ?? new Set<string>();
-    markerIds.add(event.marker_id);
-    markerIdsByPlayer.set(event.player_id, markerIds);
+    if (event.progress_eligible) {
+      markerIds.add(event.marker_id);
+      markerIdsByPlayer.set(event.player_id, markerIds);
+    }
 
     const current = byPlayer.get(event.player_id);
 
@@ -1808,6 +1943,7 @@ export async function getProgress(playerId: string): Promise<{
 
 export async function saveProgress(input: {
   player_id: string;
+  device_id?: string;
   email: string;
   marker_ids: string[];
   user_agent?: string;
@@ -1850,6 +1986,7 @@ export async function saveProgress(input: {
       email,
       email_updated_at: new Date().toISOString()
     });
+    await recordProgressSave(input.player_id, email, input.device_id, input.user_agent);
 
     return sendSavedProgressMessage({
       player_id: input.player_id,
@@ -1878,14 +2015,31 @@ export async function saveProgress(input: {
     email,
     email_updated_at: savedPlayer.saved_at
   });
-
   await writeLocalDb(db);
+  await recordProgressSave(input.player_id, email, input.device_id, input.user_agent);
 
   return sendSavedProgressMessage({
     player_id: input.player_id,
     email,
     recovery_code,
     marker_count: input.marker_ids.length
+  });
+}
+
+async function recordProgressSave(
+  playerId: string,
+  email: string,
+  deviceId: string | undefined,
+  userAgent: string | undefined
+) {
+  await recordAdminAuditEvent({
+    action: "progress.save",
+    player_id: playerId,
+    target: email,
+    result: "saved",
+    detail: `${userAgent ? "Browser user agent present" : "No user agent"}; device_id=${
+      normalizeOptionalDeviceId(deviceId) ?? "unavailable"
+    }.`
   });
 }
 
@@ -2072,7 +2226,10 @@ export async function generateRecoverySmsCopy(input: {
   };
 }
 
-export async function recoverProgressByCode(recoveryCode: string): Promise<
+export async function recoverProgressByCode(
+  recoveryCode: string,
+  context: { device_id?: string; user_agent?: string } = {}
+): Promise<
   | {
       mode: "recovered";
       player_id: string;
@@ -2108,6 +2265,7 @@ export async function recoverProgressByCode(recoveryCode: string): Promise<
     }
 
     const progress = await getProgress(saved.player_id);
+    await recordRecoveryCompletion(saved.player_id, context);
     return {
       mode: "recovered",
       player_id: saved.player_id,
@@ -2125,11 +2283,29 @@ export async function recoverProgressByCode(recoveryCode: string): Promise<
   }
 
   const progress = await getProgress(saved.player_id);
+  await recordRecoveryCompletion(saved.player_id, context);
   return {
     mode: "recovered",
     player_id: saved.player_id,
     marker_ids: progress.marker_ids
   };
+}
+
+async function recordRecoveryCompletion(
+  playerId: string,
+  context: { device_id?: string; user_agent?: string }
+) {
+  const deviceId = normalizeOptionalDeviceId(context.device_id);
+
+  await recordAdminAuditEvent({
+    action: "recovery.complete",
+    player_id: playerId,
+    target: deviceId,
+    result: "recovered",
+    detail: context.user_agent
+      ? "Recovery link applied on a browser that reported a user agent."
+      : "Recovery link applied without a user agent."
+  });
 }
 
 async function sendSavedProgressMessage(input: {
@@ -2275,12 +2451,13 @@ async function recordD1Scan(
   d1: FamousLandD1,
   input: {
     player_id: string;
+    device_id?: string;
     marker_id: string;
     user_agent?: string;
     is_test?: boolean;
     track_event?: boolean;
   }
-): Promise<{ is_new: boolean; scan: ScanRecord }> {
+): Promise<{ is_new: boolean; scan: ScanRecord; event_id?: string; event_at?: string }> {
   const scan: ScanRecord = {
     player_id: input.player_id,
     marker_id: input.marker_id,
@@ -2289,9 +2466,11 @@ async function recordD1Scan(
     is_test: input.is_test === true
   };
 
-  if (input.track_event !== false) {
-    await recordD1ScanEvent(d1, makeScanEvent(scan, { progress_eligible: true }));
-  }
+  const scanEvent =
+    input.track_event !== false
+      ? makeScanEvent(scan, { device_id: input.device_id, progress_eligible: true })
+      : undefined;
+  if (scanEvent) await recordD1ScanEvent(d1, scanEvent);
 
   const result = await d1
     .prepare(
@@ -2312,11 +2491,21 @@ async function recordD1Scan(
       .first<ScanRecord>();
 
     if (existing) {
-      return { is_new: false, scan: existing };
+      return {
+        is_new: false,
+        scan: existing,
+        event_id: scanEvent?.id,
+        event_at: scanEvent?.scanned_at
+      };
     }
   }
 
-  return { is_new: true, scan };
+  return {
+    is_new: true,
+    scan,
+    event_id: scanEvent?.id,
+    event_at: scanEvent?.scanned_at
+  };
 }
 
 async function recordD1ScanEvent(d1: FamousLandD1, event: ScanEventRecord) {
@@ -2328,6 +2517,7 @@ async function recordD1ScanEvent(d1: FamousLandD1, event: ScanEventRecord) {
            id,
            player_id,
            source_player_id,
+           device_id,
            marker_id,
            scanned_at,
            user_agent,
@@ -2335,12 +2525,13 @@ async function recordD1ScanEvent(d1: FamousLandD1, event: ScanEventRecord) {
            email_id,
            progress_eligible
          )
-         values (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+         values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       )
       .bind(
         event.id,
         event.player_id,
         event.source_player_id ?? null,
+        event.device_id ?? null,
         event.marker_id,
         event.scanned_at,
         event.user_agent ?? null,
@@ -2400,7 +2591,10 @@ async function recordD1ScanEvent(d1: FamousLandD1, event: ScanEventRecord) {
 }
 
 async function ensureD1ScanEventSourceColumns(d1: FamousLandD1) {
-  await addD1ColumnIfMissing(d1, "scan_events", "source_player_id", "text");
+  await Promise.all([
+    addD1ColumnIfMissing(d1, "scan_events", "source_player_id", "text"),
+    addD1ColumnIfMissing(d1, "scan_events", "device_id", "text")
+  ]);
 }
 
 async function upsertD1PlayerContact(d1: FamousLandD1, input: PlayerContactUpdate) {
@@ -2526,7 +2720,7 @@ async function getD1ScanEvents(d1: FamousLandD1): Promise<ScanEventRecord[]> {
     const eventResult = await d1
       .prepare(
         `select id, player_id, marker_id, scanned_at, user_agent, is_test
-              , email_id, source_player_id, progress_eligible
+              , email_id, source_player_id, device_id, progress_eligible
          from scan_events
          order by scanned_at desc`
       )
@@ -2577,6 +2771,7 @@ function makeScanEvent(
   scan: ScanRecord,
   options: {
     email_id?: string;
+    device_id?: string;
     source_player_id?: string;
     progress_eligible?: boolean;
   } = {}
@@ -2586,6 +2781,7 @@ function makeScanEvent(
     ...scan,
     is_test: scan.is_test === true,
     email_id: options.email_id,
+    device_id: normalizeOptionalDeviceId(options.device_id),
     source_player_id: normalizeOptionalPlayerId(options.source_player_id),
     progress_eligible: options.progress_eligible !== false
   };
@@ -2600,6 +2796,7 @@ function normalizeD1ScanEvent(event: D1ScanEventRow): ScanEventRecord {
     user_agent: event.user_agent ?? undefined,
     is_test: normalizeBoolean(event.is_test),
     email_id: event.email_id ?? undefined,
+    device_id: normalizeOptionalDeviceId(event.device_id ?? undefined),
     source_player_id: normalizeOptionalPlayerId(event.source_player_id ?? undefined),
     progress_eligible: event.progress_eligible === undefined ? true : normalizeBoolean(event.progress_eligible)
   };
@@ -2609,6 +2806,7 @@ function normalizeLocalScanEvent(event: ScanEventRecord): ScanEventRecord {
   return {
     ...event,
     email_id: event.email_id || undefined,
+    device_id: normalizeOptionalDeviceId(event.device_id),
     source_player_id: normalizeOptionalPlayerId(event.source_player_id),
     is_test: event.is_test === true,
     progress_eligible: event.progress_eligible !== false
@@ -2618,6 +2816,11 @@ function normalizeLocalScanEvent(event: ScanEventRecord): ScanEventRecord {
 function normalizeOptionalPlayerId(value?: string) {
   const playerId = value?.trim();
   return playerId && playerId !== GAME_OFF_SCAN_PLAYER_ID ? playerId : undefined;
+}
+
+function normalizeOptionalDeviceId(value?: string) {
+  const deviceId = value?.trim();
+  return deviceId && deviceId.length <= 120 ? deviceId : undefined;
 }
 
 function scanToLegacyEvent(scan: ScanRecord): ScanEventRecord {
@@ -2734,7 +2937,7 @@ function timelineLabel(filters: ScanReportFilters): string {
 
 function defaultTimelineDateRange() {
   const todayMs = easternDayMs(new Date().toISOString()) ?? dateInputMs(isoDateFromUtcMs(Date.now()));
-  const startMs = todayMs - 6 * REPORT_DAY_MS;
+  const startMs = todayMs - 29 * REPORT_DAY_MS;
 
   return {
     start_date: isoDateFromUtcMs(startMs),

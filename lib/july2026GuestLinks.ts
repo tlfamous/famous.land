@@ -1,5 +1,6 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { guestAssignments } from "@/app/july2026/data";
+import { queueMasterActivity } from "@/lib/masterActivity";
 
 export type JulyGuestLink = {
   slug: string;
@@ -123,6 +124,48 @@ function makeToken() {
   return crypto.randomUUID().replaceAll("-", "").slice(0, 16);
 }
 
+function guestName(slug: string) {
+  return guestAssignments.find((guest) => guest.slug === slug)?.name || slug;
+}
+
+async function publishGuestActivity(input: {
+  slug: string;
+  action: "bound" | "regenerated" | "reset";
+  occurredAt: string;
+}) {
+  const labels = {
+    bound: {
+      eventType: "events.guest.checked_in",
+      severity: "success" as const,
+      title: "Guest checked in",
+      detail: `${guestName(input.slug)} opened and claimed their guest link.`
+    },
+    regenerated: {
+      eventType: "events.guest.link_regenerated",
+      severity: "info" as const,
+      title: "Guest link regenerated",
+      detail: `${guestName(input.slug)} received a fresh guest link.`
+    },
+    reset: {
+      eventType: "events.guest.link_reset",
+      severity: "info" as const,
+      title: "Guest check-in reset",
+      detail: `${guestName(input.slug)} can claim their guest link again.`
+    }
+  }[input.action];
+
+  await queueMasterActivity({
+    projectId: "events",
+    sourceEventId: `${input.slug}:${input.action}:${input.occurredAt}`,
+    eventType: labels.eventType,
+    severity: labels.severity,
+    title: labels.title,
+    detail: labels.detail,
+    occurredAt: input.occurredAt,
+    metadata: { guestSlug: input.slug }
+  });
+}
+
 function normalizeRow(row: JulyGuestLink): JulyGuestLink {
   return {
     slug: row.slug,
@@ -218,7 +261,9 @@ export async function regenerateJulyGuestLink(slug: string): Promise<JulyGuestLi
       )
       .bind(token, now, now, slug)
       .run();
-    return ensureD1Link(d1, slug);
+    const link = await ensureD1Link(d1, slug);
+    await publishGuestActivity({ slug, action: "regenerated", occurredAt: now });
+    return link;
   }
 
   const store = await readLocalStore();
@@ -229,6 +274,7 @@ export async function regenerateJulyGuestLink(slug: string): Promise<JulyGuestLi
   link.bound_at = undefined;
   link.reset_at = now;
   await writeLocalStore(store);
+  await publishGuestActivity({ slug, action: "regenerated", occurredAt: now });
   return link;
 }
 
@@ -246,7 +292,9 @@ export async function resetJulyGuestBinding(slug: string): Promise<JulyGuestLink
       )
       .bind(now, now, slug)
       .run();
-    return ensureD1Link(d1, slug);
+    const link = await ensureD1Link(d1, slug);
+    await publishGuestActivity({ slug, action: "reset", occurredAt: now });
+    return link;
   }
 
   const store = await readLocalStore();
@@ -256,6 +304,7 @@ export async function resetJulyGuestBinding(slug: string): Promise<JulyGuestLink
   link.bound_at = undefined;
   link.reset_at = now;
   await writeLocalStore(store);
+  await publishGuestActivity({ slug, action: "reset", occurredAt: now });
   return link;
 }
 
@@ -294,7 +343,9 @@ export async function bindJulyGuestLink(input: {
       .bind(input.device_id, now, now, input.slug)
       .run();
 
-    return { ok: true, mode: "bound", link: await ensureD1Link(d1, input.slug) };
+    const boundLink = await ensureD1Link(d1, input.slug);
+    await publishGuestActivity({ slug: input.slug, action: "bound", occurredAt: now });
+    return { ok: true, mode: "bound", link: boundLink };
   }
 
   const store = await readLocalStore();
@@ -316,5 +367,6 @@ export async function bindJulyGuestLink(input: {
   link.bound_at = now;
   link.updated_at = now;
   await writeLocalStore(store);
+  await publishGuestActivity({ slug: input.slug, action: "bound", occurredAt: now });
   return { ok: true, mode: "bound", link };
 }

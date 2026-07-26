@@ -1,5 +1,6 @@
 import { decryptHomeSecretJson, encryptHomeSecretJson } from "./crypto";
 import { listHomeLockEvents } from "./locks";
+import { queueMasterActivity } from "../masterActivity";
 import { assertD1Success, getHomesD1, mutateLocalHomesStore, readLocalHomesStore, type HomesD1 } from "./storage";
 import type { EncryptedHomeSecret, HomeActivityEvent, HomeActivitySource, HomeNetworkIntegration } from "./types";
 
@@ -15,6 +16,51 @@ type NetworkRow = {
 };
 
 export type ActivityInput = Omit<HomeActivityEvent, "id" | "receivedAt"> & { id?: string; receivedAt?: string; sensitive?: Record<string, unknown> };
+
+function masterSeverity(input: ActivityInput) {
+  if (input.eventType === "alert.opened") {
+    return input.metadata?.severity === "critical" ? "critical" : "warning";
+  }
+  if (input.eventType.includes("disconnected") || input.eventType.includes("failed")) {
+    return "warning";
+  }
+  if (
+    input.eventType === "alert.resolved" ||
+    input.eventType.includes("connected") ||
+    input.eventType.includes("unlocked")
+  ) {
+    return "success";
+  }
+  return "info";
+}
+
+function masterTitle(input: ActivityInput) {
+  const subject = input.deviceName || "Home";
+  if (input.eventType === "alert.opened") return `${subject} needs attention`;
+  if (input.eventType === "alert.resolved") return `${subject} recovered`;
+  if (input.eventType.includes("disconnected")) return `${subject} went offline`;
+  if (input.eventType.includes("connected")) return `${subject} came online`;
+  if (input.eventType.includes("unlocked")) return `${subject} unlocked`;
+  if (input.eventType.includes("locked")) return `${subject} locked`;
+  return `${subject} update`;
+}
+
+async function publishHomeActivity(input: ActivityInput, id: string) {
+  await queueMasterActivity({
+    projectId: "homes",
+    sourceEventId: id,
+    eventType: `homes.${input.eventType}`,
+    severity: masterSeverity(input),
+    title: masterTitle(input),
+    detail: input.description,
+    occurredAt: input.occurredAt,
+    metadata: {
+      homeId: input.homeId,
+      source: input.source,
+      ...(input.deviceName ? { deviceName: input.deviceName } : {})
+    }
+  });
+}
 
 function fromRow(row: ActivityRow): HomeActivityEvent {
   return { id: row.id, homeId: row.home_id, source: row.source, sourceEventId: row.source_event_id, eventType: row.event_type, occurredAt: row.occurred_at, receivedAt: row.received_at, ...(row.device_id ? { deviceId: row.device_id } : {}), ...(row.device_name ? { deviceName: row.device_name } : {}), ...(row.description ? { description: row.description } : {}), ...(row.metadata_json ? { metadata: JSON.parse(row.metadata_json) as HomeActivityEvent["metadata"] } : {}) };
@@ -50,14 +96,18 @@ export async function recordHomeActivity(input: ActivityInput): Promise<boolean>
     const result = await d1.prepare(`insert or ignore into home_activity_events (id, home_id, source, source_event_id, event_type, occurred_at, received_at, device_id, device_name, description, metadata_json, sensitive_ciphertext, sensitive_iv, sensitive_algorithm, sensitive_key_version) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
       .bind(id, input.homeId, input.source, input.sourceEventId, input.eventType, input.occurredAt, receivedAt, input.deviceId ?? null, input.deviceName ?? null, input.description ?? null, input.metadata ? JSON.stringify(input.metadata) : null, secret?.ciphertext ?? null, secret?.iv ?? null, secret?.algorithm ?? null, secret?.keyVersion ?? null).run();
     assertD1Success(result, "Activity event could not be stored.");
-    return Boolean(result.meta?.changes);
+    const created = Boolean(result.meta?.changes);
+    if (created) await publishHomeActivity(input, id);
+    return created;
   }
-  return mutateLocalHomesStore((store) => {
+  const created = await mutateLocalHomesStore((store) => {
     store.activityEvents ??= [];
     if (store.activityEvents.some((event) => event.source === input.source && event.sourceEventId === input.sourceEventId)) return false;
     store.activityEvents.push({ id, homeId: input.homeId, source: input.source, sourceEventId: input.sourceEventId, eventType: input.eventType, occurredAt: input.occurredAt, receivedAt, ...(input.deviceId ? { deviceId: input.deviceId } : {}), ...(input.deviceName ? { deviceName: input.deviceName } : {}), ...(input.description ? { description: input.description } : {}), ...(input.metadata ? { metadata: input.metadata } : {}) });
     return true;
   });
+  if (created) await publishHomeActivity(input, id);
+  return created;
 }
 
 export async function getHomeNetworkIntegration(homeId: string): Promise<HomeNetworkIntegration | undefined> {

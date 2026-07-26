@@ -13,6 +13,7 @@
     "EMAIL_REPLY_TO_NAME": "Famous Land Quest",
     "FAMOUS_LAND_AUTH_VERSION": "1",
     "FAMOUS_ADMIN_SSO_URL": "https://admin.famous.land",
+    "FAMOUS_ADMIN_ACTIVITY_URL": "https://admin.famous.land",
     "NEXT_PUBLIC_SITE_URL": "https://famous.land"
   },
   "workers_dev": false,
@@ -32,6 +33,11 @@
       "binding": "DB",
       "database_name": "famous-land-quest",
       "database_id": "a5e9f465-9d47-4af1-bf1a-06137fc626c2"
+    },
+    {
+      "binding": "ALEX_DB",
+      "database_name": "famous-land-alex",
+      "database_id": "fc021e1c-16fc-4a90-a6c6-53d073492b64"
     }
   ],
   "r2_buckets": [
