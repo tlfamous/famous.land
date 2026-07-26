@@ -1,0 +1,79 @@
+.form {
+  display: grid;
+  gap: 1rem;
+  max-width: 42rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field label {
+  color: #172216;
+  font-size: 0.93rem;
+  font-weight: 700;
+}
+
+.field input,
+.field select {
+  min-height: 2.75rem;
+  width: 100%;
+  border: 1px solid #8a9586;
+  border-radius: 0.55rem;
+  background: #fff;
+  color: #172216;
+  font: inherit;
+  padding: 0.65rem 0.75rem;
+}
+
+.field input[type="file"] {
+  min-height: auto;
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.button:focus-visible {
+  outline: 3px solid #1f6f46;
+  outline-offset: 2px;
+}
+
+.field small {
+  color: #52604f;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.button {
+  min-height: 2.75rem;
+  justify-self: start;
+  border: 0;
+  border-radius: 999px;
+  background: #1f6f46;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.7rem 1.1rem;
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.status,
+.error {
+  min-height: 1.4em;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.status {
+  color: #36543e;
+}
+
+.error {
+  color: #a1251b;
+  font-weight: 650;
+}

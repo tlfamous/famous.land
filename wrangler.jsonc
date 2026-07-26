@@ -11,9 +11,12 @@
     "EMAIL_FROM_NAME": "Famous Land Quest",
     "EMAIL_REPLY_TO": "quest@famous.land",
     "EMAIL_REPLY_TO_NAME": "Famous Land Quest",
+    "FAMOUS_LAND_AUTH_VERSION": "1",
+    "FAMOUS_ADMIN_SSO_URL": "https://admin.famous.land",
     "NEXT_PUBLIC_SITE_URL": "https://famous.land"
   },
   "workers_dev": false,
+  "triggers": { "crons": ["*/5 * * * *", "7 * * * *"] },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
@@ -29,6 +32,12 @@
       "binding": "DB",
       "database_name": "famous-land-quest",
       "database_id": "a5e9f465-9d47-4af1-bf1a-06137fc626c2"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "HOMES_MEDIA",
+      "bucket_name": "famous-land-homes-media"
     }
   ],
   "routes": [

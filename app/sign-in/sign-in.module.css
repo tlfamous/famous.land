@@ -1,0 +1,76 @@
+.page {
+  display: grid;
+  min-height: calc(100svh - 5rem);
+  place-items: center;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(216, 227, 189, 0.38), transparent 32rem),
+    linear-gradient(180deg, #f7f3e8 0%, #ece6d7 100%);
+}
+
+.card {
+  display: grid;
+  width: min(100%, 28rem);
+  gap: 1rem;
+  padding: clamp(1.5rem, 6vw, 2.5rem);
+  border: 1px solid rgba(38, 54, 28, 0.18);
+  border-radius: 1.5rem;
+  background: rgba(255, 250, 240, 0.96);
+  box-shadow: 0 1.5rem 4rem rgba(38, 54, 28, 0.14);
+}
+
+.card h1,
+.card p {
+  margin: 0;
+}
+
+.card label {
+  display: grid;
+  gap: 0.45rem;
+  font-weight: 700;
+}
+
+.card input {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(38, 54, 28, 0.32);
+  border-radius: 0.7rem;
+  background: #fff;
+  color: #11140f;
+  font: inherit;
+}
+
+.card input:focus-visible,
+.card button:focus-visible {
+  outline: 3px solid #2f6f77;
+  outline-offset: 3px;
+}
+
+.card button {
+  min-height: 2.9rem;
+  border: 0;
+  border-radius: 999px;
+  background: #26361c;
+  color: #fffaf0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.card button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.eyebrow {
+  color: #536b35;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.error {
+  color: #8b241e;
+  font-weight: 700;
+}
